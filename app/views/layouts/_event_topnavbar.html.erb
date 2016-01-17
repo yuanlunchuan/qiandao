@@ -1,0 +1,21 @@
+<div class="row border-bottom">
+  <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+      <span class="navbar-eventname" href="#"><%=current_event.name%> </span>
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+      <li>
+        <%= link_to root_path do%>
+          <i class="fa fa-chevron-left"></i>全部活动
+        <% end %>
+      </li>
+
+        <li>
+          <%=link_to sign_out_path, method: :delete, data: {confirm: '是否确认退出？'} do %>
+              <i class="fa fa-sign-out"></i> 退出
+          <% end %>
+        </li>
+    </ul>
+  </nav>
+</div>

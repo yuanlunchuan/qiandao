@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+
+      <div class="ibox-title">
+        <h5>全部活动</h5>
+      </div>
+
+      <div class="ibox-content">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>名称</th>
+            <th>开始日期</th>
+            <th>结束日期</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <%@events.each do |event| %>
+            <tr>
+              <td><%=event.id%></td>
+              <td><%=event.name%></td>
+              <td><%=event.start.to_s(:short)%></td>
+              <td><%=event.end.to_s(:short)%></td>
+              <td>
+                <%= link_to '编辑', edit_event_path(event), class: 'btn btn-outline btn-info btn-xs'%>
+                <%= link_to  event_dashboard_path(event), class: 'btn btn-warning btn-xs btn-outline' do%> 管理 <% end %>
+              </td>
+            </tr>
+          <%end%>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>

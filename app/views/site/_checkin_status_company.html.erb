@@ -1,0 +1,22 @@
+<div class="row" style="background: #fff">
+
+   <div class="col-md-12 text-center">
+     <h2><i class="fa fa-check-circle text-success"></i> &nbsp;签到成功</h2>
+   </div>
+
+    <div class="col-md-12 m-t-xs text-left">
+
+        <h3><%= @attendee.company %></h3>
+        <ul class="list-unstyled" style="font-size:14px">
+        <li>用户姓名：<%= @attendee.name %></li>
+        <li>手机号码：<%= @attendee.mobile%> </li>
+        </ul>
+
+        <div class="m-b-md">
+            <%= link_to '取消签到', 'javascript:;', data: {token: @attendee.token}, class: 'btn btn-white btn-xs site-uncheck-in-btn' %>
+            <%= link_to '关闭', 'javascript:;', class: 'btn btn-white btn-xs site-close-checkin-status' %>
+        </div>
+
+    </div>
+
+</div>

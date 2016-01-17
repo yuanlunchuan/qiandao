@@ -1,0 +1,73 @@
+<% breadcrumb :photos %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <div class="row">
+          <div class="col-xs-6">
+            <h3>共找到 <strong class="text-success"><%= @attendees.total_count %></strong> 条记录</h3>
+          </div>
+        </div>
+
+        <%= render 'filter' %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <% @attendees.each do |attendee| %>
+      <div class="attendee-photo-col" id="attendee-photo-<%=attendee.attendee_number%>">
+        <div class="ibox">
+          <div class="ibox-content product-box photo-box">
+
+            <div class="photo-imitation">
+              <% if attendee.avatar.exists? %>
+                  <%= image_tag attendee.avatar.url %>
+              <% else %>
+                  <div class="product-imitation">
+                    [ 没有头像 ]
+                  </div>
+              <% end %>
+              <% if attendee.photo.exists? %>
+                  <%= link_to attendee.photo.url, target: '_blank' do%>
+                      <%= image_tag attendee.photo.url(:thumb), class: 'thumb' %>
+                  <% end %>
+              <% end %>
+            </div>
+
+
+            <div class="product-desc">
+              <small class="text-muted"># <%=attendee.attendee_number%></small>
+              <a href="#" class="product-name"><%=attendee.name%></a>
+              <div class="small m-t-xs"> <%= attendee.company %> &nbsp;</div>
+              <div class="m-t text-righ">
+
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="btn btn-xs btn-white dropdown-toggle m-r-xs" aria-expanded="false"><i class="fa fa-gear"></i> <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li> <%= link_to '查看用户信息', event_attendee_path(current_event, attendee)%> </li>
+                    <li> <%= link_to '编辑用户信息', edit_event_attendee_path(current_event, attendee)%> </li>
+                    <li> <%= link_to '预览胸卡', badge_event_attendee_path(current_event, attendee, format: :pdf, preview: true), target: '_blank'%> </li>
+                  </ul>
+                </div>
+                <% if attendee.photo.exists? %>
+                    <%= link_to '编辑头像', avatar_event_attendee_path(current_event, attendee, back_url: request.original_url + "#attendee-photo-#{attendee.attendee_number}"), class: 'btn btn-xs btn-white'%>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= paginate @attendees %>
+  </div>
+</div>

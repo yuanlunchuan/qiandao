@@ -1,0 +1,105 @@
+<% breadcrumb :checkin_session, current_event, @session%>
+
+<%= render 'stats'%>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>用户签到管理</h5>
+      </div>
+      <div class="ibox-content">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <h3>共找到 <strong class="text-success"><%= @attendees.total_count %></strong> 条记录</h3>
+          </div>
+          <div class="col-xs-6">
+            <%= link_to '签到数据导出', event_session_checkin_export_path(current_event, @session), class: 'btn btn-white btn-sm pull-right' %>
+          </div>
+        </div>
+
+        <div class="row m-b-md m-t-md">
+
+
+            <div class="col-sm-5 m-b-xs">
+              <%=select_tag :category_id, options_from_collection_for_select(current_event.attendee_categories, 'id', 'name', params[:category_id]), prompt: '选择用户标签', include_blank: false, class: 'input-sm form-control input-s-sm inline'%>
+            </div>
+
+            <div class="col-sm-4 m-b-xs">
+              <div data-toggle="buttons" class="btn-group">
+                <% {'全部' => '0', '已签到' => '1', '未签到' => '-1'}.each do |k, v| %>
+                  <label class="btn btn-sm btn-white <%=params[:checked_in] == v ? 'active' : ''%>">
+                    <input type="radio" name="checked_in" value="<%=v%>" <%=params[:checked_in] == v ? 'checked' : ''%>> <%=k%> </label>
+                <% end %>
+              </div>
+            </div>
+
+          <%= form_tag url_for, method: :get do%>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <input type="text" placeholder="请输入关键字" class="input-sm form-control" name="keyword" value="<%=params[:keyword]%>">
+                <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>姓名</th>
+              <th>状态</th>
+              <th>签到时间</th>
+              <th>公司</th>
+              <th>手机号码</th>
+              <th>电子邮件</th>
+              <th>标签</th>
+              <th>管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @attendees.each do |attendee| %>
+              <tr>
+                <td><%=attendee.attendee_number%></td>
+                <td><%=attendee.name%></td>
+                <td><% if attendee.session_checked_in(@session.id) %>
+                      <span class='text-success'>已签到</span>
+                    <% else %>
+                      <span class='text-muted'>未签到</span>
+                    <% end %>
+                </td>
+                <td><%=attendee.session_checked_in(@session.id) ? attendee.session_checked_in(@session.id).checked_in_at.to_s(:short) : ''%></td>
+                <td><%=attendee.company%></td>
+                <td><%=attendee.mobile%></td>
+                <td><%=attendee.email%></td>
+                <td><%=attendee.category.try(:name)%></td>
+                <td>
+                  <%=link_to '查看', event_attendee_path(current_event, attendee), class: 'btn btn-white btn-xs' %>
+
+                  <% if attendee.session_checked_in(@session.id) %>
+                    <%= link_to '取消签到', event_session_uncheck_in_path(current_event, @session, attendee), method: :delete, data: {confirm: '是否确认取消签到?'}, class: 'btn btn-xs btn-white' %>
+                  <% else %>
+                    <%= link_to '人工签到', event_session_check_in_path(current_event, @session, attendee), method: :put, data: {confirm: '是否确认人工签到?'}, class: 'btn btn-xs btn-white' %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <%= paginate @attendees %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

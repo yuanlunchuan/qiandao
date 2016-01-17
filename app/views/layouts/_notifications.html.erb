@@ -1,0 +1,14 @@
+<%flash.each do |type, message|%>
+<div class="row">
+  <div class="alert <%=bootstrap_class_for(type.to_sym)%> alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    <% if message.is_a? Array %>
+      <% message.each do |msg| %>
+        <li><%=msg%></li>
+      <% end %>
+    <% else %>
+      <%=message%>
+    <% end %>
+  </div>
+</div>
+<%end%>

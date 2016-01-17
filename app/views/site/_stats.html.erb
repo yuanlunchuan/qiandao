@@ -1,0 +1,31 @@
+<div class="row">
+  <% @categories.each do |category| %>
+    <div class="col-lg-4">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <h3 class="no-margins"> <%=category.name%> 签到进度 </h3>
+          <h3>&nbsp;</h3>
+
+          <% if @session.company_checkin? %>
+          <h1> <%= category.checked_in_attendee_numbers(@session.id) %> / <%= category.company_numbers %></h1>
+          <% else %>
+          <h1><%= category.checked_in_attendee_numbers(@session.id) %> / <%= category.attendee_numbers %></h1>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col-lg-4">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content text-center">
+        <h3 class="no-margins timer-date"></h3>
+        <h3>&nbsp;</h3>
+        <h1 class="timer-time">
+          <%= render 'circle_spinner' %>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>

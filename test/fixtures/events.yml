@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start: 2015-07-08
+  end: 2015-07-08
+  enabled: false
+
+two:
+  name: MyString
+  start: 2015-07-08
+  end: 2015-07-08
+  enabled: false

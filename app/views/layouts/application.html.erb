@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yonex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="top-navigation">
+
+<!-- Wrapper-->
+<div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
+
+  <!-- Page wraper -->
+  <div id="page-wrapper" class="gray-bg <%= @extra_class %>">
+
+    <%= render 'layouts/topnavbar' %>
+
+
+    <div class="wrapper wrapper-content">
+      <%= render 'layouts/notifications'%>
+      <%= yield %>
+    </div>
+
+    <%= render 'layouts/footer' %>
+
+  </div>
+  <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
+
+</body>
+
+</html>

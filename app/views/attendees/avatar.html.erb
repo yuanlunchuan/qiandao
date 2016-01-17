@@ -1,0 +1,60 @@
+<% breadcrumb :attendee_avatar, @attendee %>
+
+<div class="row">
+  <div class="col-md-7">
+    <%= image_tag @attendee.photo.url(:large), class: 'cropper-img' %>
+  </div>
+
+  <div class="col-md-5">
+    <div class="img-preview img-preview-sm"></div>
+
+    <div class="row m-t-md">
+
+      <div class="col-md-12">
+        <a href="javascript:;" class="btn btn-white btn-avatar-rotate-right"> <i class="fa fa-rotate-right"></i> 旋转</a>
+        <a href="javascript:;" class="btn btn-white btn-avatar-rotate-left"> <i class="fa fa-rotate-left"></i> 旋转</a>
+      </div>
+    </div>
+
+    <hr class="hr-line-solid">
+
+    <a href="javascript:;" class="btn btn-primary btn-save-avatar ladda-button" data-style="zoom-in">保存</a>
+
+    <%= form_for [current_event, @attendee],url: upload_avatar_event_attendee_path(current_event, @attendee), html:{id: 'upload-avatar-form', class:'hidden'} do |f|%>
+      <%=hidden_field_tag 'attendee[avatar]', '', id:'avatar-data-url'%>
+      <%=hidden_field_tag 'back_url', params[:back_url] %>
+    <% end %>
+
+  </div>
+</div>
+
+
+<script>
+    $(function(){
+        $('.cropper-img').cropper({
+        aspectRatio: 1 / 1,
+        preview: ".img-preview"
+    });
+
+    $('.btn-save-avatar').click(function(e){
+        e.preventDefault();
+        var j = Ladda.create(this);
+        j.start();
+        var dataURL = $('.cropper-img').cropper('getCroppedCanvas').toDataURL();
+        $('#avatar-data-url').val(dataURL);
+        $('#upload-avatar-form').submit();
+    });
+
+    $('.btn-avatar-rotate-right').click(function(){
+    $('.cropper-img').cropper('rotate', 90);
+    });
+
+    $('.btn-avatar-rotate-left').click(function(){
+    $('.cropper-img').cropper('rotate', -90);
+    });
+
+    });
+
+</script>
+
+

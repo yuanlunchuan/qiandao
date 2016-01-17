@@ -1,0 +1,72 @@
+<%= form_for [current_event, @session], html: {class: 'form-horizontal'} do |f|%>
+
+  <div class="form-group"><label class="col-sm-2 control-label">日程名称</label>
+    <div class="col-sm-3"> <%=f.text_field :name, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">日程描述</label>
+    <div class="col-sm-5"> <%=f.text_area :desc, rows: 5, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">会场地址</label>
+    <div class="col-sm-5"> <%=f.text_field :location, class: 'form-control'%> </div>
+  </div>
+
+  <div class="input-daterange-group">
+
+    <div class="form-group"><label class="col-sm-2 control-label">开始时间</label>
+      <div class="col-sm-3">
+        <div class="input-group date">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span> <%= f.text_field :start_date, class: 'form-control actual_range'%>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="input-group clockpicker">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+          <%= f.text_field :start_time, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"><label class="col-sm-2 control-label">结束时间</label>
+      <div class="col-sm-2">
+        <div class="input-group clockpicker">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+          <%= f.text_field :end_time, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">签到监控</label>
+    <div class="col-sm-4">
+      <%= f.check_box :checkin_enabled, class: 'form-control'%>
+    </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">公司签到</label>
+    <div class="col-sm-4">
+      <%= f.check_box :company_checkin, class: 'form-control'%>
+    </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">在前台隐藏</label>
+    <div class="col-sm-4">
+      <%= f.check_box :hidden, class: 'form-control'%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+      <%=link_to '取消', event_sessions_path(current_event), class: 'btn btn-white'%>
+      <%= button_tag '保存', class: 'btn btn-primary'%>
+    </div>
+  </div>
+
+
+<% end %>

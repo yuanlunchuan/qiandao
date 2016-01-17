@@ -1,0 +1,32 @@
+<%= form_for @admin, html: {class: 'form-horizontal'} do |f|%>
+
+  <div class="form-group"><label class="col-sm-2 control-label">用户名</label>
+    <div class="col-sm-3"> <%=f.text_field :name, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">密码</label>
+    <div class="col-sm-3"> <%=f.password_field :password, class: 'form-control', readonly: true, autocomplete: 'off'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">备注</label>
+    <div class="col-sm-5"> <%=f.text_area :memo, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+      <%=link_to '取消', admins_path, class: 'btn btn-white'%>
+      <%= button_tag '保存', class: 'btn btn-primary'%>
+    </div>
+  </div>
+
+  <% if @admin.persisted?%>
+  <div class="hr-line-dashed"></div>
+
+  <div class="form-group">
+    <div class="col-sm-2 col-sm-offset-2">
+      <%= link_to '删除管理员', admin_path(@admin), method: :delete, data: {confirm: "是否确认删除管理员 #{@admin.name}？"}, class: 'btn btn-danger btn-block btn-outline' %>
+    </div>
+  </div>
+  <% end %>
+
+<% end %>

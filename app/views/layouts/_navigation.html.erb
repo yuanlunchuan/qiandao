@@ -1,0 +1,91 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="dropdown profile-element">
+          <span>
+            <%= image_tag 'avatar.png', class:'img-circle'%>
+          </span>
+          <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">-->
+              <span class="clear">
+                  <span class="block m-t-xs">
+                      <strong class="font-bold">你好， <%= current_admin.name %></strong>
+                  </span>
+              </span>
+          <!--</a>-->
+          <!--
+          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li class="divider"></li>
+            <li><%=link_to '退出', sign_out_path, method: :delete, data: {confirm: '是否确认退出？'}%></li>
+          </ul>
+          -->
+        </div>
+        <div class="logo-element">
+          YONEX
+        </div>
+      </li>
+
+      <li class="<%= is_active_action('dashboard', 'events') || is_active_action('settings', 'events') %>">
+        <%= link_to event_dashboard_path do%>
+          <i class="fa fa-th-large"></i> <span class="nav-label">基本信息设置</span></span>
+        <% end %>
+      </li>
+
+      <li class="<%= is_active_controller('event_sessions') %>">
+        <%= link_to event_sessions_path do %>
+          <i class="fa fa-comments"></i> <span class="nav-label">会议日程管理</span></span>
+        <% end %>
+      </li>
+
+
+      <li class="<%= is_active_controller('attendee_categories') %>">
+        <%= link_to event_attendee_categories_path do %>
+          <i class="fa fa-sitemap"></i> <span class="nav-label">用户标签管理</span></span>
+        <% end %>
+      </li>
+
+      <li class="<%= is_active_action('index', 'attendees') %>">
+        <%= link_to event_attendees_path do %>
+          <i class="fa fa-user"></i> <span class="nav-label">报名用户列表</span></span>
+        <% end %>
+      </li>
+
+      <li class="<%= is_active_action('photos', 'attendees') %>">
+        <%= link_to event_photos_path do %>
+            <i class="fa fa-picture-o"></i> <span class="nav-label">用户照片管理</span></span>
+        <% end %>
+      </li>
+
+      <li class="<%= is_active_controller('notifications') %>">
+        <%= link_to event_notifications_path do %>
+          <i class="fa fa-bell"></i> <span class="nav-label">会议通知管理</span></span>
+        <% end %>
+      </li>
+
+      <li class="<%= is_active_controller('invitation_settings') %>">
+        <%= link_to event_invitation_settings_path do %>
+          <i class="fa fa-envelope"></i> <span class="nav-label">邀请函设置</span></span>
+        <% end %>
+      </li>
+
+      <li class="<%= is_active_controller('checkin') %>">
+        <%= link_to event_checkin_path do %>
+          <i class="fa fa-laptop"></i> <span class="nav-label">签到状态统计</span></span>
+        <% end %>
+      </li>
+
+      <li class="<%= is_active_controller('prints') %>">
+        <%= link_to event_prints_path do %>
+          <i class="fa fa-print"></i> <span class="nav-label">入场证打印</span></span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to event_site_path do %>
+          <i class="fa fa-qrcode"></i> <span class="nav-label">现场签到管理</span>
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+</nav>

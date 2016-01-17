@@ -1,0 +1,141 @@
+<% breadcrumb :attendee, @attendee%>
+
+<div class="row m-b-md">
+  <div class="col-lg-12">
+
+    <% if @attendee.checked_in? %>
+      <%= link_to '取消签到', checkin_event_attendee_path(current_event, @attendee), method: :delete, data: {confirm: '是否确认取消签到? '}, class: 'btn btn-danger btn-outline btn-md pull-right' %>
+    <% else %>
+      <%= link_to '签到', checkin_event_attendee_path(current_event, @attendee), method: :put, class: 'btn btn-primary btn-md pull-right' %>
+    <% end %>
+
+    <%=link_to '删除', event_attendee_path(current_event, @attendee), method: :delete, data: {confirm: '是否确认删除？'}, class: 'btn btn-white btn-md pull-right m-r-md' %>
+    <%=link_to '编辑', edit_event_attendee_path(current_event, @attendee), class: 'btn btn-white btn-md pull-right m-r-md' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>基本资料</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="text-center">
+              <%= image_tag(@attendee.photo.url(:medium))%>
+              <div class="m-t-xs font-bold">
+                <div class="dropzone-photo-preview"></div>
+                <%=link_to '上传', 'javascript:;', class: 'upload-photo-btn', data: {url: upload_photo_event_attendee_path(current_event, @attendee, format: :json)}%>
+                <% if @attendee.photo.exists? %>
+                | <%=link_to '下载', download_photo_event_attendee_path(current_event, @attendee)%>
+                | <%=link_to '删除', photo_event_attendee_path(current_event, @attendee), method: :delete, data: {confirm: '是否确认删除证件照？'}%>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="text-center m-t-md hidden" id="upload-photo-status">
+              <div class="sk-spinner sk-spinner-three-bounce">
+                <div class="sk-bounce1"></div>
+                <div class="sk-bounce2"></div>
+                <div class="sk-bounce3"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-8">
+            <h3><%=@attendee.name%></h3>
+            <ul class="list-unstyled">
+              <li>序号：<%=@attendee.attendee_number%></li>
+              <li>公司：<%=@attendee.company%></li>
+              <li>所在省：<%=@attendee.province%></li>
+              <li>所在市：<%=@attendee.city%></li>
+              <li>性别：<%=@attendee.gender%></li>
+              <li>手机号码：<%=@attendee.mobile%></li>
+              <li>电子邮箱：<%=@attendee.email%></li>
+              <li>用户标签：<%=@attendee.category.try(:name)%></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>报名信息</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="text-center">
+              <%= image_tag(@attendee.avatar.url, class: 'attendee-avatar') %>
+              <div class="m-t-xs font-bold m-b-lg">
+                <% if @attendee.photo.exists? %>
+                  <%=link_to '编辑',  avatar_event_attendee_path(current_event, @attendee)%> &nbsp;&nbsp;&nbsp;
+                  <% if @attendee.avatar.exists? %>
+                  | &nbsp;&nbsp;&nbsp;<%=link_to '删除',  avatar_event_attendee_path(current_event, @attendee), method: :delete, data: {confirm: '是否确认删除用户头像？'}%>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <%=link_to @qr.as_png(border_modules: 2).to_data_url, class:'', target: '_blank' do %>
+              <%= image_tag(@qr.as_png(border_modules: 0).to_data_url) %>
+            <% end %>
+          </div>
+
+          <div class="col-sm-5">
+            <ul class="list-unstyled">
+              <li>签到状态：
+                <%if @attendee.checked_in? %>
+                <span class="text-success">已签到</span>
+              <%else%>
+                <span class="text-muted">未签到</span>
+              <%end%>
+              </li>
+
+              <%if @attendee.checked_in? %>
+                <li>签到时间： <%=@attendee.checked_in_at%></li>
+              <%end%>
+
+              <li>邀请链接： <%=link_to @attendee.invitation_long_url, @attendee.invitation_long_url, target: '_blank'%>
+                <% if @attendee.invitation_short_url %>
+                   | <%=link_to @attendee.invitation_short_url, @attendee.invitation_short_url, target: '_blank' %>
+                <% else %>
+                  <%=link_to '生成短链接', generate_invitation_short_url_event_attendee_path, method: :post, class:'btn btn-white btn-xs' %>
+                <% end %>
+              </li>
+              <li>报名状态： 正常</li>
+              <li>胸卡预览： <%= link_to '打开', badge_event_attendee_path(preview: true, format: :pdf), target: '_blank' %></li>
+              <li>报名编号： <%=@attendee.serial_number%></li>
+              <li>报名时间： <%=@attendee.created_at%></li>
+              <li>报名方式： 网站后台添加</li>
+              <li>签到编号： <%=@attendee.qrcode%></li>
+              <li class="hr-line-dashed"></li>
+
+              <li>短信通知：
+                <% if @attendee.sms_sent? %>
+                已发送 ( <%=@attendee.sms_sent_at.to_s(:short)%> ) <%= link_to '再次发送', event_notifications_send_sms_path(current_event, @attendee), method: :post, class: 'btn btn-xs btn-white', data:{confirm: '再次发送短信通知？'} %>
+                <% else %>
+                <%= link_to '发送', event_notifications_send_sms_path(current_event, @attendee), method: :post, data:{confirm: '是否确认发送短信通知？'}, class: 'btn btn-xs btn-white'%>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<%= form_for [current_event, @attendee], html: {class: 'form-horizontal', multipart: true} do |f|%>
+
+  <div class="form-group"><label class="col-sm-2 control-label">分类</label>
+    <div class="col-sm-3"> <%=f.select :category_id, current_event.attendee_categories.map {|p| [p.name, p.id] }, {include_blank: true}, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">性别</label>
+    <div class="col-sm-2"> <%=f.select :gender_id, Attendee::GENDER, {}, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">姓名</label>
+    <div class="col-sm-3"> <%=f.text_field :name, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">公司</label>
+    <div class="col-sm-3"> <%=f.text_field :company, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">手机</label>
+    <div class="col-sm-3"> <%=f.text_field :mobile, class: 'form-control', data: {mask:"99999999999"}%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">邮箱</label>
+    <div class="col-sm-3"> <%=f.text_field :email, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">所在省</label>
+    <div class="col-sm-3"> <%=f.text_field :province, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">所在市</label>
+    <div class="col-sm-3"> <%=f.text_field :city, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"> <label class="col-sm-2 control-label">照片</label>
+    <div class="col-sm-3">
+      <% if @attendee.photo.exists? %>
+      <div class="row photo-preview">
+        <div class="col-sm-12">
+          <%= image_tag(@attendee.photo.url(:thumb))%>
+        </div>
+
+        <div class="col-sm-12 m-t-md">
+          <a href="javascript:;" class="btn btn-xs btn-white btn-outline delete-photo-btn">删除照片</a>
+          <a href="javascript:;" class="btn btn-xs btn-white btn-outline re-upload-photo-btn">重新上传</a>
+        </div>
+
+        <%= hidden_field_tag '_delete_photo'%>
+
+      </div> <!-- ROW -->
+      <% end %>
+
+      <div class="row  <%= @attendee.photo.exists? ? 'hidden' : ''%> upload-photo-input">
+        <div class="col-sm-12">
+          <%=f.file_field :photo, class: 'form-control'%>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+      <%=link_to '取消', event_attendees_path, class: 'btn btn-white'%>
+      <%= button_tag '保存', class: 'btn btn-primary'%>
+    </div>
+  </div>
+
+  <% if @attendee.persisted? %>
+  <div class="hr-line-dashed"></div>
+  <div class="form-group">
+    <div class="col-sm-2 col-sm-offset-2">
+      <%= link_to '删除', event_attendee_path(current_event, @attendee), method: :delete, data: {confirm: "是否确认删除 #{@attendee.name}？"}, class: 'btn btn-danger btn-outline btn-block' %>
+    </div>
+  </div>
+  <% end %>
+<% end %>
+

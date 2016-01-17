@@ -1,0 +1,166 @@
+/*
+ *= require_self
+ *= require font-awesome
+ *= require animate/animate
+ *= require dropzone/dropzone
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html, body{
+  overflow-x: hidden;
+  font-size: 14px;
+}
+
+@media(min-width:321px){
+  html, body{
+    font-size: 16px;
+  }
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: url(image-path('background-1.png')) no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.background-container-2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: url(image-path('background-2.png')) no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.index-logo {
+  float:right;
+  margin-top: 60px;
+  width: 100px;
+}
+
+.index-event-title{
+  clear: both;
+  float: right;
+  background: red;
+}
+
+.sessions-text{
+  text-align: left;
+  font-size: 1em;
+  line-height: 1.6em;
+}
+
+.confirmation-row{
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.1em;
+  line-height: 1.3em;
+  margin-bottom: .4em;
+  border-bottom: 1px dashed #bbb;
+  padding: 0.6em 0;
+}
+
+.confirmation-row i{
+  width: 1.2em;
+}
+
+.confirmation-row div{
+  text-align: left;
+  padding: 0;
+}
+
+.confirmation-details{
+  font-size: 1.1em;
+}
+
+.confirmation-details ul{
+  list-style: none;
+  padding: 0;
+}
+
+.confirmation-details li{
+  line-height: 2em;
+  border-bottom: 1px dashed #ddd;
+  padding-left: 1.5em;
+}
+
+.confirmation-details i {
+
+}
+
+/* Sessions */
+
+.sessions-row{
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.0em;
+  line-height: 1.6em;
+  margin-bottom: .4em;
+}
+
+.sessions-row div{
+  padding:0;
+  text-align: left;
+}
+
+.done-row{
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.1em;
+  line-height: 1.3em;
+  margin-bottom: .4em;
+  border-bottom: 1px dashed #bbb;
+  padding: 0.5em 0;
+}
+
+.done-row div{
+  padding: 0;
+  text-align: left;
+}
+
+.done-row .address {
+  font-size: 0.8em;
+}
+
+.done-row a{
+  color: #c1a152;
+  text-decoration: underline;
+}
+
+.done-row .done-label{
+  padding-left: 0em;
+}
+
+.done-row .done-value{
+  padding-left: 1.0em;
+}
+
+.qr-tip {
+  color: #c1a152;
+  white-space: pre-wrap;
+  font-size: 1em;
+  padding: 0.5em 0;
+}
+
+/* Animation */
+
+#yonex-logo {
+  -vendor-animation-duration: 0.5s;
+}
+
+#yonex-event-title {
+  -vendor-animation-delay: 1s;
+}
+
+#yonex-enter-btn {
+  -vendor-animation-delay: 1.5s;
+}

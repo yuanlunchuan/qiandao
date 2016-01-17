@@ -1,0 +1,25 @@
+xlsx_package.use_autowidth = true
+wb = xlsx_package.workbook
+header_style = wb.styles.add_style alignment: { horizontal: :center, vertical: :center}, bg_color: '0C56A1', fg_color: 'FF', border: { style: :thin, color: '00' }, b:false
+row_style = wb.styles.add_style border: {style: :thin, color: '00'}
+
+wb.styles.fonts.first.name = 'Arial'
+wb.add_worksheet(name: '签到统计') do |sheet|
+
+  headers = ['序号', '姓名','省', '市', '公司', '手机', '签到状态', '签到时间']
+
+  sheet.add_row headers, style: header_style
+
+  @attendees.each do |item|
+    row = [item.attendee_number, item.name,
+           item.province, item.city,
+           item.company, item.mobile,
+           item.session_checked_in(@session.id) ? '已签到' : '未签到',
+           item.session_checked_in(@session.id) ? item.session_checked_in(@session.id).checked_in_at.to_s(:short) : '-'
+          ]
+    sheet.add_row row, types: :string, style: row_style
+  end
+
+end
+
+xlsx_package.use_shared_strings = true

@@ -1,0 +1,28 @@
+<% if @attendees.to_a.count > 0 %>
+<div class="row" >
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <tbody>
+    <% @attendees.each do |attendee|%>
+    <tr>
+      <td class="text-center"><%=attendee.session_checked_in_at.in_time_zone('Beijing').to_s(:time_only)%></td>
+      <td title="<%=attendee.mobile%>"><%=attendee.name%></td>
+      <td class="text-center">
+        <% style = (attendee.printed_at.present? ? 'btn-white' : 'btn-primary') %>
+        <%= link_to 'javascript:;', class: "btn #{style} btn-xs site-print-pdf-btn", data: { pdf: badge_event_attendee_path(id: attendee.id, format: :pdf) } do%>
+          <i class="fa fa-print"></i>
+        <% end %>
+        &nbsp;
+        <%= link_to 'javascript:;', data: {token: attendee.token}, class: 'btn btn-white btn-xs site-uncheck-in-btn' do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<% end %>

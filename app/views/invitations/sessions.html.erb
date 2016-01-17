@@ -1,0 +1,45 @@
+<div class="background-container-2" ></div>
+
+
+<div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
+  <div class="row">
+    <div class="col-md-12 text-center" style="margin-top: 1em;">
+      <%= image_tag image_path('yonex-sessions-banner.png'), width: '80%', style:'margin: 0 auto', class: 'animated bounceInLeft' %>
+
+      <div class="sessions-text" style="width: 80%; margin: 1em auto;">
+        尊敬的 <%=@attendee.name%> 先生/女士, <br>
+
+        <%=  @settings.content %>
+      </div>
+
+      <%= image_tag image_path('yonex-sessions-title.png'), width: '80%', style:'margin: 0 auto; margin-bottom: .5em' %>
+
+      <% @schedule.each do |date, schedule| %>
+        <div class="row sessions-row animated fadeIn">
+          <div class="col-xs-3">
+            <%= date %>
+          </div>
+          <div class="col-xs-5 text-left" style="padding-left:1em;">
+            <%schedule.each do |session|%>
+              <%=session[:time]%><br>
+            <% end %>
+          </div>
+          <div class="col-xs-4 text-left" style="padding:0">
+            <%schedule.each do |session|%>
+              <%=session[:name]%><br>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+
+
+      <%= link_to invitations_confirmation_path, id: 'yonex-confirm-btn', class:'animated fadeIn' do %>
+      <%= image_tag image_path('yonex-confirm-btn.png'), width: '80%', style:'margin: 2em auto' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+

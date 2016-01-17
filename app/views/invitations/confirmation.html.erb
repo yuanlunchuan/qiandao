@@ -1,0 +1,45 @@
+<div class="background-container-2" ></div>
+
+
+<div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
+  <div class="row">
+    <div class="col-md-12 text-center" style="margin-top: 1em;">
+      <%= image_tag image_path('yonex-confirmation-title.png'), width: '80%', style:'margin: 0 auto' %>
+
+
+      <% img_url = (@img.present? ? @img : image_path('yonex-confirmation-camera.png')) %>
+      <%= image_tag  img_url, width: '35%', style:'margin: 1em auto;', id: 'upload_photo', class: 'img-circle animated zoomIn'%>
+
+      <div class="hidden loading-animation">
+        <%= image_tag image_path('loading.gif') %>
+      </div>
+
+      <div class="row confirmation-row">
+        <div class="col-xs-3 col-xs-offset-1"> <i class="fa fa-user"></i><strong>姓名</strong> </div>
+        <div class="col-xs-8"> <%=@attendee.name%> </div>
+      </div>
+
+      <div class="row confirmation-row">
+        <div class="col-xs-3 col-xs-offset-1"> <i class="fa fa-mobile"></i><strong>手机</strong> </div>
+        <div class="col-xs-8"> <%=@attendee.mobile%> </div>
+      </div>
+
+      <div class="row confirmation-row">
+        <div class="col-xs-3 col-xs-offset-1"> <i class="fa fa-building-o"></i><strong>公司</strong> </div>
+        <div class="col-xs-8"> <%=@attendee.company%></div>
+      </div>
+
+      <div class="row confirmation-row">
+        <div class="col-xs-3 col-xs-offset-1"> <i class="fa fa-home"></i><strong>场次</strong> </div>
+        <div class="col-xs-8"> <%=@settings.event_alias%> </div>
+      </div>
+
+      <% klass = @attendee.photo.exists? ? '' : 'hidden' %>
+      <%= link_to invitations_done_path, class:"yonex-done-btn #{klass}" do %>
+        <%= image_tag image_path('yonex-done-btn.png'), width: '80%', style:'margin: 1em auto' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+

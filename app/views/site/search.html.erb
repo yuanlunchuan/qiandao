@@ -1,0 +1,79 @@
+<% if @attendees.count == 0 %>
+    <div class="text-center">
+      <h3>没有找到相关用户</h3>
+    </div>
+
+<% elsif @attendees.count == -1 %>
+<% attendee = @attendees.first %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag attendee.avatar.url, width: 100, height: 100, class:'m-t-md' %>
+    </div>
+    <div class="col-md-8">
+      <h2><%=attendee.name%></h2>
+      <ul class="list-unstyled site-user-info">
+        <li>报名身份：<%= attendee.category.try(:name)%> </li>
+        <li>公司名称：<%= attendee.company%> </li>
+        <li>手机号码：<%= attendee.mobile%> </li>
+        <li>签到状态：<%= attendee.session_checked_in(@session.id) ? '已签到': '-'%></li>
+      </ul>
+      <% unless attendee.session_checked_in(@session.id) %>
+        <td> <%= link_to '签到', 'javascript:;', data: {token: attendee.token}, class: 'btn btn-primary site-check-in-btn', method: :post  %> </td>
+      <% else %>
+        <td> <%= link_to '取消签到', 'javascript:;', data: {token: attendee.token}, class: 'btn btn-white site-uncheck-in-btn', method: :post  %> </td>
+      <% end %>
+    </div>
+  </div>
+<% else %> <!--搜索到多个用户-->
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th class="text-center">头像</th>
+        <th class="text-center">姓名</th>
+        <th class="text-center">公司</th>
+        <th class="text-center">手机</th>
+        <th class="text-center">打印</th>
+        <th class="text-center">状态</th>
+        <th class="text-center">操作</th>
+      </tr>
+    </thead>
+  <tbody>
+
+  </tbody>
+    <% @attendees.each do |attendee|%>
+      <tr>
+        <% if attendee.photo.exists? %>
+          <td class="site-table-avatar">
+            <%= link_to attendee.photo.url, target: '_blank' do%>
+              <% if attendee.avatar.exists? %>
+                <%= image_tag(attendee.avatar.url) %>
+                  <% elsif attendee.photo.exists? %>
+                    <%= image_tag(attendee.photo.url(:thumb)) %>
+                  <% end %>
+                <% end %>
+              </td>
+            <% else %>
+            <td>-</td>
+          <% end %>
+
+          <td> <%= attendee.name %> </td>
+          <td> <%= attendee.company %> </td>
+          <td> <%= attendee.mobile %> </td>
+
+          <td>
+            <%= link_to 'javascript:;', class: "btn btn-white btn-xs site-print-pdf-btn", data: { pdf: badge_event_attendee_path(id: attendee.id, format: :pdf) } do%>
+                <i class="fa fa-print"></i>
+            <% end %>
+          </td>
+          <% unless attendee.session_checked_in(@session.id) %>
+            <td>-</td>
+            <td> <%= link_to '签到','javascript:;', data: {token: attendee.token}, class: 'btn btn-xs btn-primary site-check-in-btn', method: :post  %> </td>
+            <% else %>
+          <td>已签到</td>
+          <td> <%= link_to '取消签到', 'javascript:;', data: {token: attendee.token}, class: 'btn btn-xs btn-white site-uncheck-in-btn', method: :post  %> </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

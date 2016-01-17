@@ -1,0 +1,25 @@
+<div class="col-md-4">
+  <div class="ibox">
+    <div class="ibox-content product-box event-box">
+
+      <div class="product-desc">
+        <!--<span class="product-price"> 未开始 </span>-->
+
+        <%= link_to event.name, event_dashboard_path(event), class: 'product-name' %>
+
+        <ul class="list-unstyled event-items">
+          <li><i class="fa fa-calendar"></i>
+            <%= event.start == event.end ? "#{event.start}" : "#{event.start} - #{event.end}" %>
+          </li>
+          <li><i class="fa fa-map-marker"></i><nobr><%= event.location %></nobr></li>
+        </ul>
+
+        <div class="m-t text-righ">
+          <%= link_to event_dashboard_path(event), class: 'btn btn-xs btn-outline btn-success' do %>
+            进入活动 <i class="fa fa-long-arrow-right"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

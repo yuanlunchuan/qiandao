@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+
+      <div class="ibox-title">
+        <h5>管理员列表</h5>
+      </div>
+
+      <div class="ibox-content">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>帐号</th>
+            <th>超级管理员</th>
+            <th>备注</th>
+            <th>添加时间</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%@admins.each do |admin| %>
+          <tr>
+            <td><%=admin.id%></td>
+            <td><%=admin.name%></td>
+            <td><%=admin.root? ? '是': '否'%></td>
+            <td><%=admin.memo%></td>
+            <td><%=admin.created_at.to_s(:default)%></td>
+            <td>
+              <% unless admin.root? %>
+              <%= link_to '编辑', edit_admin_path(admin), class: 'btn btn-outline btn-info btn-xs'%>
+              <% end %>
+            </td>
+          </tr>
+          <%end%>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

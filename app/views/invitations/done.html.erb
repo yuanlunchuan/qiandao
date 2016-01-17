@@ -1,0 +1,62 @@
+<div class="background-container-2" ></div>
+
+
+<div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
+  <div class="row">
+    <div class="col-md-12 text-center" style="margin-top: 1em;">
+      <%= image_tag image_path('yonex-done-title.png'), width: '80%', style:'margin: 0 auto; margin-bottom: 1em', class: 'animated fadeIn' %>
+
+      <div class="animated fadeIn">
+      <div class="row done-row">
+        <div class="col-xs-1">
+          <i class="fa fa-calendar"></i>
+        </div>
+        <div class="col-xs-3 done-label">
+          <strong>会议日期</strong>
+        </div>
+        <div class="col-xs-8 done-value">
+          <%= @settings.date %>
+        </div>
+      </div>
+
+      <div class="row done-row">
+        <div class="col-xs-1">
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <div class="col-xs-3 done-label">
+          <strong>会议签到</strong>
+        </div>
+        <div class="col-xs-8 done-value">
+          <%= @settings.check_in_time %>
+        </div>
+      </div>
+
+      <div class="row done-row">
+        <div class="col-xs-1">
+          <i class="fa fa-map-marker"></i>
+        </div>
+        <div class="col-xs-3 done-label">
+          <strong>会议地点</strong>
+        </div>
+        <div class="col-xs-8 done-value">
+          <%= @settings.location %> <br>
+          <span class="address"><%= @settings.address %></span> <br>
+          <%= link_to @settings.map_url do %>
+            查看地图
+          <% end %>
+        </div>
+      </div>
+      </div> <!--WRAPPER-->
+      
+      <%= image_tag(@qr.as_png(border_modules: 1).to_data_url,  width: '40%', style:'margin:0 auto; margin-top: 1.3em;', class:'animated fadeInUp') %>
+      <%= image_tag image_path('yonex-done-qrcode-arrow.png'), width: '80%', style:'margin: 0 auto; '%>
+
+      <div class="qr-tip" style="font-weight: bold;">长按上图或截屏将二维码保存至手机相册</div>
+
+      <%= image_tag image_path('yonex-done-qrcode-tip.png'), width: '80%', style:'margin: 0 auto; margin-bottom: 1em'%>
+
+
+    </div>
+  </div>
+</div>
+

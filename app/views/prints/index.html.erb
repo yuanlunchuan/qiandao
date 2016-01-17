@@ -1,0 +1,96 @@
+<% breadcrumb :prints %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>入场证打印</h5>
+      </div>
+      <div class="ibox-content">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <h3>共找到 <strong class="text-success"><%= @attendees.total_count %></strong> 条记录</h3>
+          </div>
+        </div>
+
+        <div class="row m-b-md m-t-md">
+
+          <div class="col-sm-5 m-b-xs">
+            <%=select_tag :category_id, options_from_collection_for_select(current_event.attendee_categories, 'id', 'name', params[:category_id]), prompt: '选择用户标签', include_blank: false, class: 'input-sm form-control input-s-sm inline'%>
+          </div>
+
+          <div class="col-sm-4 m-b-xs">
+            <div data-toggle="buttons" class="btn-group">
+              <% {'全部' => '0', '已打印' => '1', '未打印' => '-1'}.each do |k, v| %>
+                <label class="btn btn-sm btn-white <%=params[:printed] == v ? 'active' : ''%>">
+                  <input type="radio" name="printed" value="<%=v%>" <%=params[:printed] == v ? 'checked' : ''%>> <%=k%> </label>
+              <% end %>
+            </div>
+          </div>
+
+          <%= form_tag event_prints_path, method: :get do%>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <input type="text" placeholder="请输入关键字" class="input-sm form-control" name="keyword" value="<%=params[:keyword]%>">
+                <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>姓名</th>
+              <th>公司</th>
+              <th>标签</th>
+              <th>手机号码</th>
+              <th class="text-center">入场证打印</th>
+              <th>打印时间</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @attendees.each do |attendee| %>
+              <tr>
+                <td><%=attendee.attendee_number%></td>
+                <td><%=attendee.name%></td>
+                <td><%=attendee.company%></td>
+                <td><%=attendee.category.try(:name)%></td>
+                <td><%=attendee.mobile%></td>
+                <td class="text-center">
+                  <% if attendee.printed_at %>
+                    <span class="label label-default">已打印</span>
+                  <% else %>
+                    未打印
+                  <% end %>
+                </td>
+                <td>
+                  <% if attendee.printed_at %>
+                    <%= attendee.printed_at.to_s(:default)%>
+                  <% end %>
+                </td>
+                <td>
+                  <%=link_to '打印入场证', '#', class: 'btn btn-white btn-xs print-pdf-btn', data: {pdf: badge_event_attendee_path(id: attendee.id, format: :pdf)}%>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <%= paginate @attendees %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

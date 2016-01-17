@@ -1,0 +1,54 @@
+<% breadcrumb :invitation_settings %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>邀请函设置</h5>
+      </div>
+      <div class="ibox-content">
+
+        <%= form_for @settings, url: event_update_invitation_settings_path, html: {class: 'form-horizontal'} do |f|%>
+
+          <div class="form-group"><label class="col-sm-2 control-label">邀请函内容</label>
+            <div class="col-sm-5"> <%=f.text_area :content, rows: 5, class: 'form-control'%> </div>
+          </div>
+
+          <div class="form-group"><label class="col-sm-2 control-label">场次</label>
+            <div class="col-sm-5"> <%=f.text_field :event_alias, class: 'form-control'%> </div>
+          </div>
+
+          <div class="form-group"><label class="col-sm-2 control-label">会议日期</label>
+            <div class="col-sm-3"> <%=f.text_field :date, class: 'form-control'%> </div>
+          </div>
+
+          <div class="form-group"><label class="col-sm-2 control-label">会议签到时间</label>
+            <div class="col-sm-3"> <%=f.text_field :check_in_time, class: 'form-control'%> </div>
+          </div>
+
+          <div class="form-group"><label class="col-sm-2 control-label">会议地点</label>
+            <div class="col-sm-5"> <%=f.text_field :location, class: 'form-control'%> </div>
+          </div>
+
+          <div class="form-group"><label class="col-sm-2 control-label">地址</label>
+            <div class="col-sm-5"> <%=f.text_field :address, class: 'form-control'%> </div>
+          </div>
+
+          <div class="form-group"><label class="col-sm-2 control-label">地图链接</label>
+            <div class="col-sm-5"> <%=f.text_field :map_url, class: 'form-control'%> </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-2">
+              <%=link_to '取消', event_dashboard_path(current_event), class: 'btn btn-white'%>
+              <%= button_tag '保存', class: 'btn btn-primary'%>
+            </div>
+          </div>
+
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+</div>

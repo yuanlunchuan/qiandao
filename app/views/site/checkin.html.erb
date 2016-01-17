@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="row text-center">
+      <h2>
+        <i class="fa fa-check text-success"></i> &nbsp; 验证信息有效，签到成功 !</h2>
+    </div>
+    <div class="row m-t-md m-b-lg">
+      <div class="col-md-5 m-t-md text-center">
+        <%= image_tag @attendee.avatar, class: 'img-circle', width: 120, height: 120 %>
+      </div>
+
+      <div class="col-md-7">
+        <h1><%= @attendee.name %></h1>
+        <ul class="list-unstyled site-user-info">
+          <li>报名身份：<%= @attendee.category.try(:name)%> </li>
+          <li>手机号码：<%= @attendee.mobile%> </li>
+          <li>公司名称：<%= @attendee.company%> </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row m-t-lg">
+      <div class="col-md-5">
+        <%= link_to '确定', 'javascript:;', class: 'btn btn-primary btn-block', data: {dismiss:"modal"} %>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <% style = (@attendee.printed_at.present? ? 'btn-default' : 'btn-primary') %>
+        <%= link_to '打印入场凭证', 'javascript:;',  class: "btn #{style} btn-block site-print-pdf-btn", data: {pdf: badge_event_attendee_path(id: @attendee.id, format: :pdf)}%>
+      </div>
+    </div>
+
+  </div>
+
+</div>

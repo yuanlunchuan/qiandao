@@ -1,0 +1,6 @@
+set :domain, 'web.tixing'
+set :deploy_to, '/var/www/yonex'
+set :repository, 'git@yonex.github.com:duxins/yonex.git'
+set :branch, 'checkin'
+set :user, 'deploy'
+set :rvm_ruby_version, '2.1.'
