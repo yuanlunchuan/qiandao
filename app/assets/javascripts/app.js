@@ -1,13 +1,19 @@
 $(document).on('ready page:load', function(){
-    //This will deal with RFID situation
-    $('#key_word_input_box').on('change', function(){
+    function is_rfid_num(){
       var rfid_value = $('#key_word_input_box').val();
       if (rfid_value[0]=='0') {
-        siteCheckIn('8ymvrwk');
-        //console.info('--------this is special card--');
+        return true;
       }
       else{
-        siteCheckIn('jta7q8i');
+        return false;
+      }
+    }
+
+    $('#key_word_input_box').on('change', function(){
+      if (is_rfid_num()) {
+        var rfid_value = $('#key_word_input_box').val();
+        siteCheckIn(rfid_value);
+        $('#key_word_input_box').val('');
       }
     });
 
@@ -83,10 +89,10 @@ $(document).on('ready page:load', function(){
     });
 
     $('.site-keyword-input').keydown(function(e){
-        if(e.keyCode != 13){
+        if((e.keyCode != 13)||is_rfid_num()){
           return;
         }
-       // searchAttendee();
+        searchAttendee();
     });
 
     $('.site-keyword-input').click(function(){
@@ -94,7 +100,9 @@ $(document).on('ready page:load', function(){
     });
 
     $('.site-search-btn').click(function(){
-        //searchAttendee();
+        if (!is_rfid_num()) {
+          searchAttendee();
+        }
         return false;
     });
 

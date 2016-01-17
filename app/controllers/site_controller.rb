@@ -8,6 +8,7 @@ class SiteController < ApplicationController
 
   def search
     @attendees = current_event.attendees.contains(params[:keyword])
+
     render layout: false
   end
 
@@ -22,7 +23,11 @@ class SiteController < ApplicationController
 
   # POST /site/:session_id/check_in
   def check_in
-    @attendee = current_event.attendees.find_by_token(params[:token])
+    if '0'==params[:token][0]
+      @attendee = current_event.attendees.find_by_rfid_num(params[:token])
+    else
+      @attendee = current_event.attendees.find_by_token(params[:token])
+    end
 
     if @attendee.nil?
       return render json: {type: 'error', error: '找不到用户', code: -1}

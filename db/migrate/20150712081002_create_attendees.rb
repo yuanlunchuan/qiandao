@@ -9,6 +9,7 @@ class CreateAttendees < ActiveRecord::Migration
       t.references :event
       t.references :category
       t.string     :token
+      t.string     :rfid_num
 
       t.datetime :checked_in_at
       t.integer  :attendee_number, default: 0

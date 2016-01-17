@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160114071901) do
     t.integer  "event_id",             limit: 4
     t.integer  "category_id",          limit: 4
     t.string   "token",                limit: 255
+    t.string   "rfid_num",             limit: 255
     t.datetime "checked_in_at"
     t.integer  "attendee_number",      limit: 4,   default: 0
     t.integer  "sms_sid",              limit: 4
