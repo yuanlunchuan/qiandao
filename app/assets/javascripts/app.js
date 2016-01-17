@@ -1,9 +1,20 @@
 $(document).on('ready page:load', function(){
+    //This will deal with RFID situation
+    $('#key_word_input_box').on('change', function(){
+      var rfid_value = $('#key_word_input_box').val();
+      if (rfid_value[0]=='0') {
+        siteCheckIn('8ymvrwk');
+        //console.info('--------this is special card--');
+      }
+      else{
+        siteCheckIn('jta7q8i');
+      }
+    });
 
     $('input[autocomplete=off]').on('focus', function(){
         $(this).attr('readonly', false);
     });
-    
+
     $('.input-daterange').datepicker({
         format: 'yyyy-mm-dd',
         //startDate: '+1d',
@@ -72,8 +83,10 @@ $(document).on('ready page:load', function(){
     });
 
     $('.site-keyword-input').keydown(function(e){
-        if(e.keyCode != 13) return;
-        searchAttendee();
+        if(e.keyCode != 13){
+          return;
+        }
+       // searchAttendee();
     });
 
     $('.site-keyword-input').click(function(){
@@ -81,7 +94,7 @@ $(document).on('ready page:load', function(){
     });
 
     $('.site-search-btn').click(function(){
-        searchAttendee();
+        //searchAttendee();
         return false;
     });
 
@@ -219,7 +232,7 @@ $(document).on('ready page:load', function(){
         var url = $input.data('url');
         url = url + '?keyword=' + name;
 
-        $('#site-modal-content').load(url, function(){
+        $('#site-modal-content').load(url, function(event){
             $('#site-modal').modal();
         });
     }
@@ -284,4 +297,37 @@ $(document).on('ready page:load', function(){
         }else{
             $(this).html('删除照片');
             $input.val('');
-            $(this).addClass('btn-outline btn-white')
+            $(this).addClass('btn-outline btn-white');
+            $(this).removeClass('btn-danger');
+        }
+    });
+
+    $('.upload-photo-btn').dropzone({
+        url: '#',
+        maxFiles: 1,
+        maxFilesize: 3,
+        previewsContainer: '.dropzone-photo-preview',
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        processing: function(){
+            this.options.url = $(this.element).data('url');
+        },
+        sending: function(){
+            $('#upload-photo-status').removeClass('hidden');
+        },
+        error: function(a, error){
+            alert(error);
+            $('#upload-photo-status').addClass('hidden');
+        },
+        success: function(a, b){
+            Turbolinks.visit(location.href);
+            $('#upload-photo-status').addClass('hidden');
+        },
+        complete: function(){
+            this.removeAllFiles(true);
+            $('#upload-photo-status').addClass('hidden');
+        }
+    });
+
+});
