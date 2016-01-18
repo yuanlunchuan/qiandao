@@ -45,6 +45,6 @@ class AttendeeCategoriesController < ApplicationController
 private
 
   def category_params
-    params.require(:attendee_category).permit(:name)
+    params.require(:attendee_category).permit(:name, :category_color)
   end
 end

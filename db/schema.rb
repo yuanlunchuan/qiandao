@@ -26,9 +26,10 @@ ActiveRecord::Schema.define(version: 20160114071901) do
   create_table "attendee_categories", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.integer  "event_id",        limit: 4
+    t.integer  "category_number", limit: 4
+    t.string   "category_color",  limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "category_number", limit: 4
   end
 
   create_table "attendees", force: :cascade do |t|
@@ -134,7 +135,7 @@ ActiveRecord::Schema.define(version: 20160114071901) do
     t.boolean  "checkin_enabled",  limit: 1
     t.boolean  "hidden",           limit: 1,     default: false
     t.boolean  "company_checkin",  limit: 1,     default: false
-    t.boolean  "question_enabled", limit: 1
+    t.boolean  "question_enabled", limit: 1,     default: false
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end

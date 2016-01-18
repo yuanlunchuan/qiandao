@@ -20,6 +20,7 @@
             <tr>
               <th>序号</th>
               <th>名称</th>
+              <th>颜色</th>
               <th>操作</th>
             </tr>
             </thead>
@@ -28,6 +29,7 @@
               <tr>
                 <td><%=category.category_number%></td>
                 <td><%=category.name%></td>
+                <td><span style="background-color: <%=category.category_color %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
                 <td>
                   <%=link_to '编辑', edit_event_attendee_category_path(current_event, category), class: 'btn btn-white btn-xs' %>
                   <%=link_to '删除', event_attendee_category_path(current_event, category), method: :delete, data: {confirm: '是否确认删除标签？'}, class: 'btn btn-danger btn-outline btn-xs' %>
