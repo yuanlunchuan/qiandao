@@ -2,6 +2,10 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :questions do
+  link '提问审核', event_questions_path
+end
+
 crumb :attendees do
   link '全部报名用户', event_attendees_path
 end

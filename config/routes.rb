@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :questions
+
       get 'photos'          => 'attendees#photos'
 
       get 'notifications'   => 'notifications#index'
