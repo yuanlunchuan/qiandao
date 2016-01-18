@@ -11,6 +11,7 @@ class CreateSessions < ActiveRecord::Migration
       t.boolean :checkin_enabled
       t.boolean :hidden, default: false
       t.boolean :company_checkin, default: false
+      t.boolean :question_enabled, default: false
 
       t.timestamps null: false
     end

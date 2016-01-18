@@ -50,6 +50,14 @@
                 <% end %>
               </td>
 
+              <td class="text-center">
+                <% if session.question_enabled? %>
+                    开启提问
+                <% else %>
+                    关闭提问
+                <% end %>
+              </td>
+
 
               <td class="project-actions">
                 <%= link_to edit_event_session_path(current_event, session), class: 'btn btn-white btn-sm' do%>

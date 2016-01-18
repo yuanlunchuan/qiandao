@@ -48,6 +48,6 @@ class EventSessionsController < ApplicationController
 private
 
   def session_params
-    params.require(:session).permit(:name, :desc, :location, :start_time, :end_time, :start_date, :checkin_enabled, :company_checkin, :hidden)
+    params.require(:session).permit(:name, :desc, :location, :start_time, :end_time, :start_date, :checkin_enabled, :company_checkin, :hidden, :question_enabled)
   end
 end

@@ -119,22 +119,24 @@ ActiveRecord::Schema.define(version: 20160114071901) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "question_content", limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.integer  "event_id",        limit: 4
+    t.string   "name",             limit: 255
+    t.integer  "event_id",         limit: 4
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.string   "location",        limit: 255
-    t.text     "desc",            limit: 65535
-    t.boolean  "checkin_enabled", limit: 1
-    t.boolean  "hidden",          limit: 1,     default: false
-    t.boolean  "company_checkin", limit: 1,     default: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "location",         limit: 255
+    t.text     "desc",             limit: 65535
+    t.boolean  "checkin_enabled",  limit: 1
+    t.boolean  "hidden",           limit: 1,     default: false
+    t.boolean  "company_checkin",  limit: 1,     default: false
+    t.boolean  "question_enabled", limit: 1
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "sms_templates", force: :cascade do |t|
