@@ -8,12 +8,6 @@
       </div>
       <div class="ibox-content">
 
-        <div class="row">
-          <div class="col-sm-12">
-            <%= link_to '添加标签', new_event_attendee_category_path, class: 'btn btn-white btn-sm pull-right' %>
-          </div>
-        </div>
-
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -31,7 +25,11 @@
                 <td><%= i+= 1 %></td>
                 <td><%= question.attendee.name %></td>
                 <td><%= question.question_content %></td>
-                <td><%= link_to '查看并回复', event_question_path(current_event, question.id) %></td>
+                <% if question.answer.present? %>
+                  <td><%= link_to '查看', event_question_path(current_event, question.id) %></td>
+                <% else %>
+                  <td><%= link_to '查看并回复', event_question_path(current_event, question.id) %></td>
+                <% end %>
               </tr>
               <% end %>
             </tbody>

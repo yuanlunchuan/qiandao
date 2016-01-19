@@ -9,6 +9,8 @@
       <div class="ibox-content">
         <%= form_for [ current_event, @question ], html: {class: 'form-horizontal'} do |f|%>
 
+          <%= text_field_tag :answer_id, @answer.id, class: 'form-control hidden' %>
+
           <div class="form-group"><label class="col-sm-2 control-label">用户名</label>
             <div class="col-sm-3"><%= @question.attendee.name %></div>
           </div>
@@ -24,7 +26,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">回答</label>
             <div class="col-sm-3">
-              <textarea name="answer" class='form-control' rows="3" cols="100" ></textarea>
+              <%= text_area_tag :answer, @answer.answer, class: 'form-control' %>
             </div>
           </div>
 

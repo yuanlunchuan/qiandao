@@ -5,6 +5,7 @@ class CreateAnswers < ActiveRecord::Migration
       t.references :admin
 
       t.text :answer
+      t.column :state, 'char(1)', null: false, default: 'C'
 
       t.timestamps null: false
     end

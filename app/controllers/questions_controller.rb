@@ -7,11 +7,29 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @answer   = Answer.new
+    if @question.answer.present?
+      @answer   = @question.answer
+    else
+      @answer = Answer.new
+    end
   end
 
   def edit
     
+  end
+
+  def update
+    admin = Admin.auth_token_is(cookies[:auth_token]).first
+    question = Question.find(params[:id])
+
+    if params[:answer_id].present?
+      answer = Answer.find(params[:answer_id])
+      answer.update admin: admin, question: question, answer: params[:answer]
+    else
+      Answer.create admin: admin, question: question, answer: params[:answer]
+    end
+
+    redirect_to event_questions_path(current_event)
   end
 
 end

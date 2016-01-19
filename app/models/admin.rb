@@ -5,6 +5,8 @@ class Admin < ActiveRecord::Base
 
   before_create { generate_token(:auth_token) }
 
+  scope :auth_token_is, ->(auth_token){ where auth_token: auth_token }
+
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 
   def name=(name)
