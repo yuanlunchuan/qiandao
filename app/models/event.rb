@@ -12,6 +12,8 @@ class Event < ActiveRecord::Base
   has_one  :sms_template
   has_one  :invitation_setting
 
+  has_many :question
+
   before_validation :generate_datetime
   after_find :build_time_attributes
 

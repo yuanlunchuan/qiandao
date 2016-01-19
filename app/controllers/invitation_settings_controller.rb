@@ -4,7 +4,7 @@ class InvitationSettingsController < ApplicationController
   layout 'event'
 
   def index
-        @settings = InvitationSetting.find_or_create_by(event: current_event)
+    @settings = InvitationSetting.find_or_create_by(event: current_event)
   end
 
   def update

@@ -2,7 +2,7 @@ class Session < ActiveRecord::Base
   belongs_to :event
   has_many :checkins, dependent: :destroy
   has_many :attendees, -> { select('`attendees`.*, `checkins`.checked_in_at as session_checked_in_at').order('`checkins`.checked_in_at DESC') }, through: :checkins
-  has_many :questions
+  has_many :question
 
   default_scope -> { order(starts_at: :asc) }
 

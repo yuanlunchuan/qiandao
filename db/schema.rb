@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114071901) do
+ActiveRecord::Schema.define(version: 20160119141654) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20160114071901) do
     t.text     "memo",            limit: 65535
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "question_id", limit: 4
+    t.integer  "admin_id",    limit: 4
+    t.text     "answer",      limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "attendee_categories", force: :cascade do |t|
@@ -121,6 +129,9 @@ ActiveRecord::Schema.define(version: 20160114071901) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "question_content", limit: 255
+    t.integer  "session_id",       limit: 4
+    t.integer  "attendee_id",      limit: 4
+    t.integer  "event_id",         limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
