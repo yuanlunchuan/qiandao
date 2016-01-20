@@ -34,7 +34,9 @@ class AttendeesController < ApplicationController
   end
 
   def create
-    @attendee = current_event.attendees.new attendee_params
+    @attendee          = current_event.attendees.new attendee_params
+    @attendee.province = params[:province]
+    @attendee.city     = params[:city]
 
     if @attendee.save
       redirect_to event_attendees_path, flash: {success: '添加成功'}
@@ -50,7 +52,11 @@ class AttendeesController < ApplicationController
 
   def update
     @attendee = current_event.attendees.find(params[:id])
+
     if @attendee.update(attendee_params)
+      @attendee.province = params[:province]
+      @attendee.city     = params[:city]
+      @attendee.save
       if(params[:_delete_photo] == '1')
         @attendee.photo.clear
         @attendee.save

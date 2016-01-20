@@ -1,4 +1,12 @@
-<%= form_for [current_event, @attendee], html: {class: 'form-horizontal', multipart: true, onkeydown: "if(event.keyCode==13){return false;}" } do |f|%>
+<% if @attendee.present? %>
+  <div id="province_city" class="hidden" data-province=<%= @attendee.province %> data-city=<%= @attendee.city %> data-name="zhangsan"></div>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag 'province_city' %>
+<% end %>
+
+<%= form_for [current_event, @attendee], html: {class: 'form-horizontal', multipart: true, onkeydown: "if(event.keyCode==13){return false;}", name: 'creator' } do |f|%>
   <div class="form-group"><label class="col-sm-2 control-label">卡号</label>
     <div class="col-sm-3"> <%=f.text_field :rfid_num, class: 'form-control'  %> </div>
   </div>
@@ -28,11 +36,19 @@
   </div>
 
   <div class="form-group"><label class="col-sm-2 control-label">所在省</label>
-    <div class="col-sm-3"> <%=f.text_field :province, class: 'form-control'%> </div>
+    <div class="col-sm-3">
+      <select onchange="initcity();" name="province" class: 'form-control' > 
+        <option value="" class='form-control'>请选择省份</option>
+      </select>
+    </div>
   </div>
 
   <div class="form-group"><label class="col-sm-2 control-label">所在市</label>
-    <div class="col-sm-3"> <%=f.text_field :city, class: 'form-control'%> </div>
+    <div class="col-sm-3">
+      <select name="city">
+        <option value="" class='form-control'>请选择城市</option>
+      </select>
+    </div>
   </div>
 
   <div class="form-group"> <label class="col-sm-2 control-label">照片</label>
@@ -79,4 +95,3 @@
   </div>
   <% end %>
 <% end %>
-

@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    logger.info "---------params: #{params}"
     admin = Admin.auth_token_is(cookies[:auth_token]).first
     question = Question.find(params[:id])
 
