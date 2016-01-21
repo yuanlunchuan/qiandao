@@ -11,6 +11,9 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( 
   invitations.js 
   province_city.js
- 
+  seats.js
+  jquery.seat-charts.min.js
+
+  seats.css
   invitations.css
 )

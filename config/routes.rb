@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       end
 
       resources :questions
+      resources :seats
 
       get 'photos'          => 'attendees#photos'
 
