@@ -1,7 +1,8 @@
 source 'https://ruby.taobao.org'
 
 gem 'rails', '4.2.1'
-gem 'mysql2'
+#gem 'mysql2'
+gem 'pg'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'sass-rails', '~> 5.0'
