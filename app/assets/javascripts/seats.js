@@ -8,7 +8,7 @@ $(document).ready(function() {
     var item = "";
     var tablePernum = $("#seats_num").data("table-pernum");
     for(var i=0; i<tablePernum; i++){
-      item += 'a';
+      item += 'a['+i+']';
     }
 
     var tableNum = $("#seats_num").data("table-num")
@@ -16,6 +16,11 @@ $(document).ready(function() {
       map.push(item);
     }
 
+    // map = [
+    //   'a[ID,zhang]a[ID2,LABEL2]a___a[JUST_ID1]aa',
+    //   'aaaa_aaaa[,JUST_LABEL1]',
+    //   'aaaa_aaaa'
+    // ]
     var sc = $('#seat-map').seatCharts({
       map: map,
       naming : {
