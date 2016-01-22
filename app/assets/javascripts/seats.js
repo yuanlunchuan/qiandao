@@ -16,25 +16,22 @@ $(document).ready(function() {
       map.push(item);
     }
 
-    console.info(map);
+    var sc = $('#seat-map').seatCharts({
+      map: map,
+      naming : {
+        top : false,
+        getLabel: function (character, row, column) {
+          return column;
+      }
+    },
 
-  var sc = $('#seat-map').seatCharts({
-  map: map,
-
-  naming : {
-    top : false,
-    getLabel : function (character, row, column) {
-      return column;
-    }
-  },
-
-  legend : { //定义图例
-    node : $('#legend'),
-    items : [
-      [ 'a', 'available',   '可选座' ],
-      [ 'a', 'unavailable', '已售出']
-    ]
-  },
+    legend : { //定义图例
+      node : $('#legend'),
+      items : [
+        [ 'a', 'available',   '可选座' ],
+        [ 'a', 'unavailable', '已售出']
+      ]
+    },
 
   click: function () { //点击事件
     if (this.status() == 'available') { //可选座

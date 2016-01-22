@@ -2,7 +2,7 @@ class SeatsController < ApplicationController
   layout 'event'
 
   def new
-    logger.info "----------params: #{params}"
+    @session = Session.find(params[:session_id])
     if params[:session_id]
       params[:has_photo]  ||= '0'
       params[:has_avatar] ||= '0'
@@ -23,13 +23,21 @@ class SeatsController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def create
-    attendees = current_event.attendees
+    session = Session.find(params[:session_id])
+
+    if session.seat.present?
+      session.seat.update table_num: params[:table_num], per_table_num: params[:table_pernum]
+    else
+      Seat.create table_num: params[:table_num], per_table_num: params[:table_pernum], session: session
+    end
+
     if params[:classify]=='location'&&params[:enable_together]=='no'
-      city_list = Attendee.select("city").group("city").size
+
+       city_list = Attendee.select("city").group("city").reorder('city').size
       city_collection = []
 
       city_list.each do |k,v|

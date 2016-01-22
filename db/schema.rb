@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121085733) do
+ActiveRecord::Schema.define(version: 20160122020820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -382,6 +382,14 @@ ActiveRecord::Schema.define(version: 20160121085733) do
     t.json     "property",                   default: {},                    null: false
     t.datetime "created_at",                                                 null: false
     t.datetime "updated_at",                                                 null: false
+  end
+
+  create_table "seats", force: :cascade do |t|
+    t.integer  "session_id"
+    t.integer  "table_num"
+    t.integer  "per_table_num"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "sessions", force: :cascade do |t|
