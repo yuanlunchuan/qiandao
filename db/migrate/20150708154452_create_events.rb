@@ -10,6 +10,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :location
       t.string :contact
       t.string :contact_number
+      t.string :event_link
 
       t.string :time_zone, default: 'Beijing'
       t.datetime :starts_at

@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20160122020820) do
     t.string   "location"
     t.string   "contact"
     t.string   "contact_number"
+    t.string   "event_link"
     t.string   "time_zone",      default: "Beijing"
     t.datetime "starts_at"
     t.datetime "ends_at"
@@ -245,7 +246,7 @@ ActiveRecord::Schema.define(version: 20160122020820) do
     t.string   "owner_type",   limit: 64, default: "",                    null: false
     t.float    "latitude",                default: 0.0,                   null: false
     t.float    "longitude",               default: 0.0,                   null: false
-    t.string   "address",                 default: "",                    null: false
+    t.string   "address",      limit: 35, default: "",                    null: false
     t.text     "address_desc"
     t.string   "state",        limit: 1,  default: "C",                   null: false
     t.datetime "opened_at",               default: '1970-01-01 00:00:00', null: false
@@ -361,16 +362,16 @@ ActiveRecord::Schema.define(version: 20160122020820) do
   end
 
   create_table "scenes_blocks", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "scenes_spot_id",                                              null: false
-    t.string   "scenes_block_name",           default: "",                    null: false
+    t.uuid     "scenes_spot_id",                                               null: false
+    t.string   "scenes_block_name", limit: 20, default: "",                    null: false
     t.text     "scenes_block_desc"
-    t.string   "state",             limit: 1, default: "C",                   null: false
-    t.datetime "opened_at",                   default: '1970-01-01 00:00:00', null: false
-    t.datetime "closed_at",                   default: '3000-01-01 00:00:00', null: false
-    t.boolean  "defunct",                     default: false,                 null: false
-    t.json     "property",                    default: {},                    null: false
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.string   "state",             limit: 1,  default: "C",                   null: false
+    t.datetime "opened_at",                    default: '1970-01-01 00:00:00', null: false
+    t.datetime "closed_at",                    default: '3000-01-01 00:00:00', null: false
+    t.boolean  "defunct",                      default: false,                 null: false
+    t.json     "property",                     default: {},                    null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
   end
 
   create_table "scenes_spots", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -398,20 +399,19 @@ ActiveRecord::Schema.define(version: 20160122020820) do
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.string   "location"
+    t.string   "baidu_map_location_url"
     t.text     "desc"
     t.boolean  "checkin_enabled"
-    t.boolean  "hidden",           default: false
-    t.boolean  "company_checkin",  default: false
-    t.boolean  "question_enabled", default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "hidden",                 default: false
+    t.boolean  "company_checkin",        default: false
+    t.boolean  "question_enabled",       default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "shops", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "boss_id",                                                  null: false
     t.uuid     "scenes_spot_id",                                           null: false
-    t.float    "coordinates",              default: [],                    null: false, array: true
-    t.string   "address",                  default: "",                    null: false
     t.string   "shop_name",                default: "",                    null: false
     t.string   "state",          limit: 1, default: "C",                   null: false
     t.datetime "opened_at",                default: '1970-01-01 00:00:00', null: false

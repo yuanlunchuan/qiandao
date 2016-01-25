@@ -6,6 +6,7 @@ class CreateSessions < ActiveRecord::Migration
       t.datetime :starts_at
       t.datetime :ends_at
       t.string :location
+      t.string :baidu_map_location_url
       t.text :desc
 
       t.boolean :checkin_enabled
