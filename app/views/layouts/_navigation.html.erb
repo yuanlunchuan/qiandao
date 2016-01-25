@@ -1,103 +1,116 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
-  <div class="sidebar-collapse">
-    <ul class="nav metismenu" id="side-menu">
-      <li class="nav-header">
-        <div class="dropdown profile-element">
-          <span>
-            <%= image_tag 'avatar.png', class:'img-circle'%>
-          </span>
-          <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">-->
-              <span class="clear">
-                  <span class="block m-t-xs">
-                      <strong class="font-bold">你好， <%= current_admin.name %></strong>
-                  </span>
+  <div class="content">
+
+    <div id="jquery-accordion-menu" class="jquery-accordion-menu" style="background-color: #2F4050; width: 20px" >
+      <ul id="demo-list">
+
+        <li class="nav-header">
+          <div class="dropdown profile-element">
+            <span>
+              <%= image_tag 'avatar.png', class:'img-circle'%>
+            </span>
+            <span class="clear">
+              <span class="block m-t-xs">
+                <strong class="font-bold">你好， <%= current_admin.name %></strong>
               </span>
-          <!--</a>-->
-          <!--
-          <ul class="dropdown-menu animated fadeInRight m-t-xs">
-            <li class="divider"></li>
-            <li><%=link_to '退出', sign_out_path, method: :delete, data: {confirm: '是否确认退出？'}%></li>
+            </span>
+          </div>
+          <div class="logo-element">
+            YONEX
+          </div>
+        </li>
+
+        <li class="active">
+          <%= link_to event_dashboard_path do%>
+            <i class="fa fa-th-large"></i> <span class="nav-label">基本信息设置</span></span>
+          <% end %>
+        </li>
+
+        <li><a href="#"><i class="fa fa-users"></i>会议管理</a>
+          <ul class="submenu">
+            <li><a href="#">新建活动 </a></li>
+            <li><a href="#">会议日程 </a></li>
+            <li><a href="#">会议场地管理 </a></li>
+            <li><a href="#">活动管理 </a></li>
           </ul>
-          -->
-        </div>
-        <div class="logo-element">
-          YONEX
-        </div>
-      </li>
+        </li>
 
-      <li class="<%= is_active_action('dashboard', 'events') || is_active_action('settings', 'events') %>">
-        <%= link_to event_dashboard_path do%>
-          <i class="fa fa-th-large"></i> <span class="nav-label">基本信息设置</span></span>
-        <% end %>
-      </li>
+        <li><a href="#"><i class="fa fa-users"></i>会议通知</a>
+          <ul class="submenu">
+            <li><a href="#">电子邀请函 </a></li>
+            <li><a href="#">会议通知 </a></li>
+          </ul>
+        </li>
+        <li><a href="#"><i class="fa fa-user"></i>销售员管理 </a></li>
 
-      <li class="<%= is_active_controller('event_sessions') %>">
-        <%= link_to event_sessions_path do %>
-          <i class="fa fa-comments"></i> <span class="nav-label">会议日程管理</span></span>
-        <% end %>
-      </li>
+<!--         <li><a href="#"><i class="fa fa-file-image-o"></i>Gallery </a><span class="jquery-accordion-menu-label">
+          12 </span></li>
+ -->
+        <li><a href="#"><i class="fa fa-heart"></i>嘉宾管理 </a>
+          <ul class="submenu">
+            <li><a href="#">嘉宾标签管理 </a></li>
+            <li><a href="#">嘉宾信息 </a></li>
+            <li><a href="#">嘉宾照片管理 </a></li>
+            <li><a href="#">入住信息 </a></li>
+            <li><a href="#">嘉宾RFID信息录入 </a></li>
+            <li><a href="#">会议座位 </a></li>
+          </ul>
+        </li>
 
+        <li><a href="#"><i class="fa fa-pencil"></i>签到管理 </a>
+          <ul class="submenu">
+            <li><a href="#">签到监控设置 </a></li>
+            <li><a href="#">签到状态 </a><span class="jquery-accordion-menu-label">10 </span>
+            </li>
+            <li><a href="#">证件打印状态 </a></li>
+          </ul>
+        </li>
 
-      <li class="<%= is_active_controller('attendee_categories') %>">
-        <%= link_to event_attendee_categories_path do %>
-          <i class="fa fa-sitemap"></i> <span class="nav-label">用户标签管理</span></span>
-        <% end %>
-      </li>
+        <li><a href="#"><i class="fa fa-gift"></i>现场互动管理 </a>
+          <ul class="submenu">
+            <li><a href="#">现场抽奖 </a></li>
+            <li><a href="#">现场提问 </a></li>
+          </ul>
+        </li>
 
-      <li class="<%= is_active_action('index', 'attendees') %>">
-        <%= link_to event_attendees_path do %>
-          <i class="fa fa-user"></i> <span class="nav-label">报名用户列表</span></span>
-        <% end %>
-      </li>
-
-      <li class="<%= is_active_action('photos', 'attendees') %>">
-        <%= link_to event_photos_path do %>
-            <i class="fa fa-picture-o"></i> <span class="nav-label">用户照片管理</span></span>
-        <% end %>
-      </li>
-
-      <li class="<%= is_active_controller('notifications') %>">
-        <%= link_to event_notifications_path do %>
-          <i class="fa fa-bell"></i> <span class="nav-label">会议通知管理</span></span>
-        <% end %>
-      </li>
-
-      <li class="<%= is_active_controller('invitation_settings') %>">
-        <%= link_to event_invitation_settings_path do %>
-          <i class="fa fa-envelope"></i> <span class="nav-label">邀请函设置</span></span>
-        <% end %>
-      </li>
-
-      <li class="<%= is_active_controller('checkin') %>">
-        <%= link_to event_checkin_path do %>
-          <i class="fa fa-laptop"></i> <span class="nav-label">签到状态统计</span></span>
-        <% end %>
-      </li>
-
-      <li class="<%= is_active_controller('prints') %>">
-        <%= link_to event_prints_path do %>
-          <i class="fa fa-print"></i> <span class="nav-label">入场证打印</span></span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to event_questions_path do %>
-        <i class="fa fa-check-circle-o"></i><span class="nav-label">提问审核</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to new_event_seat_path do %>
-          <i class="fa fa-plane"></i> <span class="nav-label">座位安排</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to event_site_path do %>
-          <i class="fa fa-qrcode"></i> <span class="nav-label">现场签到管理</span>
-        <% end %>
-      </li>
-
-    </ul>
+      </ul>
+    </div>
   </div>
 </nav>
+
+<script type="text/javascript">
+(function($) {
+$.expr[":"].Contains = function(a, i, m) {
+  return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+};
+function filterList(header, list) {
+  //@header 头部元素
+  //@list 无需列表
+  //创建一个搜素表单
+  var form = $("<form>").attr({
+    "class":"filterform",
+    action:"#"
+  }), input = $("<input>").attr({
+    "class":"filterinput",
+    type:"text"
+  });
+  $(form).append(input).appendTo(header);
+  $(input).change(function() {
+    var filter = $(this).val();
+    if (filter) {
+      $matches = $(list).find("a:Contains(" + filter + ")").parent();
+      $("li", list).not($matches).slideUp();
+      $matches.slideDown();
+    } else {
+      $(list).find("li").slideDown();
+    }
+    return false;
+  }).keyup(function() {
+    $(this).change();
+  });
+}
+$(function() {
+  filterList($("#form"), $("#demo-list"));
+});
+})(jQuery); 
+</script>
