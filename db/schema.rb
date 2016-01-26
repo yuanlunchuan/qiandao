@@ -365,6 +365,11 @@ ActiveRecord::Schema.define(version: 20160122020820) do
     t.uuid     "scenes_spot_id",                                               null: false
     t.string   "scenes_block_name", limit: 20, default: "",                    null: false
     t.text     "scenes_block_desc"
+    t.string   "busy_season_start", limit: 20, default: "",                    null: false
+    t.string   "busy_season_end",   limit: 20, default: "",                    null: false
+    t.string   "open_time",         limit: 20, default: "",                    null: false
+    t.string   "close_time",        limit: 20, default: "",                    null: false
+    t.integer  "price",                        default: 0,                     null: false
     t.string   "state",             limit: 1,  default: "C",                   null: false
     t.datetime "opened_at",                    default: '1970-01-01 00:00:00', null: false
     t.datetime "closed_at",                    default: '3000-01-01 00:00:00', null: false
