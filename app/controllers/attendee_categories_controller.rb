@@ -30,7 +30,7 @@ class AttendeeCategoriesController < ApplicationController
     @category = current_event.attendee_categories.find(params[:id])
 
     if @category.update(category_params)
-      redirect_to event_attendee_categories_path, flash: {success: '添加成功'}
+      redirect_to event_attendee_categories_path, flash: {success: '修改成功'}
     else
       flash.now[:error] = @category.errors.full_messages
       render :new

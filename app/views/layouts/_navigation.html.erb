@@ -33,10 +33,17 @@
         <% end %>
           <a id="conference" href="#"><i class="fa fa-users"></i>会议管理</a>
           <ul class="submenu">
-            <li><a href="#">活动管理</a></li>
+            <li>
+              <a href="#"><i class="fa fa-tasks"></i><span class="nav-label">活动管理</span></a>
+            </li>
+            <li>
+              <%= link_to event_activity_categories_path do %>
+                <i class="fa fa-sitemap"></i><span class="nav-label">活动标签</span></a>
+              <% end %>
+            </li>
             <li><%= link_to event_sessions_path do %>
               <i class="fa fa-comments"></i>
-              <span class="nav-label">会议日程管理</span></span>
+              <span class="nav-label">会议日程管理</span>
               <% end %>
             </li>
           </ul>

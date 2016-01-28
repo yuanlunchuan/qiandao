@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
       resources :questions
       resources :seats
+      resources :activity_categories
 
       get 'photos'          => 'attendees#photos'
 

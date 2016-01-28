@@ -11,11 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122020820) do
+ActiveRecord::Schema.define(version: 20160128055840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "event_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.string   "location"
+    t.string   "link"
+    t.text     "desc"
+    t.boolean  "apply_enable", default: false
+    t.integer  "category_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "activity_categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "event_id"
+    t.string   "category_color"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -352,6 +374,15 @@ ActiveRecord::Schema.define(version: 20160122020820) do
   add_index "pictures", ["subject_id"], name: "index_pictures_on_subject_id", using: :btree
   add_index "pictures", ["uuid"], name: "index_pictures_on_uuid", unique: true, using: :btree
 
+  create_table "praises", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "guest_id"
+    t.uuid     "praise_id",                           null: false
+    t.string   "praise_type", limit: 64, default: "", null: false
+    t.integer  "praise_num",             default: 1,  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string   "question_content"
     t.integer  "session_id"
@@ -443,6 +474,7 @@ ActiveRecord::Schema.define(version: 20160122020820) do
     t.json     "properties",           default: {},                    null: false
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
+    t.json     "avatars"
   end
 
   create_table "verificatings", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

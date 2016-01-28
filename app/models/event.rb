@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
   has_many :sessions
   has_one  :sms_template
   has_one  :invitation_setting
+  has_many :activity_categories
+  has_many :activities
 
   has_many :question
 
