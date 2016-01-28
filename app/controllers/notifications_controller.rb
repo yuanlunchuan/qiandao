@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   before_action :authorize_admin!
   before_action :check_sms_template, only: [:send_sms, :send_test_sms]
+  before_action :set_current_module
 
   layout 'event'
 
@@ -38,6 +39,10 @@ class NotificationsController < ApplicationController
       flash.now[:error] = @template.errors.full_messages
       render :edit_sms_template
     end
+  end
+
+  def set_current_module
+    @current_module = 1
   end
 
 private

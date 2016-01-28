@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   layout 'event'
+  before_action :set_current_module
 
   def index
     @questions = current_event.question
@@ -19,7 +20,6 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    logger.info "---------params: #{params}"
     admin = Admin.auth_token_is(cookies[:auth_token]).first
     question = Question.find(params[:id])
 
@@ -31,6 +31,10 @@ class QuestionsController < ApplicationController
     end
 
     redirect_to event_questions_path(current_event)
+  end
+
+  def set_current_module
+    @current_module = 4
   end
 
 end

@@ -26,8 +26,8 @@
           <% end %>
         </li>
 
-        <li>
-          <a href="#"><i class="fa fa-users"></i>会议管理</a>
+        <li id="<%= 'active-item' if @current_module.present?&&@current_module==0 %>">
+          <a id="conference" href="#"><i class="fa fa-users"></i>会议管理</a>
           <ul class="submenu">
             <li><a href="#">活动管理</a></li>
             <li><%= link_to event_sessions_path do %>
@@ -38,7 +38,7 @@
           </ul>
         </li>
 
-        <li>
+        <li id="<%= 'active-item' if @current_module.present?&&@current_module==1 %>">
           <a href="#"><i class="fa fa-users"></i>会议通知</a>
           <ul class="submenu">
             <li>
@@ -55,7 +55,8 @@
           </ul>
         </li>
 
-        <li><a href="#"><i class="fa fa-heart"></i>嘉宾管理 </a>
+        <li id="<%= 'active-item' if @current_module.present?&&@current_module==2 %>">
+        <a href="#"><i class="fa fa-heart"></i>嘉宾管理</a>
           <ul class="submenu">
             <li>
               <%= link_to event_attendee_categories_path do %>
@@ -80,7 +81,8 @@
           </ul>
         </li>
 
-        <li><a href="#"><i class="fa fa-pencil"></i>签到管理 </a>
+        <li id="<%= 'active-item' if @current_module.present?&&@current_module==3 %>">
+        <a href="#"><i class="fa fa-pencil"></i>签到管理 </a>
           <ul class="submenu">
             <li><a href="#">签到监控设置 </a></li>
             <li>
@@ -93,7 +95,8 @@
           </ul>
         </li>
 
-        <li><a href="#"><i class="fa fa-gift"></i>现场互动管理</a>
+        <li id="<%= 'active-item' if @current_module.present?&&@current_module==4 %>">
+        <a href="#"><i class="fa fa-gift"></i>现场互动管理</a>
           <ul class="submenu">
             <li><a href="#">现场抽奖 </a></li>
             <li>

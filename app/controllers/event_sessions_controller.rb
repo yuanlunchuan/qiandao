@@ -5,6 +5,7 @@ class EventSessionsController < ApplicationController
 
   def index
     @sessions = current_event.sessions
+    @current_module = 0
   end
 
   def new

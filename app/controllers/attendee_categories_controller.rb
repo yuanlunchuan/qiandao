@@ -1,5 +1,6 @@
 class AttendeeCategoriesController < ApplicationController
   before_action :authorize_admin!
+  before_action :set_current_module
   layout 'event'
 
   def index
@@ -43,6 +44,10 @@ class AttendeeCategoriesController < ApplicationController
   end
 
 private
+
+  def set_current_module
+    @current_module = 2
+  end
 
   def category_params
     params.require(:attendee_category).permit(:name, :category_color)

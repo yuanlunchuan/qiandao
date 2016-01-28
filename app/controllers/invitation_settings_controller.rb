@@ -5,9 +5,11 @@ class InvitationSettingsController < ApplicationController
 
   def index
     @settings = InvitationSetting.find_or_create_by(event: current_event)
+    @current_module = 1
   end
 
   def update
+    @current_module = 1
     @settings = current_event.invitation_setting
     if @settings.update(settings_param)
       redirect_to event_invitation_settings_path, flash: {success: '保存成功'}

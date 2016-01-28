@@ -21,6 +21,12 @@
             this.submenuIndicators();
             if (defaults.clickEffect) {
                 this.addClickEffect()
+                //This ia add by yuan lun chuan add
+                var li = $("#demo-list").find("#active-item");
+                li.children(".submenu").delay(0).slideDown(0);
+                li.children(".submenu").siblings("a").addClass("submenu-indicator-minus");
+                li.siblings().children(".submenu").slideUp(0);
+                li.siblings().children(".submenu").siblings("a").removeClass("submenu-indicator-minus");
             }
         },
         openSubmenu: function() {
@@ -85,5 +91,6 @@
             }
         });
         return this
-    }
+    };
+
 })(jQuery, window, document);

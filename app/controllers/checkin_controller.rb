@@ -1,5 +1,6 @@
 class CheckinController < ApplicationController
   before_action :authorize_admin!
+  before_action :set_current_module
 
   layout 'event'
 
@@ -58,6 +59,10 @@ class CheckinController < ApplicationController
   end
 
 private
+
+  def set_current_module
+    @current_module = 3
+  end
 
   def sessions_company
     params[:checked_in] ||= '1'

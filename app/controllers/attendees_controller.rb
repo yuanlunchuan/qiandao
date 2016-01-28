@@ -1,5 +1,6 @@
 class AttendeesController < ApplicationController
   before_action :authorize_admin!
+  before_action :set_current_module
   layout 'event'
 
   def export
@@ -157,6 +158,10 @@ class AttendeesController < ApplicationController
   end
 
 private
+
+  def set_current_module
+    @current_module = 2
+  end
 
   def attendee_params
     params.require(:attendee).permit(:name, :company, :email, :mobile, :category_id, :photo, :gender_id, :province, :city, :avatar, :rfid_num)
