@@ -33,7 +33,8 @@ class SiteController < ApplicationController
       return render json: {type: 'error', error: '找不到用户', code: -1}
     end
 
-    return company_check_in if @session.company_checkin?
+    # comment out by yuan lun chuan close company check in function
+    #return company_check_in if @session.company_checkin?
 
     # 已签到
     if @session.checkins.where(attendee: @attendee).count > 0
