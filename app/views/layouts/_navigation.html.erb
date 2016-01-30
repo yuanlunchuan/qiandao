@@ -131,7 +131,12 @@
         <% end %>
         <a href="#"><i class="fa fa-gift"></i>现场互动管理</a>
           <ul class="submenu">
-            <li><a href="#">现场抽奖 </a></li>
+            <li>
+              <%= link_to event_lottery_prizes_path do %>
+                <i class="fa fa-gift"></i>
+                <span class="nav-label">现场抽奖</span>
+              <% end %>
+            </li>
             <li>
               <%= link_to event_questions_path do %>
                 <i class="fa fa-check-circle-o"></i>

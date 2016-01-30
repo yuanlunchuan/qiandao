@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128055840) do
+ActiveRecord::Schema.define(version: 20160130101113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -279,6 +279,14 @@ ActiveRecord::Schema.define(version: 20160128055840) do
     t.datetime "updated_at",                                              null: false
   end
 
+  create_table "lottery_prizes", force: :cascade do |t|
+    t.integer  "session_id"
+    t.integer  "event_id"
+    t.json     "prize"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -376,11 +384,16 @@ ActiveRecord::Schema.define(version: 20160128055840) do
 
   create_table "praises", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "guest_id"
-    t.uuid     "praise_id",                           null: false
-    t.string   "praise_type", limit: 64, default: "", null: false
-    t.integer  "praise_num",             default: 1,  null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.uuid     "praise_id",                                              null: false
+    t.string   "praise_type", limit: 64, default: "",                    null: false
+    t.integer  "praise_num",             default: 1,                     null: false
+    t.string   "state",       limit: 1,  default: "C",                   null: false
+    t.datetime "opened_at",              default: '1970-01-01 00:00:00', null: false
+    t.datetime "closed_at",              default: '3000-01-01 00:00:00', null: false
+    t.boolean  "defunct",                default: false,                 null: false
+    t.json     "property",               default: {},                    null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   create_table "questions", force: :cascade do |t|

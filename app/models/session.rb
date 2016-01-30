@@ -4,7 +4,6 @@ class Session < ActiveRecord::Base
   has_many :attendees, -> { select('`attendees`.*, `checkins`.checked_in_at as session_checked_in_at').order('`checkins`.checked_in_at DESC') }, through: :checkins
   has_many :question
   has_one  :seat
-
   default_scope -> { order(starts_at: :asc) }
 
   scope :visible, -> { where(hidden: false) }
