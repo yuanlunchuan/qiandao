@@ -2,6 +2,10 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :lottery_prizes do
+  link '抽奖管理', event_lottery_prizes_path
+end
+
 crumb :questions do
   link '提问审核', event_questions_path
 end
