@@ -1,5 +1,6 @@
 class PrintsController < ApplicationController
   before_action :authorize_admin!
+  before_action :set_current_module
 
   layout 'event'
 
@@ -10,5 +11,9 @@ class PrintsController < ApplicationController
     @attendees = @attendees.contains(params[:keyword]) if params[:keyword].present?
     @attendees = @attendees.printed if params[:printed] == '1'
     @attendees = @attendees.not_printed if params[:printed] == '-1'
+  end
+
+  def set_current_module
+    @current_module = 3
   end
 end

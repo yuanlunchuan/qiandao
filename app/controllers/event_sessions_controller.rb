@@ -1,11 +1,14 @@
 class EventSessionsController < ApplicationController
   before_action :authorize_admin!
+  before_action :set_current_module
 
   layout 'event'
+  def set_current_module
+    @current_module = 0
+  end
 
   def index
     @sessions = current_event.sessions
-    @current_module = 0
   end
 
   def new

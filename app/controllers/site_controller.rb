@@ -41,14 +41,13 @@ class SiteController < ApplicationController
     end
 
     @session.checkins.create(attendee: @attendee)
-
     render json: {type: 0, code: 0 , attendee: attendee_info, html: render_to_string('_checkin_status', layout: false)}
 
   end
 
   def company_check_in
     colleagues = current_event.attendees.where(company:@attendee.company).pluck(:id)
-    checked_in_colleagues = @session.attendees.where(id: colleagues)
+    checked_in_colleagues = @session.attendees.find(colleagues)
 
     #无人签到
     if checked_in_colleagues.to_a.count == 0

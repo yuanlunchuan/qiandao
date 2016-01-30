@@ -10,6 +10,20 @@ crumb :seats_new do
   link '现场签到管理', event_questions_path
 end
 
+crumb :activities do
+  link '活动管理', event_activities_path
+end
+
+crumb :new_activity do |cat|
+  link '添加活动', new_event_activity_path
+  parent :activities
+end
+
+crumb :edit_activity do |cat|
+  link '编辑活动', new_event_activity_path
+  parent :activities
+end
+
 crumb :activity_categories do
   link '活动标签管理', event_activity_categories_path
 end

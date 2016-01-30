@@ -34,7 +34,9 @@
           <a id="conference" href="#"><i class="fa fa-users"></i>会议管理</a>
           <ul class="submenu">
             <li>
-              <a href="#"><i class="fa fa-tasks"></i><span class="nav-label">活动管理</span></a>
+              <%= link_to event_activities_path do %>
+                <i class="fa fa-gamepad"></i><span class="nav-label">活动管理</span></a>
+              <% end %>
             </li>
             <li>
               <%= link_to event_activity_categories_path do %>
@@ -114,7 +116,11 @@
                 <span class="nav-label">签到状态</span></span>
               <% end %>
             </li>
-            <li><a href="#">证件打印状态</a></li>
+            <li>
+              <%= link_to event_prints_path do %>
+                <i class="fa fa-print"></i> <span class="nav-label">证件打印状态</span></span>
+              <% end %>
+            </li>
           </ul>
         </li>
 
@@ -136,6 +142,9 @@
         </li>
         
         <li><a href="#"><i class="fa fa-user"></i>销售员管理</a></li>
+        <li><%= link_to event_site_path do %>
+          <i class="fa fa-qrcode"></i> <span class="nav-label">现场签到管理</span>
+        <% end %></li>
       </ul>
     </div>
   </div>
