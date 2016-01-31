@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  namespace :client do
+    resources :events do
+      resources :sites
+    end
+  end
+
   scope 'app' do
     get '/'           => redirect('/app/dashboard')
     get 'dashboard'   =>  'dashboard#index'
