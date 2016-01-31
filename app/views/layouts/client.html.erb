@@ -16,6 +16,7 @@
 
   <%= yield :title %>
 
+  <%= render partial: 'shared/style' %>
   <%= yield :style %>
 
 </head>
@@ -34,6 +35,8 @@
 
   <%= yield %>
 
+
+  <%= render partial: 'shared/script' %>
   <%= yield :script %>
 
 </body>
