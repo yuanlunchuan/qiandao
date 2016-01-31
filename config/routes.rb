@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :client do
     resources :events do
       resources :sites
+      resources :sessions
     end
   end
 
