@@ -1,7 +1,9 @@
 class Session < ActiveRecord::Base
   belongs_to :event
   has_many :checkins, dependent: :destroy
-  has_many :attendees, -> { select('`attendees`.*, `checkins`.checked_in_at as session_checked_in_at').order('`checkins`.checked_in_at DESC') }, through: :checkins
+  # This is wrong in postgresql
+  # has_many :attendees, -> { select('attendees.*, checkins.checked_in_at as session_checked_in_at').order('`checkins`.checked_in_at DESC') }, through: :checkins
+  has_many :attendees, -> { select('attendees.*, checkins.checked_in_at as session_checked_in_at').order('checkins.checked_in_at DESC') }, through: :checkins
   has_many :question
   has_one  :seat
   default_scope -> { order(starts_at: :asc) }

@@ -32,11 +32,8 @@ class SiteController < ApplicationController
     if @attendee.nil?
       return render json: {type: 'error', error: '找不到用户', code: -1}
     end
-    
-    #----------------------------------------------------------------#
-    # comment out by yuan lun chuan close company check in function
-    #return company_check_in if @session.company_checkin?
 
+    return company_check_in if @session.company_checkin?
     # 已签到
     if @session.checkins.where(attendee: @attendee).count > 0
       return render json: {type: 'warning', error: '该用户已签到', message: "#{@attendee.name} / #{@attendee.mobile} / #{@attendee.company}", code: -2, attendee: attendee_info}
@@ -49,7 +46,11 @@ class SiteController < ApplicationController
 
   def company_check_in
     colleagues = current_event.attendees.where(company:@attendee.company).pluck(:id)
-    checked_in_colleagues = @session.attendees.find(colleagues)
+
+    #-------------------------------
+    #-There have modified by postgresql
+    #checked_in_colleagues = @session.attendees.find(colleagues)
+    checked_in_colleagues = @session.attendees.where(id: colleagues)
 
     #无人签到
     if checked_in_colleagues.to_a.count == 0
