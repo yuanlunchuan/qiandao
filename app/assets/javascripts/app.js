@@ -106,6 +106,27 @@ $(document).on('ready page:load', function(){
         return false;
     });
 
+    $( ".modal" ).on( "click", ".binding_rfid", function() {
+      $('.modal').modal('hide');
+      var rfid=prompt("请刷卡","");
+      var attendee_id = $(this).data('attendee-id');
+      if (name!=null && name!="")
+      {
+        $.post('/app/events/1/site/binding_rfid',
+          {
+            session_id: 1,
+            attendee_id: attendee_id,
+            rfid_num:rfid
+          },
+        function(event){
+        }).error(function(event){
+          if(event.responseJSON&&event.responseJSON.message[0]){
+            alert(event.responseJSON.message[0]);
+        }
+        });
+     }
+    });
+
     $( ".modal" ).on( "click", ".site-check-in-btn", function() {
         $('.modal').modal('hide');
         var token = $(this).data('token');

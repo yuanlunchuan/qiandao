@@ -72,6 +72,8 @@
           <td>已签到</td>
           <td> <%= link_to '取消签到', 'javascript:;', data: {token: attendee.token}, class: 'btn btn-xs btn-white site-uncheck-in-btn', method: :post  %> </td>
         <% end %>
+        <td>
+        <%= link_to '绑定rfid', 'javascript:;', data: {attendee_id: attendee.id}, class: 'btn btn-xs btn-primary binding_rfid', method: :post  %></td>
       </tr>
     <% end %>
   </tbody>

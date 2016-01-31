@@ -1,7 +1,9 @@
 class SiteController < ApplicationController
   before_action :authorize_admin!
   before_action :find_categories
-  before_action :find_session, except: [:index]
+  before_action :find_session, except: [:index, :binding_rfid]
+  include WebApiRenderer
+  attr_accessor :meta
 
   def sessions
   end
@@ -10,6 +12,16 @@ class SiteController < ApplicationController
     @attendees = current_event.attendees.contains(params[:keyword])
 
     render layout: false
+  end
+
+  def binding_rfid
+    self.meta = params
+    attendee = Attendee.find(params[:attendee_id])
+    if attendee.update(rfid_num: params[:rfid_num])
+      render_created [ attendee ]
+    else
+      render_conflict [], attendee.errors.full_messages
+    end
   end
 
   def attendees

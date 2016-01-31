@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get 'photos'          => 'attendees#photos'
 
       get 'notifications'   => 'notifications#index'
+      post 'site/binding_rfid'      => 'site#binding_rfid'
       post 'notifications/:attendee_id/send_sms' => 'notifications#send_sms',     as: :notifications_send_sms
       get  'notifications/edit_sms_template' => 'notifications#edit_sms_template'
       patch 'notifications/update_sms_template' => 'notifications#update_sms_template'
@@ -74,6 +75,7 @@ Rails.application.routes.draw do
       get 'site'          => 'site#index'
 
       get 'site/:session_id/search'      => 'site#search',     as: :site_search
+
       get 'site/:session_id' => 'site#sessions',     as: :site_session
       # get 'site/:session_id/checkin/:token/:sn'  => 'site#checkin', as: :site_session_checkin
       get 'site/:session_id/attendees'                    => 'site#attendees',  as: :site_attendees
