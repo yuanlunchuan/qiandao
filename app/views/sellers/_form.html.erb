@@ -1,0 +1,26 @@
+<%= form_for [current_event, @seller], html: {class: 'form-horizontal'} do |f|%>
+
+  <div class="form-group"><label class="col-sm-2 control-label">销售对接人</label>
+    <div class="col-sm-3"><%= text_field_tag 'seller_manager_name', @seller_manager_name, placeholder: '如果没有销售对接人，则不填', class: 'form-control' %></div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">销售人员姓名</label>
+    <div class="col-sm-5"> <%=f.text_field :name, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">负责区域</label>
+    <div class="col-sm-5"> <%=f.text_field :responsible_area, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">电话号码</label>
+    <div class="col-sm-5"> <%=f.text_field :phone_number, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+      <%=link_to '取消', event_sessions_path(current_event), class: 'btn btn-white'%>
+      <%= button_tag '保存', class: 'btn btn-primary'%>
+    </div>
+  </div>
+
+<% end %>

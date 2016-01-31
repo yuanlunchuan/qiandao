@@ -146,7 +146,16 @@
           </ul>
         </li>
         
-        <li><a href="#"><i class="fa fa-user"></i>销售员管理</a></li>
+        <% if @current_module==5 %>
+          <li id="active-item" class="active">
+        <% else %>
+          <li>
+        <% end %>
+          <%= link_to event_sellers_path do %>
+            <i class="fa fa-user"></i>销售员管理
+          <% end %>
+        </li>
+
         <li><%= link_to event_site_path do %>
           <i class="fa fa-qrcode"></i> <span class="nav-label">现场签到管理</span>
         <% end %></li>

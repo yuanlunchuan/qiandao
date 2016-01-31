@@ -2,6 +2,20 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :sellers do
+  link '销售管理', event_sellers_path
+end
+
+crumb :new_sellers do |cat|
+  link '新增销售', new_event_seller_path
+  parent :sellers
+end
+
+crumb :edit_seller do |cat|
+  link '编辑销售', event_sellers_path
+  parent :sellers
+end
+
 crumb :lottery_prizes do
   link '抽奖管理', event_lottery_prizes_path
 end
