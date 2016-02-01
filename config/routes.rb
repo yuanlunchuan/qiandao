@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       resources :activities
       resources :lottery_prizes
       resources :sellers
+      resources :recommends
 
       get 'photos'          => 'attendees#photos'
 

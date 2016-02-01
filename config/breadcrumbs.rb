@@ -2,6 +2,20 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :recommends do
+  link '推荐列表', event_recommends_path
+end
+
+crumb :new_recommend do |cat|
+  link '新增推荐', new_event_recommend_path
+  parent :recommends
+end
+
+crumb :edit_recommend do |cat|
+  link '编辑推荐', event_recommends_path
+  parent :recommends
+end
+
 crumb :sellers do
   link '销售管理', event_sellers_path
 end
