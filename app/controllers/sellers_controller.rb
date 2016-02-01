@@ -1,7 +1,7 @@
 class SellersController < ApplicationController
   before_action :authorize_admin!
   before_action :set_current_module
-
+  skip_before_action :verify_authenticity_token
   layout 'event'
 
   def index
@@ -9,6 +9,46 @@ class SellersController < ApplicationController
   end
 
   def create
+    if params[:seller_file].present?
+      filename = uploadfile(params[:seller_file])
+      file_path = "#{Rails.root}/public/upload/#{@filename}"
+      #begin
+      SellerList.import(file_path)
+      count = 0
+      error_collection = []
+      SellerList.all.each do |seller|
+        manage_name = seller.attributes['manager_name']
+        name =  seller.attributes['name']
+        if seller.attributes['phone_number'].length>11
+          phone_number =seller.attributes['phone_number'].split('.')[0]
+        else
+          phone_number =seller.attributes['phone_number']
+        end
+        responsible_area = seller.attributes['responsible_area']
+
+        manager = nil
+        managers = Seller.seller_name_is(manage_name) if manage_name.present?
+        manager = managers.first if managers.present?
+        seller_item = Seller.new name: name,
+          phone_number: phone_number,
+          responsible_area: responsible_area,
+          manager: manager,
+          event: current_event
+        if seller_item.save
+          count+=1
+        else
+          error_collection << name
+        end
+      end
+      SellerList.all.clear
+      # rescue Importex::ImportError => e
+      #   puts e.message
+      # end
+      redirect_to event_sellers_path, flash: {success: "成功导入#{count}"} if error_collection.size==0
+      redirect_to event_sellers_path, flash: {error: "成功导入#{count}条, #{error_collection}导入失败"} if error_collection.size>0
+    return
+    end
+
     @seller = current_event.sellers.new(seller_params)
 
     if params[:seller_manager_name].present?
@@ -79,6 +119,22 @@ class SellersController < ApplicationController
     @current_module = 5
   end
 
-  private :set_current_module, :seller_params
+  ##上传文件
+  ##file.original_filename 获取文件名字
+  def uploadfile(file)
+    if !file.original_filename.empty?
+      @filename = file.original_filename
+      #设置目录路径，如果目录不存在，生成新目录
+      FileUtils.mkdir("#{Rails.root}/public/upload") unless File.exist?("#{Rails.root}/public/upload")
+      #写入文件
+      ##wb 表示通过二进制方式写，可以保证文件不损坏
+      File.open("#{Rails.root}/public/upload/#{@filename}", "wb") do |f|
+        f.write(file.read)
+      end
+      return @filename
+    end
+  end
+
+  private :set_current_module, :seller_params, :uploadfile
 
 end

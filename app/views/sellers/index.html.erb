@@ -1,4 +1,17 @@
 <% breadcrumb :sellers %>
+<script type="text/javascript">
+function validate_form(thisform)
+{
+  var fileName = document.forms["fileForm"]["seller_file"].value;
+  if (fileName){
+    return true;
+  }
+  else{
+    alert('请选择要上传的文件');
+    return false;
+  }
+}
+</script>
 
 <div class="row">
   <div class="col-lg-12">
@@ -10,13 +23,26 @@
         <div class="project-list">
 
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-3">
+              <%= link_to '下载模板', templates_path(templates_name: :seller,format: :csv), class: 'btn btn-white btn-sm pull-right' %>
+            </div>
+
+            <div class="col-sm-3">
               <%= link_to '新增销售', new_event_seller_path, class: 'btn btn-white btn-sm pull-right' %>
+            </div>
+            <div class="col-sm-3">
+              <form action="/app/events/<%= current_event.id %>/sellers" class='form-horizontal' method="post" name="fileForm" multipart='true' enctype="multipart/form-data" onsubmit="return validate_form(this);">
+                <table>
+                  <tr>
+                    <td><%= file_field_tag :seller_file, accept: ".xls" %></td>
+                    <td><input type="submit" value="导入"></td>
+                  </tr>
+                </table>
+              </form>
             </div>
           </div>
 
           <div class="row">
-
           <table class="table table-hover">
             <thead>
             <tr>

@@ -1,6 +1,5 @@
 class Seller < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
-  validates :phone_number, presence: true, uniqueness: true
   validates :phone_number, presence: true, length: { is: 11 }, numericality: { integer_only: true }, format: { with: /\A1[3-9]\d{9}\z/ }
   has_many :subordinates, class_name: "Seller",
                           foreign_key: "seller_id"

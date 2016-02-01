@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'templates'  => 'templates#show'
+
   scope 'app' do
     get '/'           => redirect('/app/dashboard')
     get 'dashboard'   =>  'dashboard#index'
