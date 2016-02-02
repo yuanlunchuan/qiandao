@@ -5,7 +5,7 @@ class AttendeeCategory < ActiveRecord::Base
   validates :name, presence: true
 
   before_validation :populate_category_number, on: :create
-
+  scope :category_name_is, ->(name) { where name: name }
   def attendee_numbers
     Event.find(self.event_id).attendees.category(self.id).count
   end

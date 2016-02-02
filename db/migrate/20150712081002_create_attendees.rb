@@ -8,8 +8,10 @@ class CreateAttendees < ActiveRecord::Migration
       t.string     :id_photo
       t.references :event
       t.references :category
+      t.references :seller
       t.string     :token
       t.string     :rfid_num
+      t.string     :level
 
       t.datetime :checked_in_at
       t.integer  :attendee_number, default: 0

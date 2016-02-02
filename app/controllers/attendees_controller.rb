@@ -1,6 +1,7 @@
 class AttendeesController < ApplicationController
   before_action :authorize_admin!
   before_action :set_current_module
+  skip_before_action :verify_authenticity_token
   layout 'event'
 
   def export
@@ -35,9 +36,18 @@ class AttendeesController < ApplicationController
   end
 
   def create
+    if params[:attendee_file].present?
+      import_attendee
+      return
+    end
+
     @attendee          = current_event.attendees.new attendee_params
     @attendee.province = params[:province]
     @attendee.city     = params[:city]
+    if params[:seller_name].present?
+      seller             = Seller.seller_name_is(params[:seller_name]).first
+      @attendee.seller   = seller
+    end
 
     if @attendee.save
       redirect_to event_attendees_path, flash: {success: '添加成功'}
@@ -47,8 +57,49 @@ class AttendeesController < ApplicationController
     end
   end
 
+  def import_attendee
+    filename = uploadfile(params[:attendee_file])
+    file_path = "#{Rails.root}/public/upload/#{@filename}"
+
+    AttendeeList.import(file_path)
+    count = 0
+    error_count = 0
+    AttendeeList.all.each do |attendee|
+      gender_id = 0 if attendee.attributes['gender']=='男'
+      gender_id = 1 if attendee.attributes['gender']=='女'
+
+      category_name = attendee.attributes['category_name']
+      category = AttendeeCategory.category_name_is(category_name).first if category_name.present?
+
+      if attendee.attributes['mobile'].length>11
+        mobile =attendee.attributes['mobile'].split('.')[0]
+      else
+        mobile =attendee.attributes['mobile']
+      end
+
+      attendee.attributes.delete('category_name')
+      attendee.attributes.delete('gender')
+      attendee_item           = Attendee.new attendee.attributes
+      attendee_item.category  = category
+      attendee_item.gender_id = gender_id
+      attendee_item.mobile    = mobile
+      attendee_item.event     =current_event
+
+      if attendee_item.save
+        count += 1
+      else
+        error_count += 1
+      end
+    end
+    AttendeeList.all.clear
+    redirect_to event_attendees_path, flash: {success: "成功导入#{count}"} if error_count==0
+    redirect_to event_attendees_path, flash: {error: "成功导入#{count}条, 有#{error_count}条导入失败"} if error_count>0
+  return
+  end
+
   def edit
     @attendee = current_event.attendees.find(params[:id])
+    @seller_name = @attendee.seller.try(:name)
   end
 
   def update
@@ -57,6 +108,11 @@ class AttendeesController < ApplicationController
     if @attendee.update(attendee_params)
       @attendee.province = params[:province]
       @attendee.city     = params[:city]
+      if params[:seller_name].present?
+        seller           = Seller.seller_name_is(params[:seller_name]).first
+        @attendee.seller = seller
+      end
+
       @attendee.save
       if(params[:_delete_photo] == '1')
         @attendee.photo.clear
@@ -83,6 +139,21 @@ class AttendeesController < ApplicationController
   def show
     @attendee = current_event.attendees.find(params[:id])
     @qr = RQRCode::QRCode.new(@attendee.qrcode, size: 5, level: :h)
+  end
+
+  ##上传文件
+  def uploadfile(file)
+    if !file.original_filename.empty?
+      @filename = file.original_filename
+      #设置目录路径，如果目录不存在，生成新目录
+      FileUtils.mkdir("#{Rails.root}/public/upload") unless File.exist?("#{Rails.root}/public/upload")
+      #写入文件
+      ##wb 表示通过二进制方式写，可以保证文件不损坏
+      File.open("#{Rails.root}/public/upload/#{@filename}", "wb") do |f|
+        f.write(file.read)
+      end
+      return @filename
+    end
   end
 
   def destroy
@@ -164,7 +235,7 @@ private
   end
 
   def attendee_params
-    params.require(:attendee).permit(:name, :company, :email, :mobile, :category_id, :photo, :gender_id, :province, :city, :avatar, :rfid_num)
+    params.require(:attendee).permit(:name, :company, :email, :mobile, :category_id, :photo, :gender_id, :province, :city, :avatar, :rfid_num, :level)
   end
 
 end

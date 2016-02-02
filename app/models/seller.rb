@@ -7,6 +7,7 @@ class Seller < ActiveRecord::Base
   belongs_to :manager, class_name: "Seller"
 
   belongs_to :event
+  has_many   :attendees
 
   scope :seller_name_is, ->(name) { where name: name }
 end

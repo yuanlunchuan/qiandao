@@ -17,6 +17,7 @@ class Attendee < ActiveRecord::Base
   belongs_to :event
   belongs_to :category, class_name: 'AttendeeCategory'
   has_many :question
+  belongs_to :seller
 
   has_many :checkins
   has_many :sessions, through: :checkins

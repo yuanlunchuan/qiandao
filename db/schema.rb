@@ -74,8 +74,10 @@ ActiveRecord::Schema.define(version: 20160201070004) do
     t.string   "id_photo"
     t.integer  "event_id"
     t.integer  "category_id"
+    t.integer  "seller_id"
     t.string   "token"
     t.string   "rfid_num"
+    t.string   "level"
     t.datetime "checked_in_at"
     t.integer  "attendee_number",      default: 0
     t.integer  "sms_sid"
