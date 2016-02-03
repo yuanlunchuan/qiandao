@@ -14,9 +14,15 @@ Rails.application.config.assets.precompile += %w(
   client/invites/home_page1.png
   client/sessions/sessions.png
   client/shared/metting_logo.png
+  client/sites/hotel.png
   client/sites/no_portrait.png
   client/sites/notice.png
+  client/sites/official_website.png
+  client/sites/periphery.png
+  client/sites/schedule.png
+  client/sites/seat.png
   client/sites/sites_illus.png
+  client/sites/voucher.png
   
   client_invites_show.js
   client_sessions_new.js
