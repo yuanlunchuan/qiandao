@@ -18,8 +18,14 @@
   width: 100px;
   height: 26px;
 }
+.all-page{
+  padding: 0px;
+}
 .profiles-area{
   padding-top: 40px;
+}
+.profiles-area div{
+  padding: 0px;
 }
 .portrait-img-area{
   width: 84px;
@@ -76,4 +82,27 @@
 }
 .scroll-area span{
   margin-right: 60px;
+}
+.function-area{
+  padding: 0px;
+}
+.function-area table{
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  border-top: #fff 1px solid;
+  border-bottom: #fff 1px solid;
+}
+.function-area tr{
+  height: 80px;
+}
+.function-area td{
+  border:#e1e1e1 1px solid;
+}
+.function-area img{
+  width: 50px;
+  height: 50px;
+}
+.function-area span{
+  display: block;
 }
