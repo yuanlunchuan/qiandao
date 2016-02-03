@@ -1,91 +1,79 @@
-.home-bg{
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.container{
+  padding: 0px;
 }
-.bg-img{
-  position: fixed;
-  width: 100%;
+.row{
+  margin: 0px;
+}
+.home-page{
+  position: absolute;
+  padding: 0px;
   height: 100%;
-  z-index: -999;
 }
 .logo-area{
-  padding-top: 12px;
   position: absolute;
+  top: 15px;
+  right: 20px;
 }
 .logo-area img{
   width: 100px;
   height: 26px;
 }
-.title-area{
-  top: 100px;
-  text-align: center;
-  position: absolute;
-  color: #3E3A39;
+.profiles-area{
+  padding-top: 40px;
 }
-.title-area p{
-  margin: 0px;
+.portrait-img-area{
+  width: 84px;
+  height: 84px;
+  border: #E9E9E9 2px solid;
+  border-radius: 84px;
+  display: inline-block;
+  padding: 0px;
 }
-.letter-area{
-  position: absolute;
-  margin-top: 180px;
-  color: #3E3A39;
+.portrait-img-area img{
+  width: 80px;
+  height: 80px;
 }
-.letter-area p{
-  margin: 0px;
-  font-size: 12px;
+.portrait-msg{
+  color: #424242;
 }
-p.letter-pre{
-  text-indent: 2em;
+.user-name{
+  font-size: 1.4em;
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
-p.letter-next{
-  text-indent: 2em;
-}
-p.name{
-  font-size: 1.2em;
-}
-p.name-eg-pre{
-  font-size: 1.1em;
-}
-p.name-eg-next{
+.user-company{
   font-size: 0.8em;
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
-p.invitation{
+.user-phone{
+  font-size: 0.8em;
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.illus-area{
+  padding: 0px;
   margin-top: 10px;
-  font-size: 2.8em;
 }
-.double-down{
-  color: #fff;
+.notice-area{
+  height: 40px;
+  background-color: #e1e1e1;
+  line-height: 40px;
+}
+.notice-area img{
+  width: 20px;
+  height: 20px;
+}
+.notice-img{
   position: absolute;
-  bottom: 40px;
+  height: 40px;
 }
-.double-down img{
-  width: 50px;
-  height: 17px;
+.scroll-area{
+  margin-left: 64px;
 }
-#page1{
-  display: none;
-}
-.container{
-  padding: 0px;
-}
-.row{
-  padding: 0px;
-  margin: 0px;
-}
-.button-area{
-  position: absolute;
-  margin-top: 340px;
-}
-.button-area a{
-  color: #fff;
-}
-.button-area button{
-  background-color: #009541;
-  border: 0px;
-  width: 160px;
-  height: 34px;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
+.scroll-area span{
+  margin-right: 60px;
 }
