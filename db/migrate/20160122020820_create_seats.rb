@@ -3,9 +3,11 @@ class CreateSeats < ActiveRecord::Migration
     create_table :seats do |t|
 
       t.references :session
-      
-      t.integer :table_num
-      t.integer :per_table_num
+      t.references :attendee
+
+      t.integer :table_row
+      t.integer :table_col
+      t.string  :desc
 
       t.timestamps null: false
     end
