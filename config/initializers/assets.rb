@@ -24,6 +24,7 @@ Rails.application.config.assets.precompile += %w(
   invitations.js 
   province_city.js
   jquery-accordion-menu.js
+  seat_show.js
 
   client_invites_show.css
   client_sessions_new.css

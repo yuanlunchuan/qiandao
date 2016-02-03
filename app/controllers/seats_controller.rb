@@ -1,6 +1,8 @@
 class SeatsController < ApplicationController
+  include WebApiRenderer
   layout 'event'
   before_action :set_current_module
+  attr_accessor :meta
 
   def new
     #@session = Session.find(params[:session_id]||1)
@@ -26,17 +28,26 @@ class SeatsController < ApplicationController
   end
 
   def show
+    @session = Session.find(params[:id])
+  end
 
+  def update
+    self.meta = params
+
+    first_seat = Seat.find(params[:first_seat])
+    second_seat = Seat.find(params[:second_seat])
+
+    temp_seat_table_row = first_seat.table_row
+    temp_seat_table_col = first_seat.table_col
+
+    first_seat.update(table_row: second_seat.table_row, table_col: second_seat.table_col)
+    second_seat.update(table_row: temp_seat_table_row, table_col: temp_seat_table_col)
+
+    render_ok []
   end
 
   def create
     session = Session.find(params[:session_id])
-
-    if session.seat.present?
-      #session.seat.update table_num: params[:table_num], per_table_num: params[:table_pernum]
-    else
-      #Seat.create table_num: params[:table_num], per_table_num: params[:table_pernum], session: session
-    end
 
     if params[:classify]=='location'&&params[:enable_together]=='no'
 
@@ -49,9 +60,6 @@ class SeatsController < ApplicationController
         city_item['city_count'] = v
         city_collection << city_item
       end
-
-      # row = params[:table_num]
-      # col = params[:table_pernum]
 
       current_seat_exist = Seat.session_is(session)
 
@@ -67,14 +75,18 @@ class SeatsController < ApplicationController
       city_collection.each do |city_item|
         attendees = current_event.attendees.city_is(city_item['city_name'])
         col = 1
+        i = 0
         attendees.each do |attendee|
+          i += 1
+          attendees_size = attendees.size
           Seat.create session: session,
             attendee:  attendee,
             desc:      city_item['city_name'],
             table_row: row,
             table_col: col
 
-          if params[:table_pernum]==col
+          if params[:table_pernum].to_i==col
+            row += 1 if attendees_size!=i
             col = 1
           else
             col += 1
@@ -85,7 +97,7 @@ class SeatsController < ApplicationController
 
     end
 
-    redirect_to event_seat_path(current_event, '12', { table_num: params[:table_num], table_pernum: params[:table_pernum] })
+    redirect_to event_seat_path(current_event, session, { table_num: params[:table_num], table_pernum: params[:table_pernum] })
   end
 
   def set_current_module

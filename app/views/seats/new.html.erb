@@ -1,4 +1,4 @@
-<% breadcrumb :seats_new %>
+<% breadcrumb :seats %>
 
 <% if params[:session_id].blank? %>
   <div class="row">
@@ -36,8 +36,8 @@
             <input type="radio" name="enable_together" value="no" checked="true" /> 不允许
             <input type="radio" name="enable_together" value="yes" /> 允许
             <br />
-            <input type="tetx" name="table_num" placeholder="请输入桌数" value=<%= @session.try(:seat).try(:table_num) %> />---
-            <input type="tetx" name="table_pernum" placeholder="请输入没桌坐的的人数"  value=<%= @session.try(:seat).try(:per_table_num) %> />
+            <input type="tetx" name="table_num" placeholder="请输入桌数" value=<%= @session.try(:seat).try(:table_num) %> >---
+            <input type="tetx" name="table_pernum" placeholder="请输入没桌坐的的人数"  value=<%= @session.try(:seat).try(:per_table_num) %> >
             <div class="input-group">
               <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 开始安排座位</button> </span>
             </div>

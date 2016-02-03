@@ -2,6 +2,14 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :seats do
+  link '座位安排', new_event_seat_path
+end
+
+crumb :seat_show do
+  link '查看座位', new_event_seat_path
+end
+
 crumb :recommends do
   link '推荐列表', event_recommends_path
 end
