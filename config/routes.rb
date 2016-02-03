@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :sites
       resources :sessions
       resources :profiles
+      resources :invites
     end
   end
 
