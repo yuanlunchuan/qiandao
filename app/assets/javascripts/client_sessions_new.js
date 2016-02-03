@@ -13,7 +13,7 @@ $(document).ready(function(){
       }
       else
       {
-        location.href = "/client/events/1/profiles/12" //跳转
+        location.href = "/client/events/1/sites/12" //跳转
       }
     }
   })
