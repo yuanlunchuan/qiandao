@@ -1,39 +1,11 @@
 <div id="seats_num" data-table-num=<%= params[:table_num] %> data-table-pernum=<%= params[:table_pernum] %> class="hidden"></div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div id="main">
-        <div class="demo">
-          <div id="seat-map">
-          <div class="front">主席台</div>
-        </div>
-
-        <div class="booking-details hidden">
-          <p>影片：<span>星际穿越</span></p>
-          <p>时间：<span>11月14日 21:00</span></p>
-          <p>座位：</p>
-          <ul id="selected-seats"></ul>
-          <p>票数：<span id="counter">2</span></p>
-          <p>总计：<b>￥<span id="total">0</span></b></p>
-          <button class="checkout-button">确定购买</button>
-          <div id="legend"></div>
-        </div>
-        <div style="clear:both"></div>
-       </div>
-
-      <br/>
-      </div>
-    </div>
-  </div>
-</div>
-
-<% content_for :style do %>
-  <%= stylesheet_link_tag 'seats', media: 'all' %>
-<% end %>
-
-<% content_for :script do %>
-  <%= javascript_include_tag 'http://libs.useso.com/js/jquery/1.7.2/jquery.min.js'%>
-  <%= javascript_include_tag 'jquery.seat-charts.min'%>
-  <%= javascript_include_tag 'seats'%>
-<% end %>
+<table>
+  <% for i in 0..params[:table_num].to_i %>
+    <tr>
+      <% for j in 0..params[:table_pernum].to_i %>
+        <td>123&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

@@ -21,8 +21,9 @@ class Attendee < ActiveRecord::Base
 
   belongs_to :event
   belongs_to :category, class_name: 'AttendeeCategory'
-  has_many :question
+  has_many   :question
   belongs_to :seller
+  has_one    :seat
 
   has_many :checkins
   has_many :sessions, through: :checkins
@@ -43,6 +44,7 @@ class Attendee < ActiveRecord::Base
 
   default_scope -> {order(attendee_number: :asc)}
   scope :attendee_name_is, ->(name) { where name: name }
+  scope :city_is, ->(city) { where city: city }
 
   before_create { generate_token(:token) }
   after_create  { generate_invitation_short_url }

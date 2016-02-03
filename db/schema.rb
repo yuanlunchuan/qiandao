@@ -179,10 +179,12 @@ ActiveRecord::Schema.define(version: 20160201070004) do
 
   create_table "seats", force: :cascade do |t|
     t.integer  "session_id"
-    t.integer  "table_num"
-    t.integer  "per_table_num"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "attendee_id"
+    t.integer  "table_row"
+    t.integer  "table_col"
+    t.string   "desc"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "sellers", force: :cascade do |t|
