@@ -9,12 +9,13 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w(
-  client/sites/home_page0.jpg
-  client/sites/home_page1.jpg
-  client/sites/login.jpg
-  client/sites/logo.jpg
-  client/sites/metting_name.png
+  client/sessions/sessions.png
+  client/sites/arrow.png
+  client/sites/home_page0.png
+  client/sites/home_page1.png
+  client/sites/metting_logo.png
 
+  client_sessions_new.js
   client_sites_show.js
   invitations.js 
   province_city.js
@@ -22,6 +23,8 @@ Rails.application.config.assets.precompile += %w(
   jquery.seat-charts.min.js
   jquery-accordion-menu.js
 
+  client_profiles_show.css
+  client_sessions_new.css
   client_sites_show.css
   seats.css
   invitations.css

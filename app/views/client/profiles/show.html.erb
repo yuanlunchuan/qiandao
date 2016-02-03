@@ -1,1 +1,21 @@
-show.html.erb
+<title>个人中心</title>
+<div class="container">
+  <div class="row">
+    <div class="home-bg">
+      <%= image_tag 'client/sites/home_page0.jpg', class:"bg-img" %>
+      <div class="col-xs-12 logo-area">
+        <%= image_tag 'client/sites/logo.jpg'%>
+      </div>
+      <div class="col-xs-12 text-center">
+        <button type="button">123</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :style do %>
+  <%= stylesheet_link_tag 'client_profiles_show', media: 'all' %>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag 'client_sites_show' %>
+<% end %>

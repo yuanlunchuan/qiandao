@@ -1,1 +1,31 @@
-new.html.erb
+<title>尤尼克斯新品发布合作伙伴会议</title>
+<div class="container">
+  <div class="row">
+    <div class="home-bg">
+      <%= image_tag 'client/sessions/sessions.png', class:"bg-img" %>
+    </div>
+    <div class="col-xs-12 text-center">
+      <%= image_tag 'client/sites/metting_logo.png', class:"logo-img"%>
+      <p class="call-name">您好!</p>
+      <p class="phone-msg">请输入您的手机号码验证身份</p>
+      <div class="col-xs-12 phone-area">
+        <span class="phone-box-area">
+          <span>+ 86 &nbsp;|</span>
+          <input type="tel" maxlength="11" class="phone-box" />
+        </span>
+      </div>
+      <div class="col-xs-12 session-button-area">
+        <a>
+          <button class="session-button">验证身份</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :style do %>
+  <%= stylesheet_link_tag 'client_sessions_new', media: 'all' %>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag 'client_sessions_new' %>
+<% end %>
