@@ -19,6 +19,10 @@
     <div class="col-sm-2"> <%=f.select :gender_id, Attendee::GENDER, {}, class: 'form-control'%> </div>
   </div>
 
+  <div class="form-group"><label class="col-sm-2 control-label">主嘉宾</label>
+    <div class="col-sm-3"><%= text_field_tag 'owner_attendee_name', @attendee.try(:owner_attendee).try(:name), placeholder: '如果没有则不填', class: 'form-control' %></div>
+  </div>
+
   <div class="form-group"><label class="col-sm-2 control-label">对应销售</label>
     <div class="col-sm-3"> <%= text_field_tag 'seller_name', @seller_name, class: 'form-control'%> </div>
   </div>

@@ -42,12 +42,29 @@ class AttendeesController < ApplicationController
     end
 
     @attendee          = current_event.attendees.new attendee_params
-    @attendee.province = params[:province]
-    @attendee.city     = params[:city]
+
+    if params[:owner_attendee_name].present?
+      owner_attendee = Attendee.attendee_name_is(params[:owner_attendee_name]).first
+      if owner_attendee.blank?
+        flash.now[:error] = '没有找到主嘉宾'
+        render :new
+        return
+      end
+    end
+
     if params[:seller_name].present?
       seller             = Seller.seller_name_is(params[:seller_name]).first
-      @attendee.seller   = seller
+      if seller.blank?
+        flash.now[:error] = '没有找到对应的销售'
+        render :new
+        return
+      end
     end
+
+    @attendee.province       = params[:province]
+    @attendee.city           = params[:city]
+    @attendee.owner_attendee = owner_attendee
+    @attendee.seller   = seller
 
     if @attendee.save
       redirect_to event_attendees_path, flash: {success: '添加成功'}
@@ -106,12 +123,28 @@ class AttendeesController < ApplicationController
     @attendee = current_event.attendees.find(params[:id])
 
     if @attendee.update(attendee_params)
+      if params[:seller_name].present?
+        seller = Seller.seller_name_is(params[:seller_name]).first
+        if seller.blank?
+          flash.now[:error] = '没有找到对应的销售'
+          render :new
+          return
+        end
+      end
+
+      if params[:owner_attendee_name].present?
+        owner_attendee = Attendee.attendee_name_is(params[:owner_attendee_name]).first
+        if owner_attendee.blank?
+          flash.now[:error] = '没有找到主嘉宾'
+          render :edit
+          return
+        end
+      end
+
       @attendee.province = params[:province]
       @attendee.city     = params[:city]
-      if params[:seller_name].present?
-        seller           = Seller.seller_name_is(params[:seller_name]).first
-        @attendee.seller = seller
-      end
+      @attendee.seller = seller
+      @attendee.owner_attendee = owner_attendee
 
       @attendee.save
       if(params[:_delete_photo] == '1')

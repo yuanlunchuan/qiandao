@@ -8,6 +8,7 @@ class CreateAttendees < ActiveRecord::Migration
       t.string     :id_photo
       t.references :event
       t.references :category
+      t.references :owner_attendee
       t.references :seller
       t.string     :token
       t.string     :rfid_num

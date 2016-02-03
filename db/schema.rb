@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160201070004) do
     t.string   "id_photo"
     t.integer  "event_id"
     t.integer  "category_id"
+    t.integer  "owner_attendee_id"
     t.integer  "seller_id"
     t.string   "token"
     t.string   "rfid_num"

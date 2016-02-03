@@ -1,7 +1,12 @@
 class Attendee < ActiveRecord::Base
+  has_many :sub_attendees, class_name: "Attendee",
+                          foreign_key: "attendee_id"
+
+  belongs_to :owner_attendee, class_name: "Attendee"
 
   GENDER = { '男' => 0, '女' => 1}
   validates :rfid_num, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   has_attached_file :photo,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
                     url: '/system/events/:event_id/attendees/:style/:attendee_number-:token.jpg',
@@ -37,6 +42,7 @@ class Attendee < ActiveRecord::Base
   scope :contains, ->(keyword) { where('name like :keyword OR mobile like :keyword OR company like :keyword OR province like :keyword OR city like :keyword', keyword: "%#{keyword}%") }
 
   default_scope -> {order(attendee_number: :asc)}
+  scope :attendee_name_is, ->(name) { where name: name }
 
   before_create { generate_token(:token) }
   after_create  { generate_invitation_short_url }
