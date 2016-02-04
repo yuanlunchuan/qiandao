@@ -6,12 +6,12 @@
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
       <div class="ibox-title">
-        <h5>新增活动</h5>
+        <h5>座位安排</h5>
       </div>
       <div class="ibox-content">
 
         <table style="width: 100%">
-          <center><caption align='center'>主席台<%= params[:table_pernum].to_i %></caption></center>
+          <caption align='center'>主席台</caption>
           <% for i in 1..params[:table_num].to_i+1 %>
             <tr>
               <% for j in 1..params[:table_pernum].to_i %>
