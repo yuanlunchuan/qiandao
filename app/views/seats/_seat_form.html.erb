@@ -1,0 +1,34 @@
+
+<div class="ibox-title">
+  <h5>报名用户列表</h5>
+</div>
+
+<div class="ibox-content">
+  <%= form_tag event_seats_path(current_event) do%>
+    <div class="row">
+      <input type="tetx" name="table_num" placeholder="请输入桌数" value=<%= @session.try(:seat).try(:table_num) %> >---
+      <input type="tetx" name="table_pernum" placeholder="请输入每桌坐的的人数"  value=<%= @session.try(:seat).try(:per_table_num) %> ><br>
+
+      <input type="text" name='session_id' value=<%= params[:session_id] %> class="hidden" />
+
+      <span>请选择安排坐位要求: </span>
+      <input type="radio" name="classify" value="location" checked="true" /> 按照所在地（省市） 
+      <input type="radio" name="classify" value="seller" /> 对接销售等条件筛选嘉宾列表
+      
+      <br />
+      <span>是否允许不是同一个分类的坐一桌: </span>
+      <input type="radio" name="enable_together" value="no" checked="true" /> 不允许
+      <input type="radio" name="enable_together" value="yes" /> 允许
+      <br />
+
+      <span>是否给随从嘉宾安排座位: </span>
+      <input type="radio" name="sub_attendee_enable" value="yes" checked="true" /> 是
+      <input type="radio" name="sub_attendee_enable" value="no" />否
+      
+      <div class="input-group">
+        <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 开始安排座位</button> </span>
+      </div>
+    </div>
+  <% end %>
+
+</div>

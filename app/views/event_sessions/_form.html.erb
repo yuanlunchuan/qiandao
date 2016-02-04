@@ -18,29 +18,30 @@
 
   <div class="input-daterange-group">
 
-    <div class="form-group"><label class="col-sm-2 control-label">开始时间</label>
+    <div class="form-group"><label class="col-sm-2 control-label">开始日期</label>
       <div class="col-sm-3">
         <div class="input-group date">
           <span class="input-group-addon"><i class="fa fa-calendar"></i></span> <%= f.text_field :start_date, class: 'form-control actual_range'%>
         </div>
       </div>
+    </div>
 
+    <div class="form-group">
+      <label class="col-sm-2 control-label">时间段</label>
       <div class="col-sm-2">
         <div class="input-group clockpicker">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                </span>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+          </span>
           <%= f.text_field :start_time, class: 'form-control' %>
         </div>
       </div>
-    </div>
 
-    <div class="form-group"><label class="col-sm-2 control-label">结束时间</label>
       <div class="col-sm-2">
         <div class="input-group clockpicker">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                </span>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+          </span>
           <%= f.text_field :end_time, class: 'form-control' %>
         </div>
       </div>

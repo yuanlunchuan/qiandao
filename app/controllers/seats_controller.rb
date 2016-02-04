@@ -5,9 +5,11 @@ class SeatsController < ApplicationController
   attr_accessor :meta
 
   def new
-    #@session = Session.find(params[:session_id]||1)
-    @session =[]
+    @session = Session.new
+
     if params[:session_id]
+      @session = Session.find(params[:session_id])
+      @seats = Seat.session_is(@session) unless params[:reload_seat].present?
 
       params[:has_photo]  ||= '0'
       params[:has_avatar] ||= '0'
@@ -49,55 +51,123 @@ class SeatsController < ApplicationController
   def create
     session = Session.find(params[:session_id])
 
+    if session.session_seat.present?
+      session_seat = session.session_seat
+      session_seat.total_table_count = params[:table_num]
+      session_seat.per_table_num = params[:table_pernum]
+    else
+      session_seat = SessionSeat.new total_table_count: params[:table_num],
+        per_table_num: params[:table_pernum],
+        session: session
+    end
+
+    unless session_seat.save
+      flash.now[:error] = session_seat.errors.full_messages
+      render :new
+      return
+    end
+
     if params[:classify]=='location'&&params[:enable_together]=='no'
+      seat_location_not_together
+    end
 
-      city_list = Attendee.select("city").group("city").reorder('city').size
-      city_collection = []
+    if params[:classify]=='location'&&params[:enable_together]=='yes'
+      seat_location_can_together
+    end
 
-      city_list.each do |k,v|
-        city_item = {}
-        city_item['city_name'] = k
-        city_item['city_count'] = v
-        city_collection << city_item
+    redirect_to new_event_seat_path(session_id: session)
+  end
+
+  def seat_location_can_together
+    session = Session.find(params[:session_id])
+    city_list = Attendee.select("city").group("city").reorder('city').size
+    city_collection = []
+
+    city_list.each do |k,v|
+      city_item = {}
+      city_item['city_name'] = k
+      city_item['city_count'] = v
+      city_collection << city_item
+    end
+
+    current_seat_exist = Seat.session_is(session)
+
+    if current_seat_exist.present?
+      current_seat_exist.each do |seat|
+        seat.destroy
       end
+    end
 
-      current_seat_exist = Seat.session_is(session)
+    @attendees = current_event.attendees
 
-      if current_seat_exist.present?
-        current_seat_exist.each do |seat|
-          seat.destroy
+    row = 1
+    city_collection.each do |city_item|
+      attendees = current_event.attendees.city_is(city_item['city_name'])
+      col = 1
+      attendees.each do |attendee|
+        attendees_size = attendees.size
+        Seat.create session: session,
+          attendee:  attendee,
+          desc:      city_item['city_name'],
+          table_row: row,
+          table_col: col
+
+        if params[:table_pernum].to_i==col
+          row += 1
+          col = 1
+        else
+          col += 1
         end
-      end
-
-      @attendees = current_event.attendees
-
-      row = 1
-      city_collection.each do |city_item|
-        attendees = current_event.attendees.city_is(city_item['city_name'])
-        col = 1
-        i = 0
-        attendees.each do |attendee|
-          i += 1
-          attendees_size = attendees.size
-          Seat.create session: session,
-            attendee:  attendee,
-            desc:      city_item['city_name'],
-            table_row: row,
-            table_col: col
-
-          if params[:table_pernum].to_i==col
-            row += 1 if attendees_size!=i
-            col = 1
-          else
-            col += 1
-          end
-        end
-        row += 1
       end
 
     end
+  end
 
-    redirect_to event_seat_path(current_event, session, { table_num: params[:table_num], table_pernum: params[:table_pernum] })
+  def seat_location_not_together
+    session = Session.find(params[:session_id])
+    city_list = Attendee.select("city").group("city").reorder('city').size
+    city_collection = []
+
+    city_list.each do |k,v|
+      city_item = {}
+      city_item['city_name'] = k
+      city_item['city_count'] = v
+      city_collection << city_item
+    end
+
+    current_seat_exist = Seat.session_is(session)
+
+    if current_seat_exist.present?
+      current_seat_exist.each do |seat|
+        seat.destroy
+      end
+    end
+
+    @attendees = current_event.attendees
+
+    row = 1
+    city_collection.each do |city_item|
+      attendees = current_event.attendees.city_is(city_item['city_name'])
+      col = 1
+      i = 0
+      attendees.each do |attendee|
+        i += 1
+        attendees_size = attendees.size
+        Seat.create session: session,
+          attendee:  attendee,
+          desc:      city_item['city_name'],
+          table_row: row,
+          table_col: col
+
+        if params[:table_pernum].to_i==col
+          row += 1 if attendees_size!=i
+          col = 1
+        else
+          col += 1
+        end
+      end
+      row += 1
+    end
   end
 
   def set_current_module

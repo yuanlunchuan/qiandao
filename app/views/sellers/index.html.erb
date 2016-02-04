@@ -24,13 +24,6 @@ function validate_form(thisform)
 
           <div class="row">
             <div class="col-sm-3">
-              <%= link_to '下载模板', templates_path(filename: 'seller.xls'), class: 'btn btn-white btn-sm pull-right' %>
-            </div>
-
-            <div class="col-sm-3">
-              <%= link_to '新增销售', new_event_seller_path, class: 'btn btn-white btn-sm pull-right' %>
-            </div>
-            <div class="col-sm-3">
               <form action="/app/events/<%= current_event.id %>/sellers" class='form-horizontal' method="post" name="fileForm" multipart='true' enctype="multipart/form-data" onsubmit="return validate_form(this);">
                 <table>
                   <tr>
@@ -40,6 +33,15 @@ function validate_form(thisform)
                 </table>
               </form>
             </div>
+
+            <div class="col-sm-3">
+              <%= link_to '下载模板', templates_path(filename: 'seller.xls'), class: 'btn btn-white btn-sm pull-right' %>
+            </div>
+
+            <div class="col-sm-3">
+              <%= link_to '新增销售', new_event_seller_path, class: 'btn btn-white btn-sm pull-right' %>
+            </div>
+
           </div>
 
           <div class="row">

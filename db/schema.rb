@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201070004) do
+ActiveRecord::Schema.define(version: 20160204145630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,6 +195,14 @@ ActiveRecord::Schema.define(version: 20160201070004) do
     t.string   "phone_number"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "session_seats", force: :cascade do |t|
+    t.integer  "session_id"
+    t.integer  "total_table_count"
+    t.integer  "per_table_num"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "sessions", force: :cascade do |t|
