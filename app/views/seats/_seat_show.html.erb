@@ -13,7 +13,7 @@
 
     <table class="table table-hover" style="width: 100%">
       <caption align='center'>主席台</caption>
-      <% for i in 1..(@session.session_seat.total_table_count+1) %>
+      <% for i in 1..@session.session_seat.total_table_count %>
       <tr>
         <% for j in 1..@session.session_seat.per_table_num %>
         <% seat = @session.seats.seat_position_is(i, j).first %>
