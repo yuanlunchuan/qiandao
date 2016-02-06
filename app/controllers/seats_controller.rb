@@ -6,31 +6,13 @@ class SeatsController < ApplicationController
 
   def new
     @session = Session.new
+    @attendees = current_event.attendees
+    @attendees = @attendees.page(params[:page]).includes(:category)
 
     if params[:session_id]
       @session = Session.find(params[:session_id])
       @seats = Seat.session_is(@session) unless params[:reload_seat].present?
-
-      params[:has_photo]  ||= '0'
-      params[:has_avatar] ||= '0'
-      @attendees = current_event.attendees
-      @attendees = @attendees.category(params[:category_id]) if params[:category_id].present?
-      @attendees = @attendees.has_photo if params[:has_photo] == '1'
-      @attendees = @attendees.has_avatar if params[:has_avatar] == '1'
-      @attendees = @attendees.does_not_have_photo  if params[:has_photo] == '-1'
-      @attendees = @attendees.does_not_have_avatar if params[:has_avatar] == '-1'
-      @attendees = @attendees.does_not_processed_avatar if params[:has_avatar] == '-2'
-      @attendees = @attendees.contains(params[:keyword]) if params[:keyword].present?
-      @attendees = @attendees.page(params[:page]).includes(:category)
     end
-  end
-
-  def index
-    
-  end
-
-  def show
-    @session = Session.find(params[:id])
   end
 
   def update
@@ -63,6 +45,8 @@ class SeatsController < ApplicationController
 
     unless session_seat.save
       flash.now[:error] = session_seat.errors.full_messages
+      @attendees = current_event.attendees
+      @attendees = @attendees.page(params[:page]).includes(:category)
       render :new
       return
     end
@@ -75,12 +59,12 @@ class SeatsController < ApplicationController
       seat_location_can_together
     end
 
-    redirect_to new_event_seat_path(session_id: session)
+    redirect_to new_event_seat_path(session_id: session) unless @should_break
   end
 
-  def seat_location_can_together
-    session = Session.find(params[:session_id])
-    city_list = Attendee.select("city").group("city").reorder('city').size
+  def city_collection attendees
+    city_list = current_event.attendees.select("city").group("city").reorder('city').size
+
     city_collection = []
 
     city_list.each do |k,v|
@@ -90,83 +74,87 @@ class SeatsController < ApplicationController
       city_collection << city_item
     end
 
-    current_seat_exist = Seat.session_is(session)
+    city_collection
+  end
 
+  def clear_current_session_seat session
+    current_seat_exist = Seat.session_is(session)
     if current_seat_exist.present?
       current_seat_exist.each do |seat|
         seat.destroy
       end
     end
+  end
 
-    @attendees = current_event.attendees
+  def seat_location_not_together
+    session = Session.find(params[:session_id])
+    city_collection = city_collection current_event.attendees
+    clear_current_session_seat session
+    @should_break = false
 
     row = 1
     city_collection.each do |city_item|
-      attendees = current_event.attendees.city_is(city_item['city_name'])
-      col = 1
-      attendees.each do |attendee|
-        attendees_size = attendees.size
-        Seat.create session: session,
-          attendee:  attendee,
-          desc:      city_item['city_name'],
-          table_row: row,
-          table_col: col
-
+      if params[:sub_attendee_enable] == 'yes'
+        current_city_attendees = current_event.attendees.city_is(city_item['city_name'])
+      else
+        current_city_attendees = current_event.attendees.is_sub_attendees.city_is(city_item['city_name'])
+      end
+      col = 0
+      current_city_attendees.each do |attendee|
         if params[:table_pernum].to_i==col
           row += 1
           col = 1
         else
           col += 1
         end
-      end
 
-    end
-  end
+        break if @should_break
+        if params[:table_num].to_i < row
+          @should_break = true
+          redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
+          break
+        end
 
-  def seat_location_not_together
-    session = Session.find(params[:session_id])
-    city_list = Attendee.select("city").group("city").reorder('city').size
-    city_collection = []
-
-    city_list.each do |k,v|
-      city_item = {}
-      city_item['city_name'] = k
-      city_item['city_count'] = v
-      city_collection << city_item
-    end
-
-    current_seat_exist = Seat.session_is(session)
-
-    if current_seat_exist.present?
-      current_seat_exist.each do |seat|
-        seat.destroy
-      end
-    end
-
-    @attendees = current_event.attendees
-
-    row = 1
-    city_collection.each do |city_item|
-      attendees = current_event.attendees.city_is(city_item['city_name'])
-      col = 1
-      i = 0
-      attendees.each do |attendee|
-        i += 1
-        attendees_size = attendees.size
         Seat.create session: session,
           attendee:  attendee,
           desc:      city_item['city_name'],
           table_row: row,
           table_col: col
+      end
+      row += 1
+    end
+  end
 
+  def seat_location_can_together
+    session = Session.find(params[:session_id])
+    city_collection = city_collection current_event.attendees
+    clear_current_session_seat session
+
+    row = 1
+    col = 0
+    city_collection.each do |city_item|
+      attendees = current_event.attendees.city_is(city_item['city_name'])
+      attendees.each do |attendee|
         if params[:table_pernum].to_i==col
-          row += 1 if attendees_size!=i
+          row += 1
           col = 1
         else
           col += 1
         end
+
+        break if @should_break
+        if params[:table_num].to_i < row
+          @should_break = true
+          redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
+          break
+        end
+
+        Seat.create session: session,
+          attendee:  attendee,
+          desc:      city_item['city_name'],
+          table_row: row,
+          table_col: col
       end
-      row += 1
     end
   end
 
