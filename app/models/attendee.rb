@@ -45,6 +45,7 @@ class Attendee < ActiveRecord::Base
   default_scope -> {order(attendee_number: :asc)}
   scope :attendee_name_is, ->(name) { where name: name }
   scope :city_is, ->(city) { where city: city }
+  scope :seller_id_is, ->(seller_id) { where seller_id: seller_id }
   scope :is_sub_attendees, -> { where 'owner_attendee_id IS NULL' }
 
   before_create { generate_token(:token) }
