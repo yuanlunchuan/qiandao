@@ -1,4 +1,4 @@
-<div id="seats_num" data-table-num=<%= @session.session_seat.try(:total_table_count) %> data-table-pernum=<%= @session.session_seat.try(:per_table_num) %> class='hidden'></div>
+<div id="seats_num" data-table-num=<%= @session.try(:session_seat).try(:total_table_count) %> data-table-pernum=<%= @session.try(:session_seat).try(:per_table_num) %> class='hidden'></div>
 
 <% breadcrumb :seats %>
 
