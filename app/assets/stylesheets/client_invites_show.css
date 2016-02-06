@@ -11,24 +11,23 @@
 }
 .logo-area{
   padding-top: 12px;
-  position: absolute;
+  padding-right: 0px;
+  
 }
 .logo-area img{
   width: 100px;
   height: 26px;
 }
 .title-area{
-  top: 100px;
+  margin-top: 60px;
   text-align: center;
-  position: absolute;
   color: #3E3A39;
 }
 .title-area p{
   margin: 0px;
 }
 .letter-area{
-  position: absolute;
-  margin-top: 180px;
+  margin-top: 20px;
   color: #3E3A39;
 }
 .letter-area p{
@@ -74,8 +73,7 @@ p.invitation{
   margin: 0px;
 }
 .button-area{
-  position: absolute;
-  margin-top: 340px;
+  margin-top: 40px;
 }
 .button-area a{
   color: #fff;
@@ -89,3 +87,21 @@ p.invitation{
   font-weight: bold;
   color: #fff;
 }
+@media screen and (min-width: 350px) {
+  p.name{
+  font-size: 1.3em;
+  }
+  p.name-eg-pre{
+    font-size: 1.2em;
+  }
+  p.name-eg-next{
+    font-size: 0.9em;
+  }
+  p.invitation{
+    font-size: 3em;
+  }
+  .letter-area p{
+    font-size: 14px;
+  }
+}
+
