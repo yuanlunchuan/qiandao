@@ -59,10 +59,109 @@ class SeatsController < ApplicationController
       seat_location_can_together
     end
 
+    if params[:classify]=='seller'&&params[:enable_together]=='no'
+      seat_seller_not_together
+    end
+
+    if params[:classify]=='seller'&&params[:enable_together]=='yes'
+      seat_seller_can_together
+    end
+
     redirect_to new_event_seat_path(session_id: session) unless @should_break
   end
 
-  def city_collection attendees
+  def seat_seller_not_together
+    session = Session.find(params[:session_id])
+    seller_collections = seller_collection
+    clear_current_session_seat session
+    @should_break = false
+
+    row = 1
+    seller_collections.each do |seller_item|
+      col = 0
+      if params[:sub_attendee_enable] == 'yes'
+        current_seller_attendees = current_event.attendees.seller_id_is(seller_item['seller_id'])
+      else
+        current_seller_attendees = current_event.attendees.is_sub_attendees.seller_id_is(seller_item['seller_id'])
+      end
+      current_seller_attendees.each do |attendee|
+        if params[:table_pernum].to_i==col
+          row += 1
+          col = 1
+        else
+          col += 1
+        end
+
+        break if @should_break
+        if params[:table_num].to_i < row
+          @should_break = true
+          redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
+          break
+        end
+
+        Seat.create session: session,
+          attendee:  attendee,
+          desc:      seller_item['seller_id'],
+          table_row: row,
+          table_col: col
+      end
+      row += 1 if current_seller_attendees.present?
+    end
+
+  end
+
+  def seat_seller_can_together
+    session = Session.find(params[:session_id])
+    seller_collections = seller_collection
+    clear_current_session_seat session
+
+    row = 1
+    col = 0
+    seller_collections.each do |seller_item|
+      if params[:sub_attendee_enable] == 'yes'
+        current_seller_attendees = current_event.attendees.seller_id_is(seller_item['seller_id'])
+      else
+        current_seller_attendees = current_event.attendees.is_sub_attendees.seller_id_is(seller_item['seller_id'])
+      end
+      current_seller_attendees.each do |attendee|
+        if params[:table_pernum].to_i==col
+          row += 1
+          col = 1
+        else
+          col += 1
+        end
+
+        break if @should_break
+        if params[:table_num].to_i < row
+          @should_break = true
+          redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
+          break
+        end
+
+        Seat.create session: session,
+          attendee:  attendee,
+          desc:      seller_item['seller_id'],
+          table_row: row,
+          table_col: col
+      end
+    end
+  end
+
+  def seller_collection
+    seller_list = current_event.attendees.select("seller_id").group("seller_id").reorder('seller_id').size
+    seller_collection = []
+
+    seller_list.each do |k,v|
+      seller_item = {}
+      seller_item['seller_id'] = k
+      seller_item['seller_count'] = v
+      seller_collection << seller_item
+    end
+
+    seller_collection
+  end
+
+  def city_collection
     city_list = current_event.attendees.select("city").group("city").reorder('city').size
 
     city_collection = []
@@ -88,12 +187,12 @@ class SeatsController < ApplicationController
 
   def seat_location_not_together
     session = Session.find(params[:session_id])
-    city_collection = city_collection current_event.attendees
+    city_collections = city_collection
     clear_current_session_seat session
     @should_break = false
 
     row = 1
-    city_collection.each do |city_item|
+    city_collections.each do |city_item|
       col = 0
       if params[:sub_attendee_enable] == 'yes'
         current_city_attendees = current_event.attendees.city_is(city_item['city_name'])
@@ -127,12 +226,12 @@ class SeatsController < ApplicationController
 
   def seat_location_can_together
     session = Session.find(params[:session_id])
-    city_collection = city_collection current_event.attendees
+    city_collections = city_collection
     clear_current_session_seat session
 
     row = 1
     col = 0
-    city_collection.each do |city_item|
+    city_collections.each do |city_item|
       if params[:sub_attendee_enable] == 'yes'
         current_city_attendees = current_event.attendees.city_is(city_item['city_name'])
       else
