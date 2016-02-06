@@ -52,6 +52,9 @@ function validate_form(thisform)
             <tr>
               <th>序号</th>
               <th>姓名</th>
+              <th>rfid</th>
+              <th>主嘉宾</th>
+              <th>对应销售</th>
               <th>性别</th>
               <th>报名时间</th>
               <th>省</th>
@@ -69,6 +72,9 @@ function validate_form(thisform)
               <tr>
                 <td><%=attendee.attendee_number%></td>
                 <td><%=attendee.name%></td>
+                <td><%=attendee.rfid_num%></td>
+                <td><%=attendee.owner_attendee.try(:name)%></td>
+                <td><%=attendee.seller.try(:name)%></td>
                 <td><%=attendee.gender%></td>
                 <td><%=attendee.created_at%></td>
                 <td><%=attendee.province%></td>
