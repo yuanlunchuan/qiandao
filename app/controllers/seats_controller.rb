@@ -94,12 +94,12 @@ class SeatsController < ApplicationController
 
     row = 1
     city_collection.each do |city_item|
+      col = 0
       if params[:sub_attendee_enable] == 'yes'
         current_city_attendees = current_event.attendees.city_is(city_item['city_name'])
       else
         current_city_attendees = current_event.attendees.is_sub_attendees.city_is(city_item['city_name'])
       end
-      col = 0
       current_city_attendees.each do |attendee|
         if params[:table_pernum].to_i==col
           row += 1
@@ -121,7 +121,7 @@ class SeatsController < ApplicationController
           table_row: row,
           table_col: col
       end
-      row += 1
+      row += 1 if current_city_attendees.present?
     end
   end
 
@@ -133,7 +133,11 @@ class SeatsController < ApplicationController
     row = 1
     col = 0
     city_collection.each do |city_item|
-      attendees = current_event.attendees.city_is(city_item['city_name'])
+      if params[:sub_attendee_enable] == 'yes'
+        current_city_attendees = current_event.attendees.city_is(city_item['city_name'])
+      else
+        current_city_attendees = current_event.attendees.is_sub_attendees.city_is(city_item['city_name'])
+      end
       attendees.each do |attendee|
         if params[:table_pernum].to_i==col
           row += 1
