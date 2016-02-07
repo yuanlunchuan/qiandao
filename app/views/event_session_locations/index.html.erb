@@ -1,0 +1,42 @@
+<% breadcrumb :locations %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>会议场地管理</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="project-list">
+
+          <div class="row">
+
+          <table class="table table-hover">
+            <tbody>
+
+            <% @sessions.each do |session| %>
+            <tr>
+              <td class="session-date">
+                <%= session.start_date %> <%= session.day_of_week_in_chinese %>
+                <br>
+                <small><%= session.start_time %> - <%= session.end_time %> </small>
+              </td>
+              <td class="session-name"><%= session.name %> </td>
+
+              <td class="project-actions">
+                <%= link_to edit_event_event_session_location_path(current_event, session), class: 'btn btn-white btn-sm' do%>
+                <i class="fa fa-pencil"></i> 编辑会议场地信息
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
