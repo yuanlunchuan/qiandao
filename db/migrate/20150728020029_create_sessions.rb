@@ -8,6 +8,8 @@ class CreateSessions < ActiveRecord::Migration
       t.string :location
       t.string :baidu_map_location_url
       t.text :desc
+      t.string :contact_name
+      t.string :contact_phone_number
 
       t.boolean :checkin_enabled
       t.boolean :hidden, default: false
