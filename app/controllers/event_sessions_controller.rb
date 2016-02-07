@@ -52,6 +52,6 @@ class EventSessionsController < ApplicationController
 private
 
   def session_params
-    params.require(:session).permit(:name, :desc, :location, :start_time, :end_time, :start_date, :checkin_enabled, :company_checkin, :hidden, :question_enabled, :baidu_map_location_url)
+    params.require(:session).permit(:name, :desc, :start_time, :end_time, :start_date, :checkin_enabled, :company_checkin, :hidden, :question_enabled)
   end
 end
