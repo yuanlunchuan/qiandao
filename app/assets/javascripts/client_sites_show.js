@@ -46,4 +46,22 @@ $(document).ready(function(){
     $('.page0').removeClass("blur");
     $('.seat-page').addClass("hidden");
   });
+
+  $('#pic-portrait').change(function(){
+    var file = $('#pic-portrait').prop('files')[0];
+    if (!/image\/\w+/.test(file.type))
+    {
+      alert("请确保文件为图像类型");
+      return false;
+    }
+    if (window.FileReader) 
+    {
+      var fr = new FileReader();
+      fr.onloadend = function(e)
+      {
+        $('.portrait-img').attr({'src':e.target.result});
+      };
+      fr.readAsDataURL(file);
+    }
+  });
 })

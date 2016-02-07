@@ -29,6 +29,10 @@
   border-radius: 84px;
   display: inline-block;
   padding: 0px;
+  position: absolute;
+  left: 50%;
+  margin-left: -42px;
+  overflow: hidden;
 }
 .portrait-img-area img{
   width: 80px;
@@ -176,6 +180,17 @@
   position: absolute;
   left: 30px;
   margin-top: -2px;
+}
+#pic-portrait{
+  width: 84px;
+  height: 84px;
+  border-radius: 84px;
+  display: inline-block;
+  padding: 0px;
+  position: absolute;
+  left: 50%;
+  margin-left: -42px;
+  opacity: 0;/*设置文件上传框隐藏*/
 }
 .blur{
   filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */

@@ -22,6 +22,7 @@ Rails.application.config.assets.precompile += %w(
   client/sites/periphery.png
   client/sites/schedule.png
   client/sites/seat.png
+  client/sites/seat_number.png
   client/sites/sites_illus.png
   client/sites/voucher.png
   
