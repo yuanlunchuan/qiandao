@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :sessions
       resources :profiles
       resources :invites
+      get 'event_sessions'  => 'event_sessions#show'
     end
   end
 
