@@ -38,6 +38,28 @@
             <div class="col-sm-5"> <%=f.text_field :map_url, class: 'form-control'%> </div>
           </div>
 
+          <div class="form-group"> <label class="col-sm-2 control-label">照片</label>
+            <div class="col-sm-3">
+              <% if @settings.photo.exists? %>
+              <div class="row photo-preview">
+                <div class="col-sm-12">
+                  <%= image_tag(@settings.photo.url(:thumb))%>
+                </div>
+                <div class="col-sm-12 m-t-md">
+                  <a href="javascript:;" class="btn btn-xs btn-white btn-outline delete-photo-btn">删除照片</a>
+                  <a href="javascript:;" class="btn btn-xs btn-white btn-outline re-upload-photo-btn">重新上传</a>
+                </div>
+                <%= hidden_field_tag '_delete_photo'%>
+              </div> <!-- ROW -->
+              <% end %>
+              <div class="row  <%= @settings.photo.exists? ? 'hidden' : ''%> upload-photo-input">
+                <div class="col-sm-12">
+                  <%=f.file_field :photo, class: 'form-control'%>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="form-group">
             <div class="col-sm-4 col-sm-offset-2">
               <%=link_to '取消', event_dashboard_path(current_event), class: 'btn btn-white'%>
