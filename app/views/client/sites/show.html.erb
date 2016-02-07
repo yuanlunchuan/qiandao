@@ -1,72 +1,95 @@
 <title>2016YONEX订货会</title>
 <div class="container">
   <div class="row">
-    <div class="logo-area">
-      <%= image_tag 'client/shared/metting_logo.png'%>
-    </div>
-    <div class="col-xs-12 all-page">
-      <div class="col-xs-12 profiles-area">
-        <div class="col-xs-4 text-center">
-          <button type="button" class="portrait-img-area">
-            <%= image_tag 'client/sites/no_portrait.png'%>
-          </button>
+    <div class="page0">
+      <div class="logo-area">
+        <%= image_tag 'client/shared/metting_logo.png'%>
+      </div>
+      <div class="col-xs-12 all-page">
+        <div class="col-xs-12 profiles-area">
+          <div class="col-xs-4 text-center">
+            <button type="button" class="portrait-img-area">
+              <%= image_tag 'client/sites/no_portrait.png'%>
+            </button>
+          </div>
+          <div class="col-xs-8 portrait-msg">
+            <span class="user-name">王琼</span>
+            <span class="user-company">尤尼克斯（上海）体育用品有限公司</span>
+            <span class="user-phone">13800000000</span>
+          </div>
         </div>
-        <div class="col-xs-8 portrait-msg">
-          <span class="user-name">王琼</span>
-          <span class="user-company">尤尼克斯（上海）体育用品有限公司</span>
-          <span class="user-phone">13800000000</span>
+        <div class="col-xs-12 illus-area">
+          <%= image_tag 'client/sites/sites_illus.png', class:"img-responsive" %>
+        </div>
+        <div class="col-xs-12 notice-area">
+          <div class="notice-img">
+            <%= image_tag 'client/sites/notice.png' %>
+            <span>公告：</span>
+          </div>
+          <marquee behavior="scroll" class="scroll-area">
+            <span>前往机场和车站的大巴将于今日下午16:00开车</span>
+            <span>前往机场和车站的大巴将于今日下午16:00开车</span>
+          </marquee>
         </div>
       </div>
-      <div class="col-xs-12 illus-area">
-        <%= image_tag 'client/sites/sites_illus.png', class:"img-responsive" %>
+      <div class="col-xs-12 function-area">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <%= image_tag 'client/sites/schedule.png' %>
+                <span>会议日程</span>
+              </td>
+              <td>
+                <a href="javascript:void(0);" class="voucher-button">
+                  <%= image_tag 'client/sites/voucher.png' %>
+                  <span>入场凭证</span>
+                </a>
+              </td>
+              <td>
+                <a href="javascript:void(0);" class="seat-button">
+                  <%= image_tag 'client/sites/seat.png' %>
+                  <span>座位查询</span>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= image_tag 'client/sites/hotel.png' %>
+                <span>酒店信息</span>
+              </td>
+              <td>
+                <%= image_tag 'client/sites/periphery.png' %>
+                <span>周边推荐</span>
+              </td>
+              <td>
+                <%= image_tag 'client/sites/official_website.png' %>
+                <span>官方网站</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="col-xs-12 notice-area">
-        <div class="notice-img">
-          <%= image_tag 'client/sites/notice.png' %>
-          <span>公告：</span>
+    </div>
+    <div class="col-xs-12 voucher-area text-center voucher-page hidden">
+      <p class="voucher-msg">您的入场凭证</p>
+      <div class="col-xs-6 col-xs-offset-6 qrcode-all-area">
+        <div class="qrcode-area">
+          <div id="qrcode"></div>
         </div>
-        <marquee behavior="scroll" class="scroll-area">
-          <span>前往机场和车站的大巴将于今日下午16:00开车</span>
-          <span>前往机场和车站的大巴将于今日下午16:00开车</span>
-        </marquee>
       </div>
+      <%= image_tag 'client/sites/arrow.png', class:"qrcode-button" %>
+      <p class="down-msg">请点击下载按钮</p>
+      <p>保存二维码并在办理签到时出示</p>
     </div>
-    <div class="col-xs-12 function-area">
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <%= image_tag 'client/sites/schedule.png' %>
-              <span>会议日程</span>
-            </td>
-            <td>
-              <a href="">
-                <%= image_tag 'client/sites/voucher.png' %>
-                <span>入场凭证</span>
-              </a>
-            </td>
-            <td>
-              <%= image_tag 'client/sites/seat.png' %>
-              <span>座位查询</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= image_tag 'client/sites/hotel.png' %>
-              <span>酒店信息</span>
-            </td>
-            <td>
-              <%= image_tag 'client/sites/periphery.png' %>
-              <span>周边推荐</span>
-            </td>
-            <td>
-              <%= image_tag 'client/sites/official_website.png' %>
-              <span>官方网站</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="col-xs-12 seat-area text-center seat-page hidden">
+      <div class="seat-show-area">
+        <p class="seat-user-name"><span>张三</span> 先生/女士，您的座位</p>
+        <div class="seat-number-area">
+          <%= image_tag 'client/sites/seat_number.png'%>
+          <span class="seat-number">正在安排中</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -75,5 +98,6 @@
 <% end %>
 
 <% content_for :script do %>
+  <%= javascript_include_tag 'http://www.luqidong.com/demo/qrcode/js/qrcode.js' %>
   <%= javascript_include_tag 'client_sites_show' %>
 <% end %>
