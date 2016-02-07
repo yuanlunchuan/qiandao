@@ -11,6 +11,12 @@ class CreateInvitationSettings < ActiveRecord::Migration
       t.text   :qr_tip
       t.string :event_alias
 
+      #---------------------
+      t.attachment :photo
+      t.string     :token
+      t.integer  :attendee_number, default: 0
+      #----------------------
+
       t.timestamps null: false
     end
   end
