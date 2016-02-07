@@ -29,6 +29,10 @@
   border-radius: 84px;
   display: inline-block;
   padding: 0px;
+  position: absolute;
+  left: 50%;
+  margin-left: -42px;
+  overflow: hidden;
 }
 .portrait-img-area img{
   width: 80px;
@@ -79,6 +83,7 @@
 }
 .function-area{
   padding: 0px;
+  color: #333333;
 }
 .function-area table{
   width: 100%;
@@ -100,4 +105,97 @@
 }
 .function-area span{
   display: block;
+}
+.function-area a{
+  color: #333333;
+}
+.function-area a:hover{
+  text-decoration: none;
+}
+.voucher-area{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.6);
+  color: #fff;
+}
+.qrcode-area{
+  width: 150px;
+  height: 150px;
+  padding-left: 15px;
+  padding-top: 15px;
+  background-color: #fff;
+}
+.voucher-msg{
+  margin-top: 120px;
+}
+.qrcode-all-area{
+  position: absolute;
+  left: 50%;
+  padding: 0px;
+  margin-left: -75px;
+}
+.voucher-area img.qrcode-button{
+  margin-top: 160px;
+  width: 32px;
+  height: 40px;
+  cursor: pointer;
+}
+.down-msg{
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+#qrcodeCanvas{
+  display: none;
+}
+.seat-area{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.6);
+}
+.seat-show-area{
+  width: 200px;
+  height: 90px;
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  margin-left: -100px;
+}
+.seat-user-name{
+  color: #454545;
+}
+.seat-number-area{
+  font-size: 1.2em;
+  color: #313131;
+}
+.seat-number-area img{
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 30px;
+  margin-top: -2px;
+}
+#pic-portrait{
+  width: 84px;
+  height: 84px;
+  border-radius: 84px;
+  display: inline-block;
+  padding: 0px;
+  position: absolute;
+  left: 50%;
+  margin-left: -42px;
+  opacity: 0;/*设置文件上传框隐藏*/
+}
+.blur{
+  filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+  -webkit-filter: blur(3px); /* Chrome, Opera */
+  -moz-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
 }
