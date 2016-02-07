@@ -2,6 +2,10 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :locations do
+  link '会议场地管理', event_event_session_locations_path
+end
+
 crumb :seats do
   link '座位安排', new_event_seat_path
 end
