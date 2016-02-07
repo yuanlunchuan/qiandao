@@ -37,8 +37,6 @@ $(document).ready(function(){
   $('.seat-button').click(function(){
     $('.page0').addClass("blur");
     $('.seat-page').removeClass("hidden");
-
-    setTimeout("$('.seat-number').html('第 12 桌')",1200);
   });
 
   //隐藏座位

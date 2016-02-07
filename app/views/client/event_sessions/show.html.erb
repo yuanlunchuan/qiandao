@@ -1,1 +1,72 @@
-show.html.erb
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 schedule-img">
+     <%= image_tag 'client/event_sessions/schedule.png', class:"img-responsive"%>
+    </div>
+    <div class="col-xs-12 schedule-area">
+      <div class="col-xs-12 title-area">
+        <div class="col-xs-8">
+          <%= image_tag 'client/event_sessions/schedule_icon.png', class:"sch_icon"%>
+          <span class="title-name">会议日程</span>
+        </div>
+        <div class="col-xs-4 text-right close-area">
+          <a href="/client/events/1/sites/12">
+            <%= image_tag 'client/event_sessions/close.png'%>
+          </a>
+        </div>
+      </div>
+      <div class="col-xs-12 schedule-msg">
+        <div class="col-xs-12 list-title">
+          <div class="col-xs-8 schedule-data">2016年2月22日</div>
+          <div class="col-xs-4 schedule-down text-right"><i class="fa fa-angle-down"></i></div>
+        </div>
+        <div class="col-xs-12">
+          <ul class="schedule-list">
+            <li>
+              <div class="col-xs-6 list-time">12:00 - 20:00</div>
+              <div class="col-xs-6 list-name">全天入住签到</div>
+            </li>
+            <li>
+              <div class="col-xs-6 list-time">18:00 - 19:00</div>
+              <div class="col-xs-6 list-name">来宾自助晚餐</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-12 schedule-msg">
+        <div class="col-xs-12 list-title">
+          <div class="col-xs-8 schedule-data">2016年2月23日</div>
+          <div class="col-xs-4 schedule-down text-right"><i class="fa fa-angle-down"></i></div>
+        </div>
+        <div class="col-xs-12">
+          <ul class="schedule-list">
+            <li>
+              <div class="col-xs-6 list-time">08:00 - 09:00</div>
+              <div class="col-xs-6 list-name">来宾签到</div>
+            </li>
+            <li>
+              <div class="col-xs-6 list-time">09:00 - 11:30</div>
+              <div class="col-xs-6 list-name">会议</div>
+            </li>
+            <li>
+              <div class="col-xs-6 list-time">11:30 - 13:30</div>
+              <div class="col-xs-6 list-name">自助午餐</div>
+            </li>
+            <li>
+              <div class="col-xs-6 list-time">13:00 - 16:30</div>
+              <div class="col-xs-6 list-name">分组讨论</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :style do %>
+  <%= stylesheet_link_tag 'client_event_sessions_show', media: 'all' %>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag "client_event_sessions_show" %>
+<% end %>
