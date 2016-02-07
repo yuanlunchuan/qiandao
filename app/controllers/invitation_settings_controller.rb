@@ -22,6 +22,6 @@ class InvitationSettingsController < ApplicationController
 private
 
   def settings_param
-    params.require(:invitation_setting).permit(:content, :date, :check_in_time, :location, :address, :map_url, :event_alias)
+    params.require(:invitation_setting).permit(:content, :date, :check_in_time, :location, :address, :map_url, :event_alias, :photo)
   end
 end
