@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :profiles
       resources :invites
       resources :recommends
+      get 'restaurants'     => 'restaurants#show'
       get 'event_sessions'  => 'event_sessions#show'
     end
   end
