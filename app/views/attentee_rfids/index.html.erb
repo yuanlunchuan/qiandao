@@ -1,0 +1,53 @@
+<% breadcrumb :attendee_rfids%>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>嘉宾RFID管理</h5>
+      </div>
+      <div class="ibox-content">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <h3>共找到 <strong class="text-success"><%= @attendees.total_count %></strong> 条记录</h3>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>姓名</th>
+              <th>rfid</th>
+              <th>管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @attendees.each do |attendee| %>
+              <tr>
+                <td><%=attendee.attendee_number%></td>
+                <td><%=attendee.name%></td>
+                <td><%=attendee.rfid_num%></td>
+                <td>
+                  <%=link_to '查看', event_attendee_path(current_event, attendee), class: 'btn btn-white btn-xs' %>
+                  <%=link_to '编辑', edit_event_attentee_rfid_path(current_event, attendee), class: 'btn btn-white btn-xs' %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <%= paginate @attendees %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

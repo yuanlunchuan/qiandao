@@ -1,0 +1,16 @@
+<%= form_for @attendee, url: event_attentee_rfid_path(current_event, @attendee), html: {class: 'form-horizontal', multipart: true, onkeydown: "if(event.keyCode==13){return false;}", name: 'creator' } do |f|%>
+  <div class="form-group"><label class="col-sm-2 control-label">卡号</label>
+    <div class="col-sm-3"> <%=f.text_field :rfid_num, class: 'form-control'  %> </div>
+  </div>
+
+  <div class="form-group"><label class="col-sm-2 control-label">姓名</label>
+    <div class="col-sm-3"> <%=f.text_field :name, class: 'form-control'%> </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+      <%=link_to '取消', event_attendees_path, class: 'btn btn-white'%>
+      <%= button_tag '保存', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
