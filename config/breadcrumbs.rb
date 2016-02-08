@@ -2,6 +2,10 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :attendee_rfids do
+  link '嘉宾RFID信息录入', event_attentee_rfids_path
+end
+
 crumb :locations do
   link '会议场地管理', event_event_session_locations_path
 end
