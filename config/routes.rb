@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :sessions
       resources :profiles
       resources :invites
+      resources :recommends
       get 'event_sessions'  => 'event_sessions#show'
     end
   end
@@ -46,6 +47,7 @@ Rails.application.routes.draw do
       resources :sellers
       resources :recommends
       resources :event_session_locations
+      resources :attentee_rfids
 
       get 'photos'          => 'attendees#photos'
 
