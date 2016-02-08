@@ -108,6 +108,18 @@
               <% end %>
             </li>
             <li>
+              <%= link_to event_photos_path do %>
+                <i class="fa fa-picture-o"></i>
+                <span class="nav-label">入住信息</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to event_attentee_rfids_path do %>
+                <i class="fa fa-barcode"></i>
+                <span class="nav-label">嘉宾RFID信息录入</span>
+              <% end %>
+            </li>
+            <li>
               <%= link_to new_event_seat_path do %>
                 <i class="fa fa-wheelchair"></i>
                 <span class="nav-label">座位安排</span>
@@ -124,6 +136,12 @@
         <a href="#"><i class="fa fa-pencil"></i>签到管理 </a>
           <ul class="submenu">
             <!-- <li><a href="#">签到监控设置 </a></li> -->
+            <li>
+              <%= link_to event_checkin_monitors_path do %>
+                <i class="fa fa-laptop"></i>
+                <span class="nav-label">签到监控设置</span></span>
+              <% end %>
+            </li>
             <li>
               <%= link_to event_checkin_path do %>
                 <i class="fa fa-laptop"></i>
