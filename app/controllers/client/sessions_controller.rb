@@ -8,6 +8,7 @@ class Client::SessionsController < ApplicationController
       session[:attendee_id] = attendees.first.id
       redirect_to client_event_sites_path(attendees.first.event.id)
     else
+      flash.now[:error] = '该用户不存在请重新输入'
       render :new
     end
   end
