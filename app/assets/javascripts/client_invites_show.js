@@ -3,7 +3,7 @@ $(document).ready(function(){
   $("#page0").swipe({ 
     swipe:function(event,direction, distance, duration, fingerCount)
     {
-      if (direction == "down")
+      if (direction == "up")
       {
         $("#page0").fadeOut();
         $("#page1").fadeIn();
@@ -13,15 +13,14 @@ $(document).ready(function(){
   $("#page1").swipe({ 
     swipe:function(event,direction, distance, duration, fingerCount)
     {
-      if (direction == "up")
+      if (direction == "down")
       {
         $("#page1").fadeOut();
         $("#page0").fadeIn();
       }
     },
   });
-})
-$(function() {
+  $(function() {
     setInterval(function(){
       var bottom = $('.double-down').css("bottom");
       if(bottom == "40px")
@@ -32,5 +31,6 @@ $(function() {
       {
         $('.double-down').animate({bottom:"40px"},1000);
       }
-    },100);
+    },10);
   });
+})

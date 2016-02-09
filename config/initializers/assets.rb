@@ -9,13 +9,19 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w(
-  client/event_sessions/close.png
   client/event_sessions/schedule.png
   client/event_sessions/schedule_icon.png
   client/invites/arrow.png
   client/invites/home_page0.png
   client/invites/home_page1.png
+  client/recommends/recommends.png
+  client/recommends/recommends_icon.png
+  client/restaurants/adress.png
+  client/restaurants/phone_icon.png
+  client/restaurants/restaurants.png
+  client/restaurants/restaurants_icon.png
   client/sessions/sessions.png
+  client/shared/close.png
   client/shared/metting_logo.png
   client/sites/arrow.png
   client/sites/hotel.png
@@ -31,6 +37,7 @@ Rails.application.config.assets.precompile += %w(
   
   client_event_sessions_show.js
   client_invites_show.js
+  client_restaurants_show.js
   client_sessions_new.js
   client_sites_show.js
   invitations.js 
@@ -40,6 +47,8 @@ Rails.application.config.assets.precompile += %w(
 
   client_event_sessions_show.css
   client_invites_show.css
+  client_recommends_index.css
+  client_restaurants_show.css
   client_sessions_new.css
   client_sites_show.css
   invitations.css

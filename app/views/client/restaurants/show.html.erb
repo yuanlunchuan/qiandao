@@ -1,1 +1,46 @@
-show.html.erb
+<title>会议信息</title>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 restaurants-img">
+     <%= image_tag 'client/restaurants/restaurants.png', class:"img-responsive"%>
+    </div>
+    <div class="col-xs-12 restaurants-area">
+      <div class="col-xs-12 title-area">
+        <div class="col-xs-8 icon-area">
+          <%= image_tag 'client/restaurants/restaurants_icon.png' %>
+          <span class="title-name">酒店信息</span>
+        </div>
+        <div class="col-xs-4 text-right close-area">
+          <a href="/client/events/1/sites/12">
+            <%= image_tag 'client/shared/close.png'%>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 map-area">
+      <div class="col-xs-12" id="mapArea">
+      </div>
+    </div>
+    <div class="col-xs-12 text-center res-name">
+      上海富豪环球东亚酒店
+    </div>
+    <div class="col-xs-12 text-center message">
+      <div class="col-xs-12 message-area">
+        <div class="col-xs-9 address-area"><%= image_tag 'client/restaurants/adress.png'%>上海市徐汇区衡山路516号</div>
+        <div class="col-xs-3 phone-icon-area">
+          <a href="tel:021-51083050">
+            <%= image_tag 'client/restaurants/phone_icon.png'%>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :style do %>
+  <%= stylesheet_link_tag 'client_restaurants_show', media: 'all' %>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag "http://api.map.baidu.com/api?v=2.0&ak=rAucbAYbQgBossFCGHwEIZG2" %>
+  <%= javascript_include_tag "client_restaurants_show" %>
+<% end %>

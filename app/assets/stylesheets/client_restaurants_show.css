@@ -1,0 +1,71 @@
+body{
+  background-color: #ececec;
+}
+.restaurants-img{
+  padding: 0px;
+}
+.title-area{
+  height: 70px;
+  line-height: 70px;
+  padding: 0px;
+}
+.icon-area img{
+  width: 30px;
+  height: 40px;
+}
+.title-name{
+  font-size: 1.2em;
+  color: #005bac;
+  margin-left: 4px;
+}
+.close-area {
+  cursor: pointer;
+}
+.close-area img{
+  width: 30px;
+  height: 30px;
+}
+.map-area{
+  padding-left: 30px;
+  padding-right: 30px;
+  height: 150px;
+  overflow: hidden;
+}
+#mapArea{
+  height: 166px;
+}
+.res-name{
+  color: #005BAC;
+  font-size: 1.2em;
+  margin-top: 20px;
+  height: 40px;
+  line-height: 40px;
+}
+.message{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.message-area{
+  border: #4484BE 1px solid;
+  padding: 0px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.address-area{
+  color: #646464;
+  padding: 0px;
+  height: 40px;
+  line-height: 40px;
+}
+.address-area img{
+  width: 10px;
+  height: 16px;
+}
+.phone-icon-area{
+  height: 40px;
+  line-height: 40px;
+}
+.phone-icon-area img{
+  width: 30px;
+  height: 30px;
+}

@@ -1,1 +1,29 @@
-index.html.erb
+<title>会议信息</title>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 recommends-img">
+     <%= image_tag 'client/recommends/recommends.png', class:"img-responsive"%>
+    </div>
+    <div class="col-xs-12 recommends-area">
+      <div class="col-xs-12 title-area">
+        <div class="col-xs-8 icon-area">
+          <%= image_tag 'client/recommends/recommends_icon.png' %>
+          <span class="title-name">周边推荐</span>
+        </div>
+        <div class="col-xs-4 text-right close-area">
+          <a href="/client/events/1/sites/12">
+            <%= image_tag 'client/shared/close.png'%>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :style do %>
+  <%= stylesheet_link_tag 'client_recommends_index', media: 'all' %>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag "client_event_sessions_show" %>
+<% end %>
