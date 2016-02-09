@@ -1,5 +1,6 @@
 $(document).ready(function(){
   $('.session-button').click(function(){
+    /*
     var phone = $('.phone-box').val();
     if(isNaN(phone))
     {
@@ -16,5 +17,6 @@ $(document).ready(function(){
         location.href = "/client/events/1/sites/12" //跳转
       }
     }
+    */
   })
 });

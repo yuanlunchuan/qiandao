@@ -27,7 +27,8 @@ class Attendee < ActiveRecord::Base
 
   has_many :checkins
   has_many :sessions, through: :checkins
-
+  
+  scope :mobile_is, -> (mobile) { where mobile: mobile }
   scope :printed, -> {where('printed_at IS NOT NULL')}
   scope :not_printed, -> {where('printed_at IS NULL')}
   scope :has_photo, -> { where('photo_file_name IS NOT NULL') }
