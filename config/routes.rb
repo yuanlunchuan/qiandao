@@ -6,12 +6,18 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  namespace :client do
+  namespace :seller do
     resources :events do
-      resources :sites
-      resources :sessions
+      resources :checkins
+    end
+  end
+
+  namespace :client do
+    get 'invites'     => 'invites#show'
+    resources :sessions
+    resources :events do
+      get 'sites'   => 'sites#show'
       resources :profiles
-      resources :invites
       resources :recommends
       get 'restaurants'     => 'restaurants#show'
       get 'event_sessions'  => 'event_sessions#show'
