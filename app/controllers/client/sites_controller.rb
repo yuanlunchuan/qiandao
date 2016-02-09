@@ -5,7 +5,7 @@ class Client::SitesController < ApplicationController
   layout 'client'
 
   def show
-
+    @attendee = Attendee.find(cookies[:attendee_id])
   end
 
 end

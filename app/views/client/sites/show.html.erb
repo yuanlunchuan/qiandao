@@ -14,9 +14,9 @@
             <input type="file" id="pic-portrait" />
           </div>
           <div class="col-xs-8 portrait-msg">
-            <span class="user-name">王琼</span>
-            <span class="user-company">尤尼克斯（上海）体育用品有限公司</span>
-            <span class="user-phone">13800000000</span>
+            <span class="user-name"><%= @attendee.name %></span>
+            <span class="user-company"><%= @attendee.company.present? ? @attendee.company : '公司未知' %></span>
+            <span class="user-phone"><%= @attendee.mobile.present? ? @attendee.mobile : '电话未知' %></span>
           </div>
         </div>
         <div class="col-xs-12 illus-area">
