@@ -1,1 +1,83 @@
-show.html.erb
+<title>签到进度查询</title>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 title-name">签到进度查询</div>
+    <div class="col-xs-12 sign-number-area">
+      <div class="col-xs-6">已签到：<span>28</span>人</div>
+      <div class="col-xs-6">未签到：<span>12</span>人</div>
+    </div>
+    <div class="col-xs-12 select-area">
+      <div class="col-xs-9 select-box-area">
+        <input type="text" placeholder="请输入经销商姓名或手机号码"/>
+      </div>
+      <div class="col-xs-3">
+        <button type="button">搜 索</button>
+      </div>
+    </div>
+    <div class="col-xs-12 text-center sign-content">
+      <div class="col-xs-12 sign-area">
+        <div class="col-xs-4 sign-active">全部</div>
+        <div class="col-xs-4">已签到</div>
+        <div class="col-xs-4">未签到</div>
+      </div>
+    </div>
+    <div class="col-xs-12 table-area">
+      <table>
+        <tr class="bg-cell">
+          <th>姓名</th>
+          <th>公司</th>
+          <th>状态</th>
+          <th>一键拨号</th>
+        </tr>
+        <tr>
+          <td>张三</td>
+          <td>上海比克营销策划有限公司</td>
+          <td>已签到</td>
+          <td class="phone-button">
+            <a href="tel:10086">
+              <span>一键拨号</span>
+            </a>
+          </td>
+        </tr>
+        <tr class="bg-cell">
+          <td>张三</td>
+          <td>上海比克营销策划有限公司</td>
+          <td>已签到</td>
+          <td class="phone-button">
+            <a href="tel:10086">
+              <span>一键拨号</span>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>张三</td>
+          <td>上海比克营销策划有限公司</td>
+          <td>已签到</td>
+          <td class="phone-button">
+            <a href="tel:10086">
+              <span>一键拨号</span>
+            </a>
+          </td>
+        </tr>
+        <tr class="bg-cell">
+          <td>张三</td>
+          <td>上海比克营销策划有限公司</td>
+          <td class="no-sign">未签到</td>
+          <td class="phone-button">
+            <a href="tel:10086">
+              <span>一键拨号</span>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :style do %>
+  <%= stylesheet_link_tag 'seller_checkins_show', media: 'all' %>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag "seller_checkins_show" %>
+<% end %>
