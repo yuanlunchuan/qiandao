@@ -8,8 +8,8 @@
   <%= csrf_meta_tags %>
 
   <%= yield :style %>
-  <%= stylesheet_link_tag 'jquery-accordion-menu' %>
-  <%= stylesheet_link_tag '//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css', media: 'all' %>
+  <%#= stylesheet_link_tag 'jquery-accordion-menu' %>
+  <%#= stylesheet_link_tag '//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css', media: 'all' %>
 
   <style type="text/css">
   .content{width:260px;margin:20px auto;}
@@ -21,21 +21,9 @@
     width:100%;
   }
   </style>
-  <%= javascript_include_tag 'jquery-accordion-menu' %>
+  <%#= javascript_include_tag 'jquery-accordion-menu' %>
 
-  <script type="text/javascript">
-  jQuery(document).ready(function () {
-    jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
-  });
 
-  $(function(){ 
-    //顶部导航切换
-    $("#demo-list li").click(function(){
-      $("#demo-list li.active").removeClass("active")
-      $(this).addClass("active");
-    })
-  })
-  </script>
 </head>
 
 <body>
