@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile += %w(
   client/invites/arrow.png
   client/invites/home_page0.png
   client/invites/home_page1.png
+  client/recommends/map_bg.png
   client/recommends/recommends.png
   client/recommends/recommends_icon.png
   client/restaurants/adress.png
