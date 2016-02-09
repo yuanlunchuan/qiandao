@@ -45,13 +45,16 @@ Rails.application.config.assets.precompile += %w(
   province_city.js
   jquery-accordion-menu.js
   seat_show.js
+  seller_checkins_show.js
 
   client_event_sessions_show.css
   client_invites_show.css
+  client_profiles_show.css
   client_recommends_index.css
   client_restaurants_show.css
   client_sessions_new.css
   client_sites_show.css
   invitations.css
   jquery-accordion-menu.css
+  seller_checkins_show.css
 )
