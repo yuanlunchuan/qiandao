@@ -25,7 +25,7 @@
             <i class="fa fa-th-large"></i> <span class="nav-label">基本信息设置</span></span>
           <% end %>
         </li>
-        
+
         <% if @current_module==0 %>
           <li id="active-item" class="active">
         <% else %>
@@ -34,27 +34,27 @@
           <a id="conference" href="#"><i class="fa fa-users"></i>会议管理</a>
           <ul class="submenu">
             <li>
-              <%= link_to event_activities_path do %>
+              <%= link_to event_activities_path, style: is_active_item('activities') do %>
                 <i class="fa fa-gamepad"></i><span class="nav-label">活动管理</span></a>
               <% end %>
             </li>
             <li>
-              <%= link_to event_event_session_locations_path do %>
+              <%= link_to event_event_session_locations_path, style: is_active_item('event_session_locations') do %>
                 <i class="fa fa-gamepad"></i><span class="nav-label">会议场地管理</span></a>
               <% end %>
             </li>
             <li>
-              <%= link_to event_activity_categories_path do %>
+              <%= link_to event_activity_categories_path, style: is_active_item('activity_categories') do %>
                 <i class="fa fa-sitemap"></i><span class="nav-label">活动标签</span></a>
               <% end %>
             </li>
-            <li><%= link_to event_sessions_path do %>
+            <li><%= link_to event_sessions_path, style: is_active_item('event_sessions') do %>
               <i class="fa fa-comments"></i>
               <span class="nav-label">会议日程管理</span>
               <% end %>
             </li>
             <li>
-              <%= link_to event_recommends_path do %>
+              <%= link_to event_recommends_path, style: is_active_item('recommends')  do %>
               <i class="fa fa-bullhorn"></i>
               <span class="nav-label">周边推荐</span>
               <% end %>
@@ -70,12 +70,12 @@
           <a href="#"><i class="fa fa-users"></i>会议通知</a>
           <ul class="submenu">
             <li>
-              <%= link_to event_invitation_settings_path do %>
+              <%= link_to event_invitation_settings_path, style: is_active_item('invitation_settings') do %>
                 <i class="fa fa-envelope"></i>
                 <span class="nav-label">电子邀请函</span></span>
               <% end %>
             <li>
-              <%= link_to event_notifications_path do %>
+              <%= link_to event_notifications_path, style: is_active_item('notifications') do %>
                 <i class="fa fa-bell"></i>
                 <span class="nav-label">会议通知管理</span></span>
               <% end %>
@@ -91,36 +91,36 @@
         <a href="#"><i class="fa fa-heart"></i>嘉宾管理</a>
           <ul class="submenu">
             <li>
-              <%= link_to event_attendee_categories_path do %>
+              <%= link_to event_attendee_categories_path, style: is_active_item('attendee_categories') do %>
                 <i class="fa fa-sitemap"></i>
                 <span class="nav-label">嘉宾标签管理</span>
               <% end %>
             <li>
-              <%= link_to event_attendees_path do %>
+              <%= link_to event_attendees_path, style: is_active_item('attendees', 'index') do %>
                 <i class="fa fa-user"></i>
                 <span class="nav-label">嘉宾信息</span>
               <% end %>
             </li>
             <li>
-              <%= link_to event_photos_path do %>
+              <%= link_to event_photos_path, style: is_active_item('attendees', 'photos') do %>
                 <i class="fa fa-picture-o"></i>
                 <span class="nav-label">嘉宾照片管理</span>
               <% end %>
             </li>
             <li>
-              <%= link_to event_photos_path do %>
+              <%= link_to event_photos_path, class: 'hidden' do %>
                 <i class="fa fa-picture-o"></i>
                 <span class="nav-label">入住信息</span>
               <% end %>
             </li>
             <li>
-              <%= link_to event_attentee_rfids_path do %>
+              <%= link_to event_attentee_rfids_path, style: is_active_item('attentee_rfids') do %>
                 <i class="fa fa-barcode"></i>
                 <span class="nav-label">嘉宾RFID信息录入</span>
               <% end %>
             </li>
             <li>
-              <%= link_to new_event_seat_path do %>
+              <%= link_to new_event_seat_path, style: is_active_item('seats') do %>
                 <i class="fa fa-wheelchair"></i>
                 <span class="nav-label">座位安排</span>
               <% end %>
@@ -135,21 +135,20 @@
         <% end %>
         <a href="#"><i class="fa fa-pencil"></i>签到管理 </a>
           <ul class="submenu">
-            <!-- <li><a href="#">签到监控设置 </a></li> -->
             <li>
-              <%= link_to event_checkin_monitors_path do %>
+              <%= link_to event_checkin_monitors_path, style: is_active_item('checkin_monitors') do %>
                 <i class="fa fa-laptop"></i>
                 <span class="nav-label">签到监控设置</span></span>
               <% end %>
             </li>
             <li>
-              <%= link_to event_checkin_path do %>
+              <%= link_to event_checkin_path, style: is_active_item('checkin') do %>
                 <i class="fa fa-laptop"></i>
                 <span class="nav-label">签到状态</span></span>
               <% end %>
             </li>
             <li>
-              <%= link_to event_prints_path do %>
+              <%= link_to event_prints_path, style: is_active_item('prints') do %>
                 <i class="fa fa-print"></i> <span class="nav-label">证件打印状态</span></span>
               <% end %>
             </li>
@@ -164,15 +163,15 @@
         <a href="#"><i class="fa fa-gift"></i>现场互动管理</a>
           <ul class="submenu">
             <li>
-              <%= link_to event_lottery_prizes_path do %>
+              <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
                 <i class="fa fa-gift"></i>
                 <span class="nav-label">现场抽奖</span>
               <% end %>
             </li>
             <li>
-              <%= link_to event_questions_path do %>
+              <%= link_to event_questions_path, style: is_active_item('questions') do %>
                 <i class="fa fa-check-circle-o"></i>
-                <span class="nav-label">现场提问</span><span class="jquery-accordion-menu-label">10 </span>
+                <span class="nav-label">现场提问</span><span class="jquery-accordion-menu-label hidden">10 </span>
               <% end %>
             </li>
           </ul>

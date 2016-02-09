@@ -31,7 +31,7 @@ class CheckinMonitorsController < ApplicationController
   end
 
   def set_current_module
-    @current_module = 4
+    @current_module = 3
   end
 
   def session_params

@@ -7,6 +7,14 @@ module ApplicationHelper
     params[:controller] == controller_name ? "active" : nil
   end
 
+  def is_active_item(controller_name, action_name=nil)
+    if action_name.present?
+      (params[:action] == action_name && params[:controller] == controller_name) ? "background-color: #999" : nil
+    else
+      params[:controller] == controller_name ? "background-color: #999" : nil
+    end
+  end
+
   def is_active_action(action_name, controller_name = nil)
     if controller_name
       (params[:action] == action_name && params[:controller] == controller_name) ? "active" : nil
