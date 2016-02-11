@@ -1,7 +1,7 @@
 class Client::InvitesController < ApplicationController
-  include AttendeeLoader
+  # include AttendeeLoader
+  # before_action :load_attendee
 
-  before_action :load_attendee
   layout 'client'
   def show
     if cookies[:attendee_id].present?
