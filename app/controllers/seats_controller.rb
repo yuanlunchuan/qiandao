@@ -237,7 +237,7 @@ class SeatsController < ApplicationController
       else
         current_city_attendees = current_event.attendees.is_sub_attendees.city_is(city_item['city_name'])
       end
-      attendees.each do |attendee|
+      current_city_attendees.each do |attendee|
         if params[:table_pernum].to_i==col
           row += 1
           col = 1
