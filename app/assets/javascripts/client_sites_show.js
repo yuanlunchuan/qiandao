@@ -1,4 +1,25 @@
+//= require dropzone/dropzone.js
+
 $(document).ready(function(){
+  //图片异步上传
+  $(".dropz").dropzone({
+    url: "/client/events/"+$('#attendee-id').data('attendee-id')+"/upload_photo?id="+$('#event-id').data('event-id'),
+    dictRemoveLinks: "x",
+    dictCancelUpload: "x",
+    maxFiles: 10,
+    maxFilesize: 5,
+    acceptedFiles: "image/*",
+    init: function() {
+        this.on("success", function(file) {
+//          attendee_photo
+          console.log("File " + JSON.stringify(file) + "uploaded");
+        });
+        this.on("removedfile", function(file) {
+            console.log("File " + file.name + "removed");
+        });
+    }
+  });
+
 
   $(function(){
     if($('.illus-area').height()== 1)//网路差图片还没加载出来

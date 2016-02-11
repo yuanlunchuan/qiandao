@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get 'seats'  => 'seats#show'
       get 'sites'   => 'sites#show'
       get 'download_qrcode'  => 'sites#download_qrcode'
+      post 'upload_photo' => 'sites#upload_photo'
       resources :profiles
       resources :recommends
       get 'restaurants'     => 'restaurants#show'

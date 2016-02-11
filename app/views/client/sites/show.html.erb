@@ -13,11 +13,19 @@
         <div class="col-xs-12 profiles-area">
           <div class="col-xs-4 text-center">
             <button type="button" class="portrait-img-area">
-              <%= image_tag download_photo_event_attendee_path(current_event, @attendee)||'client/sites/no_portrait.png', class:"portrait-img"%>
+              <%= image_tag download_photo_event_attendee_path(current_event, @attendee), class:"portrait-img", id: "attendee_photo" %>
             </button>
-            <input type="file" id="pic-portrait" />
+            <input class="hidden" type="file" id="pic-portrait" />
           </div>
+
+          <!--<form action="/client/events/<%= current_event.id %>/upload_photo?id=<%= session[:attendee_id] %>" class="dropzone">
+            <div class="fallback">
+              <input name="file" type="file" multiple />
+            </div>
+          </form>-->
+
           <div class="col-xs-8 portrait-msg">
+            <div class="dropz">上传头像</div>
             <span class="user-name"><%= @attendee.name %></span>
             <span class="user-company"><%= @attendee.company.present? ? @attendee.company : '公司未知' %></span>
             <span class="user-phone"><%= @attendee.mobile.present? ? @attendee.mobile : '电话未知' %></span>
@@ -94,7 +102,6 @@
         -->
         </div>
       </div>
-      <!-- 'attendee_qrcode/#{current_event.id}_#{@aa}.png' -->
       <div class="qrcode-content">
         <a href="/client/events/<%= current_event.id %>/download_qrcode?id=<%= @attendee.id %>">
           <%= image_tag 'client/sites/arrow.png', class:"qrcode-button" %>
@@ -105,7 +112,7 @@
     </div>
     <div class="col-xs-12 seat-area text-center seat-page hidden">
       <div class="seat-show-area">
-        <p class="seat-user-name"><span>张三</span> 先生/女士，您的座位</p>
+        <p class="seat-user-name"><span><%= @attendee.name %></span> 先生/女士，您的座位</p>
         <select class="schedule-list">
           <option>请选择日程</option>
         </select>
