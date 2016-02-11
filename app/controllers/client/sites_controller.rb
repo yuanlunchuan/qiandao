@@ -6,6 +6,7 @@ class Client::SitesController < ApplicationController
 
   def show
     @attendee = Attendee.find(cookies[:attendee_id])
+    @event = current_event
   end
 
 end
