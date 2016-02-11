@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'invites'     => 'invites#show'
     resources :sessions
     resources :events do
+      get 'seats'  => 'seats#show'
       get 'sites'   => 'sites#show'
       resources :profiles
       resources :recommends
