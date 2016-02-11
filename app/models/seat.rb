@@ -3,6 +3,7 @@ class Seat < ActiveRecord::Base
   belongs_to :session
   belongs_to :attendee
 
+  scope :attendee_seat_is, ->(attendee, session) { where "attendee_id=? AND session_id=?", attendee.id, session.id }
   scope :session_is, ->(session) { where session_id: session.id }
   scope :seat_position_is, ->(row, col) { where "table_row=? AND table_col=?", row, col }
   def to_hash
