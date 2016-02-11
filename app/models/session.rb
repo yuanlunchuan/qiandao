@@ -45,6 +45,12 @@ class Session < ActiveRecord::Base
     "#{start_date} #{start_time} #{name}"
   end
 
+  def to_hash
+    hash = {}
+    self.attributes.each { |k,v| hash[k] = v }
+    return hash
+  end
+
 private
 
   def generate_datetime
@@ -54,11 +60,13 @@ private
 
   def init_default_info
     return unless self.event
-    self.starts_at ||= self.event.starts_at
-    self.ends_at   ||= self.event.ends_at
+    # comment by yuan lunchuan
+    #self.starts_at ||= self.event.starts_at
+    #self.ends_at   ||= self.event.ends_at
 
     @start_time = self.starts_at.in_time_zone(self.timezone).strftime('%H:%M') if self.starts_at
     @end_time   = self.ends_at.in_time_zone(self.timezone).strftime('%H:%M') if self.ends_at
+
     @start_date = self.starts_at.in_time_zone(self.timezone).strftime('%Y-%m-%d') if self.starts_at
     @day_of_week  = self.starts_at.in_time_zone(self.timezone).strftime('%w') if self.starts_at
   end
