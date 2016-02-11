@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204145630) do
+ActiveRecord::Schema.define(version: 20160211065025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,11 +140,17 @@ ActiveRecord::Schema.define(version: 20160204145630) do
     t.string   "check_in_time"
     t.string   "location"
     t.string   "address"
-    t.string   "map_url",       limit: 1000
+    t.string   "map_url",            limit: 1000
     t.text     "qr_tip"
     t.string   "event_alias"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "token"
+    t.integer  "attendee_number",                 default: 0
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -175,6 +181,18 @@ ActiveRecord::Schema.define(version: 20160204145630) do
     t.integer  "distance"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "restaurant_name"
+    t.string   "phone_number"
+    t.string   "address"
+    t.string   "map_url",         limit: 1000
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "seats", force: :cascade do |t|
@@ -213,6 +231,8 @@ ActiveRecord::Schema.define(version: 20160204145630) do
     t.string   "location"
     t.string   "baidu_map_location_url"
     t.text     "desc"
+    t.string   "contact_name"
+    t.string   "contact_phone_number"
     t.boolean  "checkin_enabled"
     t.boolean  "hidden",                 default: false
     t.boolean  "company_checkin",        default: false

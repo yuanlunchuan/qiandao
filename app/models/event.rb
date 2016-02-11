@@ -15,6 +15,7 @@ class Event < ActiveRecord::Base
   has_many :activities
   has_many :sellers
   has_many :recommends
+  has_one  :restaurant
 
   has_many :question
 

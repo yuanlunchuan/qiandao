@@ -1,3 +1,6 @@
+<div id="latitude" class="hidden" data-latitude=<%= @restaurant.latitude %>></div>
+<div id="longitude" class="hidden" data-longitude=<%= @restaurant.longitude%>></div>
+
 <title>会议信息</title>
 <div class="container-fluid">
   <div class="row">
@@ -11,7 +14,7 @@
           <span class="title-name">酒店信息</span>
         </div>
         <div class="col-xs-4 text-right close-area">
-          <a href="/client/events/1/sites/12">
+          <a href="/client/invites">
             <%= image_tag 'client/shared/close.png'%>
           </a>
         </div>
@@ -22,13 +25,13 @@
       </div>
     </div>
     <div class="col-xs-12 text-center res-name">
-      上海富豪环球东亚酒店
+      <%= @restaurant.restaurant_name %>
     </div>
     <div class="col-xs-12 text-center message">
       <div class="col-xs-12 message-area">
-        <div class="col-xs-9 address-area"><%= image_tag 'client/restaurants/adress.png'%>上海市徐汇区衡山路516号</div>
+        <div class="col-xs-9 address-area"><%= image_tag 'client/restaurants/adress.png'%><%= @restaurant.address %></div>
         <div class="col-xs-3 phone-icon-area">
-          <a href="tel:021-51083050">
+          <a href="tel:<%= @restaurant.phone_number %>">
             <%= image_tag 'client/restaurants/phone_icon.png'%>
           </a>
         </div>
@@ -36,6 +39,7 @@
     </div>
   </div>
 </div>
+
 <% content_for :style do %>
   <%= stylesheet_link_tag 'client_restaurants_show', media: 'all' %>
 <% end %>

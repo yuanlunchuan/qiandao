@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       resources :event_session_locations
       resources :attentee_rfids
       resources :checkin_monitors
+      resources :restaurants
 
       get 'photos'          => 'attendees#photos'
 
