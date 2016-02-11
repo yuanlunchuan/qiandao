@@ -14,7 +14,7 @@
       <span>请选择安排坐位要求: </span>
       <input type="radio" name="classify" value="location" checked="true" /> 按照所在地（省市） 
       <input type="radio" name="classify" value="seller" /> 对接销售等条件筛选嘉宾列表
-      
+
       <br />
       <span>是否允许不是同一个分类的坐一桌: </span>
       <input type="radio" name="enable_together" value="yes" checked="true" /> 允许
@@ -24,6 +24,11 @@
       <span>是否为随从嘉宾安排座位: </span>
       <input type="radio" name="sub_attendee_enable" value="yes" checked="true" /> 是
       <input type="radio" name="sub_attendee_enable" value="no" />否
+      <br />
+
+      <span>超出位置，自动增加桌数: </span>
+      <input type="radio" name="auto_increase" value="yes" checked="true" /> 是
+      <input type="radio" name="auto_increase" value="no" />否
       <div class="input-group">
         <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 开始安排座位</button> </span>
       </div>

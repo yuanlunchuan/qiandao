@@ -94,7 +94,7 @@ class SeatsController < ApplicationController
         end
 
         break if @should_break
-        if params[:table_num].to_i < row
+        if params[:auto_increase]=='no'&&params[:table_num].to_i < row
           @should_break = true
           redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
           break
@@ -133,7 +133,7 @@ class SeatsController < ApplicationController
         end
 
         break if @should_break
-        if params[:table_num].to_i < row
+        if params[:auto_increase]=='no'&&params[:table_num].to_i < row
           @should_break = true
           redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
           break
@@ -209,7 +209,7 @@ class SeatsController < ApplicationController
         end
 
         break if @should_break
-        if params[:table_num].to_i < row
+        if params[:auto_increase]=='no'&&params[:table_num].to_i < row
           @should_break = true
           redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
           break
@@ -247,7 +247,7 @@ class SeatsController < ApplicationController
         end
 
         break if @should_break
-        if params[:table_num].to_i < row
+        if params[:auto_increase]=='no'&&params[:table_num].to_i < row
           @should_break = true
           redirect_to new_event_seat_path(session_id: session), flash: {error: '不能容纳下所有嘉宾， 请重新设置桌数'}
           break
