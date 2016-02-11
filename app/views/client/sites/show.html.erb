@@ -88,21 +88,26 @@
       <div class="col-xs-6 col-xs-offset-6 qrcode-all-area">
         <div class="qrcode-area">
           <div id="qrcode"></div>
-          <!--  如果是服务器生成图片则采用这种
-            <img src="http://qr.api.cli.im/qr?data=https%253A%252F%252Fwww.baidu.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=eb31305785c2315b072ee97543e325e5">
-           -->
+        <!--  如果是服务器生成图片则采用这种
+          <img src="http://qr.api.cli.im/qr?data=https%253A%252F%252Fwww.baidu.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=eb31305785c2315b072ee97543e325e5">
+        -->
         </div>
       </div>
-      <%= image_tag 'client/sites/arrow.png', class:"qrcode-button" %>
-      <p class="down-msg">请点击下载按钮</p>
-      <p>保存二维码并在办理签到时出示</p>
+      <div class="qrcode-content">
+        <%= image_tag 'client/sites/arrow.png', class:"qrcode-button" %>
+        <p class="down-msg">请点击下载按钮</p>
+        <p>保存二维码并在办理签到时出示</p>
+      </div>
     </div>
     <div class="col-xs-12 seat-area text-center seat-page hidden">
       <div class="seat-show-area">
         <p class="seat-user-name"><span>张三</span> 先生/女士，您的座位</p>
+        <select class="schedule-list">
+          <option>请选择日程</option>
+        </select>
         <div class="seat-number-area">
           <%= image_tag 'client/sites/seat_number.png'%>
-          <span class="seat-number">第 <span>12</span> 桌</span>
+          <span class="seat-number">请选择日程</span>
         </div>
       </div>
     </div>
