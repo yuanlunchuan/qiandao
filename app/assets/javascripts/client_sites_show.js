@@ -20,7 +20,8 @@ $(document).ready(function(){
       width : 120,//设置宽高
       height : 120
     });
-    qrcode.makeCode("https://www.baidu.com");
+    var qrcode_value = $('#rfid-num').data('rfid-num')
+    qrcode.makeCode(qrcode_value);
   });
 
   //显示二维码

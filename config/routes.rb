@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :events do
       get 'seats'  => 'seats#show'
       get 'sites'   => 'sites#show'
+      get 'download_qrcode'  => 'sites#download_qrcode'
       resources :profiles
       resources :recommends
       get 'restaurants'     => 'restaurants#show'

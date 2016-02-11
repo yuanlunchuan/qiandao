@@ -1,5 +1,6 @@
 <div id="event-id" class="hidden" data-event-id=<%= current_event.id %>></div>
 <div id="attendee-id" class="hidden" data-attendee-id=<%= session[:attendee_id] %>></div>
+<div id="rfid-num" class="hidden" data-rfid-num=<%= Attendee.find(session[:attendee_id]).rfid_num %>></div>
 
 <title>2016YONEX订货会</title>
 <div class="container">
@@ -93,9 +94,12 @@
         -->
         </div>
       </div>
+      <!-- 'attendee_qrcode/#{current_event.id}_#{@aa}.png' -->
       <div class="qrcode-content">
-        <%= image_tag 'client/sites/arrow.png', class:"qrcode-button" %>
-        <p class="down-msg">请点击下载按钮</p>
+        <a href="/client/events/<%= current_event.id %>/download_qrcode?id=<%= @attendee.id %>">
+          <%= image_tag 'client/sites/arrow.png', class:"qrcode-button" %>
+          <p class="down-msg">请点击下载按钮</p>
+        </a>
         <p>保存二维码并在办理签到时出示</p>
       </div>
     </div>
