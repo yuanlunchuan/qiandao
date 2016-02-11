@@ -31,6 +31,11 @@ $(document).ready(function(){
 
   //隐藏二维码
   $('.voucher-page').click(function(){
+
+    $('.qrcode-content').click(function(){
+      return false;  //点击在div内时直接退出函数,可以不隐藏页面
+    })
+
     $('.page0').removeClass("blur");
     $('.voucher-page').addClass("hidden");
   });
@@ -38,14 +43,73 @@ $(document).ready(function(){
   $('.seat-button').click(function(){
     $('.page0').addClass("blur");
     $('.seat-page').removeClass("hidden");
+
+    $('.schedule-list').html("");//清空下拉列表项
+
+    var event_id = $('#event-id').data('event-id');
+    //请求日程
+    $.getJSON(
+      "/client/events/"+event_id+"/event_sessions.json", 
+      {},
+      function(result) {//返回数据根据结果进行相应的处理
+        if ( result.success ) {
+          $.each(result.collection, function(n, value){
+            var time = value.starts_at.substr(0,4)+"年"+value.starts_at.substr(5,2)+"月"+value.starts_at.substr(8,2)+"日";
+            var text = value.name+" "+time;
+            var session_id = value.id;
+
+            $('.schedule-list').append("<option data-session-id="+session_id+">"+text+"</option>");
+          });
+        } else {
+          alert("请求失败了")
+        }
+      }
+    );
+    //第一次用第一条信息请求
   });
+
+  //请求座位
+  $('.schedule-list').change(function(){
+    var session_number = -1;
+    var schedule = $('.schedule-list').val()
+
+    $('.schedule-list option').each(function(){
+      if(schedule == $(this).text())
+        session_number = $(this).data("session-id")
+    })
+
+    var event_number = $('#event-id').data('event-id');
+    var attendee_number = $('#attendee-id').data('attendee-id');
+    $.getJSON(
+      '/client/events/'+event_number+'/seats',
+      {
+        attendee_id:attendee_number,
+        session_id:session_number
+      },
+      function(result) {//返回数据根据结果进行相应的处理
+        if ( result.success ) {
+          
+          //var id = result....
+          //$('.seat-number').html("第 "+id+" 桌")
+
+        } else {
+          alert("请求失败了")
+        }
+      }
+    )
+  })
 
   //隐藏座位
   $('.seat-page').click(function(){
+
+    $('.seat-show-area').click(function(){
+      return false; //点击在div内时直接退出函数,可以不隐藏页面
+    })
+
     $('.page0').removeClass("blur");
     $('.seat-page').addClass("hidden");
   });
-
+  //上传图片
   $('#pic-portrait').change(function(){
     var file = $('#pic-portrait').prop('files')[0];
     if (!/image\/\w+/.test(file.type))

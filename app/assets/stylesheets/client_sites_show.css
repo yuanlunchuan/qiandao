@@ -159,7 +159,7 @@
 }
 .seat-show-area{
   width: 200px;
-  height: 90px;
+  height: 120px;
   border-radius: 8px;
   background-color: #fff;
   text-align: center;
@@ -169,6 +169,11 @@
   left: 50%;
   top: 30%;
   margin-left: -100px;
+}
+.schedule-list{
+  width: 160px;
+  margin-bottom: 10px;
+  height: 30px;
 }
 .seat-user-name{
   color: #454545;
