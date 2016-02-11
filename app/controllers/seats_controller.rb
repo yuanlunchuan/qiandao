@@ -15,6 +15,7 @@ class SeatsController < ApplicationController
     end
   end
 
+  #更新座位安排
   def update
     self.meta = params
 
