@@ -54,6 +54,7 @@ $(document).ready(function(){
       {},
       function(result) {//返回数据根据结果进行相应的处理
         if ( result.success ) {
+          $('.schedule-list').append("<option>请选择日程</option>");
           $.each(result.collection, function(n, value){
             var time = value.starts_at.substr(0,4)+"年"+value.starts_at.substr(5,2)+"月"+value.starts_at.substr(8,2)+"日";
             var text = value.name+" "+time;
@@ -89,10 +90,9 @@ $(document).ready(function(){
       },
       function(result) {//返回数据根据结果进行相应的处理
         if ( result.success ) {
-          
-          //var id = result....
-          //$('.seat-number').html("第 "+id+" 桌")
-
+          var table_row = result.collection[0].table_row
+          var table_col = result.collection[0].table_col
+          $('.seat-number').html("第"+table_row+"桌, 第"+table_col+"号");
         } else {
           alert("请求失败了")
         }
