@@ -38,10 +38,10 @@
           <tbody>
             <tr>
               <td>
-                <a href="/client/events/1/event_sessions">
+                <%= link_to client_event_event_sessions_path(current_event) do %>
                   <%= image_tag 'client/sites/schedule.png' %>
                   <span>会议日程</span>
-                </a>
+                <% end %>
               </td>
               <td>
                 <a href="javascript:void(0);" class="voucher-button">
@@ -58,16 +58,16 @@
             </tr>
             <tr>
               <td>
-                <a href="/client/events/1/restaurants">
+                <%= link_to client_event_restaurants_path(current_event) do %>
                   <%= image_tag 'client/sites/hotel.png' %>
                   <span>酒店信息</span>
-                </a>
+                <% end %>
               </td>
               <td>
-                <a href="/client/events/1/recommends">
+                <%= link_to client_event_recommends_path(current_event) do %>
                   <%= image_tag 'client/sites/periphery.png' %>
                   <span>周边推荐</span>
-                  </a>
+                <% end %>
               </td>
               <td>
                 <a href=<%= @event.event_link %>>
