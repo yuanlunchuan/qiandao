@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resources :profiles
       resources :recommends
       get 'restaurants'     => 'restaurants#show'
-      get 'event_sessions'  => 'event_sessions#show'
+      resources :event_sessions
     end
   end
 
