@@ -11,30 +11,51 @@
           <span class="title-name">会议日程</span>
         </div>
         <div class="col-xs-4 text-right close-area">
-          <a href="/client/events/1/sites/12">
+          <a href="/client/events/1/sites">
             <%= image_tag 'client/shared/close.png'%>
           </a>
         </div>
       </div>
-      <div class="col-xs-12 schedule-msg">
-        <div class="col-xs-12 list-title">
-          <div class="col-xs-8 schedule-data">2016年2月22日</div>
-          <div class="col-xs-4 schedule-down text-right"><i class="fa fa-angle-down"></i></div>
+
+      <% count = 0 %>
+      <% total_count = 0 %>
+      <% last_date = '' %>
+      <% @sessions.each do |session| %>
+        <%
+          count += 1
+          if last_date!=session.start_date
+            count = 1
+            last_date==session.start_date
+          end
+
+          @collection.each do |item|
+            if item[:start_date] == session.start_date
+              total_count = item[:count].to_i
+            end
+          end
+        %>
+        
+        <% if 1==count %>
+        <div class="col-xs-12 schedule-msg">
+          <div class="col-xs-12 list-title">
+            <div class="col-xs-8 schedule-data"><%= session.start_date %></div>
+            <div class="col-xs-4 schedule-down text-right"><i class="fa fa-angle-down"></i></div>
+          </div>
+          <div class="col-xs-12">
+            <ul class="schedule-list">
+        <% end %>
+              <li>
+                <div class="col-xs-6 list-time"><%= session.start_time %> - <%= session.end_time %></div>
+                <div class="col-xs-6 list-name"><%= session.name %></div>
+              </li>
+        <% if count==total_count %>
+            </ul>
+          </div>
         </div>
-        <div class="col-xs-12">
-          <ul class="schedule-list">
-            <li>
-              <div class="col-xs-6 list-time">12:00 - 20:00</div>
-              <div class="col-xs-6 list-name">全天入住签到</div>
-            </li>
-            <li>
-              <div class="col-xs-6 list-time">18:00 - 19:00</div>
-              <div class="col-xs-6 list-name">来宾自助晚餐</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-xs-12 schedule-msg">
+        <% end %>
+      <% end %>
+
+<!--<div class="col-xs-12 schedule-msg">
         <div class="col-xs-12 list-title">
           <div class="col-xs-8 schedule-data">2016年2月23日</div>
           <div class="col-xs-4 schedule-down text-right"><i class="fa fa-angle-down"></i></div>
@@ -60,6 +81,7 @@
           </ul>
         </div>
       </div>
+ -->
     </div>
   </div>
 </div>
