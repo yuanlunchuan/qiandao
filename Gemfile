@@ -9,6 +9,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'importex'
+#https://github.com/mattyr/rqrencoder-magick
+gem 'rqrcode_png'
 
 gem 'jquery-rails'
 gem 'turbolinks'

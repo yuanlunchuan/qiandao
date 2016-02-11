@@ -182,6 +182,9 @@ GEM
     rdoc (4.2.0)
     rqrcode (0.6.0)
       chunky_png
+    rqrcode_png (0.1.5)
+      chunky_png
+      rqrcode
     ruby-ole (1.2.12)
     rubyzip (1.0.0)
     sass (3.4.15)
@@ -252,6 +255,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.2.1)
   rqrcode
+  rqrcode_png
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

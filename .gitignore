@@ -9,6 +9,7 @@ capybara-*.html
 /db/*.sqlite3-journal
 /public/system
 /public/uploads
+/public/attendee_qrcode
 /public/assets
 /coverage/
 /spec/tmp
