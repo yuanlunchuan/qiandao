@@ -14,6 +14,7 @@ $(document).ready(function(){
     $('.function-area tr').height((height-1)/2);
   });
 
+  //生成二维码
   $(function(){
     var qrcode = new QRCode($("#qrcode")[0], {
       width : 120,//设置宽高
