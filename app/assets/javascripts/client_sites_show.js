@@ -1,5 +1,3 @@
-//= require dropzone/dropzone.js
-
 $(document).ready(function(){
   //图片异步上传
   $(".dropz").dropzone({
