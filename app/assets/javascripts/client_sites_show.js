@@ -18,8 +18,9 @@ $(document).ready(function(){
     }
   });
 
-
-  $(function(){
+  setTimeout(function(){
+    $('.load-page').fadeOut();
+    $('.home-page').fadeIn();
     if($('.illus-area').height()== 1)//网路差图片还没加载出来
     {
       var img_height = parseInt(($(window).width()/496)*228);//计算图片的高度
@@ -31,7 +32,7 @@ $(document).ready(function(){
     }
     //设置每一行的高度
     $('.function-area tr').height((height-1)/2);
-  });
+  },1200)
 
   //生成二维码
   $(function(){
