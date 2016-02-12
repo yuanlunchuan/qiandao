@@ -7,6 +7,11 @@ class Client::SitesController < ApplicationController
 
   def show
     @attendee = Attendee.find(cookies[:attendee_id])
+    @img = if @attendee.avatar.exists?
+         @attendee.avatar.url
+       elsif @attendee.photo.exists?
+         @attendee.photo.url(:square)
+       end
     @event = current_event
   end
 

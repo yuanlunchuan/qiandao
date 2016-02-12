@@ -6,13 +6,11 @@ $(document).ready(function(){
 
   $('#all_attendee').click(function(event){
     var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json'
-
-    var session_id = $("#select-session-checkin").val();
-    if(!isNaN(parseInt(session_id))){
-      url = url+'?session_id:'+session_id
-    }
-
     loadAttendee(url);
+    // var session_id = $("#select-session-checkin").val();
+    // if(!isNaN(parseInt(session_id))){
+    //   url = url+'?session_id:'+session_id
+    // }
   });
 
   var event_id = $('#event-id').data('event-id');
@@ -44,13 +42,25 @@ $(document).ready(function(){
   }
 
   $('#checked_attendee').click(function(event){
-    var event_id = $('#event-id').data('event-id');
-    loadAttendee('/seller/events/'+event_id+'/checkins.json?state=checked');
+    var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json?state=checked'
+
+    var session_id = $("#select-session-checkin").val();
+    if(!isNaN(parseInt(session_id))){
+      url = url+'&session_id:'+session_id
+    }
+
+    loadAttendee(url);
   });
 
   $('#not_checked_attendee').click(function(event){
-    var event_id = $('#event-id').data('event-id');
-    loadAttendee('/seller/events/'+event_id+'/checkins.json?state=not_checked');
+    var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json?state=not_checked'
+
+    var session_id = $("#select-session-checkin").val();
+    if(!isNaN(parseInt(session_id))){
+      url = url+'&session_id:'+session_id
+    }
+
+    loadAttendee(url);
   });
 
 });

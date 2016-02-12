@@ -1,3 +1,3 @@
 SECRET_KEY_BASE: d6e01ffc47a1fbb4e388282a360fc2fad6d9440429a10a4f588d83ecce05b462594948b4d84aab0d642dc6345b6c9bf901b08ff7e766db4dd034f932ed8e6cb2
 YUNPIAN_APIKEY:  1a72941f1a742a54b9bf8e829b1c60ba
-HOSTNAME: http://yonex.xhjdcd.com/
+HOSTNAME: http://yonex.xhjdcd.com
