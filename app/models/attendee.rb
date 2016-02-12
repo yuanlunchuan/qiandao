@@ -155,6 +155,9 @@ class Attendee < ActiveRecord::Base
 
 private
   def generate_short_url(long_url)
+    encode_url = CGI.escape(long_url)
+    short_link = Net::HTTP.get(URI.parse("http://985.so/api.php?url=#{encode_url}"))
+    return short_link
     Rails.logger.info("[DWZ] Generate Short URL: #{long_url}")
     ret = Timeout::timeout(5) do
       # http = Net::HTTP.post_form(URI.parse('http://dwz.cn/create.php'),{url: long_url})
