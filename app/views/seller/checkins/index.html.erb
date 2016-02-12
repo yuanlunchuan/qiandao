@@ -1,3 +1,5 @@
+<div id="event-id" data-event-id=<%= current_event.id %> class="hidden"></div>
+
 <title>签到进度查询</title>
 <div class="container">
   <div class="row">
@@ -22,52 +24,12 @@
       </div>
     </div>
     <div class="col-xs-12 table-area">
-      <table>
-        <tr class="bg-cell">
+      <table id="attendee-table">
+        <tr id="table_head" class="bg-cell">
           <th>姓名</th>
           <th>公司</th>
           <th>状态</th>
           <th>一键拨号</th>
-        </tr>
-        <tr>
-          <td>张三</td>
-          <td>上海比克营销策划有限公司</td>
-          <td>已签到</td>
-          <td class="phone-button">
-            <a href="tel:10086">
-              <span>一键拨号</span>
-            </a>
-          </td>
-        </tr>
-        <tr class="bg-cell">
-          <td>张三</td>
-          <td>上海比克营销策划有限公司</td>
-          <td>已签到</td>
-          <td class="phone-button">
-            <a href="tel:10086">
-              <span>一键拨号</span>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>张三</td>
-          <td>上海比克营销策划有限公司</td>
-          <td>已签到</td>
-          <td class="phone-button">
-            <a href="tel:10086">
-              <span>一键拨号</span>
-            </a>
-          </td>
-        </tr>
-        <tr class="bg-cell">
-          <td>张三</td>
-          <td>上海比克营销策划有限公司</td>
-          <td class="no-sign">未签到</td>
-          <td class="phone-button">
-            <a href="tel:10086">
-              <span>一键拨号</span>
-            </a>
-          </td>
         </tr>
       </table>
     </div>

@@ -145,6 +145,12 @@ class Attendee < ActiveRecord::Base
     template
   end
 
+  def to_hash
+    hash = {}
+    self.attributes.each { |k,v| hash[k] = v }
+    return hash
+  end
+
   before_validation :populate_attendee_number, on: :create
 
 private
