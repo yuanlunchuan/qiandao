@@ -4,6 +4,21 @@
 .row{
   margin: 0px;
 }
+.load-area{
+  margin-top: 200px;
+}
+.home-page{
+  display: none;
+}
+.load-page{
+  background-color: #f9f9f9;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.load-page p{
+  margin-top: 10px;
+}
 .logo-area{
   position: absolute;
   top: 10px;
