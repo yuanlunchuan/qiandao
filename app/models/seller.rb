@@ -10,4 +10,5 @@ class Seller < ActiveRecord::Base
   has_many   :attendees
 
   scope :seller_name_is, ->(name) { where name: name }
+  scope :phone_number_is, -> (phone_number) { where phone_number: phone_number }
 end

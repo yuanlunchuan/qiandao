@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :seller do
+    resources :sessions
     resources :events do
       resources :checkins
     end
