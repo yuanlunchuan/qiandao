@@ -1,7 +1,7 @@
 $(document).ready(function(){
   //图片异步上传
   $(".dropz").dropzone({
-    url: "/client/events/"+$('#attendee-id').data('attendee-id')+"/upload_photo?id="+$('#event-id').data('event-id'),
+    url: "/client/events/"+$('#event-id').data('event-id')+"/upload_photo?id="+$('#attendee-id').data('attendee-id'),
     dictRemoveLinks: "x",
     dictCancelUpload: "x",
     maxFiles: 10,
