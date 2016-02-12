@@ -13,6 +13,7 @@ class Seller::CheckinsController < ApplicationController
 
   def index
     self.meta = params
+
     if params[:format]=='json'
       seller = Seller.find(session[:seller_id])
       collection = []
@@ -21,8 +22,8 @@ class Seller::CheckinsController < ApplicationController
       @attendees = seller.attendees.seller_is(seller)
       @attendees = @session.attendees.seller_is(seller).unscope(:order).order(checked_in_at: :desc) if params[:state] == 'checked'
       @attendees = current_event.attendees.seller_is(seller).where.not(id: @session.attendees.pluck(:id)) if params[:state] == 'not_checked'
+      @attendees = current_event.attendees.seller_is(seller).contains(params[:key_word]) if params[:key_word].present?
 
-      
       total = current_event.attendees.seller_is(seller).count
       unchecked_in_numbers = current_event.attendees.seller_is(seller).where.not(id: @session.attendees.pluck(:id)).count
       checked_in_numbers = total-unchecked_in_numbers
