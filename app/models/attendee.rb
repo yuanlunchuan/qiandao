@@ -28,7 +28,8 @@ class Attendee < ActiveRecord::Base
 
   has_many :checkins
   has_many :sessions, through: :checkins
-  
+
+  scope :seller_is, -> (seller) { where seller_id: seller.id }
   scope :mobile_is, -> (mobile) { where mobile: mobile }
   scope :printed, -> {where('printed_at IS NOT NULL')}
   scope :not_printed, -> {where('printed_at IS NULL')}
@@ -155,6 +156,7 @@ class Attendee < ActiveRecord::Base
 
 private
   def generate_short_url(long_url)
+    #http://985.so/page/apidoc.php
     encode_url = CGI.escape(long_url)
     short_link = Net::HTTP.get(URI.parse("http://985.so/api.php?url=#{encode_url}"))
     return short_link
