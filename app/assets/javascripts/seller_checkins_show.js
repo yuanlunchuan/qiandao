@@ -55,7 +55,7 @@ $(document).ready(function(){
         return;
       }
       var company = value.company ? value.company : '公司未知';
-      var tableItem = "<tr><td>"+value.name+"</td><td>"+company+"</td><td>"+'已签到'+"</td><td>"+"<td class='phone-button'><a href='tel:10086'><span>一键拨号</span></a></td>";
+      var tableItem = "<tr><td>"+value.name+"</td><td>"+company+"</td><td>"+'已签到'+"</td><td>"+"<td class='phone-button'><a href='tel:"+value.mobile+"'><span>一键拨号</span></a></td>";
       $('#attendee-table').append(tableItem);
     });
   }
