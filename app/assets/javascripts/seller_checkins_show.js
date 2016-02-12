@@ -5,8 +5,14 @@ $(document).ready(function(){
   });
 
   $('#all_attendee').click(function(event){
-    var event_id = $('#event-id').data('event-id');
-    loadAttendee('/seller/events/'+event_id+'/checkins.json');
+    var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json'
+
+    var session_id = $("#select-session-checkin").val();
+    if(!isNaN(parseInt(session_id))){
+      url = url+'?session_id:'+session_id
+    }
+
+    loadAttendee(url);
   });
 
   var event_id = $('#event-id').data('event-id');

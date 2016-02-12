@@ -6,14 +6,20 @@ module SellerLoader
 
     def load_seller
       if cookies[:seller_id].blank?
-        redirect_to new_client_session_path
+        cookies[:seller_id] = nil
+        redirect_to new_seller_session_path
       else
         seller = Seller.find_by(id: cookies[:seller_id])
         if seller.present?
-          session[:seller_id] = seller.id
+          if current_event.id==seller.event.id
+            session[:seller_id] = seller.id
+          else
+            cookies[:seller_id] = nil
+            redirect_to new_seller_session_path
+          end
         else
           cookies[:seller_id] = nil
-          redirect_to new_client_session_path
+          redirect_to new_seller_session_path
         end
       end
     end

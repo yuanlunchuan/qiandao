@@ -1,9 +1,14 @@
 <div id="event-id" data-event-id=<%= current_event.id %> class="hidden"></div>
 
 <title>签到进度查询</title>
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12 title-name">签到进度查询</div>
+    <div class="col-xs-12">
+      <%=select_tag :session_id, options_for_select(current_event.sessions.map {|s| [s.full_name, s.id ]}, url_for), prompt: '请选择日程', include_blank: false, class: 'input-sm form-control input-s-sm inline', id: 'select-session-checkin'%>
+    </div>
+
     <div class="col-xs-12 sign-number-area">
       <div class="col-xs-6">已签到：<span>28</span>人</div>
       <div class="col-xs-6">未签到：<span>12</span>人</div>
