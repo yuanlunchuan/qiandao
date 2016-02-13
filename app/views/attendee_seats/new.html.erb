@@ -63,6 +63,7 @@
     font-size: 1.8em;
   }
 </style>
+
 <div class="bg-area">
   <%= image_tag "attendee_seats/body_bg.png", class:"bg-img" %>
   <div class="seat-area">
@@ -71,8 +72,11 @@
         <p>座位查询</p>
       </div>
       <div class="search-area">
-        <input type="text" placeholder="如无法刷卡，请人工输入姓名/手机号码查询"/>
-        <button type="button">搜 索</button>
+        <form action="/app/events/<%= current_event.id %>/attendee_seats" method="post">
+          <input name="session_id" class="hidden" value=<%= params[:session_id] %> />
+          <input type="text" name="key_word" placeholder="如无法刷卡，请人工输入姓名/手机号码查询"/>
+          <button type="submit">搜 索</button>
+        </form>
       </div>
     </div>
   </div>

@@ -93,12 +93,13 @@
       <div class="result-area">
         <div class="portrait-area">
           <button type="button">
-            <img class="portrait-img" src="http://img1.3lian.com/img2008/06/019/ych.jpg">
+            <!-- <img class="portrait-img" src="http://img1.3lian.com/img2008/06/019/ych.jpg"> -->
+            <%= image_tag(@attendee.avatar.url, class: 'attendee-avatar') %>
           </button>
         </div>
         <div class="result-seat-area">
-          <p class="user-name">张三 ， 您好！</p>
-          <p class="seat-number">您的座位号是：<span>39</span>号</p>
+          <p class="user-name"><%=@attendee.name%> ， 您好！</p>
+          <p class="seat-number">您的座位号是：<span><%= %></span>号</p>
         </div>
       </div>
     </div>

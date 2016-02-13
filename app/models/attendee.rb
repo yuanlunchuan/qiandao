@@ -28,9 +28,12 @@ class Attendee < ActiveRecord::Base
 
   has_many :checkins
   has_many :sessions, through: :checkins
+  
+  scope :rfid_is, -> (rfid) { where rfid_num: rfid }
+  scope :mobile_is, -> (mobile) { where mobile: mobile }
+  scope :attendee_name_is, ->(name) { where name: name }
 
   scope :seller_is, -> (seller) { where seller_id: seller.id }
-  scope :mobile_is, -> (mobile) { where mobile: mobile }
   scope :printed, -> {where('printed_at IS NOT NULL')}
   scope :not_printed, -> {where('printed_at IS NULL')}
   scope :has_photo, -> { where('photo_file_name IS NOT NULL') }
@@ -46,7 +49,6 @@ class Attendee < ActiveRecord::Base
   scope :contains, ->(keyword) { where('name like :keyword OR mobile like :keyword OR company like :keyword OR province like :keyword OR city like :keyword', keyword: "%#{keyword}%") }
 
   default_scope -> {order(attendee_number: :asc)}
-  scope :attendee_name_is, ->(name) { where name: name }
   scope :city_is, ->(city) { where city: city }
   scope :seller_id_is, ->(seller_id) { where seller_id: seller_id }
   scope :is_sub_attendees, -> { where 'owner_attendee_id IS NULL' }

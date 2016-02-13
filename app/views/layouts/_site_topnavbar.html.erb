@@ -17,8 +17,14 @@
     <div class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-top-links navbar-right">
         <li>
-          <%= link_to event_site_path do%>
-              <i class="fa fa-chevron-left"></i>选择场次
+          <% if 'seat_search' == @current_module %>
+            <%= link_to event_attendee_seats_path do%>
+                <i class="fa fa-chevron-left"></i>选择场次
+            <% end %>
+          <% else %>
+            <%= link_to event_site_path do%>
+                <i class="fa fa-chevron-left"></i>选择场次
+            <% end %>
           <% end %>
         </li>
         <li>
