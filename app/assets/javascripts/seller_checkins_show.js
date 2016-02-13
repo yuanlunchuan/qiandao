@@ -55,7 +55,7 @@ $(document).ready(function(){
         return;
       }
       var company = value.company ? value.company : '公司未知';
-      var state = value.checked_in_at ? '已签到' : '未签到';
+      var state = value.has_checked ? '已签到' : '未签到';
       var tableItem = "<tr><td>"+value.name+"</td><td>"+company+"</td><td>"+state+"</td><td>"+"<td class='phone-button'><a href='tel:"+value.mobile+"'><span>一键拨号</span></a></td>";
       $('#attendee-table').append(tableItem);
     });

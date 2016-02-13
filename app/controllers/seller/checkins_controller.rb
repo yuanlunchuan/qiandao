@@ -29,7 +29,12 @@ class Seller::CheckinsController < ApplicationController
       checked_in_numbers = total-unchecked_in_numbers
 
       @attendees.each do |attendee|
-        collection << attendee.to_hash
+        checkin = Checkin.checkin_is(@session, attendee)
+        item = {}
+        item = attendee.to_hash
+        item[:has_checked] = false
+        item[:has_checked] = true if checkin.present?
+        collection << item
       end
 
       collection << { unchecked_in_numbers: unchecked_in_numbers, checked_in_numbers: checked_in_numbers }
