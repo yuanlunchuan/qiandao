@@ -51,6 +51,12 @@ class SellersController < ApplicationController
 
     @seller = current_event.sellers.new(seller_params)
 
+    if Attendee.mobile_is(params[:seller][:phone_number]).present?
+      flash.now[:error] = '该手机号已作为嘉宾手机号'
+      render :new
+      return
+    end
+
     if params[:seller_manager_name].present?
       @seller_manager = Seller.seller_name_is(params[:seller_manager_name]).first
       if @seller_manager.blank?
@@ -80,6 +86,13 @@ class SellersController < ApplicationController
 
   def update
     @seller = current_event.sellers.find(params[:id])
+
+    if Attendee.mobile_is(params[:seller][:phone_number]).present?
+      logger.info "------line 94"
+      flash.now[:error] = '该手机号已作为嘉宾手机号'
+      render :edit
+      return
+    end
 
     if @seller.update(seller_params)
       @seller_manager = nil

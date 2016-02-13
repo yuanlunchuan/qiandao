@@ -105,7 +105,7 @@
       <div class="qrcode-content">
         <a href="/client/events/<%= current_event.id %>/download_qrcode?id=<%= @attendee.id %>">
           <%= image_tag 'client/sites/arrow.png', class:"qrcode-button" %>
-          <p class="down-msg">请点击下载按钮</p>
+          <p class="down-msg" id="down-load-info">请点击下载按钮</p>
         </a>
         <p>保存二维码并在办理签到时出示</p>
       </div>

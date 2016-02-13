@@ -63,6 +63,12 @@ class AttendeesController < ApplicationController
       end
     end
 
+    if Seller.phone_number_is(params[:attendee][:mobile]).present?
+      flash.now[:error] = '该手机号已作为销售手机号码'
+      render :new
+      return
+    end
+
     @attendee.province       = params[:province]
     @attendee.city           = params[:city]
     @attendee.owner_attendee = owner_attendee
@@ -132,7 +138,7 @@ class AttendeesController < ApplicationController
         seller = Seller.seller_name_is(params[:seller_name]).first
         if seller.blank?
           flash.now[:error] = '没有找到对应的销售'
-          render :new
+          render :edit
           return
         end
       end
@@ -144,6 +150,12 @@ class AttendeesController < ApplicationController
           render :edit
           return
         end
+      end
+
+      if Seller.phone_number_is(params[:attendee][:mobile]).present?
+        flash.now[:error] = '该手机号已作为销售手机号码'
+        render :edit
+        return
       end
 
       @attendee.province = params[:province]

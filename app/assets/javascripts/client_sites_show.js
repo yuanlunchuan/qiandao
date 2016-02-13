@@ -1,4 +1,9 @@
 $(document).ready(function(){
+  var ua = navigator.userAgent.toLowerCase();
+  if(ua.match("applewebkit")&&ua.match(/MicroMessenger/i)=="micromessenger"){
+    $('#down-load-info').text('长按保存二维码');
+  }
+
   //图片异步上传
   $(".dropz").dropzone({
     url: "/client/events/"+$('#event-id').data('event-id')+"/upload_photo?id="+$('#attendee-id').data('attendee-id'),
