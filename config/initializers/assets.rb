@@ -10,6 +10,7 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w(
   attendee_seats/body_bg.png
+  attendee_seats/close.png
   client/event_sessions/schedule.png
   client/event_sessions/schedule_icon.png
   client/invites/arrow.png
