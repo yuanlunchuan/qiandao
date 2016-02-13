@@ -34,7 +34,7 @@
             <td class="shop-name"><%= recommend.recommend_name%></td>
             <td class="shop-address"><%= recommend.address%></td>
             <td class="map-navigator">
-              <a href="http://api.map.baidu.com/marker?location=<%= recommend.latitude%>,<%= recommend.longitude%>&title=<%= recommend.recommend_name%>&content=<%= recommend.address%>&output=html&src=yourComponyName|yourAppName">
+              <a href="http://api.map.baidu.com/marker?location=<%= recommend.latitude%>,<%= recommend.longitude%>&title=<%= recommend.recommend_name%>&content=<%= recommend.address%>&output=html&src=yourComponyName|yonex">
                 <span>查看路线</span>
               </a>
             </td>
@@ -61,8 +61,4 @@
 
 <% content_for :style do %>
   <%= stylesheet_link_tag 'client_recommends_index', media: 'all' %>
-<% end %>
-
-<% content_for :script do %>
-  <%= javascript_include_tag "" %>
 <% end %>
