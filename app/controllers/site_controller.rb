@@ -1,11 +1,22 @@
 class SiteController < ApplicationController
   before_action :authorize_admin!
-  before_action :find_categories
-  before_action :find_session, except: [:index, :binding_rfid]
+  before_action :find_categories, except: [:rfid_search]
+  before_action :find_session, except: [:index, :binding_rfid, :rfid_search]
   include WebApiRenderer
   attr_accessor :meta
 
   def sessions
+  end
+
+  def rfid_search
+    self.meta = params
+
+    attendee = Attendee.find_by(rfid_num: params[:rfid_num])
+    if attendee.present?
+      render_ok attendee.to_hash
+    else
+      render_not_found '没有找到'
+    end
   end
 
   def search
@@ -35,15 +46,15 @@ class SiteController < ApplicationController
 
   # POST /site/:session_id/check_in
   def check_in
-    if '0'==params[:token][0]
-      @attendee = current_event.attendees.find_by_rfid_num(params[:token])
-    else
+    @attendee = current_event.attendees.find_by_rfid_num(params[:token])
+    if !@attendee.present?
       @attendee = current_event.attendees.find_by_token(params[:token])
     end
 
     if @attendee.nil?
       return render json: {type: 'error', error: '找不到用户', code: -1}
     end
+    session = @session.checkins.where(attendee: @attendee)
 
     return company_check_in if @session.company_checkin?
     # 已签到

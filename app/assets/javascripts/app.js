@@ -1,21 +1,22 @@
 $(document).on('ready page:load', function(){
-    function is_rfid_num(){
-      var rfid_value = $('#key_word_input_box').val();
-      if (rfid_value[0]=='0') {
-        return true;
-      }
-      else{
-        return false;
-      }
-    }
-
-    $('#key_word_input_box').on('change', function(){
-      if (is_rfid_num()) {
+    function findAndCheckin(){
         var rfid_value = $('#key_word_input_box').val();
-        siteCheckIn(rfid_value);
-        $('#key_word_input_box').val('');
-      }
-    });
+        if (!rfid_value) {
+            return;
+        }
+        if ($('#key_word_input_box').val()) {
+            $.getJSON('/app/events/1/site/rfid_search.json',
+              {
+                rfid_num:$('#key_word_input_box').val()
+              },
+               function(event){
+            siteCheckIn(rfid_value);
+            $('#key_word_input_box').val('');
+        }).error(function(event){
+            searchAttendee();
+        });
+    }
+  }
 
     $('input[autocomplete=off]').on('focus', function(){
         $(this).attr('readonly', false);
@@ -89,20 +90,24 @@ $(document).on('ready page:load', function(){
     });
 
     $('.site-keyword-input').keydown(function(e){
-        if((e.keyCode != 13)||is_rfid_num()){
-          return;
+        if(e.keyCode != 13){
+            return;
         }
-        searchAttendee();
+        findAndCheckin();
     });
-
-    $('.site-keyword-input').click(function(){
+    
+    var should_execute_find=false;
+    $('.site-search-btn').click(function(){
+        findAndCheckin();
         return false;
     });
 
-    $('.site-search-btn').click(function(){
-        if (!is_rfid_num()) {
-          searchAttendee();
-        }
+    $('#key_word_input_box').on('change', function(){
+      //console.info('----------107');
+      //findAndCheckin();
+    });
+
+    $('.site-keyword-input').click(function(){
         return false;
     });
 
@@ -112,7 +117,7 @@ $(document).on('ready page:load', function(){
       var attendee_id = $(this).data('attendee-id');
       if (rfid)
       {
-        $.post('/app/events/1/site/binding_rfid',
+        $.post('/app/events/1/site/binding_rfid.json',
           {
             session_id: 1,
             attendee_id: attendee_id,
@@ -260,7 +265,7 @@ $(document).on('ready page:load', function(){
         $input.val('');
         var url = $input.data('url');
         url = url + '?keyword=' + name;
-
+        $('#key_word_input_box').val('');
         $('#site-modal-content').load(url, function(event){
             $('#site-modal').modal();
         });

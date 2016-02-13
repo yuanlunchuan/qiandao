@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       resources :attendee_seats
 
       get 'photos'          => 'attendees#photos'
+      get 'site/rfid_search'     => 'site#rfid_search'
 
       get 'notifications'   => 'notifications#index'
       post 'site/binding_rfid'      => 'site#binding_rfid'
