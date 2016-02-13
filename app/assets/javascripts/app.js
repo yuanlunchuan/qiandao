@@ -110,7 +110,7 @@ $(document).on('ready page:load', function(){
       $('.modal').modal('hide');
       var rfid=prompt("请刷卡","");
       var attendee_id = $(this).data('attendee-id');
-      if (name!=null && name!="")
+      if (rfid)
       {
         $.post('/app/events/1/site/binding_rfid',
           {
@@ -121,7 +121,7 @@ $(document).on('ready page:load', function(){
         function(event){
         }).error(function(event){
           if(event.responseJSON&&event.responseJSON.message[0]){
-            alert(event.responseJSON.message[0]);
+            alert("绑定失败"+event.responseJSON.message[0]);
         }
         });
      }
