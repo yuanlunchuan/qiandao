@@ -4,7 +4,11 @@
       <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
         <i class="fa fa-reorder"></i>
       </button>
-      <%=link_to 'YONEX', event_site_path, class:'navbar-brand'%>
+      <% if 'seat_search' == @current_module %>
+        <%=link_to 'YONEX', event_attendee_seats_path, class:'navbar-brand'%>
+      <% else %>
+        <%=link_to 'YONEX', event_site_path, class:'navbar-brand'%>
+      <% end %>
 
       <% if @session %>
       <span class="navbar-eventname">
