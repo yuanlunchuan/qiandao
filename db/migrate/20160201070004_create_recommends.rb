@@ -9,6 +9,8 @@ class CreateRecommends < ActiveRecord::Migration
       t.string :address
       t.string :phone_number
       t.integer :distance
+      t.float  :latitude
+      t.float  :longitude
 
       t.timestamps null: false
     end

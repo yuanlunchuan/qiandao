@@ -20,6 +20,15 @@
     <div class="col-sm-3"> <%=f.text_field :distance, class: 'form-control', placeholder: '千米'%></div>
   </div>
 
+  <div id="r-result">请在下图标注酒店位置:
+    <%= text_field_tag :address, @address, id: 'suggestId' %>
+    <%= text_field_tag :latitude, @latitude, class: "hidden", id: "posion-position-lng" %>
+    <%= text_field_tag :longitude, @longitude, class: "hidden", id: "posion-position-lat" %>
+  </div>
+
+  <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:300px;height:auto; display:none;"></div>
+  <div id="l-map" style="height:300px;width:100%;"></div>
+
   <div class="form-group">
     <div class="col-sm-4 col-sm-offset-2">
       <%=link_to '取消', event_activity_categories_path, class: 'btn btn-white'%>
@@ -28,3 +37,104 @@
   </div>
 
 <% end %>
+
+<script type="text/javascript">
+  var BaiDuApi = {
+  G: function(id){
+    return document.getElementById(id);
+  },
+
+  setPlace: function(){
+    var self = BaiDuApi;
+
+    self.map.clearOverlays();
+
+    function myFun(){
+      var pp = local.getResults().getPoi(0).point;
+
+      $('#posion-position-lng').val(pp['lng']);
+      $('#posion-position-lat').val(pp['lat']);
+      self.map.centerAndZoom(pp, 18);
+      self.map.addOverlay(new BMap.Marker(pp));//添加标注
+    }
+
+    var local = new BMap.LocalSearch(self.map, { //智能搜索
+      onSearchComplete: myFun
+    });
+    local.search(self.myValue);
+  },
+
+  onACHighLighted: function(e){//鼠标放在下拉列表上的事件
+    var self = BaiDuApi;
+    var str = "";
+    var _value = e.fromitem.value;
+    var value = "";
+    
+    if (e.fromitem.index > -1) {
+      value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    }
+    str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+  
+    value = "";
+    if (e.toitem.index > -1) {
+      _value = e.toitem.value;
+      value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    }
+    str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+    self.G("searchResultPanel").innerHTML = str;
+  },
+
+  onAcConfirmed: function(e){
+    var self = BaiDuApi;
+
+    var _value = e.item.value;
+
+    self.myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    self.G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + self.myValue;
+    self.setPlace();
+  },
+
+  onMapCliked: function(e){
+    var self = BaiDuApi;
+
+    $('#posion-position-lng').val(e.point['lng']);
+    $('#posion-position-lat').val(e.point['lat']);
+
+    self.map.clearOverlays();
+    self.map.centerAndZoom(e.point, self.map.getZoom());
+    self.map.addOverlay(new BMap.Marker(e.point));
+    self.map.setDefaultCursor("url('01.cur')");        //设置地图默认的鼠标指针样式   
+    self.map.setDraggingCursor("url('03.cur')");
+  },
+
+  initialize: function(){
+    var self = BaiDuApi;
+
+    var longitude = $('#posion-position-lng').val();
+    var latitude = $('#posion-position-lat').val();
+    self.map = new BMap.Map("l-map");
+    if (longitude&&latitude) {
+      var point = new BMap.Point(longitude, latitude);  // 创建点坐标
+      self.map.centerAndZoom(point, 18);
+      var marker = new BMap.Marker(point);        // 创建标注    
+      self.map.addOverlay(marker);
+    }else{
+      self.map.centerAndZoom("北京",14);
+    }
+
+    var ac = new BMap.Autocomplete(
+      {
+        "input"     : "suggestId"
+        ,"location" : self.map
+      });
+
+    self.map.enableScrollWheelZoom();
+    self.map.enableKeyboard();
+
+    ac.addEventListener('onhighlight', self.onACHighLighted);
+    ac.addEventListener('onconfirm', self.onAcConfirmed);
+    self.map.addEventListener('click', self.onMapCliked);
+  }
+};
+BaiDuApi.initialize({});
+</script>

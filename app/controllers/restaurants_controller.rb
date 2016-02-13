@@ -6,6 +6,8 @@ class RestaurantsController < ApplicationController
 
   def edit
     @restaurant = Restaurant.find_or_create_by(event: current_event)
+    @latitude = @restaurant.latitude
+    @longitude = @restaurant.longitude
   end
 
   def update

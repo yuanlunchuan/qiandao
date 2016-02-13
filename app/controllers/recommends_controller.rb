@@ -16,6 +16,9 @@ class RecommendsController < ApplicationController
     @recommend = current_event.recommends.new recommend_params
 
     if @recommend.save
+      @recommend.latitude = params[:latitude]
+      @recommend.longitude = params[:longitude]
+      @recommend.save
       redirect_to event_recommends_path, flash: {success: '保存成功'}
     else
       flash.now[:error] = @recommend.errors.full_messages
@@ -27,6 +30,9 @@ class RecommendsController < ApplicationController
     @recommend = current_event.recommends.find(params[:id])
 
     if @recommend.update(recommend_params)
+      @recommend.latitude = params[:latitude]
+      @recommend.longitude = params[:longitude]
+      @recommend.save
       redirect_to event_recommends_path, flash: {success: '保存成功'}
     else
       flash.now[:error] = @recommend.errors.full_messages
@@ -43,6 +49,8 @@ class RecommendsController < ApplicationController
 
   def edit
     @recommend = current_event.recommends.find(params[:id])
+    @latitude = @recommend.latitude
+    @longitude = @recommend.longitude
   end
 
   def set_current_module
