@@ -30,29 +30,30 @@
         <% @recommends.each do |recommend| %>
         <% count +=1  %>
           <tr class=<%= count%2==0 ? "bg-cell" : "" %>>
-            <td class="classification"><%= recommend.category_name %></td>
+            <td class="classification"><span><%= recommend.category_name %></span></td>
             <td class="shop-name"><%= recommend.recommend_name%></td>
             <td class="shop-address"><%= recommend.address%></td>
             <td class="map-navigator">
-              <a href="http://api.map.baidu.com/geocoder?address=上海市徐汇区高安路35号&output=html&src=yourCompanyName|yourAppName">
+              <a href="http://api.map.baidu.com/marker?location=<%= recommend.latitude%>,<%= recommend.longitude%>&title=<%= recommend.recommend_name%>&content=<%= recommend.address%>&output=html&src=yourComponyName|yonex">
                 <span>查看路线</span>
               </a>
             </td>
           </tr>
         <% end %>
-
       
-     <!-- 
+     <!--
         <tr class="no-boder">
           <td class="classification"><span>ATM</span></td>
           <td class="shop-name">上海银行</td>
           <td class="shop-address">衡山路615-2号</td>
           <td class="map-navigator">
-            <a href="http://api.map.baidu.com/geocoder?address=上海市徐汇区衡山路615号&output=html&src=yourCompanyName|yourAppName">
+            <a href="http://api.map.baidu.com/marker?location=39.047669,116.313082&title=我的位置&content=百度奎科大厦&output=html">
+
               <span>查看路线</span>
             </a>
           </td>
-        </tr> -->
+        </tr>
+      -->
       </table>
     </div>
   </div>
@@ -60,8 +61,4 @@
 
 <% content_for :style do %>
   <%= stylesheet_link_tag 'client_recommends_index', media: 'all' %>
-<% end %>
-
-<% content_for :script do %>
-  <%= javascript_include_tag "" %>
 <% end %>
