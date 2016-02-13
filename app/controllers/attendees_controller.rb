@@ -93,29 +93,39 @@ class AttendeesController < ApplicationController
     count = 0
     error_count = 0
     AttendeeList.all.each do |attendee|
-      gender_id = 0 if attendee.attributes['gender']=='男'
-      gender_id = 1 if attendee.attributes['gender']=='女'
+      gender_id = 0 if attendee.attributes['性别']=='男'
+      gender_id = 1 if attendee.attributes['性别']=='女'
 
-      category_name = attendee.attributes['category_name']
+      category_name = attendee.attributes['分类'].try(:strip)
       category = AttendeeCategory.category_name_is(category_name).first if category_name.present?
 
-      if attendee.attributes['mobile'].length>11
-        mobile =attendee.attributes['mobile'].split('.')[0]
+      if attendee.attributes['手机号码'].length>11
+        mobile =attendee.attributes['手机号码'].split('.')[0]
       else
-        mobile =attendee.attributes['mobile']
+        mobile =attendee.attributes['手机号码']
       end
+      owner = attendee.attributes['主嘉宾']
+      owner_attendee = Attendee.attendee_name_is(attendee.attributes['主嘉宾'].try(:strip)).first
+      seller = Seller.seller_name_is(attendee.attributes['对应销售'].try(:strip)).first
 
-      attendee.attributes.delete('category_name')
-      attendee.attributes.delete('gender')
-      attendee_item           = Attendee.new attendee.attributes
-      attendee_item.category  = category
-      attendee_item.gender_id = gender_id
-      attendee_item.mobile    = mobile
-      attendee_item.event     =current_event
+      attendee_item = Attendee.new rfid_num: attendee.attributes['卡号'],
+        name: attendee.attributes['名字'],
+        gender_id: gender_id,
+        mobile: mobile,
+        category: category,
+        level: attendee.attributes['级别'],
+        company: attendee.attributes['公司'],
+        email: attendee.attributes['email'],
+        province: attendee.attributes['所在省'],
+        city: attendee.attributes['所在市'],
+        event: current_event,
+        owner_attendee: owner_attendee,
+        seller: seller
 
       if attendee_item.save
         count += 1
       else
+        logger.info "----------attendee.errors.full_messages: #{attendee.errors.full_messages}"
         error_count += 1
       end
     end
