@@ -47,7 +47,8 @@
   }
   .result-area{
     height: 60%;
-    width: 20%
+    width: 20%;
+    margin-top:20px;
   }
   .portrait-area{
     position: absolute;
@@ -56,30 +57,49 @@
     display: inline-block;
   }
   .portrait-area button{
-    width: 204px;
-    height: 204px;
-    border-radius: 204px;
-    border:#fff 4px solid;
+    width: 102px;
+    height: 102px;
+    border-radius: 102px;
+    border:#fff 2px solid;
     overflow: hidden;
     padding: 0px;
+    position: absolute;
+    left: 50%;
+    margin-left: -51px;
   }
   .portrait-area img.portrait-img{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
   }
   .result-seat-area{
     position: absolute;
     right: 0px;
-    height: 200px;
+    height: 100px;
     display: inline-block;
     width: 60%;
-    font-size: 4em;
+    font-size: 2em;
   }
   .seat-number span{
     color: #0454A2;
   }
   .result-seat-area p{
     margin: 0px;
+  }
+  @media screen and (min-width:1500px){
+    .portrait-area button{
+      width: 204px;
+      height: 204px;
+      border-radius: 204px;
+      border:#fff 4px solid;
+    }
+    .portrait-area img.portrait-img{
+      width: 200px;
+      height: 200px;
+    }
+    .result-seat-area{
+      height: 200px;
+      font-size: 4em;
+    }
   }
 </style>
 <div class="bg-area">
@@ -98,7 +118,7 @@
         </div>
         <div class="result-seat-area">
           <p class="user-name"><%=@attendee.name%> ， 您好！</p>
-          <p class="seat-number">您的座位是：<span>第<%= @seat.table_row %>桌<%= @seat.table_col %></span>号</p>
+          <p class="seat-number">您的座位是：<span>第<%= @seat.table_row %>桌<%= @seat.table_col %>号</span></p>
         </div>
       </div>
     </div>
