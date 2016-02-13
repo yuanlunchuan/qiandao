@@ -88,18 +88,17 @@
     <div class="seat-box">
       <div class="title-area text-center">
         <div class="title-name">查询结果</div>
-        <div class="close-area"><i class="fa fa-close"></i></div>
+        <!-- <div class="close-area"><i class="fa fa-close"></i></div> -->
       </div>
       <div class="result-area">
         <div class="portrait-area">
           <button type="button">
-            <!-- <img class="portrait-img" src="http://img1.3lian.com/img2008/06/019/ych.jpg"> -->
             <%= image_tag(@attendee.avatar.url, class: 'attendee-avatar') %>
           </button>
         </div>
         <div class="result-seat-area">
           <p class="user-name"><%=@attendee.name%> ， 您好！</p>
-          <p class="seat-number">您的座位号是：<span><%= %></span>号</p>
+          <p class="seat-number">您的座位是：<span>第<%= @seat.table_row %>桌<%= @seat.table_col %></span>号</p>
         </div>
       </div>
     </div>

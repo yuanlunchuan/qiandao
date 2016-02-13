@@ -31,7 +31,7 @@ class AttendeeSeatsController < ApplicationController
       flash.now[:error] = '座位信息为空'
       render :new 
     end
-    
+
   end
 
   def show
@@ -40,8 +40,7 @@ class AttendeeSeatsController < ApplicationController
   end
 
   def index
-    
-    
+
   end
 
   def set_module
