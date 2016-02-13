@@ -59,7 +59,8 @@ class Attendee < ActiveRecord::Base
   end
 
   def qrcode
-    "#{self.token}/#{serial_number}"
+    ##{self.token}/#{serial_number}"
+    "#{self.rfid_num}"
   end
 
   def qrcode_image
