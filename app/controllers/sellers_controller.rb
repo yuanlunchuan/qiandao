@@ -12,19 +12,18 @@ class SellersController < ApplicationController
     if params[:seller_file].present?
       filename = uploadfile(params[:seller_file])
       file_path = "#{Rails.root}/public/upload/#{@filename}"
-      #begin
       SellerList.import(file_path)
       count = 0
       error_collection = []
       SellerList.all.each do |seller|
-        manage_name = seller.attributes['manager_name']
-        name =  seller.attributes['name']
-        if seller.attributes['phone_number'].length>11
-          phone_number =seller.attributes['phone_number'].split('.')[0]
+        manage_name = seller.attributes['销售负责人']
+        name =  seller.attributes['姓名']
+        if seller.attributes['电话号码'].length>11
+          phone_number =seller.attributes['电话号码'].split('.')[0]
         else
-          phone_number =seller.attributes['phone_number']
+          phone_number =seller.attributes['电话号码']
         end
-        responsible_area = seller.attributes['responsible_area']
+        responsible_area = seller.attributes['负责地区']
 
         manager = nil
         managers = Seller.seller_name_is(manage_name) if manage_name.present?
@@ -41,9 +40,7 @@ class SellersController < ApplicationController
         end
       end
       SellerList.all.clear
-      # rescue Importex::ImportError => e
-      #   puts e.message
-      # end
+
       redirect_to event_sellers_path, flash: {success: "成功导入#{count}"} if error_collection.size==0
       redirect_to event_sellers_path, flash: {error: "成功导入#{count}条, #{error_collection}导入失败"} if error_collection.size>0
     return

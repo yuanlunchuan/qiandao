@@ -65,6 +65,7 @@ $(document).ready(function(){
     $('.page0').removeClass("blur");
     $('.voucher-page').addClass("hidden");
   });
+
   //显示座位
   $('.seat-button').click(function(){
     $('.page0').addClass("blur");
