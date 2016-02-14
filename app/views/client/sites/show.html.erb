@@ -19,7 +19,11 @@
         <div class="col-xs-12 profiles-area">
           <div class="col-xs-4 text-center">
             <button type="button" class="portrait-img-area">
-              <%= image_tag download_photo_event_attendee_path(current_event, @attendee), class:"portrait-img", id: "attendee_photo" %>
+              <% img_url = (@img.present? ? @img : image_path('yonex-confirmation-camera.png')) %>
+              <%= image_tag  img_url, class:"portrait-img", id: "attendee_photo"%>
+              <%#= image_tag  img_url, width: '35%', style:'margin: 1em auto;', id: 'upload_photo', class: 'img-circle animated zoomIn'%>
+
+              <%#= image_tag download_photo_event_attendee_path(current_event, @attendee), class:"portrait-img", id: "attendee_photo" %>
             </button>
             <input class="hidden" type="file" id="pic-portrait" />
           </div>
