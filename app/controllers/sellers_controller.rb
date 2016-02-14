@@ -85,7 +85,6 @@ class SellersController < ApplicationController
     @seller = current_event.sellers.find(params[:id])
 
     if Attendee.mobile_is(params[:seller][:phone_number]).present?
-      logger.info "------line 94"
       flash.now[:error] = '该手机号已作为嘉宾手机号'
       render :edit
       return
@@ -136,6 +135,8 @@ class SellersController < ApplicationController
       @filename = file.original_filename
       #设置目录路径，如果目录不存在，生成新目录
       FileUtils.mkdir("#{Rails.root}/public/upload") unless File.exist?("#{Rails.root}/public/upload")
+      #如果文件存在则删除该文件
+      File.delete("#{Rails.root}/public/upload/#{@filename}") if File::exists?("#{Rails.root}/public/upload/#{@filename}")
       #写入文件
       ##wb 表示通过二进制方式写，可以保证文件不损坏
       File.open("#{Rails.root}/public/upload/#{@filename}", "wb") do |f|
