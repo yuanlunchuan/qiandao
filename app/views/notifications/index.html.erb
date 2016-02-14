@@ -15,7 +15,15 @@
           </div>
 
           <div class="col-xs-6">
-            <%= link_to '批量发送短信', '', method: :post, class: 'btn btn-white btn-sm pull-right' %>
+            <% if params[:category_id].present? %>
+              <%= link_to '批量发送短信', event_notifications_path(current_event, category_id: params[:category_id]), method: :post, class: 'btn btn-white btn-sm pull-right' %>
+            <% elsif params[:sent_sms].present? %>
+              <%= link_to '批量发送短信', event_notifications_path(current_event, sent_sms: params[:sent_sms]), method: :post, class: 'btn btn-white btn-sm pull-right' %>
+            <% elsif params[:keyword].present? %>
+              <%= link_to '批量发送短信', event_notifications_path(current_event, keyword: params[:keyword]), method: :post, class: 'btn btn-white btn-sm pull-right' %>
+            <% else %>
+              <%= link_to '批量发送短信', event_notifications_path(current_event), method: :post, class: 'btn btn-white btn-sm pull-right' %>
+            <% end %>
           </div>
         </div>
 

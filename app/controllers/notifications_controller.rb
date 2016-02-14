@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :authorize_admin!
-  before_action :check_sms_template, only: [:send_sms, :send_test_sms]
+  before_action :check_sms_template, only: [:send_sms, :send_test_sms, :create]
   before_action :set_current_module
 
   layout 'event'
@@ -12,6 +12,29 @@ class NotificationsController < ApplicationController
     @attendees = @attendees.contains(params[:keyword]) if params[:keyword].present?
     @attendees = @attendees.sms_sent if params[:sent_sms] == '1'
     @attendees = @attendees.sms_not_sent if params[:sent_sms] == '-1'
+  end
+
+  def create
+    params[:sent_sms] ||= '0'
+    @attendees  = current_event.attendees.page(params[:page])
+    @attendees = @attendees.category(params[:category_id]) if params[:category_id].present?
+    @attendees = @attendees.contains(params[:keyword]) if params[:keyword].present?
+    @attendees = @attendees.sms_sent if params[:sent_sms] == '1'
+    @attendees = @attendees.sms_not_sent if params[:sent_sms] == '-1'
+
+    success_count = 0
+    error_count = 0
+
+    @attendees.each do |attendee|
+      begin
+        attendee.send_sms(@template.content)
+        success_count += 1
+      rescue => e
+        error_count += 1
+        #redirect_to :back, flash: {error: e.message}
+      end
+    end
+    redirect_to :back, flash: {success: "发送成功#{success_count}条, 失败#{error_count}条"}
   end
 
   def send_sms
