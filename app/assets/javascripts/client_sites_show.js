@@ -51,6 +51,11 @@ $(document).ready(function(){
 
   //显示二维码
   $('.voucher-button').click(function(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    if (userAgent.indexOf("Safari") > -1)
+    {
+      $(".down-msg").html("长按图片下载二维码");
+    }
     $('.page0').addClass("blur");
     $('.voucher-page').removeClass("hidden");
   });
