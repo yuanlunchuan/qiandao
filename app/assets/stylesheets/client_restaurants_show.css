@@ -29,6 +29,10 @@ body{
   padding-left: 30px;
   padding-right: 30px;
   height: 150px;
+}
+.map-border{
+  border: #4484BE 1px solid;
+  height: 150px;
   overflow: hidden;
 }
 #mapArea{

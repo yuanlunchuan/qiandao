@@ -5,8 +5,8 @@ $(document).ready(function(){
     {
       if (direction == "up")
       {
-        $("#page0").fadeOut();
-        $("#page1").fadeIn();
+        $("#page0").css("display","none");
+        $("#page1").css("display","block");
       };
     },
   });
@@ -15,8 +15,8 @@ $(document).ready(function(){
     {
       if (direction == "down")
       {
-        $("#page1").fadeOut();
-        $("#page0").fadeIn();
+        $("#page1").css("display","none");
+        $("#page0").css("display","block");
       }
     },
   });
@@ -31,6 +31,6 @@ $(document).ready(function(){
       {
         $('.double-down').animate({bottom:"40px"},1000);
       }
-    },10);
+    },100);
   });
 })

@@ -37,6 +37,9 @@
 p.letter-pre{
   text-indent: 2em;
 }
+#page1{
+  display: none;
+}
 p.letter-next{
   text-indent: 2em;
 }
@@ -61,9 +64,6 @@ p.invitation{
 .double-down img{
   width: 50px;
   height: 17px;
-}
-#page1{
-  display: none;
 }
 .container{
   padding: 0px;
