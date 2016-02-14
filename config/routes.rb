@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'invites'     => 'invites#show'
     resources :sessions
     resources :events do
+      get 'system_infos' => 'sites#system_infos'
       get 'seats'  => 'seats#show'
       get 'sites'   => 'sites#show'
       get 'download_qrcode'  => 'sites#download_qrcode'

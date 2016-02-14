@@ -4,6 +4,21 @@ class Client::SitesController < ApplicationController
   before_action :load_attendee
   layout 'client'
   skip_before_action :verify_authenticity_token
+  include WebApiRenderer
+  attr_accessor :meta
+
+  def system_infos
+    self.meta = params
+    collection = []
+
+    current_event.system_infos.visible.each do |system_info|
+      collection << system_info.to_hash
+    end
+
+    render_not_found '没有系统消息' and return if collection.size==0
+
+    render_ok collection
+  end
 
   def show
     @attendee = Attendee.find(cookies[:attendee_id])
