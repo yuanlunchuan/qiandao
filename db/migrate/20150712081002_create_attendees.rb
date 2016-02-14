@@ -17,7 +17,7 @@ class CreateAttendees < ActiveRecord::Migration
       t.datetime :checked_in_at
       t.integer  :attendee_number, default: 0
 
-      t.integer  :sms_sid
+      t.string  :sms_sid
       t.string   :sms_mobile
       t.datetime :sms_sent_at
       t.boolean  :sms_delivered
