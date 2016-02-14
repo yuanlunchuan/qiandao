@@ -26,6 +26,7 @@ $(document).ready(function(){
   setTimeout(function(){
     $('.load-page').fadeOut();
     $('.home-page').fadeIn();
+
     if($('.illus-area').height()== 1)//网路差图片还没加载出来
     {
       var img_height = parseInt(($(window).width()/496)*228);//计算图片的高度
@@ -37,6 +38,15 @@ $(document).ready(function(){
     }
     //设置每一行的高度
     $('.function-area tr').height((height-1)/2);
+
+    //显示二维码
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    if (userAgent.indexOf("Safari") > -1)
+    {
+      $(".down-msg").html("长按图片下载二维码");
+    }
+    $('.page0').addClass("blur");
+    $('.voucher-page').removeClass("hidden");
   },1200)
 
   //生成二维码
@@ -47,17 +57,6 @@ $(document).ready(function(){
     });
     var qrcode_value = $('#rfid-num').data('rfid-num')
     qrcode.makeCode(qrcode_value);
-  });
-
-  //显示二维码
-  $('.voucher-button').click(function(){
-    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-    if (userAgent.indexOf("Safari") > -1)
-    {
-      $(".down-msg").html("长按图片下载二维码");
-    }
-    $('.page0').addClass("blur");
-    $('.voucher-page').removeClass("hidden");
   });
 
   //隐藏二维码
