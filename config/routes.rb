@@ -62,10 +62,12 @@ Rails.application.routes.draw do
       resources :checkin_monitors
       resources :restaurants
       resources :attendee_seats
+      resources :system_infos
 
       get 'photos'          => 'attendees#photos'
       get 'site/rfid_search'     => 'site#rfid_search'
 
+      post 'notifications'   => 'notifications#create'
       get 'notifications'   => 'notifications#index'
       post 'site/binding_rfid'      => 'site#binding_rfid'
       post 'notifications/:attendee_id/send_sms' => 'notifications#send_sms',     as: :notifications_send_sms

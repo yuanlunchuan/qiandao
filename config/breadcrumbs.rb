@@ -2,6 +2,20 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :new_seytem_info do |cat|
+  link '发布系统消息', event_system_infos_path
+  parent :system_infos
+end
+
+crumb :edit_system_info do |cat|
+  link '编辑系统消息', event_system_infos_path
+  parent :system_infos
+end
+
+crumb :system_infos do
+  link '系统消息管理', event_system_infos_path
+end
+
 crumb :edit_restaurant do
   link '酒店信息设置', event_attentee_rfids_path
 end

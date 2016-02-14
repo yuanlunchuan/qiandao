@@ -86,6 +86,12 @@
                 <span class="nav-label">会议通知管理</span></span>
               <% end %>
             </li>
+            <li>
+              <%= link_to event_system_infos_path, style: is_active_item('system_infos') do %>
+                <i class="fa fa-bell"></i>
+                <span class="nav-label">系统消息</span></span>
+              <% end %>
+            </li>
           </ul>
         </li>
 
