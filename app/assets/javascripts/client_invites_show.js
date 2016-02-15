@@ -7,6 +7,7 @@ $(document).ready(function(){
       {
         $("#page0").css("display","none");
         $("#page1").css("display","block");
+        $('#page0').addClass("fadeInDown")
       };
     },
   });
