@@ -1,83 +1,94 @@
 <style type="text/css">
   .bg-area{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    left: 0px;
     top: 0px;
-    left: 0px;
-  }
-  .bg-area img.bg-img{
-    position: absolute;
     width: 100%;
     height: 100%;
-    bottom: 0px;
-    left: 0px;
-    z-index: 1;
+    z-index: -999;
   }
-  .seat-area{
+  .bg-area img{
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
-    z-index: 3;
-  }
-  .seat-box{
-    position: absolute;
-    left: 33%;
-    width: 33%;
-    top: 20%;
-    height: 50%;
-    background:rgba(236,236,236,0.3);
   }
   .title-area{
-    background-color: #0454A2;
-    color: #fff;
-    height: 20%;
-    line-height: 100%;
-    font-size: 3.6em;
+    margin-top: 15%;
+    font-size: 2.6em;
+    color: #4b4b4b;
   }
-  .search-area{
-    height: 60%;
+  .notice-area{
+    color: #646464;
+    font-size: 1.6em;
+    margin-top: 5%;
   }
-  .search-area input{
-    height: 15%;
-    width: 76%;
-    position: absolute;
-    top: 50%;
-    margin-top: -25px;
-    left: 10px;
-    font-size: 1.2em;
-    border-radius: 8px;
-    border: #0454A2 1px solid;
+  .graphic-area{
+    margin-top: 2%;
+    padding-left: 15px;
+    padding-right: 15px;
   }
-  .search-area button{
-    height: 15%;
-    position: absolute;
-    width: 16%;
-    top: 50%;
-    margin-top: -25px;
-    right: 10px;
-    background-color: #0454A2;
-    color: #fff;
-    font-size: 1.8em;
+  .jump-area button{
+    background-color: #005bac;
+    color:#ffffff;
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+  }
+  @media screen and (min-width: 1400px){
+    .title-area{
+      font-size: 2.8em;
+    }
+    .notice-area{
+      font-size: 1.8em;
+    }
+  }
+  @media screen and (min-width: 1600px){
+    .title-area{
+      font-size: 3.6em;
+    }
+    .notice-area{
+      font-size: 2.6em;
+    }
   }
 </style>
-
-<div class="bg-area">
-  <%= image_tag "attendee_seats/body_bg.png", class:"bg-img" %>
-  <div class="seat-area">
-    <div class="seat-box">
-      <div class="title-area text-center">
-        <p>座位查询</p>
+<title>座位查询</title>
+<div class="container-fluid">
+  <div class="row">
+    <div class="bg-area">
+      <%= image_tag 'attendee_seats/body_bg.png' %>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3 text-center page-area">
+      <div class="title-area">座位自助查询</div>
+      <div class="notice-area">请在旁边的读卡器上刷卡查询您的座位</div>
+      <div class="graphic-area">
+        <%= image_tag 'attendee_seats/graphic.jpg',class:"img-responsive" %>
       </div>
-      <div class="search-area">
-        <form action="/app/events/<%= current_event.id %>/attendee_seats" method="post">
-          <input name="session_id" class="hidden" value=<%= params[:session_id] %> />
-          <input type="text" name="key_word" placeholder="如无法刷卡，请人工输入姓名/手机号码查询"/>
-          <button type="submit">搜 索</button>
-        </form>
+      <div class="hidden">
+        <input class="mssage-box" type="text"/>
+      </div>
+      <div class="user-message-area"></div>
+      <div class="jump-area hidden">
+        <button type="button">查看座位</button>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).keypress(function(event){
+    var keyCode = event.which||event.keyCode;
+    if(keyCode == 13)//点击了回车
+    {
+      var message = $('.mssage-box').val()
+      $('.user-message-area').html(message);
+
+      $('.jump-area').removeClass("hidden");
+
+      $('.jump-area button').click(function(){
+        location.href = "../attendee_seats/1/show"; //跳转到show页面
+      })
+    }
+  })
+</script>

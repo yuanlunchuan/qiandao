@@ -1,126 +1,120 @@
 <style type="text/css">
   .bg-area{
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-  }
-  .bg-area img.bg-img{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    bottom: 0px;
-    left: 0px;
-    z-index: 1;
-  }
-  .seat-area{
-    position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
-    z-index: 3;
+    z-index: -999;
   }
-  .seat-box{
+  .bg-area img{
     position: absolute;
-    left: 33%;
-    width: 33%;
-    top: 20%;
-    height: 50%;
-    background:rgba(236,236,236,0.3);
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%; 
   }
   .title-area{
-    background-color: #0454A2;
-    color: #fff;
-    height: 20%;
-    line-height: 100%;
-    font-size: 3.6em;
+    margin-top: 15%;
+    font-size: 2.6em;
+    color: #4b4b4b;
   }
-  .title-name{
-    display: inline-block;
-    width: 80%;
+  .seat-area{
+    font-size: 1.6em;
+    margin-top: 5%;
+    color: #646464;
   }
-  .close-area{
-    display: inline-block;
-    cursor: pointer;
+  .seat-area p{
+    margin-bottom: 0px;
   }
-  .result-area{
-    height: 60%;
-    width: 20%;
-    margin-top:20px;
+  .seat-number{
+    color: #005bac;
   }
-  .portrait-area{
-    position: absolute;
-    left: 0px;
-    width: 40%;
-    display: inline-block;
+  .return-area{
+    margin-top: 5%;
   }
-  .portrait-area button{
-    width: 102px;
-    height: 102px;
-    border-radius: 102px;
-    border:#fff 2px solid;
-    overflow: hidden;
-    padding: 0px;
-    position: absolute;
-    left: 50%;
-    margin-left: -51px;
+  .return-area button{
+    width: 30%;
+    background-color: #005bac;
+    color:#ffffff;
+    border-radius: 6px;
+    height: 40px;
+    font-size: 1.4em;
   }
-  .portrait-area img.portrait-img{
-    width: 100px;
-    height: 100px;
+  .seconds{
+    color: #005bac;
   }
-  .result-seat-area{
-    position: absolute;
-    right: 0px;
-    height: 100px;
-    display: inline-block;
-    width: 60%;
-    font-size: 2em;
+  .return-msg{
+    margin-top: 2%;
   }
-  .seat-number span{
-    color: #0454A2;
-  }
-  .result-seat-area p{
-    margin: 0px;
-  }
-  @media screen and (min-width:1500px){
-    .portrait-area button{
-      width: 204px;
-      height: 204px;
-      border-radius: 204px;
-      border:#fff 4px solid;
+  @media screen and (min-width: 1400px){
+    .title-area{
+      font-size: 3em;
     }
-    .portrait-area img.portrait-img{
-      width: 200px;
-      height: 200px;
+    .seat-area{
+      font-size: 1.8em;
     }
-    .result-seat-area{
-      height: 200px;
-      font-size: 4em;
+    .return-msg{
+      font-size: 1.2em;
+    }
+    .return-area button{
+      height: 60px;
+      font-size: 1.6em;
+    }
+  }
+  @media screen and (min-width: 1600px){
+    .title-area{
+      font-size: 3.6em;
+    }
+    .seat-area{
+      font-size: 2.6em;
+    }
+    .return-msg{
+      font-size: 1.8em;
+    }
+    .return-area button{
+      height: 90px;
+      font-size: 2.4em;
     }
   }
 </style>
-<div class="bg-area">
-  <%= image_tag "attendee_seats/body_bg.png", class:"bg-img" %>
-  <div class="seat-area">
-    <div class="seat-box">
-      <div class="title-area text-center">
-        <div class="title-name">查询结果</div>
-        <!-- <div class="close-area"><i class="fa fa-close"></i></div> -->
+<title>座位查询</title>
+<div class="container-fluid">
+  <div class="row">
+    <div class="bg-area">
+      <%= image_tag 'attendee_seats/body_bg.png' %>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3 text-center page-area">
+      <div class="title-area">座位自助查询</div>
+      <div class="seat-area">
+        <p class="name-paragraph">张三 先生/女士，您好！</p>
+        <p class="number-paragraph">您的座位是:<span class="seat-number">第1桌1号</span></p>
       </div>
-      <div class="result-area">
-        <div class="portrait-area">
-          <button type="button">
-            <%= image_tag(@attendee.avatar.url, class: 'attendee-avatar') %>
-          </button>
-        </div>
-        <div class="result-seat-area">
-          <p class="user-name"><%=@attendee.name%> ， 您好！</p>
-          <p class="seat-number">您的座位是：<span>第<%= @seat.table_row %>桌<%= @seat.table_col %>号</span></p>
-        </div>
+      <div class="return-area">
+        <button type="button">返 回</button>
+      </div>
+      <div class="return-msg">
+        <p>将在<span class="seconds">5</span>秒后自动返回</p>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    //查询座位信息失败
+    $('.name-paragraph').html("很抱歉，没有找到您的座位信息。");
+    $('.number-paragraph').html("请联系您的销售担当。");
+
+    var i = 4;
+    var timer = setInterval(function(){
+      $('.seconds').html(i);
+      i--;
+      if(i == -1)
+      {
+        clearInterval(timer);//取消进程
+        location.href="../attendee_seats/new"//自动跳转
+      }
+    },1000)
+  })
+</script>

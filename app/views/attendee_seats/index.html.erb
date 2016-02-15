@@ -1,9 +1,0 @@
-<div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-content">
-        <%=select_tag :session_id, options_for_select(current_event.sessions.checkin_enabled.map {|s| [s.full_name, new_event_attendee_seat_path(current_event, session_id: s.id)]}, url_for), prompt: '请选择日程', include_blank: false, class: 'input-sm form-control input-s-sm inline', id: 'select-session-checkin'%>
-      </div>
-    </div>
-  </div>
-</div>
