@@ -22,6 +22,7 @@ class Client::SitesController < ApplicationController
 
   def show
     @attendee = Attendee.find(cookies[:attendee_id])
+    @attendee.update(login_count: (@attendee.login_count+1))
     @img = if @attendee.avatar.exists?
          @attendee.avatar.url
        elsif @attendee.photo.exists?
