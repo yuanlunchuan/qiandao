@@ -3,7 +3,7 @@ $(document).ready(function(){
   $("#page0").swipe({ 
     swipe:function(event,direction, distance, duration, fingerCount)
     {
-      if (direction == "up")
+      if (direction == "down")
       {
         $("#page0").css("display","none");
         $("#page1").css("display","block");
@@ -13,7 +13,7 @@ $(document).ready(function(){
   $("#page1").swipe({ 
     swipe:function(event,direction, distance, duration, fingerCount)
     {
-      if (direction == "down")
+      if (direction == "up")
       {
         $("#page1").css("display","none");
         $("#page0").css("display","block");

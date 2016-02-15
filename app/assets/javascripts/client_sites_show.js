@@ -47,7 +47,21 @@ $(document).ready(function(){
     }
     $('.page0').addClass("blur");
     $('.voucher-page').removeClass("hidden");
-  },1200)
+
+    //请求通知消息
+    var event_number = $('#event-id').data('event-id');
+    $.getJSON(
+      '/client/events/'+event_number+'/system_infos.json',
+      {},
+      function(result) {//返回数据根据结果进行相应的处理
+        if ( result.success ) {
+          $('.notice-msg').html(result.collection[0].content);
+        } else {
+          alert("请求失败了")
+        }
+      }
+    )
+  },1000)
 
   //生成二维码
   $(function(){
