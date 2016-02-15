@@ -7,7 +7,6 @@ class Client::SessionsController < ApplicationController
     if attendees.present?
       cookies.permanent[:attendee_id] = attendees.first.id
       attendee = attendees.first
-      attendee.update(login_count: (attendee.login_count+1))
 
       redirect_to client_event_sites_path(attendees.first.event.id)
     else
