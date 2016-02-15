@@ -31,6 +31,7 @@ class NotificationsController < ApplicationController
         success_count += 1
       rescue => e
         error_count += 1
+        logger.info "--------e.message: #{e.message}"
         #redirect_to :back, flash: {error: e.message}
       end
     end
