@@ -1,5 +1,3 @@
-require 'rqrcode_png'
-
 class AttendeesController < ApplicationController
   before_action :authorize_admin!
   before_action :set_current_module
@@ -75,9 +73,6 @@ class AttendeesController < ApplicationController
     @attendee.seller   = seller
 
     if @attendee.save
-      qr = RQRCode::QRCode.new(@attendee.rfid_num, :size => 4, :level => :h )
-      png = qr.to_img
-      png.resize(150, 150).save("#{Rails.root}/public/attendee_qrcode/#{current_event.id}_#{@attendee.id}.png")
       redirect_to event_attendees_path, flash: {success: '添加成功'}
     else
       flash.now[:error] = @attendee.errors.full_messages
@@ -174,9 +169,6 @@ class AttendeesController < ApplicationController
       @attendee.owner_attendee = owner_attendee
 
       @attendee.save
-      qr = RQRCode::QRCode.new(@attendee.rfid_num, :size => 4, :level => :h )
-      png = qr.to_img
-      png.resize(150, 150).save("#{Rails.root}/public/attendee_qrcode/#{current_event.id}_#{@attendee.id}.png")
 
       if(params[:_delete_photo] == '1')
         @attendee.photo.clear

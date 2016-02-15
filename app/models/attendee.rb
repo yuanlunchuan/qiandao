@@ -1,3 +1,4 @@
+require 'rqrcode_png'
 class Attendee < ActiveRecord::Base
   has_many :sub_attendees, class_name: "Attendee",
                           foreign_key: "attendee_id"
@@ -55,6 +56,13 @@ class Attendee < ActiveRecord::Base
 
   before_create { generate_token(:token) }
   after_create  { generate_invitation_short_url }
+  after_create  { generate_qrcode }
+
+  def generate_qrcode
+    qr = RQRCode::QRCode.new(self.token, :size => 4, :level => :h )
+    png = qr.to_img
+    png.resize(150, 150).save("#{Rails.root}/public/attendee_qrcode/#{self.event_id}_#{self.id}.png")
+  end
 
   def gender
     GENDER.invert[gender_id]
@@ -62,7 +70,7 @@ class Attendee < ActiveRecord::Base
 
   def qrcode
     ##{self.token}/#{serial_number}"
-    "#{self.rfid_num}"
+    "#{self.token}"
   end
 
   def qrcode_image
