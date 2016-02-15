@@ -25,12 +25,12 @@ $(document).ready(function(){
       var bottom = $('.double-down').css("bottom");
       if(bottom == "40px")
       {
-        $('.double-down').animate({bottom:"10px"},1000);
+        $('.double-down').animate({bottom:"10px"});
       }
       else if (bottom == "10px")
       {
-        $('.double-down').animate({bottom:"40px"},1000);
+        $('.double-down').animate({bottom:"40px"});
       }
-    },100);
+    },500);
   });
 })
