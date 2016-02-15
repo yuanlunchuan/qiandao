@@ -26,11 +26,10 @@
 
               <%#= image_tag download_photo_event_attendee_path(current_event, @attendee), class:"portrait-img", id: "attendee_photo" %>
             </button>
-            <input class="hidden" type="file" id="pic-portrait" />
+            <input type="file" id="pic-portrait" />
           </div>
 
           <div class="col-xs-8 portrait-msg">
-            <div class="dropz">上传头像</div>
             <span class="user-name"><%= @attendee.name %></span>
             <span class="user-company"><%= @attendee.company.present? ? @attendee.company : '公司未知' %></span>
             <span class="user-phone"><%= @attendee.mobile.present? ? @attendee.mobile : '电话未知' %></span>

@@ -23,8 +23,9 @@
   text-align: center;
   color: #3E3A39;
 }
-.title-area p{
-  margin: 0px;
+.title-area img{
+  margin-top: 15px;
+  width: 80%;
 }
 .letter-area{
   margin-top: 20px;
@@ -42,15 +43,6 @@ p.letter-pre{
 }
 p.letter-next{
   text-indent: 2em;
-}
-p.name{
-  font-size: 1.2em;
-}
-p.name-eg-pre{
-  font-size: 1.1em;
-}
-p.name-eg-next{
-  font-size: 0.8em;
 }
 p.invitation{
   margin-top: 10px;
