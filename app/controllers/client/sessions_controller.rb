@@ -6,6 +6,9 @@ class Client::SessionsController < ApplicationController
     attendees = Attendee.mobile_is(params[:phone_number])
     if attendees.present?
       cookies.permanent[:attendee_id] = attendees.first.id
+      attendee = attendees.first
+      attendee.update(login_count: (attendee.login_count+1))
+
       redirect_to client_event_sites_path(attendees.first.event.id)
     else
       flash.now[:error] = '该用户不存在请重新输入'

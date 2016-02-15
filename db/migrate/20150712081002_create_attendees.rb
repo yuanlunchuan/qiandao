@@ -13,6 +13,7 @@ class CreateAttendees < ActiveRecord::Migration
       t.string     :token
       t.string     :rfid_num
       t.string     :level
+      t.integer    :login_count, default: 0
 
       t.datetime :checked_in_at
       t.integer  :attendee_number, default: 0

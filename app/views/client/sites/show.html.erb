@@ -1,6 +1,7 @@
 <div id="event-id" class="hidden" data-event-id=<%= current_event.id %>></div>
 <div id="attendee-id" class="hidden" data-attendee-id=<%= session[:attendee_id] %>></div>
 <div id="rfid-num" class="hidden" data-rfid-num=<%= Attendee.find(session[:attendee_id]).rfid_num %>></div>
+<div id="show-qrcode" class="hidden" data-show-qrcode=<%=@attendee.login_count>1? false : true %>></div>
 
 <title>2016YONEX订货会</title>
 <div class="container">
