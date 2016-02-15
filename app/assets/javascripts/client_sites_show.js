@@ -58,7 +58,10 @@ $(document).ready(function(){
       {},
       function(result) {//返回数据根据结果进行相应的处理
         if ( result.success ) {
-          $('.notice-msg').html(result.collection[0].content);
+          var notice = result.collection[0].content;
+          if(notice != null){
+            $('.notice-msg').html(notice);
+          }
         } else {
           alert("请求失败了")
         }
