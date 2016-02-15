@@ -39,14 +39,17 @@ $(document).ready(function(){
     //设置每一行的高度
     $('.function-area tr').height((height-1)/2);
 
-    //显示二维码
-    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-    if (userAgent.indexOf("Safari") > -1)
-    {
-      $(".down-msg").html("长按图片下载二维码");
+    //显示二维码(第一次打开)
+    var showQrcodeIs = $('#show-qrcode').data('show-qrcode');
+    if(showQrcodeIs){
+      var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+      if (userAgent.indexOf("Safari") > -1)
+      {
+        $(".down-msg").html("长按图片下载二维码");
+      }
+      $('.page0').addClass("blur");
+      $('.voucher-page').removeClass("hidden");
     }
-    $('.page0').addClass("blur");
-    $('.voucher-page').removeClass("hidden");
 
     //请求通知消息
     var event_number = $('#event-id').data('event-id');
@@ -72,6 +75,17 @@ $(document).ready(function(){
     var qrcode_value = $('#rfid-num').data('rfid-num')
     qrcode.makeCode(qrcode_value);
   });
+
+  //显示二维码
+  $('.voucher-button').click(function(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    if (userAgent.indexOf("Safari") > -1)
+    {
+      $(".down-msg").html("长按图片下载二维码");
+    }
+    $('.page0').addClass("blur");
+    $('.voucher-page').removeClass("hidden");
+  })
 
   //隐藏二维码
   $('.voucher-page').click(function(){

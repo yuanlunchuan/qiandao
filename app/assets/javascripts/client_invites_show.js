@@ -31,6 +31,6 @@ $(document).ready(function(){
       {
         $('.double-down').animate({bottom:"40px"});
       }
-    },1000);
+    },800);
   });
 })
