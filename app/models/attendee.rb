@@ -145,7 +145,7 @@ class Attendee < ActiveRecord::Base
 
   def prepare_sms_template(template)
     template = template.gsub(/#name#/, self.name)
-    template = template.gsub(/#url#/, 'http://985.so/urUx')#self.invitation_url)
+    template = template.gsub(/#url#/, self.invitation_url)
     template
   end
 
@@ -159,6 +159,7 @@ class Attendee < ActiveRecord::Base
 
 private
   def generate_short_url(long_url)
+    return 'http://985.so/urUx'
     #http://985.so/page/apidoc.php
     encode_url = CGI.escape(long_url)
     short_link = Net::HTTP.get(URI.parse("http://985.so/api.php?url=#{encode_url}"))
