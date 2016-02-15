@@ -108,7 +108,7 @@ class AttendeesController < ApplicationController
       owner_attendee = Attendee.attendee_name_is(attendee.attributes['主嘉宾'].try(:strip)).first
       seller = Seller.seller_name_is(attendee.attributes['对应销售'].try(:strip)).first
 
-      attendee_item = Attendee.new rfid_num: attendee.attributes['卡号'],
+      attendee_item = Attendee.new rfid_num: attendee.attributes['卡号'].split('.')[0],
         name: attendee.attributes['名字'],
         gender_id: gender_id,
         mobile: mobile,
