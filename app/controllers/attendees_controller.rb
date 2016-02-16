@@ -36,8 +36,24 @@ class AttendeesController < ApplicationController
   end
 
   def create
+
     if params[:attendee_file].present?
-      import_attendee
+      File.open("#{Rails.root}/public/data_new") do |file|  
+      file.each_line{|line|
+        gender_id = 0 if line.split(',')[2]=='男'
+        gender_id = 1 if line.split(',')[2]=='女'
+
+        attendee          = current_event.attendees.new name: line.split(',')[1],
+        gender_id: gender_id,
+        company: line.split(',')[7],
+        mobile: line.split(',')[8],
+        province: line.split(',')[10],
+        city: line.split(',')[11]
+        attendee.save
+      }  
+      file.close();
+      end
+      #import_attendee
       return
     end
 
