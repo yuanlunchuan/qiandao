@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  get '20160223'  => 'redirects#show'
+
   namespace :seller do
     resources :sessions
     resources :events do

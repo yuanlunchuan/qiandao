@@ -135,6 +135,7 @@ $(document).ready(function(){
     $('.page0').removeClass("blur");
     $('.seat-page').addClass("hidden");
   });
+
   //上传图片
   $('#pic-portrait').change(function(){
     var file = $('#pic-portrait').prop('files')[0];
