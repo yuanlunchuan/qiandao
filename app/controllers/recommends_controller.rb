@@ -58,7 +58,7 @@ class RecommendsController < ApplicationController
   end
 
   def recommend_params
-    params.require(:recommend).permit(:category_name, :recommend_name, :address, :phone_number, :distance)
+    params.require(:recommend).permit(:category_name, :recommend_name, :address, :phone_number, :distance, :baidu_url)
   end
 
   private :set_current_module

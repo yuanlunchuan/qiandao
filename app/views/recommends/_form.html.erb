@@ -16,18 +16,21 @@
     <div class="col-sm-3"> <%=f.text_field :phone_number, maxlength: 11, class: 'form-control'%> </div>
   </div>
 
+  <div class="form-group"><label class="col-sm-2 control-label">百度地图url</label>
+    <div class="col-sm-3"> <%=f.text_field :baidu_url, class: 'form-control'%> </div>
+  </div>
   <div class="form-group"><label class="col-sm-2 control-label">距离</label>
     <div class="col-sm-3"> <%=f.text_field :distance, class: 'form-control', placeholder: '千米'%></div>
   </div>
 
-  <div id="r-result">请在下图标注酒店位置:
+  <div class="hidden" id="r-result">请在下图标注酒店位置:
     <%= text_field_tag :address, @address, id: 'suggestId' %>
     <%= text_field_tag :latitude, @latitude, class: "hidden", id: "posion-position-lng" %>
     <%= text_field_tag :longitude, @longitude, class: "hidden", id: "posion-position-lat" %>
   </div>
 
-  <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:300px;height:auto; display:none;"></div>
-  <div id="l-map" style="height:300px;width:100%;"></div>
+  <div class="hidden" id="searchResultPanel" style="border:1px solid #C0C0C0;width:300px;height:auto; display:none;"></div>
+  <div class="hidden" id="l-map" style="height:300px;width:100%;"></div>
 
   <div class="form-group">
     <div class="col-sm-4 col-sm-offset-2">
