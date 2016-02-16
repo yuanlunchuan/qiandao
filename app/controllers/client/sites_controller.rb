@@ -41,9 +41,12 @@ class Client::SitesController < ApplicationController
     @attendee = current_event.attendees.find(params[:id])
     @attendee.photo = params[:file]
     @attendee.save
-    respond_to do |format|
-      format.json {render json: {code: 0, message: 'ok'}}
-    end
+
+    redirect_to client_event_sites_path(@attendee.event_id)
+
+    # respond_to do |format|
+    #   format.json {render json: {code: 0, message: 'ok'}}
+    # end
   end
 
 end

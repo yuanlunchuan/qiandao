@@ -26,7 +26,9 @@
 
               <%#= image_tag download_photo_event_attendee_path(current_event, @attendee), class:"portrait-img", id: "attendee_photo" %>
             </button>
-            <input type="file" id="pic-portrait" />
+            <form action="/client/events/<%= current_event.id %>/upload_photo.json?id=<%= @attendee.id %>" method="post" id="formId" multipart='true' enctype="multipart/form-data">
+              <input type="file" id="pic-portrait" name="file" />
+            </form>
           </div>
 
           <div class="col-xs-8 portrait-msg">

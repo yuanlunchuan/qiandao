@@ -142,12 +142,13 @@ $(document).ready(function(){
     }
     if (window.FileReader) 
     {
-      var fr = new FileReader();
-      fr.onloadend = function(e)
-      {
-        $('.portrait-img').attr({'src':e.target.result});
-      };
-      fr.readAsDataURL(file);
+      $("#formId").submit();
+      // var fr = new FileReader();
+      // fr.onloadend = function(e)
+      // {
+      //   $('.portrait-img').attr({'src':e.target.result});
+      // };
+      // fr.readAsDataURL(file);
     }
   });
 });
