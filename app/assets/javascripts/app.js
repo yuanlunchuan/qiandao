@@ -1,11 +1,12 @@
 $(document).on('ready page:load', function(){
+
     function findAndCheckin(){
         var keyword = $('#key_word_input_box').val();
         if (!keyword) {
             return;
         }
         if ($('#key_word_input_box').val()) {
-            $.getJSON('/app/events/1/site/rfid_search.json',
+            $.getJSON('/app/events/1/site/search_attendee.json',
               {
                 keyword: $('#key_word_input_box').val()
               },
@@ -17,6 +18,20 @@ $(document).on('ready page:load', function(){
             searchAttendee();
         });
     }
+  }
+
+  function binding_rfid(attendee_id, rfid_num){
+    $.post('/app/events/1/site/binding_rfid.json',
+      {
+        attendee_id: attendee_id,
+        rfid_num:rfid_num
+      },
+    function(event){
+    }).error(function(event){
+      if(event.responseJSON&&event.responseJSON.message[0]){
+        alert("绑定失败"+event.responseJSON.message[0]);
+    }
+    });
   }
 
     $('input[autocomplete=off]').on('focus', function(){
@@ -114,23 +129,13 @@ $(document).on('ready page:load', function(){
 
     $( ".modal" ).on( "click", ".binding_rfid", function() {
       $('.modal').modal('hide');
+
       var rfid=prompt("请刷卡","");
       var attendee_id = $(this).data('attendee-id');
       if (rfid)
       {
-        $.post('/app/events/1/site/binding_rfid.json',
-          {
-            session_id: 1,
-            attendee_id: attendee_id,
-            rfid_num:rfid
-          },
-        function(event){
-        }).error(function(event){
-          if(event.responseJSON&&event.responseJSON.message[0]){
-            alert("绑定失败"+event.responseJSON.message[0]);
-        }
-        });
-     }
+        binding_rfid(attendee_id, rfid);
+      }
     });
 
     $( ".modal" ).on( "click", ".site-check-in-btn", function() {
@@ -213,6 +218,13 @@ $(document).on('ready page:load', function(){
                     });
                     playSound();
                     reloadAttendees();
+                    if (!data.attendee.rfid_num) {
+                      var rfid=prompt("请刷卡绑定卡号","");
+                      if (rfid)
+                      {
+                        binding_rfid(data.attendee.id, rfid);
+                      }
+                    }
                 }
             }
         });

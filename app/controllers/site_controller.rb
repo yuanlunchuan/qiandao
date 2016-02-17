@@ -1,26 +1,25 @@
 class SiteController < ApplicationController
   before_action :authorize_admin!
-  before_action :find_categories, except: [:rfid_search]
-  before_action :find_session, except: [:index, :binding_rfid, :rfid_search]
+  before_action :find_categories, except: [:search_attendee]
+  before_action :find_session, except: [:index, :binding_rfid, :search_attendee]
   include WebApiRenderer
   attr_accessor :meta
 
   def sessions
   end
 
-  def rfid_search
+  def search_attendee
     self.meta = params
 
     attendee = Attendee.find_by(rfid_num: params[:keyword])
+    attendee = Attendee.find_by(token: params[:keyword]) if attendee.blank?
+    attendee = Attendee.find_by(name: params[:keyword]) if attendee.blank?
+    attendee = Attendee.find_by(mobile: params[:keyword]) if attendee.blank?
+
     if attendee.present?
       render_ok [ attendee ]
     else
-      attendee = Attendee.find_by(token: params[:keyword])
-      if attendee.present?
-        render_ok [ attendee ]
-      else
-        render_not_found '没有找到'
-      end
+      render_not_found '没有找到'
     end
   end
 
@@ -119,6 +118,7 @@ private
 
   def attendee_info
     {  id: @attendee.id,
+ rfid_num: @attendee.rfid_num,
      name: @attendee.name,
   company: @attendee.company,
    avatar: @attendee.avatar.url,

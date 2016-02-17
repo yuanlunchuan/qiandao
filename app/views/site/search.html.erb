@@ -76,7 +76,7 @@
         <% if attendee.rfid_num.present? %>
           <%= link_to '再次绑定rfid', 'javascript:;', data: {attendee_id: attendee.id}, class: 'btn btn-xs btn-primary binding_rfid', method: :post  %></td>
         <% else %>
-          <%= link_to '再次绑定rfid', 'javascript:;', data: {attendee_id: attendee.id}, class: 'btn btn-xs btn-primary binding_rfid', method: :post  %></td>
+          <%= link_to '绑定rfid', 'javascript:;', data: {attendee_id: attendee.id}, class: 'btn btn-xs btn-primary binding_rfid', method: :post  %></td>
         <% end %>
         
       </tr>

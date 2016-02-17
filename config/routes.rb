@@ -68,7 +68,7 @@ Rails.application.routes.draw do
       resources :system_infos
 
       get 'photos'          => 'attendees#photos'
-      get 'site/rfid_search'     => 'site#rfid_search'
+      get 'site/search_attendee'     => 'site#search_attendee'
 
       post 'notifications'   => 'notifications#create'
       get 'notifications'   => 'notifications#index'
