@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
 
   def create
     params[:sent_sms] ||= '0'
-    @attendees  = current_event.attendees.page(params[:page])
+    @attendees  = current_event.attendees
     @attendees = @attendees.category(params[:category_id]) if params[:category_id].present?
     @attendees = @attendees.contains(params[:keyword]) if params[:keyword].present?
     @attendees = @attendees.sms_sent if params[:sent_sms] == '1'
@@ -24,12 +24,14 @@ class NotificationsController < ApplicationController
 
     success_count = 0
     error_count = 0
+    error_attendee_name = ''
 
     @attendees.each do |attendee|
       begin
         attendee.send_sms(@template.content)
         success_count += 1
       rescue => e
+        error_attendee_name = "#{error_attendee_name}, #{attendee.name}"
         error_count += 1
         logger.info "--------e.message: #{e.message}"
         #redirect_to :back, flash: {error: e.message}
