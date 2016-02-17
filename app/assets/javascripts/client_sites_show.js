@@ -58,11 +58,15 @@ $(document).ready(function(){
       {},
       function(result) {//返回数据根据结果进行相应的处理
         if ( result.success ) {
-          var notice = result.collection[0].content;
-          if(notice != null){
-            $('.notice-msg').html(notice);
+          var notice = result.collection;
+          if(notice != null&&notice != undefined){
+            $('.scroll-area').html("");
+            $.each(notice, function(i, value) {
+              $('.scroll-area').append('<span class="notice-msg">'+value.content+'</span>');
+            })
           }
-        } else {
+        }
+        else {
           alert("请求失败了")
         }
       }
