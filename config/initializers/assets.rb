@@ -48,6 +48,7 @@ Rails.application.config.assets.precompile += %w(
   invitations.js 
   province_city.js
   jquery-accordion-menu.js
+  seat_new.js
   seat_show.js
   seller_checkins_show.js
 

@@ -5,14 +5,16 @@ class SeatsController < ApplicationController
   attr_accessor :meta
 
   def new
-    @session = Session.new
-    @attendees = current_event.attendees
-    @attendees = @attendees.page(params[:page]).includes(:category)
+     @attendees = current_event.attendees
+    @attendees = @attendees.page(params[:page])
+    # @session = Session.new
+    # @attendees = current_event.attendees
+    # @attendees = @attendees.page(params[:page]).includes(:category)
 
-    if params[:session_id]
-      @session = Session.find(params[:session_id])
-      @seats = Seat.session_is(@session) unless params[:reload_seat].present?
-    end
+    # if params[:session_id]
+    #   @session = Session.find(params[:session_id])
+    #   @seats = Seat.session_is(@session) unless params[:reload_seat].present?
+    # end
   end
 
   #更新座位安排
