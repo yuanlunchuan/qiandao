@@ -26,7 +26,9 @@ class BadgePdf < Prawn::Document
       font('msyh') do
         text attendee.name, align: :center, size: 14
         move_down 5
-        text attendee.company, align: :center, size: 8
+        company = ' '
+        company = attendee.company if attendee.company.present?
+        text company, align: :center, size: 8
         move_down 17
         text attendee.category.try(:name), align: :center, size: 12
       end
