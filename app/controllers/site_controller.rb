@@ -11,11 +11,16 @@ class SiteController < ApplicationController
   def rfid_search
     self.meta = params
 
-    attendee = Attendee.find_by(rfid_num: params[:rfid_num])
+    attendee = Attendee.find_by(rfid_num: params[:keyword])
     if attendee.present?
-      render_ok attendee.to_hash
+      render_ok [ attendee ]
     else
-      render_not_found '没有找到'
+      attendee = Attendee.find_by(token: params[:keyword])
+      if attendee.present?
+        render_ok [ attendee ]
+      else
+        render_not_found '没有找到'
+      end
     end
   end
 

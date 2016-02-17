@@ -1,17 +1,18 @@
 $(document).on('ready page:load', function(){
     function findAndCheckin(){
-        var rfid_value = $('#key_word_input_box').val();
-        if (!rfid_value) {
+        var keyword = $('#key_word_input_box').val();
+        if (!keyword) {
             return;
         }
         if ($('#key_word_input_box').val()) {
             $.getJSON('/app/events/1/site/rfid_search.json',
               {
-                rfid_num:$('#key_word_input_box').val()
+                keyword: $('#key_word_input_box').val()
               },
                function(event){
-            siteCheckIn(rfid_value);
-            $('#key_word_input_box').val('');
+                var token = event.collection[0].token
+                siteCheckIn(token);
+                $('#key_word_input_box').val('');
         }).error(function(event){
             searchAttendee();
         });
