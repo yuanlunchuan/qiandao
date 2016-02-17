@@ -50,7 +50,7 @@ class AttendeesController < ApplicationController
       #   province: line.split(',')[10],
       #   city: line.split(',')[11]
       #   attendee.save
-      # }  
+      # }
       # file.close();
       # end
       import_attendee
