@@ -75,7 +75,7 @@ $(document).ready(function(){
       width : 120,//设置宽高
       height : 120
     });
-    var qrcode_value = $('#rfid-num').data('rfid-num')
+    var qrcode_value = $('#attendee-token').data('attendee-token')
     qrcode.makeCode(qrcode_value);
   });
 
