@@ -122,6 +122,7 @@ private
      name: @attendee.name,
   company: @attendee.company,
    avatar: @attendee.avatar.url,
+ event_id: @attendee.event_id,
 badge_url: badge_event_attendee_path(id: @attendee.id, format: :pdf, print: true),
   printed: @attendee.printed_at.present? ? true : false,
     }
