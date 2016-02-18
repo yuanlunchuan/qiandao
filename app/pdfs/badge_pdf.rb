@@ -30,7 +30,7 @@ class BadgePdf < Prawn::Document
         company = attendee.company if attendee.company.present?
         text company, align: :center, size: 8
         move_down 17
-        text attendee.category.try(:name), align: :center, size: 12
+        text attendee.category.try(:name), align: :center, size: 9
       end
 
       #image attendee.qrcode_image, width: 45, height: 45, position: :center, vposition: 152
