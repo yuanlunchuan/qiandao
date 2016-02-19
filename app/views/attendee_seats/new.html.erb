@@ -29,12 +29,9 @@
     padding-left: 15px;
     padding-right: 15px;
   }
-  .jump-area button{
-    background-color: #005bac;
-    color:#ffffff;
-    width: 200px;
-    height: 40px;
-    border-radius: 5px;
+  .mssage-box{
+    opacity: 0;
+    cursor: default;
   }
   @media screen and (min-width: 1400px){
     .title-area{
@@ -65,30 +62,28 @@
       <div class="graphic-area">
         <%= image_tag 'attendee_seats/graphic.jpg',class:"img-responsive" %>
       </div>
-      <div class="hidden">
+      <div class="">
         <input class="mssage-box" type="text"/>
-      </div>
-      <div class="user-message-area"></div>
-      <div class="jump-area hidden">
-        <button type="button">查看座位</button>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
-  $(document).keypress(function(event){
+
+  $(document).ready(function(){ //文档读取时赋予文本框焦点
+    $('.mssage-box').focus();
+  })
+  $(document).click(function(){ //文档被点击时避免文本框失去焦点
+    $('.mssage-box').focus();
+  })
+  $('.mssage-box').keypress(function(event){ //检测输入了回车
     var keyCode = event.which||event.keyCode;
     if(keyCode == 13)//点击了回车
     {
-      var message = $('.mssage-box').val()
-      $('.user-message-area').html(message);
 
-      $('.jump-area').removeClass("hidden");
-
-      $('.jump-area button').click(function(){
-        location.href = "../attendee_seats/1/show"; //跳转到show页面
-      })
+      //此处进行数据的提交
+      $('.mssage-box').val("");//提交时将文本款数据清空,以免返回后文本框内有值
     }
   })
 </script>

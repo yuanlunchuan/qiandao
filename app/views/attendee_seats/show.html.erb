@@ -1,4 +1,8 @@
 <style type="text/css">
+  body{
+    background-color: #ececec;
+    font-family:'黑体', '微软雅黑';
+  }
   .bg-area{
     position: absolute;
     left: 0px;
@@ -15,30 +19,27 @@
     height: 100%; 
   }
   .title-area{
-    margin-top: 15%;
+    margin-top: 16%;
     font-size: 2.6em;
-    color: #4b4b4b;
+    color: #383838;
   }
   .seat-area{
     font-size: 1.6em;
     margin-top: 5%;
-    color: #646464;
+    color: #484848;
   }
   .seat-area p{
     margin-bottom: 0px;
   }
-  .seat-number{
-    color: #005bac;
-  }
   .return-area{
-    margin-top: 5%;
+    margin-top: 6%;
   }
   .return-area button{
     width: 30%;
     background-color: #005bac;
     color:#ffffff;
-    border-radius: 6px;
-    height: 40px;
+    border-radius: 10px;
+    height: 50px;
     font-size: 1.4em;
   }
   .seconds{
@@ -46,6 +47,11 @@
   }
   .return-msg{
     margin-top: 2%;
+  }
+  .number-paragraph{
+    color: #00953F;
+    font-size: 1.5em;
+    margin-top: 12px;
   }
   @media screen and (min-width: 1400px){
     .title-area{
@@ -60,6 +66,9 @@
     .return-area button{
       height: 60px;
       font-size: 1.6em;
+    }
+    .number-paragraph{
+      font-size: 1.7em;
     }
   }
   @media screen and (min-width: 1600px){
@@ -76,6 +85,9 @@
       height: 90px;
       font-size: 2.4em;
     }
+    .number-paragraph{
+      font-size: 2.5em;
+    }
   }
 </style>
 <title>座位查询</title>
@@ -86,12 +98,18 @@
     </div>
     <div class="col-xs-6 col-xs-offset-3 text-center page-area">
       <div class="title-area">座位自助查询</div>
-      <div class="seat-area">
-        <p class="name-paragraph">张三 先生/女士，您好！</p>
-        <p class="number-paragraph">您的座位是:<span class="seat-number">第1桌1号</span></p>
+      <div class="seat-area success-message">
+        <p>张三 先生/女士，您的座位在</p>
+        <p class="number-paragraph">第 12 桌</p>
+      </div>
+      <div class="seat-area failure-message hidden">
+        <p>很抱歉，没有找到您的座位信息。</p>
+        <p>请联系您的销售担当。</p>
       </div>
       <div class="return-area">
-        <button type="button">返 回</button>
+        <a href="javascript:;" onclick="javascript:history.back(-1);">
+          <button type="button">返 回</button>
+        </a>
       </div>
       <div class="return-msg">
         <p>将在<span class="seconds">5</span>秒后自动返回</p>
@@ -102,19 +120,19 @@
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    //查询座位信息失败
-    $('.name-paragraph').html("很抱歉，没有找到您的座位信息。");
-    $('.number-paragraph').html("请联系您的销售担当。");
 
-    var i = 4;
-    var timer = setInterval(function(){
-      $('.seconds').html(i);
-      i--;
-      if(i == -1)
-      {
-        clearInterval(timer);//取消进程
-        location.href="../attendee_seats/new"//自动跳转
-      }
-    },1000)
+    //倒计时返回
+    $(function(){
+      var i = 4;
+      var timer = setInterval(function(){
+        $('.seconds').html(i);
+        i--;
+        if(i == -1)
+        {
+          clearInterval(timer);//取消进程
+          history.back(-1);
+        }
+      },1000)
+    })
   })
 </script>

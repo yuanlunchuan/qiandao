@@ -1,7 +1,7 @@
 class AttendeeSeatsController < ApplicationController
   before_action :set_module
   skip_before_action :verify_authenticity_token
-  layout 'site'
+  layout 'client'
 
   def new
     
