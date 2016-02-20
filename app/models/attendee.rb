@@ -157,7 +157,7 @@ class Attendee < ActiveRecord::Base
 
   def prepare_sms_template(template)
     template = template.gsub(/#name#/, self.name)
-    template = template.gsub(/#url#/, 'http://985.so/urUx')#self.invitation_url)
+    template = template.gsub(/#url#/, 'http://985.so/uuE2')#self.invitation_url)
     template
   end
 
