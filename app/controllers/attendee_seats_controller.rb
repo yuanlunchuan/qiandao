@@ -4,11 +4,10 @@ class AttendeeSeatsController < ApplicationController
   layout 'client'
 
   def new
-    
+    session[:search_seat_session_id] = params[:session_id]
   end
 
   def create
-    attendees = Attendee.rfid_is(params[:key_word])
     if 0==attendees.size
       attendees = Attendee.mobile_is(params[:key_word])
     end
@@ -31,16 +30,20 @@ class AttendeeSeatsController < ApplicationController
       flash.now[:error] = '座位信息为空'
       render :new 
     end
-
   end
 
   def show
-    @seat = Seat.find(params[:id])
-    @attendee = @seat.attendee
+    session = Session.find(params[:session_id])
+    attendees = Attendee.rfid_is(params[:keyword])
+    attendees = Attendee.token_is(params[:keyword]) if attendees.blank?
+    if session.present?&&attendees.present?
+      @attendee = attendees.first
+      @seat = Seat.attendee_seat_is(attendees.first, session).first
+    end
   end
 
   def index
-
+    render layout: "site"
   end
 
   def set_module

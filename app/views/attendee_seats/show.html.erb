@@ -98,14 +98,17 @@
     </div>
     <div class="col-xs-6 col-xs-offset-3 text-center page-area">
       <div class="title-area">座位自助查询</div>
-      <div class="seat-area success-message">
-        <p>张三 先生/女士，您的座位在</p>
-        <p class="number-paragraph">第 12 桌</p>
-      </div>
-      <div class="seat-area failure-message hidden">
-        <p>很抱歉，没有找到您的座位信息。</p>
-        <p>请联系您的销售担当。</p>
-      </div>
+      <% if @seat.present? %>
+        <div class="seat-area success-message">
+          <p><%= @attendee.name %> 先生/女士，您的座位在</p>
+          <p class="number-paragraph">第 <%=@seat.table_row%> 桌 <%=@seat.table_col%> 号</p>
+        </div>
+      <% else %>
+        <div class="seat-area failure-message">
+          <p>很抱歉，没有找到您的座位信息。</p>
+          <p>请联系您的担当销售。</p>
+        </div>
+      <% end %>
       <div class="return-area">
         <a href="javascript:;" onclick="javascript:history.back(-1);">
           <button type="button">返 回</button>

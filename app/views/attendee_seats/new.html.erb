@@ -63,7 +63,10 @@
         <%= image_tag 'attendee_seats/graphic.jpg',class:"img-responsive" %>
       </div>
       <div class="">
-        <input class="mssage-box" type="text"/>
+        <%= form_tag event_attendee_seat_path(current_event, '~'), id: 'attendee-keyword', method: 'get' do %>
+          <input class="mssage-box" name="keyword" type="text"/>
+          <input class="hidden" name="session_id" value=<%= params[:session_id] %>>
+        <% end %>
       </div>
     </div>
   </div>
@@ -81,7 +84,7 @@
     var keyCode = event.which||event.keyCode;
     if(keyCode == 13)//点击了回车
     {
-      alert($('.mssage-box').val());
+      $('#attendee-keyword').submit();
       //此处进行数据的提交
       $('.mssage-box').val("");//提交时将文本款数据清空,以免返回后文本框内有值
     }

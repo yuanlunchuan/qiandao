@@ -4,25 +4,6 @@ $(document).ready(function(){
     $('#down-load-info').text('长按保存二维码');
   }
 
-  //图片异步上传
-  $(".dropz").dropzone({
-    url: "/client/events/"+$('#event-id').data('event-id')+"/upload_photo?id="+$('#attendee-id').data('attendee-id'),
-    dictRemoveLinks: "x",
-    dictCancelUpload: "x",
-    maxFiles: 10,
-    maxFilesize: 5,
-    acceptedFiles: "image/*",
-    init: function() {
-      this.on("success", function(file) {
-      //attendee_photo
-        console.log("File " + JSON.stringify(file) + "uploaded");
-      });
-      this.on("removedfile", function(file) {
-          console.log("File " + file.name + "removed");
-      });
-    }
-  });
-
   setTimeout(function(){
     $('.load-page').fadeOut();
     $('.home-page').fadeIn();
@@ -151,12 +132,6 @@ $(document).ready(function(){
     if (window.FileReader) 
     {
       $("#formId").submit();
-      // var fr = new FileReader();
-      // fr.onloadend = function(e)
-      // {
-      //   $('.portrait-img').attr({'src':e.target.result});
-      // };
-      // fr.readAsDataURL(file);
     }
   });
 });

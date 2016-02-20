@@ -33,6 +33,7 @@ class Attendee < ActiveRecord::Base
   scope :rfid_is, -> (rfid) { where rfid_num: rfid }
   scope :mobile_is, -> (mobile) { where mobile: mobile }
   scope :attendee_name_is, ->(name) { where name: name }
+  scope :token_is, ->(token) { where token: token}
 
   scope :seller_is, -> (seller) { where seller_id: seller.id }
   scope :printed, -> {where('printed_at IS NOT NULL')}
