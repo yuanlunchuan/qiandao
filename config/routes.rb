@@ -66,7 +66,10 @@ Rails.application.routes.draw do
       resources :restaurants
       resources :attendee_seats
       resources :system_infos
-
+      
+      get 'get_session_seat'  => 'seats#get_session_seat'
+      get 'get_seats_tablerow' => 'seats#get_seats_tablerow'
+      get 'arrange_seat'    => 'seats#arrange_seat'
       get 'photos'          => 'attendees#photos'
       get 'site/search_attendee'     => 'site#search_attendee'
 

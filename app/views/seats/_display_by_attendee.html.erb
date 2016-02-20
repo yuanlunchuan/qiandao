@@ -1,0 +1,57 @@
+<div id="current-event" class="hidden" data-current-event=<%=current_event.id%>></div>
+<div id="session-id" class="hidden" data-session-id=<%=params[:session_id]%>></div>
+
+<div class="ibox-content">
+  <div class="container-fluid">
+    <div class="col-sm-5 m-b-xs">
+      <%= link_to '按座位查看', event_seats_path(current_event, display_type: 'seat', session_id: params[:session_id]), class: "btn btn-primary" %>
+      <%= link_to '按名单查看', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id]), class: 'btn btn-primary' %>
+    </div>
+
+    <%= form_tag "/app/events/#{current_event.id}/seats", method: :get do%>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <input type="text" class="hidden" name="display_type" value="attendee" />
+          <input type="text" class="hidden" name="session_id" value="<%= params[:session_id] %>" />
+          <input type="text" placeholder="请输入关键字" class="input-sm form-control" name="keyword" value="<%=params[:keyword]%>">
+          <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <table id="seat-attendee-table" class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>姓名</th>
+          <th>省</th>
+          <th>市</th>
+          <th>公司</th>
+          <th>手机号码</th>
+          <th>座位号</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @attendees.each do |attendee| %>
+          <tr>
+            <td><%=attendee.attendee_number%></td>
+            <td><%=attendee.name%></td>
+            <td><%=attendee.province%></td>
+            <td><%=attendee.city%></td>
+            <td><%=attendee.company%></td>
+            <td><%=attendee.mobile%></td>
+            <% seat = Seat.attendee_seat_is(attendee, @session).first %>
+            <td><%= seat.present? ? "#{seat.table_row} 桌, #{seat.table_col} 号" : '未安排' %></td>
+            <td id="update-seat"><button>变更</button></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="col-sm-12">
+        <%= paginate @attendees %>
+      </div>
+    </div>
+  </div>
+</div>

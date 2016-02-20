@@ -2,11 +2,80 @@ class SeatsController < ApplicationController
   include WebApiRenderer
   layout 'event'
   before_action :set_current_module
+  skip_before_action :verify_authenticity_token
   attr_accessor :meta
 
+  def get_session_seat
+    self.meta = params
+
+    session = Session.find(params[:session_id])
+    current_seat = session.session_seat
+
+    render_ok [ current_seat ] if current_seat.present?
+    render_not_found '没有找到安排信息' if current_seat.blank?
+  end
+
+  def get_seats_tablerow
+    self.meta = params
+    session = Session.find(params[:session_id])
+
+    current_seats = Seat.session_is session
+    seats_list = current_seats.select('table_row').group('table_row').size
+    collection = []
+    per_table_num = session.session_seat.per_table_num
+    for i in 1..session.session_seat.total_table_count
+      item = i
+      item = "第#{i}桌（排）坐满" if seats_list[i].to_i>=per_table_num
+      collection << item
+    end
+
+    render_ok collection
+  end
+
+  def arrange_seat
+    self.meta = params
+
+    session = Session.find(params[:session_id])
+    table_col = 0
+    params[:attendees_id].each do |attendee_id|
+      table_col += 1
+      attendee = Attendee.find(attendee_id)
+      seat = Seat.new session: session,
+        attendee:  attendee,
+        table_row: params[:table_row],
+        table_col: table_col
+      seat.save
+    end
+    render_ok []
+  end
+
+  def show
+
+  end
+
+  def index
+    @session = Session.find(params[:session_id])
+    @current_session_seat = @session.session_seat
+    @attendees = current_event.attendees.page(params[:page])
+    @attendees = current_event.attendees.contains(params[:keyword]).page(params[:page]) if params[:keyword].present?
+  end
+
   def new
-     @attendees = current_event.attendees
-    @attendees = @attendees.page(params[:page])
+    if 'show_attendees'==params[:current_action]
+      session = Session.find(params[:session_id])
+      
+      @table_rows = []
+      for table_row in 0...session.session_seat.total_table_count
+        table_row += 1
+        @table_rows << [table_row, table_row]
+      end
+      @attendees = current_event.attendees.not_arrange(current_event, session)
+      @attendees = current_event.attendees.not_arrange(current_event, session).contains(params[:keyword]) if params[:keyword].present?
+      @attendees = @attendees.page(params[:page])
+      @current_row = (session.seats.maximum("table_row")||0)+1
+      @current_session_seat = session.session_seat
+    end
+
     # @session = Session.new
     # @attendees = current_event.attendees
     # @attendees = @attendees.page(params[:page]).includes(:category)
@@ -38,22 +107,25 @@ class SeatsController < ApplicationController
 
     if session.session_seat.present?
       session_seat = session.session_seat
-      session_seat.total_table_count = params[:table_num]
-      session_seat.per_table_num = params[:table_pernum]
+      session_seat.total_table_count = params[:total_table_count]
+      session_seat.per_table_num = params[:per_table_num]
     else
-      session_seat = SessionSeat.new total_table_count: params[:table_num],
-        per_table_num: params[:table_pernum],
+      session_seat = SessionSeat.new total_table_count: params[:total_table_count],
+        per_table_num: params[:per_table_num],
         session: session
     end
+    session_seat.properties[:unit] = params[:unit]
+    session_seat.properties[:set_table_num] = params[:set_table_num]
+    session_seat.save
 
     unless session_seat.save
       flash.now[:error] = session_seat.errors.full_messages
-      @attendees = current_event.attendees
-      @attendees = @attendees.page(params[:page]).includes(:category)
       render :new
       return
     end
-
+    redirect_to new_event_seat_path(current_action: 'show_attendees', session_id: params[:session_id])
+    return
+    #------------------------------------------
     if params[:classify]=='location'&&params[:enable_together]=='no'
       seat_location_not_together
     end

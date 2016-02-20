@@ -51,6 +51,8 @@ Rails.application.config.assets.precompile += %w(
   seat_new.js
   seat_show.js
   seller_checkins_show.js
+  seat_index_display_by_attendee.js
+  set_seat.js
 
   client_event_sessions_show.css
   client_invites_show.css

@@ -1,4 +1,5 @@
 <div id="seats_num" data-table-num=<%= @session.try(:session_seat).try(:total_table_count) %> data-table-pernum=<%= @session.try(:session_seat).try(:per_table_num) %> class='hidden'></div>
+<div id="current-event" class="hidden" data-current-event=<%=current_event.id%>></div>
 
 <% breadcrumb :seats %>
 
@@ -11,52 +12,11 @@
       <div class="ibox-content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-9" style="border-right-style: solid; border-right-color: #000">
-              <div class="table-responsive">
-                <table id="attendee-table" class="table table-striped table-hover">
-                  <thead>
-                  <tr>
-                    <th>序号</th>
-                    <th>姓名</th>
-                    <th>主嘉宾</th>
-                    <th>对应销售</th>
-                    <th>省</th>
-                    <th>市</th>
-                    <th>公司</th>
-                    <th>手机号码</th>
-                    <th>标签</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <% @attendees.each do |attendee| %>
-                    <tr>
-                      <td><%=attendee.attendee_number%></td>
-                      <td id="attendee-name"><%=attendee.name%></td>
-                      <td><%=attendee.owner_attendee.try(:name)%></td>
-                      <td><%=attendee.seller.try(:name)%></td>
-                      <td><%=attendee.province%></td>
-                      <td><%=attendee.city%></td>
-                      <td><%=attendee.company%></td>
-                      <td><%=attendee.mobile%></td>
-                      <td><%=attendee.category.try(:name)%></td>
-                    </tr>
-                  <% end %>
-                  </tbody>
-                </table>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <%= paginate @attendees %>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <button type="button">创建并继续</button>
-              <button>查看座位安排</button>
-              <table id="wait-arrange-seat-attendee" class="table table-striped table-hover">
-              </table>
-            </div>
+            <% if 'show_attendees'==params[:current_action] %>
+              <%= render 'attendees' %>
+            <% else %>
+              <%= render 'set_seat' %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -83,6 +43,7 @@
 
 <% content_for :script do %>
   <%= javascript_include_tag 'seat_new' %>
+  <%= javascript_include_tag 'set_seat' %>
 <% end %>
 
 <%# content_for :script do %>

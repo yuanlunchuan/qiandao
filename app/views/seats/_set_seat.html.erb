@@ -1,0 +1,34 @@
+<div class="row">目前还没有设置座位安排， 请填写一下内容开始设置：</div>
+
+<form action="/app/events/<%= current_event.id %>/seats" method="post">
+  <div class="row">
+    <%=select_tag :session_id, options_for_select(current_event.sessions.map {|s| [s.full_name, s.id]}, url_for), include_blank: false, class: 'input-sm form-control input-s-sm inline'%>
+  </div>
+  <div class="row">
+    本场活动需要<input type="text" id="total-table-count" name="total_table_count" placeholder='数字' />
+    <select id="unit" name="unit">
+      <option value="table">
+        桌
+      </option>
+      <option value="row">
+        排
+      </option>
+    </select>
+  </div>
+  <div class="row">
+    每桌最多可安排<input type="text" id="per-table-num" name="per_table_num" placeholder='数字' />人
+  </div>
+  <div class="row">
+    是否需要设定座号
+    <input type="radio" id="show-table-num" name="set_table_num" value="true" checked="true" />是
+    <input type="radio" id="hide-table-num" name="set_table_num" value="false" />否
+  </div>
+  <div class="row">
+    <button type="submit">开始设置</button>
+  </div>
+</form>
+
+<div id="dispaly-seat" class="col-sm-5 m-b-xs">
+  <a id="display-by-seat" class="btn btn-primary">按座位查看</a>
+  <a id="display-by-attendee" class="btn btn-primary">按名单查看</a>
+</div>
