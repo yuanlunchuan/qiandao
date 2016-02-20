@@ -33,8 +33,6 @@ var Obj = {
       {
         arrange_seat_url = arrange_seat_url+'&attendees_id[]='+self.choosed_attendee[i]
       }
-      console.info(arrange_seat_url);
-      return
       $.getJSON(arrange_seat_url,
         {
           session_id: $('#current-session-id').data('current-session-id'),
@@ -47,11 +45,15 @@ var Obj = {
 
     $("#attendee-table tr").each(function(){
       $(this).on("click", function(event){
+        if($('#per-table-num').data('per-table-num')<self.choosed_attendee.length){
+          alert('已超出人数，请先提交后再新建。');
+          return;
+        }
         self.choosed_attendee.push($(this).children().eq(9).text());
 
         var attendee_name = $(this).children().eq(1).text();
         $(this).closest('tr').remove();
-        var tr = "<tr><td class='attendee-id' data-attendee-id="+$(this).children().eq(9).text()+" align='center' valign='middle'>"+table_col+"<span style='border:1px solid #000;>"+attendee_name
+        var tr = "<tr><td class='attendee-id' data-attendee-id="+$(this).children().eq(9).text()+" align='center' valign='middle'>"+table_col+"<span style='border:1px solid #000; width: 100%'>"+attendee_name
         +"<i class='fa fa-times'></i></span></td></tr>"
 
         $('#wait-arrange-seat-attendee').append(tr);
