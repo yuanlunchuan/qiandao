@@ -44,9 +44,7 @@ var Obj = {
 
   onSessionIdChanged: function(event){
     var self = Obj;
-    console.info('--------line 30');
     self.loadSeat();
-    console.info('-------line 32');
     return self;
   },
 

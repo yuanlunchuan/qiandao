@@ -30,6 +30,7 @@
           <th>手机号码</th>
           <th>座位号</th>
           <th>操作</th>
+          <th class="hidden">嘉宾id</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +45,7 @@
             <% seat = Seat.attendee_seat_is(attendee, @session).first %>
             <td><%= seat.present? ? "#{seat.table_row} 桌, #{seat.table_col} 号" : '未安排' %></td>
             <td id="update-seat"><button>变更</button></td>
+            <td class="hidden"><%= attendee.id %></td>
           </tr>
         <% end %>
         </tbody>

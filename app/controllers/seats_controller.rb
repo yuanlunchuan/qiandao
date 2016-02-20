@@ -5,6 +5,38 @@ class SeatsController < ApplicationController
   skip_before_action :verify_authenticity_token
   attr_accessor :meta
 
+  def update_attendee_seat
+    self.meta = params
+
+    session = Session.find(params[:session_id])
+    attendee = Attendee.find(params[:attendee_id])
+    seat = Seat.attendee_seat_is(session, attendee).first
+    if seat.present?
+      seat.update(table_row: params[:table_row], table_col: params[:table_col])
+    else
+      seat = Seat.create session: session,
+        attendee:  attendee,
+        table_row: params[:table_row],
+        table_col: params[:table_col]
+    end
+
+    render_ok [ seat ]
+  end
+
+  def search_by_session_row
+    self.meta = params
+    session = Session.find(params[:session_id])
+    seats = Seat.search_by_session_row(session, params[:table_row]).reorder('table_col ASC')
+    collection = []
+
+    collection << session.session_seat
+    seats.each do |seat|
+      collection << seat
+    end
+
+    render_ok collection
+  end
+
   def get_session_seat
     self.meta = params
 
