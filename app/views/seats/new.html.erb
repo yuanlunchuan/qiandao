@@ -24,28 +24,10 @@
   </div>
 </div>
 
-<!-- <div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <%# if @seats.present? %>
-        <%#= render 'seat_show' %>
-      <%# else %>
-        <%# if params[:session_id].blank? %>
-          <%#= render 'choose_session' %>
-        <%# else %>
-          <%#= render 'seat_form' %>
-          <%#= render 'attendee' %>
-        <%# end %>
-      <%# end %>
-    </div>
-  </div>
-</div> -->
-
 <% content_for :script do %>
-  <%= javascript_include_tag 'seat_new' %>
-  <%= javascript_include_tag 'set_seat' %>
+  <% if 'show_attendees'==params[:current_action] %>
+    <%= javascript_include_tag 'seat_new' %>
+  <% else %>
+    <%= javascript_include_tag 'set_seat' %>
+  <% end %>
 <% end %>
-
-<%# content_for :script do %>
-  <%#= javascript_include_tag 'seat_show' %>
-<%# end %>

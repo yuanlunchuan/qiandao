@@ -1,4 +1,13 @@
 <div class="row">目前还没有设置座位安排， 请填写一下内容开始设置：</div>
+<script type="text/javascript">
+   function validate() {
+      if (confirm("提交表单?")) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+</script>
 
 <form action="/app/events/<%= current_event.id %>/seats" method="post">
   <div class="row">
@@ -24,7 +33,7 @@
     <input type="radio" id="hide-table-num" name="set_table_num" value="false" />否
   </div>
   <div class="row">
-    <button type="submit">开始设置</button>
+    <button type="submit" onsubmit="return validate()">开始设置</button>
   </div>
 </form>
 
