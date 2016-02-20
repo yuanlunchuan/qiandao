@@ -2,7 +2,7 @@ var Obj = {
   attendee_id: '',
 
   onUpdateSeatFailure: function(event){
-    window.location.href=window.location.href;
+    alert('安排失败');
   },
 
   onUpdateSeatSuccess: function(event){
@@ -51,19 +51,23 @@ var Obj = {
 
   },
 
+  showTableColList: function(table_row){
+    var self = Obj;
+    var url = '/app/events/'+$('#current-event').data('current-event')+"/search_by_session_row.json"
+    $.getJSON(url, 
+      {
+        session_id: $('#session-id').data('session-id'),
+        table_row: table_row
+      },self.onLoadTableColSuccess).error(self.onLoadTableColFailure);
+  },
+
   onTableRowChanged: function(event){
     var self = Obj;
 
     if (isNaN($(this).val())) {
       return;
     }
-
-    var url = '/app/events/'+$('#current-event').data('current-event')+"/search_by_session_row.json"
-    $.getJSON(url, 
-      {
-        session_id: $('#session-id').data('session-id'),
-        table_row: $(this).val()
-      },self.onLoadTableColSuccess).error(self.onLoadTableColFailure);
+    self.showTableColList($(this).val());
   },
 
   initialize: function(){
@@ -73,6 +77,10 @@ var Obj = {
       $(this).on("click", function(event){
         if('保存'==$(this).text())
         {
+          if (isNaN($("#table-col").val())) {
+            alert('不能在已占座位上安排');
+            return;
+          }
           self.updateSeat();
           $(this).html("<button>变更</button>");
           return;
@@ -96,6 +104,7 @@ var Obj = {
             "<option value='choos'>请选择桌号</option></select>号";
             val.html(table_row);
             $('#table-row-num').on('change', self.onTableRowChanged);
+            self.showTableColList(1);
           });
       });
     });

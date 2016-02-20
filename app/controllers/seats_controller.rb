@@ -10,7 +10,7 @@ class SeatsController < ApplicationController
 
     session = Session.find(params[:session_id])
     attendee = Attendee.find(params[:attendee_id])
-    seat = Seat.attendee_seat_is(session, attendee).first
+    seat = Seat.attendee_seat_is(attendee, session).first
     if seat.present?
       seat.update(table_row: params[:table_row], table_col: params[:table_col])
     else
@@ -94,18 +94,17 @@ class SeatsController < ApplicationController
 
   def new
     if 'show_attendees'==params[:current_action]
-      session = Session.find(params[:session_id])
+      @session = Session.find(params[:session_id])
       
       @table_rows = []
-      for table_row in 0...session.session_seat.total_table_count
-        table_row += 1
+      for table_row in 1..@session.session_seat.total_table_count
         @table_rows << [table_row, table_row]
       end
-      @attendees = current_event.attendees.not_arrange(current_event, session)
-      @attendees = current_event.attendees.not_arrange(current_event, session).contains(params[:keyword]) if params[:keyword].present?
+      @attendees = current_event.attendees.not_arrange(current_event, @session)
+      @attendees = current_event.attendees.not_arrange(current_event, @session).contains(params[:keyword]) if params[:keyword].present?
       @attendees = @attendees.page(params[:page])
-      @current_row = (session.seats.maximum("table_row")||0)+1
-      @current_session_seat = session.session_seat
+      @current_row = (@session.seats.maximum("table_row")||0)+1
+      @current_session_seat = @session.session_seat
     end
 
     # @session = Session.new
