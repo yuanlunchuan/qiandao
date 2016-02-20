@@ -14,6 +14,11 @@
           <i class="fa fa-print"></i>
         <% end %>
         &nbsp;
+        <% if attendee.rfid_num.present? %>
+          <%= link_to '再次绑定rfid', 'javascript:;', class: 'btn btn-white btn-xs bind-rfid', data: { attendee_id: attendee.id } %>
+        <% else %>
+          <%= link_to '绑定rfid', 'javascript:;', class: 'btn btn-white btn-xs bind-rfid', data: { attendee_id: attendee.id } %>
+        <% end %>
         <%= link_to 'javascript:;', data: {token: attendee.token}, class: 'btn btn-white btn-xs site-uncheck-in-btn' do %>
           <i class="fa fa-times"></i>
         <% end %>

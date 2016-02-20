@@ -23,6 +23,11 @@
             <%= link_to title, 'javascript:;',  class: "btn #{style} btn-xs site-print-pdf-btn", data: {pdf: badge_event_attendee_path(id: @attendee.id, format: :pdf)}%>
             <%= link_to '取消签到', 'javascript:;', data: {token: @attendee.token}, class: 'btn btn-white btn-xs site-uncheck-in-btn' %>
             <%= link_to '关闭', 'javascript:;', class: 'btn btn-white btn-xs site-close-checkin-status' %>
+            <% if @attendee.rfid_num.present? %>
+              <%= link_to '再次绑定rfid', 'javascript:;', class: 'btn btn-white btn-xs bind-rfid', data: { attendee_id: @attendee.id } %>
+            <% else %>
+              <%= link_to '绑定rfid', 'javascript:;', class: 'btn btn-white btn-xs bind-rfid', data: { attendee_id: @attendee.id } %>
+            <% end %>
         </div>
 
     </div>

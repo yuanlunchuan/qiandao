@@ -67,7 +67,8 @@ $(document).on('ready page:load', function(){
         document.getElementById("alertmsgDiv").appendChild(txt);  
         //设置关闭时间
         window.setTimeout(closewin,2000);   
-    }  
+    }
+
     function closewin() {  
         document.body.removeChild(document.getElementById("alertbgDiv"));  
         document.getElementById("alertmsgDiv").removeChild(document.getElementById("alertmsgTitle"));  
@@ -210,6 +211,15 @@ $(document).on('ready page:load', function(){
         $('.modal').modal('hide');
         var token = $(this).data('token');
         siteCheckIn(token);
+    });
+
+    $('#side-list').on('click', '.bind-rfid', function(){
+        var attendee_id = $(this).data('attendee-id');
+        var rfid=prompt("请刷卡绑定卡号","");
+        if (rfid)
+        {
+          binding_rfid(attendee_id, rfid);
+        }
     });
 
     $('#side-list').on('click', '.site-close-checkin-status', function(){
