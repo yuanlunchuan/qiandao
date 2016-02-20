@@ -1,5 +1,9 @@
 <div class="ibox-content">
   <div class="container-fluid">
+    <div class="col-sm-12 m-b-xs">
+      <%= link_to '按座位查看', event_seats_path(current_event, display_type: 'seat', session_id: params[:session_id]), class: "btn btn-primary" %>
+      <%= link_to '按名单查看', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id]), class: 'btn btn-primary' %>
+    </div>
     <div class="row">
       <% for i in 1..@current_session_seat.total_table_count%>
         <div class="col-sm-6">
