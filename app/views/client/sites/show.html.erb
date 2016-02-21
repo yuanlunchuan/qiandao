@@ -23,9 +23,6 @@
             <button type="button" class="portrait-img-area">
               <% img_url = (@img.present? ? @img : image_path('yonex-confirmation-camera.png')) %>
               <%= image_tag  img_url, class:"portrait-img", id: "attendee_photo"%>
-              <%#= image_tag  img_url, width: '35%', style:'margin: 1em auto;', id: 'upload_photo', class: 'img-circle animated zoomIn'%>
-
-              <%#= image_tag download_photo_event_attendee_path(current_event, @attendee), class:"portrait-img", id: "attendee_photo" %>
             </button>
             <form action="/client/events/<%= current_event.id %>/upload_photo.json?id=<%= @attendee.id %>" method="post" id="formId" multipart='true' enctype="multipart/form-data">
               <input type="file" id="pic-portrait" name="file" />
@@ -121,7 +118,7 @@
         <p class="seat-user-name"><span><%= @attendee.name %></span> 先生/女士，您的座位</p>
         <div class="seat-number-area">
           <%= image_tag 'client/sites/seat_number.png'%>
-          <span class="seat-number">正在安排中</span>
+          <span class="seat-number">查询中</span>
         </div>
       </div>
     </div>

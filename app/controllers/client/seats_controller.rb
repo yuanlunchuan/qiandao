@@ -8,14 +8,15 @@ class Client::SeatsController < ApplicationController
     attendee = Attendee.find_by(id: params[:attendee_id])
     render_not_found '没有找到对应嘉宾' and return if attendee.blank?
 
-    # session = Session.find_by(id: params[:session_id])
-    # render_not_found '没有找到对应日程' and return if session.blank?
+    show_seat_session = nil
+    current_event.sessions.each do |session_item|
+      show_seat_session = session_item.session_seat if session_item.session_seat.present?&&session_item.session_seat.display
+    end
 
-    # seats = Seat.attendee_seat_is(attendee, session)
+    render_not_found '座位在安排中' and return if show_seat_session.blank?
+    seats = Seat.attendee_seat_is(attendee, show_seat_session)
+    render_not_found '没查询到您的座位' and return if seats.blank?
 
-    # render_not_found '没有找到座位信息' and return if seats.blank?
-    seats = Seat.attendee_seat_is(attendee, current_event.sessions.first)
-
-    render_ok [ seats.first.to_hash ]
+    render_ok [ seats.first ]
   end
 end

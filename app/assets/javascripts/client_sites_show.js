@@ -103,11 +103,15 @@ $(document).ready(function(){
           var table_row = result.collection[0].table_row
           var table_col = result.collection[0].table_col
           $('.seat-number').html("第"+table_row+"桌, 第"+table_col+"号");
-        } else {
-          alert("请求失败了")
         }
       }
-    )
+    ).error(function(event){
+      if ('404'==event.status) {
+        $('.seat-number').html('正在安排中');
+      }else{
+        alert('网络请求失败， 请重试。');
+      }
+    });
   });
 
   //隐藏座位
