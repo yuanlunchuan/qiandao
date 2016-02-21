@@ -138,13 +138,9 @@ class SeatsController < ApplicationController
 
     if session.session_seat.present?
       session_seat = session.session_seat
-      total_table_count = session_seat.total_table_count
-      per_table_num = session_seat.per_table_num
-      if (total_table_count<params[:total_table_count].to_i)||(total_table_count<params[:total_table_count].to_i)
-        clear_other_seat(params[:total_table_count].to_i, params[:total_table_count].to_i)
-      end
       session_seat.total_table_count = params[:total_table_count]
       session_seat.per_table_num = params[:per_table_num]
+      clear_current_session_seat session
     else
       session_seat = SessionSeat.new total_table_count: params[:total_table_count],
         per_table_num: params[:per_table_num],
@@ -179,10 +175,6 @@ class SeatsController < ApplicationController
     end
 
     redirect_to new_event_seat_path(session_id: session) unless @should_break
-  end
-
-  def clear_other_seat(current_table_row, current_table_col)
-    
   end
 
   def seat_seller_not_together

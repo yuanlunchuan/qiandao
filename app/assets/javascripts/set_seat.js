@@ -2,6 +2,7 @@ var Obj = {
   onLoadSeatSuccess: function(event){
     var self = Obj;
     var seat = event.collection[0];
+    $('#set-seat').text('重新设置');
     var sessionId = $('#session_id').val();
     $('#total-table-count').val(seat.total_table_count);
     $('#per-table-num').val(seat.per_table_num);
@@ -24,7 +25,7 @@ var Obj = {
   onLoadFailure: function(event){
     var self = Obj;
     $('#dispaly-seat').hide();
-
+    $('#set-seat').text('开始设置');
     $('#total-table-count').val('');
     $('#per-table-num').val('');
     $("#unit").val("row");
