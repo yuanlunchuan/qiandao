@@ -2,6 +2,35 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :display_by_attendee do |cat|
+  link '名单查看', event_seats_path
+  parent :set_seat
+end
+
+crumb :display_by_seat do |cat|
+  link '按座位查看', event_seats_path
+  parent :set_seat
+end
+
+crumb :display_by_attendees_from_attendee do |cat|
+  link '名单查看', event_seats_path
+  parent :set_attendee_seat
+end
+
+crumb :display_by_seat_from_attendee do |cat|
+  link '按座位查看', event_seats_path
+  parent :set_attendee_seat
+end
+
+crumb :set_attendee_seat do |cat|
+  link '安排嘉宾座位', new_event_seat_path
+  parent :set_seat
+end
+
+crumb :set_seat do
+  link '座位设置', new_event_seat_path
+end
+
 crumb :new_seytem_info do |cat|
   link '发布系统消息', event_system_infos_path
   parent :system_infos

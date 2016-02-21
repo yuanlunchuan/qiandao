@@ -18,6 +18,9 @@ var Obj = {
     }
     $("#display-by-seat").attr('href', '/app/events/'+$('#current-event').data('current-event')+'/seats?display_type=seat&session_id='+sessionId);
     $("#display-by-attendee").attr('href', '/app/events/'+$('#current-event').data('current-event')+'/seats?display_type=attendee&session_id='+sessionId);
+    $('#continue-arrange-seat').removeClass('hidden')
+    $('#continue-arrange-seat').attr('href', '/app/events/'+$('#current-event').data('current-event')+'/seats/new?current_action=show_attendees&session_id='+sessionId)
+
     $('#dispaly-seat').show();
     return self;
   },
@@ -29,6 +32,7 @@ var Obj = {
     $('#total-table-count').val('');
     $('#per-table-num').val('');
     $("#unit").val("row");
+    $('#continue-arrange-seat').addClass('hidden')
     $("#show-table-num").attr('checked', 'checked');
     return self;
   },

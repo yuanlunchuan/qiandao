@@ -1,7 +1,11 @@
 <div id="seats_num" data-table-num=<%= @session.try(:session_seat).try(:total_table_count) %> data-table-pernum=<%= @session.try(:session_seat).try(:per_table_num) %> class='hidden'></div>
 <div id="current-event" class="hidden" data-current-event=<%=current_event.id%>></div>
 
-<% breadcrumb :seats %>
+<% if 'show_attendees'==params[:current_action] %>
+  <% breadcrumb :set_attendee_seat %>
+<% else %>
+  <% breadcrumb :set_seat %>
+<% end %>
 
 <div class="row">
   <div class="col-lg-12">

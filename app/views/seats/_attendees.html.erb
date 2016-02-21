@@ -2,7 +2,7 @@
 <div class="row m-b-md m-t-md">
 
   <div class="col-sm-3 m-b-xs">
-    <%=select_tag :seat_id, options_for_select(@table_rows), prompt: '请选择桌号（牌号）', class: 'input-sm form-control input-s-sm inline'%>
+    <%=select_tag :seat_id, options_for_select(@table_rows), prompt: '请选择桌号（排号）', class: 'input-sm form-control input-s-sm inline'%>
   </div>
 
   <%= form_tag "/app/events/#{current_event.id}/seats/new", method: :get do%>
@@ -17,8 +17,8 @@
   <% end %>
 
   <div class="col-sm-5 m-b-xs">
-    <%= link_to '按座位查看', event_seats_path(current_event, display_type: 'seat', session_id: params[:session_id]), class: 'btn btn-primary' %>
-    <%= link_to '按名单查看', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id]), class: 'btn btn-primary' %>
+    <%= link_to '按座位查看', event_seats_path(current_event, display_type: 'seat', session_id: params[:session_id], from: 'attendees'), class: 'btn btn-primary' %>
+    <%= link_to '按名单查看', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id], from: 'attendees'), class: 'btn btn-primary' %>
   </div>
 
  </div>
