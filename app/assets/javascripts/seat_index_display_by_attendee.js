@@ -48,7 +48,7 @@ var Obj = {
 
   onLoadTableColFailure: function(event){
     var self = Obj;
-
+    
   },
 
   showTableColList: function(table_row){
@@ -70,11 +70,18 @@ var Obj = {
     self.showTableColList($(this).val());
   },
 
+  onCancelButtonClicked: function(event){
+    var self = Obj;
+    window.location.href=window.location.href;
+  },
+
   initialize: function(){
     var self = Obj;
 
+    $('#cancel-button').on('click', self.onCancelButtonClicked);
     $("#seat-attendee-table tr #update-seat").each(function(){
       $(this).on("click", function(event){
+        $('#cancel-button').removeClass('hidden');
         if('保存'==$(this).text())
         {
           if (isNaN($("#table-col").val())) {
@@ -83,6 +90,10 @@ var Obj = {
           }
           self.updateSeat();
           $(this).html("<button>变更</button>");
+          return;
+        }
+        if (self.attendee_id) {
+          alert('请先取消之前的操作');
           return;
         }
         self.attendee_id = $(this).parent().children().eq(8).text();
