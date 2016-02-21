@@ -54,6 +54,10 @@ var Obj = {
 
     $('#wait-arrange-seat-attendee tr').each(function(){
       $(this).on("click", function(event){
+        var r=confirm("是否将该嘉宾移除?")
+        if (r==false){
+          return;
+        }
         var dele_attendee_seat_url = '/app/events/'+$('#current-event').data('current-event')+'/dele_attendee_seat.json?';
         $.post(dele_attendee_seat_url, 
           {
