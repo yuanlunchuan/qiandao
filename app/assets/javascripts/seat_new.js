@@ -1,5 +1,6 @@
 var Obj = {
   choosed_attendee: [],
+  total_attendee: 0,
 
   onAttendeeIdBoxClicked: function(event){
     var self = Obj;
@@ -26,6 +27,8 @@ var Obj = {
   initialize: function(){
     var self = Obj;
     var table_col = 1;
+    
+    self.total_attendee = $('#per-table-num').data('per-table-num')-$('#seat-table').data('attendee-count');
 
     $('#save-and-continue').on('click', function(){
       var arrange_seat_url = '/app/events/'+$('#current-event').data('current-event')+'/arrange_seat.json?'
@@ -45,8 +48,8 @@ var Obj = {
 
     $("#attendee-table tr").each(function(){
       $(this).on("click", function(event){
-        if($('#per-table-num').data('per-table-num')<self.choosed_attendee.length){
-          alert('已超出人数，请先提交后再新建。');
+        if(self.total_attendee<=self.choosed_attendee.length){
+          alert('已经坐满');
           return;
         }
         self.choosed_attendee.push($(this).children().eq(9).text());

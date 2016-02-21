@@ -105,6 +105,11 @@ class SeatsController < ApplicationController
       @attendees = @attendees.page(params[:page])
       @current_row = (@session.seats.maximum("table_row")||0)+1
       @current_session_seat = @session.session_seat
+
+      if params[:table_row].present?
+        @current_row = params[:table_row]
+        @current_table = Seat.search_by_session_row(@session, params[:table_row])
+      end
     end
 
     # @session = Session.new

@@ -8,7 +8,7 @@
       <% for i in 1..@current_session_seat.total_table_count%>
         <div class="col-sm-6">
           <div class="col-sm-3">第<%= i %>桌（排）</div>
-          <div class="col-sm-3 col-sm-offset-6"><%= link_to '编辑', '', class: 'btn btn-default' %></div>
+          <div class="col-sm-3 col-sm-offset-6"><%= link_to '编辑', new_event_seat_path(current_event, current_action: 'show_attendees', session_id: params[:session_id], table_row: i) , class: 'btn btn-default' %></div>
           <table style="border:1px solid #999" class="table table-striped table-hover">
             <% col = 0 %>
             <% @session.seats.seat_by_row(i).each do |seat| %>
