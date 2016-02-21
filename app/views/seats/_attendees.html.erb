@@ -16,7 +16,7 @@
       </div>
   <% end %>
 
-  <div class="col-sm-5 m-b-xs">
+  <div class="hidden col-sm-5 m-b-xs">
     <%= link_to '按座位查看', event_seats_path(current_event, display_type: 'seat', session_id: params[:session_id], from: 'attendees'), class: 'btn btn-primary' %>
     <%= link_to '按名单查看', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id], from: 'attendees'), class: 'btn btn-primary' %>
   </div>
