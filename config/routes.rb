@@ -66,6 +66,7 @@ Rails.application.routes.draw do
       resources :restaurants
       resources :attendee_seats
       resources :system_infos
+      resources :session_seats
       
       post 'update_attendee_seat' => 'seats#update_attendee_seat'
       get 'search_by_session_row' => 'seats#search_by_session_row'

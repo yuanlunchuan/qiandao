@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211065025) do
+ActiveRecord::Schema.define(version: 20160221035221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,9 +79,10 @@ ActiveRecord::Schema.define(version: 20160211065025) do
     t.string   "token"
     t.string   "rfid_num"
     t.string   "level"
+    t.integer  "login_count",          default: 0
     t.datetime "checked_in_at"
     t.integer  "attendee_number",      default: 0
-    t.integer  "sms_sid"
+    t.string   "sms_sid"
     t.string   "sms_mobile"
     t.datetime "sms_sent_at"
     t.boolean  "sms_delivered"
@@ -179,8 +180,11 @@ ActiveRecord::Schema.define(version: 20160211065025) do
     t.string   "address"
     t.string   "phone_number"
     t.integer  "distance"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "baidu_url"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -219,8 +223,10 @@ ActiveRecord::Schema.define(version: 20160211065025) do
     t.integer  "session_id"
     t.integer  "total_table_count"
     t.integer  "per_table_num"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.json     "properties",        default: {}
+    t.boolean  "display"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -247,6 +253,14 @@ ActiveRecord::Schema.define(version: 20160211065025) do
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "system_infos", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "content"
+    t.boolean  "display",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_foreign_key "checkins", "attendees"

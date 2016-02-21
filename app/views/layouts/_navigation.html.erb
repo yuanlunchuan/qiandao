@@ -137,6 +137,12 @@
                 <span class="nav-label">座位安排</span>
               <% end %>
             </li>
+            <li>
+              <%= link_to edit_event_session_seat_path(current_event, '~'), style: is_active_item('session_seats') do %>
+                <i class="fa fa-eye"></i>
+                <span class="nav-label">座位查询设置</span>
+              <% end %>
+            </li>
           </ul>
         </li>
 

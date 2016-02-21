@@ -2,6 +2,10 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :edit_session_seat do
+  link '设置微网站座位查询', new_event_seat_path
+end
+
 crumb :display_by_attendee do |cat|
   link '名单查看', event_seats_path
   parent :set_seat
