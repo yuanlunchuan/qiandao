@@ -343,7 +343,7 @@ $(document).on('ready page:load', function(){
 
     function printPDF(pdf, attendee_id, is_binding_rfid){
         pdf = pdf + '?print=true';
-        var w = window.open(pdf) ;
+        var w = window.open(pdf);
         w.print();
         setTimeout(function(){
            if (is_binding_rfid) {
@@ -353,12 +353,13 @@ $(document).on('ready page:load', function(){
                 binding_rfid(attendee_id, rfid);
               }
            }
-        }, 1100);
+        }, 11000);
+
         setTimeout(function(){
            w.close();
            hideCheckInStatus();
            reloadAttendees();
-        }, 1000);
+        }, 10000);
     }
 
     function searchAttendee(){
