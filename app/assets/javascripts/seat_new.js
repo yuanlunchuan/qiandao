@@ -27,23 +27,45 @@ var Obj = {
   initialize: function(){
     var self = Obj;
     var table_col = 1;
-    
+
     self.total_attendee = $('#per-table-num').data('per-table-num')-$('#seat-table').data('attendee-count');
 
     $('#save-and-continue').on('click', function(){
-      var arrange_seat_url = '/app/events/'+$('#current-event').data('current-event')+'/arrange_seat.json?'
+      if (!self.choosed_attendee.length) {
+        alert('请选择嘉宾');
+        return;
+      }
+      var arrange_seat_url = '/app/events/'+$('#current-event').data('current-event')+'/arrange_seat.json?';
       for(var i=0; i< self.choosed_attendee.length; i++)
       {
         arrange_seat_url = arrange_seat_url+'&attendees_id[]='+self.choosed_attendee[i]
       }
+
+      var session_id = $('#current-session-id').data('current-session-id');
       $.getJSON(arrange_seat_url,
         {
-          session_id: $('#current-session-id').data('current-session-id'),
+          session_id: session_id,
           table_row: $('#current-row').data('current-row')
         },
         function(event){
-          window.location.href=window.location.href;
+          window.location.href='/app/events/'+$('#current-event').data('current-event')+'/seats/new?current_action=show_attendees&session_id='+session_id;
         });
+    });
+
+    $('#wait-arrange-seat-attendee tr').each(function(){
+      $(this).on("click", function(event){
+        var dele_attendee_seat_url = '/app/events/'+$('#current-event').data('current-event')+'/dele_attendee_seat.json?';
+        $.post(dele_attendee_seat_url, 
+          {
+            session_id: $('#current-session-id').data('current-session-id'),
+            attendee_id: $(this).children().eq(1).text()
+          },function(event){
+            window.location.href=window.location.href;
+          }
+          ).error(function(event){
+            window.location.href=window.location.href;
+          });
+      });
     });
 
     $("#attendee-table tr").each(function(){

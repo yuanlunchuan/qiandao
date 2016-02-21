@@ -3,7 +3,7 @@
 <div class="col-md-9" style="border-right-style: solid; border-right-color: #000">
 <div class="row m-b-md m-t-md">
 
-  <div class="col-sm-3 m-b-xs">
+  <div class="col-sm-3 m-b-xs hidden">
     <%=select_tag :seat_id, options_for_select(@table_rows), prompt: '请选择桌号（排号）', class: 'input-sm form-control input-s-sm inline'%>
   </div>
 
@@ -81,7 +81,7 @@
       <% i = 0 %>
       <% @current_table.each do |seat| %>
         <% i += 1 %>
-        <tr><td class='attendee-id' data-attendee-id=<%= seat.attendee.id %> ><span style='border:1px solid #000; width: 100%'><%= i %><%= seat.attendee.name %><i class='fa fa-times'></i></span></td></tr>
+        <tr><td class='arranged-attendee'><span style='border:1px solid #000; width: 100%'><%= i %><%= seat.attendee.name %><i class='fa fa-times'></i></span></td><td class="hidden"><%= seat.attendee.id %></td></tr>
       <% end %>
     <% end %>
   </table>

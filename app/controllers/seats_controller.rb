@@ -5,6 +5,16 @@ class SeatsController < ApplicationController
   skip_before_action :verify_authenticity_token
   attr_accessor :meta
 
+  def dele_attendee_seat
+    self.meta = params
+
+    session = Session.find(params[:session_id])
+    attendee = Attendee.find(params[:attendee_id])
+    seat = Seat.attendee_seat_is(attendee, session).first
+    seat.destroy
+    render_ok []
+  end
+
   def update_attendee_seat
     self.meta = params
 
