@@ -60,7 +60,7 @@ class Attendee < ActiveRecord::Base
   after_create  { generate_qrcode }
 
   def self.not_arrange(session)
-    self.joins('LEFT OUTER JOIN seats ON seats.attendee_id = attendees.id').where( 'attendees.id NOT IN (SELECT attendee_id FROM seats where seats.session_id=?)', session.id)
+    self.joins('LEFT OUTER JOIN seats ON seats.attendee_id = attendees.id').select('distinct(attendees.id), attendees.*').where( 'attendees.id NOT IN (SELECT attendee_id FROM seats where seats.session_id=?)', session.id)
   end
 
   def generate_qrcode
