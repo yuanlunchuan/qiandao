@@ -78,6 +78,9 @@ var Obj = {
           alert('已经坐满');
           return;
         }
+        if (isNaN($(this).children().eq(9).text())) {
+          return;
+        }
         self.choosed_attendee.push($(this).children().eq(9).text());
 
         var attendee_name = $(this).children().eq(1).text();
