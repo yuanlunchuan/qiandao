@@ -296,16 +296,16 @@ $(document).on('ready page:load', function(){
                     });
                     playSound();
                     reloadAttendees();
-                    if (!data.attendee.printed) {
-                      if(confirm('是否打印胸卡?')){
-                        var pdfUrl = "/app/events/"+data.attendee.event_id+"/attendees/"+data.attendee.id+"/badge.pdf";
-                        if (!data.attendee.rfid_num) {
-                            printPDF(pdfUrl, data.attendee.id, true);
-                        }else{
-                            printPDF(pdfUrl, false);
-                        }
-                      }
-                    }
+                    // if (!data.attendee.printed) {
+                    //   if(confirm('是否打印胸卡?')){
+                    //     var pdfUrl = "/app/events/"+data.attendee.event_id+"/attendees/"+data.attendee.id+"/badge.pdf";
+                    //     if (!data.attendee.rfid_num) {
+                    //         printPDF(pdfUrl, data.attendee.id, true);
+                    //     }else{
+                    //         printPDF(pdfUrl, false);
+                    //     }
+                    //   }
+                    // }
                 }
             }
         });
