@@ -38,6 +38,7 @@ class AttendeeSeatsController < ApplicationController
     attendees = Attendee.token_is(params[:keyword]) if attendees.blank?
     if session.present?&&attendees.present?
       @attendee = attendees.first
+      @session_seat = session.session_seat
       @seat = Seat.attendee_seat_is(attendees.first, session).first
     end
   end
