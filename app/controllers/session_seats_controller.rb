@@ -3,7 +3,20 @@ class SessionSeatsController < ApplicationController
   before_action :set_current_module
 
   def create
-    redirect_to edit_event_session_seat_path(current_event, '~'), flash: {error: '请先设置嘉宾座位'}
+    session = Session.find_by(id: params[:session_id])
+    if params[:session_id].blank?
+      redirect_to edit_event_session_seat_path(current_event, '~'), flash: {error: '请选择日程'}
+      return
+    end
+
+    current_event.sessions.each do |session_item|
+      if session_item.session_seat.present?
+        session_item.session_seat.update(display: false)
+      end
+    end
+    @session_seat = session.session_seat
+    @session_seat.update(display: true)
+    redirect_to edit_event_session_seat_path(current_event, '~'), flash: {success: '设置成功'}
   end
 
   def edit
