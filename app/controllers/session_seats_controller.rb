@@ -2,11 +2,15 @@ class SessionSeatsController < ApplicationController
   layout 'event'
   before_action :set_current_module
 
+  def create
+    redirect_to edit_event_session_seat_path(current_event, '~'), flash: {error: '请先设置嘉宾座位'}
+  end
+
   def edit
     current_event.sessions.each do |session|
       @session_seat =session.session_seat if session.session_seat.try(:display)
     end
-    @session_seat = current_event.sessions.first.session_seat if @session_seat.blank?
+    @session_seat = SessionSeat.new if @session_seat.blank?
   end
 
   def update
