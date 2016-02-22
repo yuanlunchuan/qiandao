@@ -11,6 +11,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(
   attendee_seats/body_bg.png
   attendee_seats/graphic.jpg
+  attendee_seats/logo.png
   client/event_sessions/schedule.png
   client/event_sessions/schedule_icon.png
   client/invites/arrow.png

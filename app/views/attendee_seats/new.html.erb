@@ -7,12 +7,19 @@
     height: 100%;
     z-index: -999;
   }
-  .bg-area img{
+  .bg-area .bg-img{
     position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
+    left: 10%;
+    bottom: 0px;
+    width: 759px;
+    height: 309px;
+  }
+  .bg-area .logo-img{
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 88px;
+    height: 26px;
   }
   .title-area{
     margin-top: 15%;
@@ -40,6 +47,14 @@
     .notice-area{
       font-size: 1.8em;
     }
+    .bg-area .bg-img{
+      width: 800px;
+      height: 329px;
+    }
+    .bg-area .logo-img{
+      width: 92px;
+      height: 28px;
+    }
   }
   @media screen and (min-width: 1600px){
     .title-area{
@@ -48,13 +63,22 @@
     .notice-area{
       font-size: 2.6em;
     }
+    .bg-area .bg-img{
+      width: 900px;
+      height: 379px;
+    }
+    .bg-area .logo-img{
+      width: 102px;
+      height: 33px;
+    }
   }
 </style>
 <title>座位查询</title>
 <div class="container-fluid">
   <div class="row">
     <div class="bg-area">
-      <%= image_tag 'attendee_seats/body_bg.png' %>
+      <%= image_tag 'attendee_seats/body_bg.png', class:"bg-img"%>
+      <%= image_tag 'attendee_seats/logo.png', class:"logo-img"%>
     </div>
     <div class="col-xs-6 col-xs-offset-3 text-center page-area">
       <div class="title-area">座位自助查询</div>
