@@ -116,10 +116,6 @@ class SeatsController < ApplicationController
       @current_session_seat = @session.session_seat
       @current_row = (@session.seats.maximum("table_row")||0)+1
 
-      if @current_row > @current_session_seat.total_table_count
-        @current_row = @current_session_seat.total_table_count
-      end
-
       if params[:table_row].present?
         @current_row = params[:table_row]
         @current_table = Seat.search_by_session_row(@session, params[:table_row])

@@ -31,7 +31,7 @@ var Obj = {
     self.total_attendee = $('#per-table-num').data('per-table-num')-$('#seat-table').data('attendee-count');
 
     $('#save-and-continue').on('click', function(){
-      if ($('#total-table-count').data('total-table-count')==$('#current-row').data('current-row')) {
+      if ($('#total-table-count').data('total-table-count')<$('#current-row').data('current-row')) {
         alert('当前已设置完所有桌');
         return;
       }
