@@ -113,8 +113,12 @@ class SeatsController < ApplicationController
       @attendees = current_event.attendees.not_arrange(@session)
       @attendees = current_event.attendees.not_arrange(@session).contains(params[:keyword]) if params[:keyword].present?
       @attendees = @attendees.page(params[:page])
-      @current_row = (@session.seats.maximum("table_row")||0)+1
       @current_session_seat = @session.session_seat
+      @current_row = (@session.seats.maximum("table_row")||0)+1
+
+      if @current_row > @current_session_seat.total_table_count
+        @current_row = @current_session_seat.total_table_count
+      end
 
       if params[:table_row].present?
         @current_row = params[:table_row]

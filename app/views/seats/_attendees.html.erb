@@ -70,6 +70,7 @@
   <button id="save-and-continue" type="button">保存</button>
   <div id="current-row" class="hidden" data-current-row=<%= @current_row %>></div>
   <div id="current-event" class="hidden" data-current-event=<%= current_event.id %>></div>
+  <div id="total-table-count" class="hidden" data-total-table-count=<%=@current_session_seat.total_table_count%>></div>
   <div id="per-table-num" class="hidden" data-per-table-num=<%= @current_session_seat.per_table_num%>></div>
   <div id="current-session-id" class="hidden" data-current-session-id=<%= params[:session_id] %>></div>
 
