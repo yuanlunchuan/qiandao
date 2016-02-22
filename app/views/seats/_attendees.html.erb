@@ -74,7 +74,7 @@
   <div id="per-table-num" class="hidden" data-per-table-num=<%= @current_session_seat.per_table_num%>></div>
   <div id="current-session-id" class="hidden" data-current-session-id=<%= params[:session_id] %>></div>
 
-  <% if @current_row>@current_session_seat.total_table_count%>
+  <% if @current_row.to_i > @current_session_seat.total_table_count.to_i%>
     <div id="data" style="background-color: #999; color: #fff; align='center';"><%=@current_session_seat.total_table_count%>/<%=@current_session_seat.total_table_count%>桌</div>
   <% else %>
     <div id="data" style="background-color: #999; color: #fff; align='center';"><%=@current_row||'1' %>/<%= @current_session_seat.total_table_count %>桌</div>
