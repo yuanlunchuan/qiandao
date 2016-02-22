@@ -105,7 +105,7 @@ class SeatsController < ApplicationController
   def new
     if 'show_attendees'==params[:current_action]
       @session = Session.find(params[:session_id])
-      
+
       @table_rows = []
       for table_row in 1..@session.session_seat.total_table_count
         @table_rows << [table_row, table_row]

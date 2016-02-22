@@ -100,9 +100,15 @@ $(document).ready(function(){
       },
       function(result) {//返回数据根据结果进行相应的处理
         if ( result.success ) {
-          var table_row = result.collection[0].table_row
-          var table_col = result.collection[0].table_col
-          $('.seat-number').html("第"+table_row+"桌, 第"+table_col+"号");
+          var table_row = result.collection[0].table_row;
+          var table_col = result.collection[0].table_col;
+          var seat_message = "第"+table_row+"桌, 第"+table_col+"号";
+          if (result.collection[0].properties) {
+            if ('false'==result.collection[0].properties.set_table_num) {
+              seat_message = "第"+table_row+"桌";
+            }
+          }
+          $('.seat-number').html(seat_message);
         }
       }
     ).error(function(event){

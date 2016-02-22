@@ -10,13 +10,19 @@ class Client::SeatsController < ApplicationController
 
     show_seat_session = nil
     current_event.sessions.each do |session_item|
-      show_seat_session = session_item.session_seat if session_item.session_seat.present?&&session_item.session_seat.display
+      show_seat_session = session_item if session_item.session_seat.present?&&session_item.session_seat.display
     end
 
     render_not_found '座位在安排中' and return if show_seat_session.blank?
     seats = Seat.attendee_seat_is(attendee, show_seat_session)
     render_not_found '没查询到您的座位' and return if seats.blank?
+    collection = []
+    item = {}
+    item = seats.first.to_hash
 
-    render_ok [ seats.first ]
+    item[:properties] = show_seat_session.session_seat.properties
+    collection << item
+
+    render_ok collection
   end
 end
