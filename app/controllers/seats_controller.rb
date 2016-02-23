@@ -98,8 +98,14 @@ class SeatsController < ApplicationController
   def index
     @session = Session.find(params[:session_id])
     @current_session_seat = @session.session_seat
-    @attendees = current_event.attendees.page(params[:page])
-    @attendees = current_event.attendees.contains(params[:keyword]).page(params[:page]) if params[:keyword].present?
+    @attendees = current_event.attendees
+    @attendees = current_event.attendees.contains(params[:keyword]) if params[:keyword].present?
+    if 'true'==params[:has_arranged]
+      @attendees = current_event.attendees.has_arranged(@session)
+    elsif 'false'==params[:has_arranged]
+      @attendees = current_event.attendees.not_arrange(@session)
+    end
+    @attendees = @attendees.page(params[:page])
   end
 
   def new
