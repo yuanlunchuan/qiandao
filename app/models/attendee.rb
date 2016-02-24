@@ -7,7 +7,7 @@ class Attendee < ActiveRecord::Base
 
   GENDER = { '男' => 0, '女' => 1}
   validates :rfid_num, allow_blank: true, uniqueness: true
-  validates :name, presence: true, uniqueness: true
+  #validates :name, presence: true, uniqueness: true
   validates :mobile, presence: true, length: { is: 11 }, numericality: { integer_only: true }, format: { with: /\A1[3-9]\d{9}\z/ }
   has_attached_file :photo,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
