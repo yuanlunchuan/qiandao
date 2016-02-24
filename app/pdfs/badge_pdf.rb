@@ -4,7 +4,7 @@ class BadgePdf < Prawn::Document
       # if options[:background]
       background = "#{Rails.root}/app/pdfs/red.png"
       if '经销商'==attendee.category.try(:name)
-        background = "#{Rails.root}/app/pdfs/green.png"
+        background = "#{Rails.root}/app/pdfs/badge_background_version2.png"
       end
 
       pdf_options.merge!({background: background, background_scale: 0.25})
