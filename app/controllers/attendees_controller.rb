@@ -38,21 +38,6 @@ class AttendeesController < ApplicationController
   def create
 
     if params[:attendee_file].present?
-      # File.open("#{Rails.root}/public/data_new") do |file|  
-      # file.each_line{|line|
-      #   gender_id = 0 if line.split(',')[2]=='男'
-      #   gender_id = 1 if line.split(',')[2]=='女'
-
-      #   attendee          = current_event.attendees.new name: line.split(',')[1],
-      #   gender_id: gender_id,
-      #   company: line.split(',')[7],
-      #   mobile: line.split(',')[8],
-      #   province: line.split(',')[10],
-      #   city: line.split(',')[11]
-      #   attendee.save
-      # }
-      # file.close();
-      # end
       import_attendee
       return
     end
@@ -99,7 +84,39 @@ class AttendeesController < ApplicationController
   def import_attendee
     filename = uploadfile(params[:attendee_file])
     file_path = "#{Rails.root}/public/upload/#{@filename}"
+    
+    success_count = 0
+    error_count = 0
+    error_message = ''
+    File.open(file_path) do |file|
+      file.each_line{|line|
+        gender_id = 0 if line.split(',')[2]=='男'
+        gender_id = 1 if line.split(',')[2]=='女'
+        if line.split(',')[11].present?
+          city = line.split(',')[11].split("\n")[0]
+        end
 
+        attendee   = current_event.attendees.new name: line.split(',')[1],
+        gender_id: gender_id,
+        company: line.split(',')[7],
+        mobile: line.split(',')[8],
+        province: line.split(',')[10],
+        city: city
+
+        if attendee.save
+          success_count += 1
+        else
+          if '名字'!=line.split(',')[1]
+            error_message = "#{error_message}, #{line.split(',')[1]}"
+            error_count += 1
+          end
+        end
+      }
+      file.close();
+    end
+    redirect_to event_attendees_path, flash: {success: "成功导入#{success_count}条, 有#{error_count}条导入失败, #{error_message}, 失败"}
+
+    return
     AttendeeList.import(file_path)
     count = 0
     error_count = 0
