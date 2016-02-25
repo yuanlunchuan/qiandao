@@ -109,17 +109,14 @@
                 <li>签到时间： <%=@attendee.checked_in_at%></li>
               <%end%>
 
-              <li>邀请链接： <a href='http://985.so/uuE2' target="_blank">http://985.so/uuE2</a>
-              </li>
-
-<!--               <li>邀请链接： <%=link_to @attendee.invitation_long_url, @attendee.invitation_long_url, target: '_blank'%>
+              <li>邀请链接： <%=link_to @attendee.invitation_long_url, @attendee.invitation_long_url, target: '_blank'%>
                 <% if @attendee.invitation_short_url %>
                    | <%=link_to @attendee.invitation_short_url, @attendee.invitation_short_url, target: '_blank' %>
                 <% else %>
                   <%=link_to '生成短链接', generate_invitation_short_url_event_attendee_path, method: :post, class:'btn btn-white btn-xs' %>
                 <% end %>
               </li>
- -->
+ 
               <li>报名状态： 正常</li>
               <li>胸卡预览： <%= link_to '打开', badge_event_attendee_path(preview: true, format: :pdf), target: '_blank' %></li>
               <li>报名编号： <%=@attendee.serial_number%></li>

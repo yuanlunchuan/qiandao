@@ -96,8 +96,13 @@ class AttendeesController < ApplicationController
           city = line.split(',')[11].split("\n")[0]
         end
 
+        if line.split(',')[5].present?
+          category = AttendeeCategory.category_name_is(line.split(',')[5]).first
+        end
+
         attendee   = current_event.attendees.new name: line.split(',')[1],
         gender_id: gender_id,
+        category: category,
         company: line.split(',')[7],
         mobile: line.split(',')[8],
         province: line.split(',')[10],
@@ -114,7 +119,7 @@ class AttendeesController < ApplicationController
       }
       file.close();
     end
-    redirect_to event_attendees_path, flash: {success: "成功导入#{success_count}条, 有#{error_count}条导入失败, #{error_message}, 失败"}
+    redirect_to event_attendees_path, flash: {success: "成功导入#{success_count}条, 有#{error_count}条导入失败, #{error_message}"}
 
     return
     AttendeeList.import(file_path)
