@@ -99,10 +99,10 @@
       <p class="voucher-msg">您的入场凭证</p>
       <div class="col-xs-6 col-xs-offset-6 qrcode-all-area">
         <div class="qrcode-area">
-          <div id="qrcode"></div>
-        <!--  如果是服务器生成图片则采用这种
-          <img src="http://qr.api.cli.im/qr?data=https%253A%252F%252Fwww.baidu.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=eb31305785c2315b072ee97543e325e5">
-        -->
+          <!--
+            <div id="qrcode"></div>
+          -->
+          <img src="/attendee_qrcode/<%= current_event.id %>_<%= @attendee.id %>.png">
         </div>
       </div>
       <div class="qrcode-content">

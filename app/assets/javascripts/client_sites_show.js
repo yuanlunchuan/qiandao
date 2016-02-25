@@ -55,14 +55,14 @@ $(document).ready(function(){
   },1000)
 
   //生成二维码
-  $(function(){
-    var qrcode = new QRCode($("#qrcode")[0], {
-      width : 120,//设置宽高
-      height : 120
-    });
-    var qrcode_value = $('#attendee-token').data('attendee-token')
-    qrcode.makeCode(qrcode_value);
-  });
+  // $(function(){
+  //   var qrcode = new QRCode($("#qrcode")[0], {
+  //     width : 120,//设置宽高
+  //     height : 120
+  //   });
+  //   var qrcode_value = $('#attendee-token').data('attendee-token')
+  //   qrcode.makeCode(qrcode_value);
+  // });
 
   //显示二维码
   $('.voucher-button').click(function(){
