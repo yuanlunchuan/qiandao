@@ -24,7 +24,8 @@ class AdminsController < ApplicationController
   end
 
   def create
-    @admin = Admin.new(admin_param)
+    #@admin = Admin.new(admin_param)
+    @admin = Admin.new password_digest: params[:admin][:password], name: params[:admin][:name]
     if @admin.save
       redirect_to admins_path, flash:{success: '添加成功'}
     else
