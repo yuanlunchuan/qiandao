@@ -84,7 +84,7 @@ class AttendeesController < ApplicationController
   def import_attendee
     filename = uploadfile(params[:attendee_file])
     file_path = "#{Rails.root}/public/upload/#{@filename}"
-    
+
     success_count = 0
     error_count = 0
     error_message = ''
