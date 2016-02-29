@@ -72,13 +72,15 @@ private
 
     if params[:checked_in] == '0'
       @attendees = current_event.attendees.group(:company)
+      @attendees = @attendees.page(params[:page]).per(200).includes(:category)
     elsif params[:checked_in] == '1'
       @attendees = @session.attendees
+      @attendees = @attendees.page(params[:page]).per(200).includes(:category)
     else
-      @attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).group(:company)
+      #@attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).group(:company)
+      @attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).select('attendees.company').group(:company).reorder('attendees.company')
+      @attendees = @attendees.page(params[:page]).per(200)#.includes(:category)
     end
-
-    @attendees = @attendees.page(params[:page]).per(200).includes(:category)
 
     render 'sessions_company'
   end
