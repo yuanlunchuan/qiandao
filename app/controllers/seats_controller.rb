@@ -5,6 +5,12 @@ class SeatsController < ApplicationController
   skip_before_action :verify_authenticity_token
   attr_accessor :meta
 
+  def destroy
+    seat = Seat.find(params[:id])
+    seat.destroy
+    redirect_to event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id])
+  end
+
   def dele_attendee_seat
     self.meta = params
 

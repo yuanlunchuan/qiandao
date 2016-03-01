@@ -13,7 +13,7 @@
             <% col = 0 %>
             <% @session.seats.seat_by_row(i).each do |seat| %>
               <% col += 1 %>
-              <% attendee = Attendee.find(seat.attendee.id) %>
+              <% attendee = seat.attendee %>
               <tr><td><%= col %></td><td><%= attendee.name %></td><td><%= attendee.company %></td></tr>
             <% end %>
           </table>

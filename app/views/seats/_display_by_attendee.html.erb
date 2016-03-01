@@ -53,6 +53,7 @@
             <td><%= seat.present? ? "#{seat.table_row} 桌, #{seat.table_col} 号" : '未安排' %></td>
             <td id="update-seat"><button>变更</button></td>
             <td class="hidden"><%= attendee.id %></td>
+            <td class=<%=seat.present? ? '' : 'hidden'%>><%= link_to '清除座位', event_seat_path(current_event, (seat.try(:id)||'~'), session_id: @session, display_type: 'attendee'), method: :delete, data: {confirm: '你确定清除该用户的座位吗？' } %></td>
           </tr>
         <% end %>
         </tbody>
