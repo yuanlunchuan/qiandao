@@ -16,7 +16,7 @@ class CheckinController < ApplicationController
   def company_export
     @session = current_event.sessions.find(params[:session_id])
     @attendees1 = @session.attendees.unscope(:order).order('checkins.checked_in_at ASC')
-    @attendees2 = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).group(:company)
+    @attendees2 = current_event.attendees.where.not(company: @session.attendees.pluck(:company)) #.group(:company)
     render xlsx: 'company_export', filename: "#{Time.now.to_s(:url)}.xlsx"
   end
 
