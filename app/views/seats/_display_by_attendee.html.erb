@@ -1,5 +1,6 @@
 <div id="current-event" class="hidden" data-current-event=<%=current_event.id%>></div>
 <div id="session-id" class="hidden" data-session-id=<%=params[:session_id]%>></div>
+<div id="set-table-num" class="hidden" data-set-table-num=<%=@current_session_seat.properties['set_table_num']%>></div>
 
 <div class="ibox-content">
   <div class="container-fluid">
@@ -50,7 +51,11 @@
             <td><%=attendee.company%></td>
             <td><%=attendee.mobile%></td>
             <% seat = Seat.attendee_seat_is(attendee, @session).first %>
-            <td><%= seat.present? ? "#{seat.table_row} 桌, #{seat.table_col} 号" : '未安排' %></td>
+            <% if @current_session_seat.properties['set_table_num']=="true" %>
+              <td><%= seat.present? ? "第#{seat.table_row} 桌, #{seat.table_col} 号" : '未安排' %></td>
+            <% else %>
+              <td><%= seat.present? ? "第#{seat.table_row} 桌" : '未安排' %></td>
+            <% end %>
             <td id="update-seat"><button>变更</button></td>
             <td class="hidden"><%= attendee.id %></td>
             <td class=<%=seat.present? ? '' : 'hidden'%>><%= link_to '清除座位', event_seat_path(current_event, (seat.try(:id)||'~'), session_id: @session, display_type: 'attendee'), method: :delete, data: {confirm: '你确定清除该用户的座位吗？' } %></td>

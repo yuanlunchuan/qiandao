@@ -73,8 +73,7 @@ class SeatsController < ApplicationController
     per_table_num = session.session_seat.per_table_num
     for i in 1..session.session_seat.total_table_count
       item = i
-      item = "第#{i}桌（排）坐满" if seats_list[i].to_i>=per_table_num
-      collection << item
+      collection << item if seats_list[i].to_i<per_table_num
     end
 
     render_ok collection

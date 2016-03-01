@@ -53,6 +53,9 @@ var Obj = {
 
   showTableColList: function(table_row){
     var self = Obj;
+    if (!$('#set-table-num').data('set-table-num')){
+      return;
+    }
     var url = '/app/events/'+$('#current-event').data('current-event')+"/search_by_session_row.json"
     $.getJSON(url, 
       {
@@ -84,7 +87,7 @@ var Obj = {
         $('#cancel-button').removeClass('hidden');
         if('保存'==$(this).text())
         {
-          if (isNaN($("#table-col").val())) {
+          if ($('#set-table-num').data('set-table-num')&&isNaN($("#table-col").val())) {
             alert('不能在已占座位上安排');
             return;
           }
@@ -99,20 +102,31 @@ var Obj = {
         self.attendee_id = $(this).parent().children().eq(8).text();
         $(this).html("<button>保存</button>");
         var val = $(this).parent().children().eq(6);
-        val.empty();
+
         var url = "/app/events/"+$('#current-event').data('current-event')+"/get_seats_tablerow.json";
         $.getJSON(url,
           {
             session_id: $('#session-id').data('session-id')
           },
           function(event){
+            if (!event.collection.length) {
+              alert('当前座位已安排完');
+              return
+            }
+            val.empty();
+
             var table_row = "<select id='table-row-num'>";
             $.each(event.collection, function(item){
               table_row +="<option value='"+this+"'>"+this+"</option>";
             });
 
-            table_row = table_row+"</select>桌, <select id='table-col'>"+
-            "<option value='choos'>请选择桌号</option></select>号";
+            if ($('#set-table-num').data('set-table-num')) {
+              table_row = table_row+"</select>桌, <select id='table-col'>"+
+              "<option value='choos'>请选择桌号</option></select>号";
+            }else{
+              table_row = table_row+"</select>桌";
+            }
+
             val.html(table_row);
             $('#table-row-num').on('change', self.onTableRowChanged);
             self.showTableColList(1);
