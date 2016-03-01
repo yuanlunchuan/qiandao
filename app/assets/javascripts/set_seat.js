@@ -31,7 +31,7 @@ var Obj = {
     $('#set-seat').text('开始设置');
     $('#total-table-count').val('');
     $('#per-table-num').val('');
-    $("#unit").val("row");
+    $("#unit").val("table");
     $('#continue-arrange-seat').addClass('hidden')
     $("#show-table-num").attr('checked', 'checked');
     return self;
