@@ -9,6 +9,9 @@ class Seat < ActiveRecord::Base
   scope :seat_by_row, ->(row) { where "table_row=?", row }
   scope :search_by_session_row, ->(session, table_row) { where "session_id=? AND table_row=?", session.id, table_row }
 
+  #查询出超过当前座位安排的人
+  scope :should_delete, ->(current_row, current_col) { where "table_row>? OR table_col>?", current_row, current_col }
+
   def to_hash
     hash = {}
     self.attributes.each { |k,v| hash[k] = v }
