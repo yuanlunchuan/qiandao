@@ -19,6 +19,12 @@ class AttendeeCategory < ActiveRecord::Base
     Event.find(self.event_id).attendees.where(category_id: self.id).select(:company).distinct.count
   end
 
+  def to_hash
+    hash = {}
+    self.attributes.each { |k,v| hash[k] = v }
+    return hash
+  end
+
 private
 
   def populate_category_number

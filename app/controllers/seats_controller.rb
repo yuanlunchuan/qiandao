@@ -108,6 +108,23 @@ class SeatsController < ApplicationController
     @attendees = @attendees.page(params[:page])
   end
 
+  def search_attendee
+    self.meta = params
+
+    @session = Session.find(params[:session_id])
+    @attendees = current_event.attendees.not_arrange(@session).contains(params[:keyword]) if params[:keyword].present?
+    collection = []
+    @attendees.each do |attendee|
+      item = attendee.to_hash
+      item[:owner_attendee_name] = attendee.owner_attendee.try(:name)
+      item[:seller_name] = attendee.seller.try(:name)
+      item[:category_name] = attendee.category.try(:name)
+      collection << item
+    end
+
+    render_ok collection
+  end
+
   def new
     if 'show_attendees'==params[:current_action]
       @session = Session.find(params[:session_id])
