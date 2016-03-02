@@ -187,6 +187,10 @@ $(document).on('ready page:load', function(){
         return false;
     });
 
+    $('#refresh').on('click', function(event){
+        window.location.reload();
+    });
+
     $('#key_word_input_box').on('change', function(){
       //console.info('----------107');
       //findAndCheckin();
