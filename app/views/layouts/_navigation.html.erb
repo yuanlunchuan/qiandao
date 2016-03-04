@@ -26,7 +26,7 @@
           <% end %>
         </li>
 
-        <li class="<%= 'active' if @current_module==6 %>">
+        <li class="<%= 'active' if @current_module==6 %>" class="<%= hidden if !current_admin.restaurant_permission %>">
           <%= link_to edit_event_restaurant_path(current_event, '~') do%>
             <i class="fa fa-cutlery"></i> <span class="nav-label">酒店设置</span></span>
           <% end %>
@@ -35,7 +35,7 @@
         <% if @current_module==0 %>
           <li id="active-item" class="active">
         <% else %>
-          <li>
+          <li class="<%= 'hidden' if !current_admin.session_manage_permission%>">
         <% end %>
           <a id="conference" href="#"><i class="fa fa-users"></i>会议管理</a>
           <ul class="submenu">
@@ -71,7 +71,7 @@
         <% if @current_module==1 %>
           <li id="active-item" class="active">
         <% else %>
-          <li>
+          <li class="<%= 'hidden' if !current_admin.session_notifacation_permission%>">
         <% end %>
           <a href="#"><i class="fa fa-users"></i>会议通知</a>
           <ul class="submenu">
@@ -98,7 +98,7 @@
         <% if @current_module==2 %>
           <li id="active-item" class="active">
         <% else %>
-          <li>
+          <li class="<%= 'hidden' if !current_admin.attendee_manage_permission%>">
         <% end %>
         <a href="#"><i class="fa fa-heart"></i>嘉宾管理</a>
           <ul class="submenu">
@@ -149,7 +149,7 @@
         <% if @current_module==3 %>
           <li id="active-item" class="active">
         <% else %>
-          <li>
+          <li class="<%= 'hidden' if !current_admin.checkin_manage_permission%>">
         <% end %>
         <a href="#"><i class="fa fa-pencil"></i>签到管理 </a>
           <ul class="submenu">
@@ -176,7 +176,7 @@
         <% if @current_module==4 %>
           <li id="active-item" class="active">
         <% else %>
-          <li>
+          <li class="<%= 'hidden' if !current_admin.interaction_manage_permission%>">
         <% end %>
         <a href="#"><i class="fa fa-gift"></i>现场互动管理</a>
           <ul class="submenu">
@@ -198,7 +198,7 @@
         <% if @current_module==5 %>
           <li id="active-item" class="active">
         <% else %>
-          <li>
+          <li class="<%= 'hidden' if !current_admin.seller_manage_permission%>">
         <% end %>
           <%= link_to event_sellers_path do %>
             <i class="fa fa-user"></i>销售员管理

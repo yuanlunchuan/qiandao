@@ -12,7 +12,7 @@ $(document).on('ready page:load', function(){
         //获取当前窗口尺寸  
         sWidth = document.body.offsetWidth;  
         sHeight = document.body.offsetHeight;  
-    //    //背景div  
+        //背景div  
         var bgObj=document.createElement("div");  
         bgObj.setAttribute('id','alertbgDiv');  
         bgObj.style.position="absolute";  
@@ -106,6 +106,26 @@ $(document).on('ready page:load', function(){
     }
     });
   }
+
+    $('#admin_root').on('click', function(event){
+      if($('#admin_root').prop('checked')){
+        $('#admin_restaurant_permission').prop("checked", true);
+        $('#admin_session_manage_permission').prop("checked", true);
+        $('#admin_session_notifacation_permission').prop("checked", true);
+        $('#admin_attendee_manage_permission').prop("checked", true);
+        $('#admin_checkin_manage_permission').prop("checked", true);
+        $('#admin_interaction_manage_permission').prop("checked", true);
+        $('#admin_seller_manage_permission').prop("checked", true);
+      }else{
+        $('#admin_restaurant_permission').prop("checked", false);
+        $('#admin_session_manage_permission').prop("checked", false);
+        $('#admin_session_notifacation_permission').prop("checked", false);
+        $('#admin_attendee_manage_permission').prop("checked", false);
+        $('#admin_checkin_manage_permission').prop("checked", false);
+        $('#admin_interaction_manage_permission').prop("checked", false);
+        $('#admin_seller_manage_permission').prop("checked", false);
+      }
+    });
 
     $('input[autocomplete=off]').on('focus', function(){
         $(this).attr('readonly', false);

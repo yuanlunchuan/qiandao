@@ -24,8 +24,18 @@ class AdminsController < ApplicationController
   end
 
   def create
-    #@admin = Admin.new(admin_param)
-    @admin = Admin.new password_digest: params[:admin][:password], name: params[:admin][:name]
+    @admin = Admin.new password_digest: params[:admin][:password],
+      name: params[:admin][:name],
+      restaurant_permission: params[:admin][:restaurant_permission],
+      session_manage_permission: params[:admin][:session_manage_permission],
+      session_notifacation_permission: params[:admin][:session_notifacation_permission],
+      attendee_manage_permission: params[:admin][:attendee_manage_permission],
+      checkin_manage_permission: params[:admin][:checkin_manage_permission],
+      interaction_manage_permission: params[:admin][:interaction_manage_permission],
+      seller_manage_permission: params[:admin][:seller_manage_permission],
+      event_manage_permission: params[:admin][:event_manage_permission],
+      root: params[:admin][:root]
+
     if @admin.save
       redirect_to admins_path, flash:{success: '添加成功'}
     else
