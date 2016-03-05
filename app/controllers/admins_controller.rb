@@ -58,6 +58,10 @@ class AdminsController < ApplicationController
 
 private
   def admin_param
-    params.require(:admin).permit(:name, :password, :memo)
+    params.require(:admin).permit(:name, :password, :memo, 
+      :restaurant_permission, :session_manage_permission, 
+      :session_notifacation_permission, :attendee_manage_permission, 
+      :checkin_manage_permission, :interaction_manage_permission, 
+      :seller_manage_permission, :root)
   end
 end
