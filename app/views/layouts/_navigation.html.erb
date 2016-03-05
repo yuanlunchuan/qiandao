@@ -26,7 +26,7 @@
           <% end %>
         </li>
 
-        <li class="<%= 'active' if @current_module==6 %>" class="<%= hidden if !current_admin.restaurant_permission %>">
+        <li class="<%= 'active' if @current_module==6 %>" class="<%= 'hidden' if !current_admin.restaurant_permission %>">
           <%= link_to edit_event_restaurant_path(current_event, '~') do%>
             <i class="fa fa-cutlery"></i> <span class="nav-label">酒店设置</span></span>
           <% end %>
