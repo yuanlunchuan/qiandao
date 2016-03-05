@@ -15,13 +15,14 @@
         </div>
 
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table id="attendee-rfid-table" class="table table-striped">
             <thead>
             <tr>
               <th>序号</th>
               <th>姓名</th>
               <th>rfid</th>
               <th>管理</th>
+              <td>修改rfid</td>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +34,9 @@
                 <td>
                   <%=link_to '查看', event_attendee_path(current_event, attendee), class: 'btn btn-white btn-xs' %>
                   <%=link_to '编辑', edit_event_attentee_rfid_path(current_event, attendee), class: 'btn btn-white btn-xs' %>
+                </td>
+                <td><input type="text" id=<%=attendee.id%> />
+                <button class="save-attendee-rfid" data-event-id=<%=current_event.id%> data-attendee-id=<%=attendee.id%>>保存</button>
                 </td>
               </tr>
             <% end %>
