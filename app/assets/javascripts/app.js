@@ -107,6 +107,12 @@ $(document).on('ready page:load', function(){
     });
   }
 
+    $('.save-attendee-rfid').on('click', function(event){
+        var rfid = $(('#'+$(this).data('attendee-id'))).val();
+        var attendeeId = $(this).data('attendee-id');
+        binding_rfid(attendeeId, rfid);
+    });
+
     $('#admin_root').on('click', function(event){
       if($('#admin_root').prop('checked')){
         $('#admin_restaurant_permission').prop("checked", true);
