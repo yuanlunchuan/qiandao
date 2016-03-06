@@ -22,7 +22,6 @@ wb.add_worksheet(name: '签到统计') do |sheet|
   #end
   @attendees.each do |item|
     row = [item.attendee_number, item.name,
-           item.province, item.city,
            item.company, item.mobile,
            item.session_checked_in(@session.id) ? '已签到' : '未签到',
            item.session_checked_in(@session.id) ? item.session_checked_in(@session.id).checked_in_at.to_s(:short) : '-'
