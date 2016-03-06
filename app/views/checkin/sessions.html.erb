@@ -17,18 +17,6 @@
           <div class="col-xs-6">
             <%= link_to '签到数据导出', event_session_checkin_export_path(current_event, @session), class: 'btn btn-white btn-sm pull-right' %>
           </div>
-          <div class="col-sm-3">
-            <form action="/app/events/<%= current_event.id %>/checkins" class='form-horizontal' method="post" name="fileForm" multipart='true' enctype="multipart/form-data">
-              <table>
-                <tr>
-                  <td><%= file_field_tag :attendee_file %></td>
-                  <td><input type="text" name="session_id" /></td>
-                  <td><input id="import-attendee" type="submit" value="导入"></td>
-                </tr>
-              </table>
-            </form>
-          </div>
-
         </div>
 
         <div class="row m-b-md m-t-md">
