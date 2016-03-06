@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     get 'dashboard'   =>  'dashboard#index'
 
     resources :events do
+      post 'checkins'   => 'checkin#create'
       resources :attendees do
         member do
           put 'checkin'     => 'attendees#check_in'
