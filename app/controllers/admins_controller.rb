@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
     @admin = Admin.find(params[:id])
     return redirect_to admins_path if @admin.root?
 
-    params[:admin].delete(:password) if params[:admin][:password].blank?
+    params[:admin].delete(:password_digest) if params[:admin][:password_digest].blank?
 
     if @admin.update(admin_param)
       redirect_to admins_path, flash:{success: '编辑成功'}
@@ -24,17 +24,7 @@ class AdminsController < ApplicationController
   end
 
   def create
-    @admin = Admin.new password_digest: params[:admin][:password],
-      name: params[:admin][:name],
-      restaurant_permission: params[:admin][:restaurant_permission],
-      session_manage_permission: params[:admin][:session_manage_permission],
-      session_notifacation_permission: params[:admin][:session_notifacation_permission],
-      attendee_manage_permission: params[:admin][:attendee_manage_permission],
-      checkin_manage_permission: params[:admin][:checkin_manage_permission],
-      interaction_manage_permission: params[:admin][:interaction_manage_permission],
-      seller_manage_permission: params[:admin][:seller_manage_permission],
-      event_manage_permission: params[:admin][:event_manage_permission],
-      root: params[:admin][:root]
+    @admin = Admin.new admin_param
 
     if @admin.save
       redirect_to admins_path, flash:{success: '添加成功'}
@@ -58,7 +48,7 @@ class AdminsController < ApplicationController
 
 private
   def admin_param
-    params.require(:admin).permit(:name, :password, :memo, 
+    params.require(:admin).permit(:name, :password_digest, :memo, 
       :restaurant_permission, :session_manage_permission, 
       :session_notifacation_permission, :attendee_manage_permission, 
       :checkin_manage_permission, :interaction_manage_permission, 
