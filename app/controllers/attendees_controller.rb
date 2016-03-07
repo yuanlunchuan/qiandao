@@ -97,7 +97,7 @@ class AttendeesController < ApplicationController
         end
 
         if line.split(',')[5].present?
-          category = AttendeeCategory.category_name_is(line.split(',')[5]).first
+          category = AttendeeCategory.category_name_is(current_event, line.split(',')[5]).first
         end
 
         attendee   = current_event.attendees.new name: line.split(',')[1],
