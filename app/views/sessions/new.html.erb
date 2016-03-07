@@ -15,7 +15,7 @@
       </div>
       <input type="hidden" name="back_url" value="<%=params[:back_url]%>">
       <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
-      <%= link_to '#' do %>
+      <%= link_to '#', class: 'hidden' do %>
         <small>忘记密码</small>
       <% end %>
     <% end %>
