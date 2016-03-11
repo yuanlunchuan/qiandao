@@ -7,7 +7,7 @@ class AdminsController < ApplicationController
 
   def update
     @admin = Admin.find(params[:id])
-    return redirect_to admins_path if @admin.root?
+    #return redirect_to admins_path if @admin.root?
 
     params[:admin].delete(:password_digest) if params[:admin][:password_digest].blank?
 
@@ -36,7 +36,7 @@ class AdminsController < ApplicationController
 
   def edit
     @admin = Admin.find(params[:id])
-    return redirect_to admins_path if @admin.root?
+    #return redirect_to admins_path if @admin.root?
   end
 
   def destroy

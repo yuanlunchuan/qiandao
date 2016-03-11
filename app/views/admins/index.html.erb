@@ -27,9 +27,7 @@
             <td><%=admin.memo%></td>
             <td><%=admin.created_at.to_s(:default)%></td>
             <td>
-              <% unless admin.root? %>
               <%= link_to '编辑', edit_admin_path(admin), class: 'btn btn-outline btn-info btn-xs'%>
-              <% end %>
             </td>
           </tr>
           <%end%>
