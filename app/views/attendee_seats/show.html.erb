@@ -125,10 +125,13 @@
       <% if @seat.present? %>
         <div class="seat-area success-message">
           <p><%= @attendee.name %> 先生/女士，您的座位在</p>
+          <% unit = '桌' %>
+          <% unit = '排' if 'row'==@session_seat.properties['unit']%>
+
           <% if 'true'==@session_seat.properties['set_table_num']%>
-            <p class="number-paragraph">第 <%=@seat.table_row%> 桌 <%=@seat.table_col%> 号</p>
+            <p class="number-paragraph">第 <%=@seat.table_row%> <%= unit %> <%=@seat.table_col%> 号</p>
           <% else %>
-            <p class="number-paragraph">第 <%=@seat.table_row%> 桌</p>
+            <p class="number-paragraph">第 <%=@seat.table_row%> <%= unit %></p>
           <% end %>
         </div>
       <% else %>
