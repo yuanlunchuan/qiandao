@@ -8,16 +8,18 @@ class Attendee < ActiveRecord::Base
   GENDER = { '男' => 0, '女' => 1}
   validates :rfid_num, allow_blank: true, uniqueness: true
   #validates :name, presence: true, uniqueness: true
-  validates :mobile, presence: true, length: { is: 11 }, numericality: { integer_only: true }, format: { with: /\A1[3-9]\d{9}\z/ }, uniqueness: true
+  #validates :mobile, presence: true, length: { is: 11 }, numericality: { integer_only: true }, format: { with: /\A1[3-9]\d{9}\z/ }, uniqueness: true
   has_attached_file :photo,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
-                    url: '/system/events/:event_id/attendees/:style/:attendee_number-:token.jpg',
+                    url: '/system/events/:style/:mobile.jpg',
                     default_url: 'avatar.png'
+  #url: '/system/events/:event_id/attendees/:style/:attendee_number-:token.jpg',
 
   has_attached_file :avatar,
                     styles: {original: '400x400>'},
-                    url: '/system/events/:event_id/attendees/avatar/:attendee_number-:token.jpg',
+                    url: '/system/events/avatar/:mobile.jpg',
                     default_url: 'avatar.png'
+  #url: '/system/events/:event_id/attendees/avatar/:attendee_number-:token.jpg',
 
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
@@ -29,7 +31,7 @@ class Attendee < ActiveRecord::Base
 
   has_many :checkins
   has_many :sessions, through: :checkins
-  
+
   scope :rfid_is, -> (rfid) { where rfid_num: rfid }
   scope :mobile_is, -> (mobile) { where mobile: mobile }
   scope :attendee_name_is, ->(name) { where name: name }
@@ -58,6 +60,43 @@ class Attendee < ActiveRecord::Base
   before_create { generate_token(:token) }
   after_create  { generate_invitation_short_url }
   after_create  { generate_qrcode }
+
+  before_save { generate_photo }
+  before_save { generate_avatar }
+
+  before_update { generate_photo }
+  before_update { generate_avatar }
+
+  validate :valid_mobile?
+
+  def generate_photo
+    if self.photo.blank?&&self.mobile.present?
+      attendee = Attendee.has_photo.mobile_is(self.mobile).first
+      if attendee.present?
+        self.photo_file_name = attendee.photo_file_name
+        self.photo_content_type = attendee.photo_content_type
+        self.photo_file_size = attendee.photo_file_size
+      end
+    end
+  end
+
+  def generate_avatar
+    if self.avatar.blank?&&self.mobile.present?
+      attendee = Attendee.has_avatar.mobile_is(self.mobile).first
+      if attendee.present?
+        self.avatar_file_name = attendee.avatar_file_name
+        self.avatar_content_type = attendee.avatar_content_type
+        self.avatar_file_size = attendee.avatar_file_size
+      end
+    end
+  end
+
+  def valid_mobile?
+    if self.mobile.present?
+      attendee = self.event.attendees.mobile_is(self.mobile).first
+      errors.add(:mobile, "同一个活动中电话号码不能重复") if attendee.present?&&(attendee.id!=self.id)
+    end
+  end
 
   def self.has_arranged(session)
     self.joins('LEFT OUTER JOIN seats ON seats.attendee_id = attendees.id').select('distinct(attendees.id), attendees.*').where( 'seats.session_id=?', session.id)
@@ -112,7 +151,7 @@ class Attendee < ActiveRecord::Base
   end
 
   def invitation_long_url
-    "#{ENV['HOSTNAME']}/client/invites"
+    "#{ENV['HOSTNAME']}/client/events/#{self.event.id}/invites"
   end
 
   def send_sms(template)
@@ -176,10 +215,6 @@ class Attendee < ActiveRecord::Base
 
 private
   def generate_short_url(long_url)
-    return 'http://t.cn/RGCZ90w'
-    encode_url = CGI.escape(long_url)
-    short_link = Net::HTTP.get(URI.parse("http://985.so/api.php?url=#{encode_url}"))
-    return short_link
     Rails.logger.info("[DWZ] Generate Short URL: #{long_url}")
     ret = Timeout::timeout(5) do
       # http = Net::HTTP.post_form(URI.parse('http://dwz.cn/create.php'),{url: long_url})
@@ -187,9 +222,10 @@ private
     end
     json = JSON.parse(ret)
     if json['urls']
-      json['urls'].first['url_short']
+      json['urls'][0]['url_short']
     elsif json['error']
-      raise json['error']
+      'app/model/attendee/150'
+      #raise json['error']
     else
       raise json['err_msg']
     end

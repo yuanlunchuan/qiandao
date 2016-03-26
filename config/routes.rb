@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   end
 
   namespace :client do
-    get 'invites'     => 'invites#show'
     resources :sessions
     resources :events do
+      get 'invites'     => 'invites#show'
       get 'system_infos' => 'sites#system_infos'
       get 'seats'  => 'seats#show'
       get 'sites'   => 'sites#show'
