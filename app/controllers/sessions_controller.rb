@@ -4,16 +4,6 @@ class SessionsController < ApplicationController
   layout 'empty'
 
   def new
-    Attendee.all.each do |attendee|
-      if attendee.photo.present?
-        FileUtils.cp "#{Rails.root}/public/system/events/#{attendee.event.id}/attendees/large/#{attendee.attendee_number}-#{attendee.token}.jpg", "#{Rails.root}/public/system/events/large/#{attendee.mobile}.jpg"
-        FileUtils.cp "#{Rails.root}/public/system/events/#{attendee.event.id}/attendees/medium/#{attendee.attendee_number}-#{attendee.token}.jpg", "#{Rails.root}/public/system/events/medium/#{attendee.mobile}.jpg"
-        FileUtils.cp "#{Rails.root}/public/system/events/#{attendee.event.id}/attendees/original/#{attendee.attendee_number}-#{attendee.token}.jpg", "#{Rails.root}/public/system/events/original/#{attendee.mobile}.jpg"
-        FileUtils.cp "#{Rails.root}/public/system/events/#{attendee.event.id}/attendees/square/#{attendee.attendee_number}-#{attendee.token}.jpg", "#{Rails.root}/public/system/events/square/#{attendee.mobile}.jpg"
-        FileUtils.cp "#{Rails.root}/public/system/events/#{attendee.event.id}/attendees/thumb/#{attendee.attendee_number}-#{attendee.token}.jpg", "#{Rails.root}/public/system/events/thumb/#{attendee.mobile}.jpg"
-        FileUtils.cp "#{Rails.root}/public/system/events/#{attendee.event.id}/attendees/avatar/#{attendee.attendee_number}-#{attendee.token}.jpg", "#{Rails.root}/public/system/events/avatar/#{attendee.mobile}.jpg"
-      end
-    end
 
   end
 
