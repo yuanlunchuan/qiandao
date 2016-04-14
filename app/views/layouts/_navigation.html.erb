@@ -25,11 +25,47 @@
             <i class="fa fa-th-large"></i> <span class="nav-label">基本信息设置</span></span>
           <% end %>
         </li>
-
+<!-- 
         <li class="<%= 'active' if @current_module==6 %>" class="<%= 'hidden' if !current_admin.restaurant_permission %>">
           <%= link_to edit_event_restaurant_path(current_event, '~') do%>
-            <i class="fa fa-cutlery"></i> <span class="nav-label">酒店设置</span></span>
+            <i class="fa fa-home" aria-hidden="true"></i><span class="nav-label">活动微网站</span></span>
           <% end %>
+        </li>
+ -->
+        <% if @current_module==6 %>
+          <li id="active-item" class="active">
+        <% else %>
+          <li>
+        <% end %>
+        <a href="#">
+          <i class="fa fa-home" aria-hidden="true"></i><span class="nav-label">活动微网站</span>
+        </a>
+        <ul class="submenu">
+          <li>
+            <%= link_to event_event_base_setting_path(current_event), style: is_active_item('events', 'event_base_setting') do %>
+              <i class="fa fa-gift"></i>
+              <span class="nav-label">基本设置</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
+              <i class="fa fa-gift"></i>
+              <span class="nav-label">欢迎页设置</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
+              <i class="fa fa-gift"></i>
+              <span class="nav-label">功能设置</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
+              <i class="fa fa-gift"></i>
+              <span class="nav-label">内容设置</span>
+            <% end %>
+          </li>
+        </ul>
         </li>
 
         <% if @current_module==0 %>

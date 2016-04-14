@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221035221) do
+ActiveRecord::Schema.define(version: 20160413141341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,10 +42,18 @@ ActiveRecord::Schema.define(version: 20160221035221) do
     t.string   "name"
     t.string   "password_digest"
     t.string   "auth_token"
-    t.boolean  "root",            default: false
+    t.boolean  "root",                            default: false
     t.text     "memo"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.boolean  "restaurant_permission"
+    t.boolean  "session_manage_permission"
+    t.boolean  "session_notifacation_permission"
+    t.boolean  "attendee_manage_permission"
+    t.boolean  "checkin_manage_permission"
+    t.boolean  "interaction_manage_permission"
+    t.boolean  "seller_manage_permission"
+    t.boolean  "event_manage_permission"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -127,11 +135,22 @@ ActiveRecord::Schema.define(version: 20160221035221) do
     t.string   "contact"
     t.string   "contact_number"
     t.string   "event_link"
-    t.string   "time_zone",      default: "Beijing"
+    t.string   "time_zone",               default: "Beijing"
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "domain_name"
+    t.string   "title"
+    t.text     "content"
+    t.string   "head_photo_file_name"
+    t.string   "head_photo_content_type"
+    t.integer  "head_photo_file_size"
+    t.datetime "head_photo_updated_at"
+    t.string   "event_logo_file_name"
+    t.string   "event_logo_content_type"
+    t.integer  "event_logo_file_size"
+    t.datetime "event_logo_updated_at"
   end
 
   create_table "invitation_settings", force: :cascade do |t|

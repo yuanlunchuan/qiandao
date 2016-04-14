@@ -23,6 +23,17 @@ class Event < ActiveRecord::Base
   before_validation :generate_datetime
   after_find :build_time_attributes
 
+  has_attached_file :head_photo,
+                    styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
+                    url: '/system/events/head_photo/:style/:event.jpg',
+                    default_url: 'avatar.png'
+
+  has_attached_file :event_logo,
+                    styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
+                    url: '/system/events/event_logo/:style/:event.jpg',
+                    default_url: 'avatar.png'
+
+  validates_attachment_content_type :head_photo, :content_type => /\Aimage\/.*\Z/
   def start_time
     @start_time ||= '00:00'
   end

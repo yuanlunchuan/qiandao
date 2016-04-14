@@ -1,0 +1,49 @@
+<%= form_for @event, url: event_update_event_base_setting_path(@event), html: {class: 'form-horizontal'} do |f|%>
+  <div class="row" style="margin-top: 10px">
+    <div class="col-xs-10">
+      <b>1, 域名设置</b><%=f.text_field :domain_name, style: "margin-left:5px" %>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-xs-12">
+      <b>2, 上传logo</b>(上传尺寸 120px 宽*100px高, jpg/png格式, 尺寸200kb)
+    </div>
+    <div class="col-xs-12" style="margin-top:10px">
+      请上传图片
+      <%= f.file_field :event_logo, style: "display: inline;" %>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-xs-12" style="margin-top:10px">
+      <b>3, 上传头图图片</b>(上传尺寸 640px宽*240px高，jpg/png格式，尺寸200kb)
+    </div>
+    <div class="col-xs-12" style="margin-top:10px">
+      请上传图片 <%= f.file_field :head_photo, style: "display: inline;" %>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-xs-12" style="margin-top:10px">
+      <b>4, 标题</b>(字数在15字以内)
+    </div>
+    <div class="col-xs-12" style="margin-top:10px">
+      <%=f.text_field :title %>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-xs-12" style="margin-top:10px">
+      <b>5, 内容</b>(字数在99字以内)
+    </div>
+    <div class="col-xs-12" style="margin-top:10px">
+      <%=f.text_area :content, rows: 10%>
+    </div>
+  </div>
+  
+  <div class="row" style="margin-top:10px">
+    <%= button_tag '保存', class: 'btn btn-primary col-xs-1', style: "margin-right:10px" %>
+    <input class="col-xs-2" type="button" value="取消修改"></input>
+  </div>
+<% end %>

@@ -67,6 +67,9 @@ Rails.application.routes.draw do
       resources :attendee_seats
       resources :system_infos
       resources :session_seats
+      get 'event_base_setting' => 'events#event_base_setting'
+      patch 'update_event_base_setting' => 'events#update_event_base_setting'
+
       get 'search_attendees' => 'seats#search_attendee'
       post 'dele_attendee_seat' => 'seats#dele_attendee_seat'
       post 'update_attendee_seat' => 'seats#update_attendee_seat'

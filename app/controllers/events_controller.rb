@@ -9,6 +9,22 @@ class EventsController < ApplicationController
     render layout: 'event'
   end
 
+  def event_base_setting
+    @current_module = 6
+    @event = current_event
+    render layout: 'event'
+  end
+
+  def update_event_base_setting
+    @event = Event.find(params[:event_id])
+    if @event.update(event_base_params)
+      redirect_to dashboard_path , flash: { success: '活动编辑成功' }
+    else
+      flash.now[:error] = @event.errors.full_messages
+      render :edit
+    end
+  end
+
   def settings
     render layout: 'event'
   end
@@ -54,6 +70,10 @@ class EventsController < ApplicationController
       flash.now[:error] = @event.errors.full_messages
       render :edit
     end
+  end
+
+  def event_base_params
+    params.require(:event).permit(:domain_name, :title, :content, :head_photo, :event_logo)
   end
 
 private

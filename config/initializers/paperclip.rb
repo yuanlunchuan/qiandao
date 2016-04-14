@@ -13,3 +13,7 @@
 Paperclip.interpolates :mobile do |attachment, style|
   attachment.instance.mobile
 end
+
+Paperclip.interpolates :event do |attachment, style|
+  attachment.instance.id
+end
