@@ -11,6 +11,14 @@ class LotteryPrizesController < ApplicationController
     
   end
 
+  def lottery_prize_setting
+    
+  end
+
+  def lottery_prize_rule
+    
+  end
+
   def set_current_module
     @current_module = 4
   end

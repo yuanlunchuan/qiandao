@@ -76,6 +76,9 @@ Rails.application.routes.draw do
       patch 'update_function_setting' => 'events#update_function_setting'
       get 'content_setting' => 'events#content_setting'
 
+      get 'lottery_prize_setting' => 'lottery_prizes#lottery_prize_setting'
+      get 'lottery_prize_rule' => 'lottery_prizes#lottery_prize_rule'
+
       get 'search_attendees' => 'seats#search_attendee'
       post 'dele_attendee_seat' => 'seats#dele_attendee_seat'
       post 'update_attendee_seat' => 'seats#update_attendee_seat'
