@@ -40,6 +40,7 @@ Rails.application.config.assets.precompile += %w(
   client/sites/seat_number.png
   client/sites/sites_illus.png
   client/sites/voucher.png
+  function_item_bg.jpg
   
   client_event_sessions_show.js
   client_invites_show.js
@@ -54,6 +55,7 @@ Rails.application.config.assets.precompile += %w(
   seller_checkins_show.js
   seat_index_display_by_attendee.js
   set_seat.js
+  jquery.sortable.js
 
   client_event_sessions_show.css
   client_invites_show.css

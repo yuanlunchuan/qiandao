@@ -9,16 +9,44 @@ class EventsController < ApplicationController
     render layout: 'event'
   end
 
+  def content_setting
+    @current_module = 6
+    @event = current_event
+    render layout: 'event'
+  end
+
   def event_base_setting
     @current_module = 6
     @event = current_event
     render layout: 'event'
   end
 
+  def welcome_page_setting
+    @current_module = 6
+    @event = current_event
+    render layout: 'event'
+  end
+
+  def function_setting
+    @current_module = 6
+    @event = current_event
+    render layout: 'event'
+  end
+
+  def update_welcome_page_setting
+    @event = Event.find(params[:event_id])
+    if @event.update(welcome_page_setting_params)
+      redirect_to event_welcome_page_setting_path(current_event) , flash: { success: '活动编辑成功' }
+    else
+      flash.now[:error] = @event.errors.full_messages
+      render :edit
+    end
+  end
+
   def update_event_base_setting
     @event = Event.find(params[:event_id])
     if @event.update(event_base_params)
-      redirect_to dashboard_path , flash: { success: '活动编辑成功' }
+      redirect_to event_event_base_setting_path(current_event), flash: { success: '活动编辑成功' }
     else
       flash.now[:error] = @event.errors.full_messages
       render :edit
@@ -70,6 +98,10 @@ class EventsController < ApplicationController
       flash.now[:error] = @event.errors.full_messages
       render :edit
     end
+  end
+
+  def welcome_page_setting_params
+    params.require(:event).permit(:display_welcome_page, :welcome_page_logo, :welcome_bg)
   end
 
   def event_base_params

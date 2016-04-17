@@ -1,0 +1,35 @@
+<%= form_for @event, url: event_update_welcome_page_setting_path(@event), html: {class: 'form-horizontal'} do |f|%>
+	<div class="row">
+	  <div class="col-xs-10" style="margin-top: 10px">
+	  	是否开启欢迎页<input name="display_welcome_page" type="checkbox" checked/>
+	  </div>
+	</div>
+
+	<div class="row" style="margin-top: 10px">
+		<div class="col-xs-10" style="margin-top: 10px">
+			<b>1, 上传logo</b>(上传尺寸 120px 宽*100px高, jpg/png格式, 尺寸200kb)
+		</div>
+		<div class="col-xs-12" style="margin-top:10px">
+			请上传图片<%= f.file_field :welcome_page_logo, style: "display: inline;" %>
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 10px">
+		<div class="col-xs-12">
+			<b>2, 上传背景图片</b>(上传尺寸 640px 宽*1136px高, jpg/png格式, 尺寸500kb)
+		</div>
+		<div class="col-xs-12" style="margin-top:10px">
+			请上传图片<%= f.file_field :welcome_bg, style: "display: inline;" %>
+		</div>
+	</div>
+
+	<div class="row hidden" style="margin-top: 10px">
+		<div class="col-xs-10" style="margin-top:10px">
+			3, 如背景为深色，开启文字反白<input type="checkbox" checked name="m-checkbox"/>
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<input class="col-xs-1" style="margin-right:10px" type="submit" value="确定"></input>
+	</div>
+<% end %>

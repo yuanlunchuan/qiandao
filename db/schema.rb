@@ -135,11 +135,11 @@ ActiveRecord::Schema.define(version: 20160413141341) do
     t.string   "contact"
     t.string   "contact_number"
     t.string   "event_link"
-    t.string   "time_zone",               default: "Beijing"
+    t.string   "time_zone",                      default: "Beijing"
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.string   "domain_name"
     t.string   "title"
     t.text     "content"
@@ -151,6 +151,15 @@ ActiveRecord::Schema.define(version: 20160413141341) do
     t.string   "event_logo_content_type"
     t.integer  "event_logo_file_size"
     t.datetime "event_logo_updated_at"
+    t.boolean  "display_welcome_page"
+    t.string   "welcome_page_logo_file_name"
+    t.string   "welcome_page_logo_content_type"
+    t.integer  "welcome_page_logo_file_size"
+    t.datetime "welcome_page_logo_updated_at"
+    t.string   "welcome_bg_file_name"
+    t.string   "welcome_bg_content_type"
+    t.integer  "welcome_bg_file_size"
+    t.datetime "welcome_bg_updated_at"
   end
 
   create_table "invitation_settings", force: :cascade do |t|

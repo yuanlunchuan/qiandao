@@ -48,19 +48,19 @@
             <% end %>
           </li>
           <li>
-            <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
+            <%= link_to event_welcome_page_setting_path(current_event), style: is_active_item('events', 'welcome_page_setting') do %>
               <i class="fa fa-gift"></i>
               <span class="nav-label">欢迎页设置</span>
             <% end %>
           </li>
           <li>
-            <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
+            <%= link_to event_function_setting_path(current_event), style: is_active_item('events', 'function_setting') do %>
               <i class="fa fa-gift"></i>
               <span class="nav-label">功能设置</span>
             <% end %>
           </li>
           <li>
-            <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
+            <%= link_to event_content_setting_path(current_event), style: is_active_item('events', 'content_setting') do %>
               <i class="fa fa-gift"></i>
               <span class="nav-label">内容设置</span>
             <% end %>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   namespace :client do
     resources :sessions
     resources :events do
+      get 'event_info' => 'invites#event_info'
       get 'invites'     => 'invites#show'
       get 'system_infos' => 'sites#system_infos'
       get 'seats'  => 'seats#show'
@@ -69,6 +70,10 @@ Rails.application.routes.draw do
       resources :session_seats
       get 'event_base_setting' => 'events#event_base_setting'
       patch 'update_event_base_setting' => 'events#update_event_base_setting'
+      get 'welcome_page_setting' => 'events#welcome_page_setting'
+      patch 'update_welcome_page_setting' => "events#update_welcome_page_setting"
+      get 'function_setting' => 'events#function_setting'
+      get 'content_setting' => 'events#content_setting'
 
       get 'search_attendees' => 'seats#search_attendee'
       post 'dele_attendee_seat' => 'seats#dele_attendee_seat'
