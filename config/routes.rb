@@ -73,6 +73,7 @@ Rails.application.routes.draw do
       get 'welcome_page_setting' => 'events#welcome_page_setting'
       patch 'update_welcome_page_setting' => "events#update_welcome_page_setting"
       get 'function_setting' => 'events#function_setting'
+      patch 'update_function_setting' => 'events#update_function_setting'
       get 'content_setting' => 'events#content_setting'
 
       get 'search_attendees' => 'seats#search_attendee'

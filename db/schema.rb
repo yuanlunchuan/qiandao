@@ -160,6 +160,14 @@ ActiveRecord::Schema.define(version: 20160413141341) do
     t.string   "welcome_bg_content_type"
     t.integer  "welcome_bg_file_size"
     t.datetime "welcome_bg_updated_at"
+    t.boolean  "admission_certificate"
+    t.boolean  "session_schedule"
+    t.boolean  "hotel_info"
+    t.boolean  "nearby_recommend"
+    t.boolean  "seat_info"
+    t.boolean  "outside_link"
+    t.boolean  "interactive_answer"
+    t.boolean  "lottery"
   end
 
   create_table "invitation_settings", force: :cascade do |t|

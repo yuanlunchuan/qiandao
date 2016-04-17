@@ -33,6 +33,16 @@ class EventsController < ApplicationController
     render layout: 'event'
   end
 
+  def update_function_setting
+    @event = Event.find(params[:event_id])
+    if @event.update(update_function_setting_params)
+      redirect_to event_function_setting_path(current_event), flash: { success: '活动编辑成功' }
+    else
+      flash.now[:error] = @event.errors.full_messages
+      redirect_to event_function_setting_path(current_event)
+    end
+  end
+
   def update_welcome_page_setting
     @event = Event.find(params[:event_id])
     if @event.update(welcome_page_setting_params)
@@ -98,6 +108,10 @@ class EventsController < ApplicationController
       flash.now[:error] = @event.errors.full_messages
       render :edit
     end
+  end
+
+  def update_function_setting_params
+    params.require(:event).permit(:admission_certificate, :session_schedule, :hotel_info, :nearby_recommend, :seat_info, :outside_link, :interactive_answer, :lottery)
   end
 
   def welcome_page_setting_params
