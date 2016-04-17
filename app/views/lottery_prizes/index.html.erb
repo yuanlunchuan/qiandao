@@ -11,7 +11,11 @@
 
           <div class="row">
             <div class="col-md-2">已中奖&nbsp&nbsp|&nbsp&nbsp未中奖</div>
-            <div class="col-md-3 col-md-offset-6">
+            <div class="col-md-3 col-md-offset-4">
+              <%= link_to '奖项设置', event_lottery_prize_setting_path(current_event), class: 'btn btn_default' %>
+              <%= link_to '抽奖规则设置', event_lottery_prize_rule_path(current_event) %>
+            </div>
+            <div class="col-md-3">
               <input type="text"></input>
               <input type="button" id="search" value="搜索"></input>
             </div>

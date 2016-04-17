@@ -1,1 +1,56 @@
-lottery_prize_setting.html.erb
+<% breadcrumb :edit_activity %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>奖项设置</h5>
+      </div>
+      <div class="ibox-content">
+        <table class="table table-striped" id="option">
+					<tr id="option1">
+						<td class="col-xs-1">奖项</td>
+						<td class="col-xs-2">
+						  <input type="text" placeholder="输入奖项名称"></input>
+						</td>
+						<td class="col-xs-1">
+						  <input type="text" placeholder="数量"></input>
+						</td>
+						<td class="col-xs-5">请上传奖项图片
+						  <input type="file" style="display: inline;" value="选择图片"></input>
+						</td>
+					</tr>
+
+					<tr id="option2">
+						<td class="col-xs-1">奖项</td>
+						<td class="col-xs-2">
+						  <input type="text" placeholder="输入奖项名称"></input>
+						</td>
+						<td class="col-xs-1">
+						  <input type="text" placeholder="数量"></input>
+						</td>
+						<td class="col-xs-5">请上传奖项图片
+						  <input type="file" style="display: inline;" value="选择图片"></input>
+						</td>
+					</tr>
+				</table>
+
+				<div style="margin-top:10px">
+					<input id="add" type="button" onclick="addRow()" value="+增加奖项"></input>
+				</div>
+
+				<div class="row" style="margin-top:10px">
+					<input class="col-xs-1" style="margin-right:10px" type="button" value="确定"></input>
+					<input class="col-xs-2" type="button" value="取消修改"></input>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	function addRow(){
+	  var newRow="<tr><td class=\"col-xs-1\">奖项</td><td class=\"col-xs-2\"><input type=\"text\" placeholder=\"输入奖项名称\"></input></td><td class=\"col-xs-1\"><input type=\"text\" placeholder=\"数量\"></input></td><td class=\"col-xs-5\">请上传奖项图片<input type=\"file\" style=\"display: inline;\" value=\"选择图片\"></input></td></tr>";
+		$("#option").append(newRow);
+	}
+</script>
