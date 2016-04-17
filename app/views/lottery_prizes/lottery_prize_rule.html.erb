@@ -1,1 +1,46 @@
-lottery_prize_rule.html.erb
+<% breadcrumb :edit_activity %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>抽奖规则设置</h5>
+      </div>
+      <div class="ibox-content">
+
+
+				<div class="row" style="margin-top: 10px">
+					<div class="col-xs-10" style="margin-top: 10px">
+						<b>1, 允许用户重复中奖</b><input type="checkbox" checked name="m-checkbox"></input>
+					</div>	
+				</div>
+
+				<div class="row" style="margin-top: 10px">
+					<div class="col-xs-12">
+						<b>2, 允许同一公司的人同时中奖</b><input type="checkbox" checked name="m-checkbox"></input>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px">
+					<div class="col-xs-10" style="margin-top:10px">
+						<b>3, 参与抽奖的名单</b>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-10">
+							<input style="margin: 10px" type="checkbox"/>经销商
+							<input style="margin: 10px" type="checkbox"/>嘉宾
+							<input style="margin: 10px" type="checkbox"/>其他标签
+					</div>
+				</div>
+
+				<div class="row" style="margin-top:10px">
+					<input class="col-xs-1" style="margin-right:10px" type="button" value="确定"></input>
+					<input class="col-xs-2" type="button" value="取消修改"></input>
+				</div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
