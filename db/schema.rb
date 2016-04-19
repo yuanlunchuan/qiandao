@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20160413141341) do
     t.integer  "event_logo_file_size"
     t.datetime "event_logo_updated_at"
     t.boolean  "display_welcome_page",           default: true
+    t.boolean  "opposite_color",                 default: true
     t.string   "welcome_page_logo_file_name"
     t.string   "welcome_page_logo_content_type"
     t.integer  "welcome_page_logo_file_size"
