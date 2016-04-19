@@ -6,6 +6,7 @@ class AddBaseInfoToEvents < ActiveRecord::Migration
     add_attachment :events, :head_photo
     add_attachment :events, :event_logo
     add_column :events, :display_welcome_page, :boolean, default: true
+    add_column :events, :opposite_color, :boolean, default: true
     add_attachment :events, :welcome_page_logo
     add_attachment :events, :welcome_bg
     add_column :events, :admission_certificate, :boolean
