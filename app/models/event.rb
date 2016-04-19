@@ -26,22 +26,22 @@ class Event < ActiveRecord::Base
   has_attached_file :head_photo,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
                     url: '/system/events/head_photo/:style/:event.jpg',
-                    default_url: 'avatar.png'
+                    default_url: '/images/default-bg.png'
 
   has_attached_file :event_logo,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
                     url: '/system/events/event_logo/:style/:event.jpg',
-                    default_url: 'avatar.png'
+                    default_url: '/images/default_logo.png'
 
   has_attached_file :welcome_page_logo,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
                     url: '/system/events/welcome_page_logo/:style/:event.jpg',
-                    default_url: 'avatar.png'
+                    default_url: '/images/default_logo.png'
 
   has_attached_file :welcome_bg,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
                     url: '/system/events/welcome_bg/:style/:event.jpg',
-                    default_url: 'avatar.png'
+                    default_url: '/images/default-welcome-bg.png'
 
   validates_attachment_content_type :head_photo, :content_type => /\Aimage\/.*\Z/
   def start_time
