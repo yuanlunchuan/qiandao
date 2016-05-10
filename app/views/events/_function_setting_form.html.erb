@@ -1,6 +1,5 @@
 <style type="text/css">
 	.tu{
-		position:relative;
 		text-align:center;
 	}
 	.ch{
@@ -9,37 +8,31 @@
 	}
 </style>
 <%= form_for @event, url: event_update_function_setting_path(@event), html: {class: 'form-horizontal'} do |f|%>
-	<div class="col-xs-10">
-		<div class="row" style="margin-top: 10px">
-			<div class="col-xs-10">
-				<b>选择网站上要显示的功能</b>
-			</div>
-		</div>
-
-		<div class="row" style="margin-top: 30px">
+	<div class="row">
 			<div class="col-xs-3 tu">
 			  <%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
 			  <%= f.check_box :admission_certificate, class: 'ch' %>
 				<span>入场凭证</span>
 			</div>
+
 			<div class="col-xs-3 tu">
 			<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
 				<%= f.check_box :session_schedule, class: 'ch' %>
 				<span>会议日程</span>
 			</div>
+
 			<div class="col-xs-3 tu">
 				<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
 				<%= f.check_box :hotel_info, class: 'ch' %>
 				<span>酒店信息</span>
 			</div>
+
 			<div class="col-xs-3 tu">
 				<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
 				<%= f.check_box :nearby_recommend, class: 'ch' %>
 				<span>周边推荐</span>
 			</div>
-		</div>
 
-		<div class="row" style="margin-top: 10px">
 			<div class="col-xs-3 tu">
 				<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
 				<%= f.check_box :seat_info, class: 'ch' %>
@@ -60,11 +53,8 @@
 				<%= f.check_box :lottery, class: 'ch' %>
 				<span>现场抽奖</span>
 			</div>
-		</div>
-		
-		<div class="row" style="margin-top:10px">
-			<input class="col-xs-1" style="margin-right:10px" type="submit" value="确定"></input>
-		</div>
+
+			<input class="btn btn-primary col-xs-1 col-md-offset-2" type="submit" value="确定"></input>
 
 	</div>
 <% end %>
