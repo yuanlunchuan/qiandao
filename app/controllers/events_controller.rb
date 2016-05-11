@@ -84,7 +84,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all.order(id: :desc)
+    @events = Event.all.order('start')
   end
 
   def new
