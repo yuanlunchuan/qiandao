@@ -84,7 +84,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all.order('start')
+    @events = Event.all.where(defunct: false).order('start')
   end
 
   def new
@@ -112,6 +112,15 @@ class EventsController < ApplicationController
     else
       flash.now[:error] = @event.errors.full_messages
       render :edit
+    end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    if @event.update(defunct: true)
+      redirect_to events_path, flash: { success: '成功' }
+    else
+      redirect_to events_path, flash: { error: 'failure' }
     end
   end
 

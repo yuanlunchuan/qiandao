@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413141341) do
+ActiveRecord::Schema.define(version: 20160511155044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,7 +152,6 @@ ActiveRecord::Schema.define(version: 20160413141341) do
     t.integer  "event_logo_file_size"
     t.datetime "event_logo_updated_at"
     t.boolean  "display_welcome_page",           default: true
-    t.boolean  "opposite_color",                 default: true
     t.string   "welcome_page_logo_file_name"
     t.string   "welcome_page_logo_content_type"
     t.integer  "welcome_page_logo_file_size"
@@ -169,6 +168,7 @@ ActiveRecord::Schema.define(version: 20160413141341) do
     t.boolean  "outside_link"
     t.boolean  "interactive_answer"
     t.boolean  "lottery"
+    t.boolean  "defunct",                        default: false
   end
 
   create_table "invitation_settings", force: :cascade do |t|

@@ -28,6 +28,7 @@
               <td>
                 <%= link_to '编辑', edit_event_path(event), class: 'btn btn-outline btn-info btn-xs'%>
                 <%= link_to  event_dashboard_path(event), class: 'btn btn-warning btn-xs btn-outline' do%> 管理 <% end %>
+                <%= link_to  event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs btn-outline' do%> delete<% end %>
               </td>
             </tr>
           <%end%>
