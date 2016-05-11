@@ -17,7 +17,7 @@ class RestaurantsController < ApplicationController
       @restaurant.latitude = params[:latitude]
       @restaurant.longitude = params[:longitude]
       @restaurant.save
-      redirect_to edit_event_restaurant_path(current_event, @restaurant), flash: {success: '保存成功'}
+      redirect_to event_content_setting_path(current_event), flash: {success: '保存成功'}
     else
       flash.now[:error] = @restaurant.errors.full_messages
       render :edit

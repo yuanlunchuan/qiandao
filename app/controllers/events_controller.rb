@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   before_action :authorize_admin!
 
   def dashboard
-
     @checked_in_numbers = current_event.attendees.checked_in.count
     @total = current_event.attendees.count
 
@@ -12,6 +11,12 @@ class EventsController < ApplicationController
   def content_setting
     @current_module = 6
     @event = current_event
+    
+    #restaurant setting initialize
+    @restaurant = Restaurant.find_or_create_by(event: current_event)
+    @latitude = @restaurant.latitude
+    @longitude = @restaurant.longitude
+
     render layout: 'event'
   end
 

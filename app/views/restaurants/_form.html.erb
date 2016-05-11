@@ -1,7 +1,9 @@
 <%= form_for @restaurant, url: event_restaurant_path(current_event, @restaurant), html: {class: 'form-horizontal'} do |f|%>
 
-  <div class="form-group"><label class="col-sm-2 control-label">酒店名称</label>
-    <div class="col-sm-3"> <%=f.text_field :restaurant_name, class: 'form-control'%> </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">酒店名称</label>
+    <div class="col-sm-3">
+      <%=f.text_field :restaurant_name, class: 'form-control'%> </div>
   </div>
 
   <div class="form-group"><label class="col-sm-2 control-label">酒店电话</label>
