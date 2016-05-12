@@ -9,15 +9,40 @@
 <div class="row">
   <div class="col-md-6 content-box">
 		<ul id="sortable">
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>入场凭证（个人二维码）<button id="qrcode-button">移除</button></li>
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>会议日程<button class="remove-session">移除</button></li>
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>酒店信息<button id="remove-resturant">移除</button></li>
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>周边推荐<button id="remove-recommand">移除</button></li>
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>座位信息<button id="remove-seat">移除</button></li>
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>站外链接<button id="outsite-link">移除</button></li>
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>互动问答<button id="remove-question">移除</button></li>
-		  <li class="ui-state-default"><span class="glyphicon glyphicon-list"></span>现场抽奖<button id="lottery-prize">移除</button></li>
+		  <li data-function-name="admission_certificate" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>入场凭证（个人二维码）
+		    <button id="qrcode-button">移除</button>
+		  </li>
+		  <li data-function-name="session_schedule" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>会议日程
+		    <button id="remove-session">移除</button>
+		  </li>
+		  <li data-function-name="hotel_info" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>酒店信息
+		    <button id="remove-resturant">移除</button>
+		  </li>
+		  <li data-function-name="nearby_recommend" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>周边推荐
+		    <button id="remove-recommand">移除</button>
+		  </li>
+		  <li data-function-name="seat_info" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>座位信息
+		    <button id="remove-seat">移除</button>
+		  </li>
+		  <li data-function-name="outside_link" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>站外链接
+		    <button id="outsite-link">移除</button>
+		  </li>
+		  <li data-function-name="interactive_answer" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>互动问答
+		    <button id="remove-question">移除</button>
+		  </li>
+		  <li data-function-name="lottery" class="ui-state-default">
+		    <span class="glyphicon glyphicon-list"></span>现场抽奖
+		    <button id="lottery-prize">移除</button>
+		  </li>
 		</ul>
+		<button id="saveFunctionOrder" class="btn btn-primary" style="margin-top: 20px;">保存</button>
 	</div>
 
 	<div class="col-md-6 resturant-box">
@@ -55,7 +80,7 @@
 
 		  <div class="form-group">
 		    <div class="col-sm-4 col-sm-offset-2">
-		      <%= button_tag '保存', class: 'btn btn-primary'%>
+		      <%= button_tag '保存', class: 'btn btn-primary', style: 'margin-top: 10px;'%>
 		    </div>
 		  </div>
 
