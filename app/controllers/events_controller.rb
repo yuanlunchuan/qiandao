@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :authorize_admin!
+  include WebApiRenderer
+  attr_accessor :meta
 
   def dashboard
     @checked_in_numbers = current_event.attendees.checked_in.count
@@ -81,6 +83,12 @@ class EventsController < ApplicationController
       flash.now[:error] = @event.errors.full_messages
       render :edit
     end
+  end
+
+  def show
+    self.meta = params
+    event = Event.find(params[:id])
+    render_ok [ event ]
   end
 
   def index

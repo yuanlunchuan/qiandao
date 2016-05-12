@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511155044) do
+ActiveRecord::Schema.define(version: 20160512135838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,14 @@ ActiveRecord::Schema.define(version: 20160511155044) do
     t.boolean  "interactive_answer"
     t.boolean  "lottery"
     t.boolean  "defunct",                        default: false
+    t.integer  "admission_certificate_order",    default: 1
+    t.integer  "session_schedule_order",         default: 2
+    t.integer  "hotel_info_order",               default: 3
+    t.integer  "nearby_recommend_order",         default: 4
+    t.integer  "seat_info_order",                default: 5
+    t.integer  "outside_link_order",             default: 6
+    t.integer  "interactive_answer_order",       default: 7
+    t.integer  "lottery_order",                  default: 8
   end
 
   create_table "invitation_settings", force: :cascade do |t|

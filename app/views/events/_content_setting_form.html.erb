@@ -6,10 +6,12 @@
 .resturant-box { border-left: 2px solid #000; }
 </style>
 
+<div id="event-id" class="hidden" data-event-id=<%= current_event.id%>></div>
+
 <div class="row">
   <div class="col-md-6 content-box">
 		<ul id="sortable">
-		  <li data-function-name="admission_certificate" class="ui-state-default">
+		  <!-- <li data-function-name="admission_certificate" class="ui-state-default">
 		    <span class="glyphicon glyphicon-list"></span>入场凭证（个人二维码）
 		    <button id="qrcode-button">移除</button>
 		  </li>
@@ -40,7 +42,7 @@
 		  <li data-function-name="lottery" class="ui-state-default">
 		    <span class="glyphicon glyphicon-list"></span>现场抽奖
 		    <button id="lottery-prize">移除</button>
-		  </li>
+		  </li> -->
 		</ul>
 		<button id="saveFunctionOrder" class="btn btn-primary" style="margin-top: 20px;">保存</button>
 	</div>
