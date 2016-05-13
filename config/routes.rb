@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       resources :attendee_seats
       resources :system_infos
       resources :session_seats
+      post 'update_event_function_order' => 'events#update_event_function_order'
       get 'event_base_setting' => 'events#event_base_setting'
       patch 'update_event_base_setting' => 'events#update_event_base_setting'
       get 'welcome_page_setting' => 'events#welcome_page_setting'

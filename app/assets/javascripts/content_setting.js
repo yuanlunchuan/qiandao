@@ -3,9 +3,33 @@ var Obj = {
 
   onSaveFunctionOrderClicked: function(event){
     var self = Obj;
+    var functionOrder = 0;
+    var sendData = [];
     $('li').each(function(){
-      $(this).data('function-name')&&console.info("-------------function name: "+$(this).data('function-name'));
+      var data = {};
+      if($(this).data('function-name')){
+        functionOrder += 1;
+        data = {
+          function_name: $(this).data('function-name'),
+          function_order: functionOrder
+        }
+        sendData.push(data);
+      }
     });
+    self.updateEventFunctionOrder(sendData);
+  },
+
+  updateEventFunctionOrder: function(data){
+    var self = Obj;
+    var eventId = $("#event-id").data('event-id');
+    $.post('/app/events/'+eventId+'/update_event_function_order.json',
+      {
+        function_list: data,
+        function_length: data.length
+      },
+      function(event){
+        alert('success');
+      });
   },
 
   onGetEventFunctionSuccess: function(event){
@@ -97,15 +121,12 @@ var Obj = {
       case 'admission_certificate':
         $("#sortable").append(self.show_admission_certificate());
         break;
-      
       case 'session_schedule':
         $("#sortable").append(self.show_session_schedule());
         break;
-
       case 'hotel_info':
         $("#sortable").append(self.show_hotel_info());
         break;
-
       case 'seat_info':
         $("#sortable").append(self.show_seat_info());
         break;

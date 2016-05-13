@@ -70,6 +70,59 @@ class EventsController < ApplicationController
     end
   end
 
+  def update_event_function_order
+    self.meta = params
+    reset_event_function
+    for i in 0..(params['function_length'].to_i-1)
+      function_name = params['function_list']['0']['function_name'] if 0==i
+      function_name = params['function_list']['1']['function_name'] if 1==i
+      function_name = params['function_list']['2']['function_name'] if 2==i
+      function_name = params['function_list']['3']['function_name'] if 3==i
+      function_name = params['function_list']['4']['function_name'] if 4==i
+      function_name = params['function_list']['5']['function_name'] if 5==i
+      function_name = params['function_list']['6']['function_name'] if 6==i
+      function_name = params['function_list']['7']['function_name'] if 7==i
+
+      case function_name
+      when 'admission_certificate'
+        current_event.update admission_certificate: true, admission_certificate_order: (i+1)
+      when 'session_schedule'
+        current_event.update session_schedule: true, session_schedule_order: (i+1)
+      when 'nearby_recommend'
+        current_event.update nearby_recommend: true, nearby_recommend_order: (i+1)
+      when 'seat_info'
+        current_event.update seat_info: true, seat_info_order: (i+1)
+      when 'outside_link'
+        current_event.update outside_link: true, outside_link_order: (i+1)
+      when 'interactive_answer'
+        current_event.update interactive_answer: true, interactive_answer_order: (i+1)
+      when 'lottery'
+        current_event.update lottery: true, lottery_order: (i+1)
+      end
+    end
+
+    render_ok []
+  end
+
+  def reset_event_function
+    current_event.update admission_certificate: false,
+      session_schedule: false,
+      hotel_info: false,
+      nearby_recommend: false,
+      seat_info: false,
+      outside_link: false,
+      interactive_answer: false,
+      lottery: false,
+      admission_certificate_order: 0,
+      session_schedule_order: 0,
+      hotel_info_order: 0,
+      nearby_recommend_order: 0,
+      seat_info_order: 0,
+      outside_link_order: 0,
+      interactive_answer_order: 0,
+      lottery_order: 0
+  end
+
   def settings
     render layout: 'event'
   end
