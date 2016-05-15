@@ -6,7 +6,16 @@
     <tbody>
     <% @attendees.each do |attendee|%>
     <tr>
-      <td class="text-center"><%=attendee.session_checked_in_at.in_time_zone('Beijing').to_s(:time_only)%></td>
+      <% seat = Seat.attendee_seat_is(attendee, Session.find(params[:session_id])).try(:first) %>
+      <% if seat.present? %>
+        <td class="text-center">
+          座位:<%= seat.table_row %>桌<%= seat.table_col %>号
+        </td>
+      <% else %>
+        <td class="text-center">
+          <%=attendee.session_checked_in_at.in_time_zone('Beijing').to_s(:time_only)%>
+        </td>
+      <% end %>
       <td title="<%=attendee.mobile%>"><%=attendee.name%></td>
       <td class="text-center">
         <% style = (attendee.printed_at.present? ? 'btn-white' : 'btn-primary') %>
