@@ -1,6 +1,8 @@
 class AttendeeSeatsController < ApplicationController
   before_action :set_module
   skip_before_action :verify_authenticity_token
+  include WebApiRenderer
+  attr_accessor :meta
   layout 'client'
 
   def new
@@ -33,6 +35,7 @@ class AttendeeSeatsController < ApplicationController
   end
 
   def show
+    self.meta = params
     session = Session.find(params[:session_id])
     attendees = Attendee.rfid_is(params[:keyword])
     attendees = Attendee.token_is(params[:keyword]) if attendees.blank?
@@ -40,6 +43,14 @@ class AttendeeSeatsController < ApplicationController
       @attendee = attendees.first
       @session_seat = session.session_seat
       @seat = Seat.attendee_seat_is(attendees.first, session).first
+      resonse_hash = {
+        seat: @seat,
+        attendee: attendees.first,
+        session_seat: @session_seat
+      }
+      render_ok [ resonse_hash ] if 'json'==params['format']
+    else
+      render_not_found [ 'not fund' ] if 'json'==params['format']
     end
   end
 

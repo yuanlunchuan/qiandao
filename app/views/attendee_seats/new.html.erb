@@ -87,7 +87,7 @@
         <%= image_tag 'attendee_seats/graphic.jpg',class:"img-responsive" %>
       </div>
       <div class="">
-        <%= form_tag event_attendee_seat_path(current_event, '~'), id: 'attendee-keyword', method: 'get' do %>
+        <%= form_tag event_attendee_seat_path(current_event, params[:session_id]), id: 'attendee-keyword', method: 'get' do %>
           <input class="mssage-box" name="keyword" type="text"/>
           <input class="hidden" name="session_id" value=<%= params[:session_id] %>>
         <% end %>
@@ -97,7 +97,6 @@
 </div>
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
-
   $(document).ready(function(){ //文档读取时赋予文本框焦点
     $('.mssage-box').focus();
   })

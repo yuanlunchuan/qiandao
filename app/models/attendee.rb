@@ -109,6 +109,9 @@ class Attendee < ActiveRecord::Base
   def generate_qrcode
     qr = RQRCode::QRCode.new(self.token, :size => 4, :level => :h )
     png = qr.to_img
+    unless File.directory? "#{Rails.root}/public/attendee_qrcode"
+      Dir::mkdir("#{Rails.root}/public/attendee_qrcode", 0777)
+    end
     png.resize(150, 150).save("#{Rails.root}/public/attendee_qrcode/#{self.event_id}_#{self.id}.png")
   end
 
