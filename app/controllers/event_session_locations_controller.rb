@@ -5,24 +5,34 @@ class EventSessionLocationsController < ApplicationController
   layout 'event'
 
   def index
-    @sessions = current_event.sessions
+    @session_locations = current_event.session_locations
   end
 
   def new
-    
+    @event_session = SessionLocation.new
   end
 
   def edit
-    @session = current_event.sessions.find(params[:id])
+    @event_session = current_event.session_locations.find(params[:id])
+  end
+
+  def create
+    @session_location = current_event.session_locations.new session_location_params
+    if @session_location.save
+      redirect_to event_event_session_locations_path, flash: {success: '保存成功'}
+    else
+      flash.now[:error] = @session_location.errors.full_messages
+      render :new
+    end
   end
 
   def update
-    @session = current_event.sessions.find(params[:id])
+    @session_location = current_event.session_locations.find(params[:id])
 
-    if @session.update(session_params)
+    if @session_location.update(session_location_params)
       redirect_to event_event_session_locations_path, flash: {success: '保存成功'}
     else
-      flash.now[:error] = @session.errors.full_messages
+      flash.now[:error] = @session_location.errors.full_messages
       render :edit
     end
   end
@@ -31,9 +41,9 @@ class EventSessionLocationsController < ApplicationController
     @current_module = 0
   end
 
-  def session_params    
-    params.require(:session).permit(:name, :location, :baidu_map_location_url, :contact_name, :contact_phone_number)
+  def session_location_params    
+    params.require(:session_location).permit(:location_name)
   end
 
-  private :set_current_module, :session_params
+  private :set_current_module, :session_location_params
 end

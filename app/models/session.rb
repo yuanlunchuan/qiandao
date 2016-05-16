@@ -8,6 +8,7 @@ class Session < ActiveRecord::Base
   has_many :question
   has_many :seats
   has_one  :session_seat
+  belongs_to :session_location
   default_scope -> { order(starts_at: :asc) }
 
   scope :visible, -> { where(hidden: false) }

@@ -8,23 +8,24 @@
       </div>
       <div class="ibox-content">
         <div class="project-list">
-
           <div class="row">
-
+            <div class="col-sm-12">
+              <%= link_to '新增场地', new_event_event_session_location_path(current_event), class: 'btn btn-white btn-sm pull-right' %>
+            </div>
+          </div>
+          <div class="row">
           <table class="table table-hover">
             <tbody>
 
-            <% @sessions.each do |session| %>
+            <% @session_locations.each do |location| %>
             <tr>
               <td class="session-date">
-                <%= session.start_date %> <%= session.day_of_week_in_chinese %>
-                <br>
-                <small><%= session.start_time %> - <%= session.end_time %> </small>
+                <%= location.id %>
               </td>
-              <td class="session-name"><%= session.name %> </td>
+              <td class="session-name"><%= location.location_name %> </td>
 
               <td class="project-actions">
-                <%= link_to edit_event_event_session_location_path(current_event, session), class: 'btn btn-white btn-sm' do%>
+                <%= link_to edit_event_event_session_location_path(current_event, location), class: 'btn btn-white btn-sm' do%>
                 <i class="fa fa-pencil"></i> 编辑会议场地信息
                 <% end %>
               </td>

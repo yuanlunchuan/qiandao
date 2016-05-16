@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512135838) do
+ActiveRecord::Schema.define(version: 20160516160415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,6 +264,13 @@ ActiveRecord::Schema.define(version: 20160512135838) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "session_locations", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "location_name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "session_seats", force: :cascade do |t|
     t.integer  "session_id"
     t.integer  "total_table_count"
@@ -290,6 +297,7 @@ ActiveRecord::Schema.define(version: 20160512135838) do
     t.boolean  "question_enabled",       default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.integer  "session_location_id"
   end
 
   create_table "sms_templates", force: :cascade do |t|

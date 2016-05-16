@@ -58,6 +58,11 @@
                 <% end %>
               </td>
 
+              <td class="text-center">
+                <% if session.session_location.present? %>
+                  <%= session.session_location.location_name %>
+                <% end %>
+              </td>
 
               <td class="project-actions">
                 <%= link_to edit_event_session_path(current_event, session), class: 'btn btn-white btn-sm' do%>
