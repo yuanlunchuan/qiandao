@@ -4,12 +4,17 @@
 <div class="table-responsive">
   <table class="table table-striped table-bordered">
     <tbody>
+    <% 
+      session = Session.find(params[:session_id])
+      session_seat_properties = session.try(:session_seat).try(:properties)
+      display_table_num = session_seat_properties['set_table_num'] if session_seat_properties.present?
+    %>
     <% @attendees.each do |attendee|%>
     <tr>
-      <% seat = Seat.attendee_seat_is(attendee, Session.find(params[:session_id])).try(:first) %>
+      <% seat = Seat.attendee_seat_is(attendee, session).try(:first) %>
       <% if seat.present? %>
         <td class="text-center">
-          座位:<%= seat.table_row %>桌<%= seat.table_col %>号
+          座位:<%= seat.table_row %>桌<%= display_table_num=="true" ? "#{seat.table_col}号" : "" %>
         </td>
       <% else %>
         <td class="text-center">
