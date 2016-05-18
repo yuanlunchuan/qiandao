@@ -166,7 +166,7 @@
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
   var Obj = {
-    countDownTime: 10,
+    countDownTime: 2,
     timer: null,
 
     countDown: function(){
@@ -185,7 +185,7 @@
 
     onLoadSeatSuccess: function(event){
       var self = Obj;
-      self.countDownTime = 10;
+      self.countDownTime = 2;
       self.countDown();
 
       var collection_item = event.collection[0];
@@ -211,7 +211,7 @@
 
     onLoadSeatFailure: function(event){
       var self = Obj;
-      self.countDownTime = 10;
+      self.countDownTime = 2;
       self.countDown();
       $('.seat-area').empty();
       var error_message = "<p>很抱歉，没有找到您的座位信息。</p><p>请联系您的担当销售。</p>";
