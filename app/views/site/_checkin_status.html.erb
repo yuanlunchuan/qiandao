@@ -15,9 +15,14 @@
         <li>报名身份：<%= @attendee.category.try(:name)%> </li>
         <li>手机号码：<%= @attendee.mobile%> </li>
         <li>公司名称：<%= @attendee.company%></li>
+        <% 
+          session = Session.find(params[:session_id])
+          session_seat_properties = session.try(:session_seat).try(:properties)
+          display_table_num = session_seat_properties['set_table_num'] if session_seat_properties.present?
+        %>
         <% seat = Seat.attendee_seat_is(@attendee, Session.find(params[:session_id])).try(:first) %>
         <% if seat.present? %>
-          <li>座位:<%= seat.table_row %>桌<%= seat.table_col %>号</li>
+          <li>座位:<%= seat.table_row %>桌<%= display_table_num=="true" ? "#{seat.table_col}号" : "" %></li>
         <% end %>
         </ul>
 
