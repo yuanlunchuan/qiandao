@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516163112) do
+ActiveRecord::Schema.define(version: 20160530150202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,14 @@ ActiveRecord::Schema.define(version: 20160516163112) do
   add_index "checkins", ["attendee_id"], name: "index_checkins_on_attendee_id", using: :btree
   add_index "checkins", ["session_id"], name: "index_checkins_on_session_id", using: :btree
 
+  create_table "event_lottery_prizes", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "lottery_prize_name"
+    t.integer  "lottery_prize_acount"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.date     "start"
@@ -152,6 +160,7 @@ ActiveRecord::Schema.define(version: 20160516163112) do
     t.integer  "event_logo_file_size"
     t.datetime "event_logo_updated_at"
     t.boolean  "display_welcome_page",           default: true
+    t.boolean  "opposite_color",                 default: true
     t.string   "welcome_page_logo_file_name"
     t.string   "welcome_page_logo_content_type"
     t.integer  "welcome_page_logo_file_size"
