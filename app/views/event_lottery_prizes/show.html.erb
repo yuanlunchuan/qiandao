@@ -8,7 +8,10 @@
       </div>
       <div class="ibox-content">
         <div class="row">
-          <%= link_to "添加奖项", new_event_event_lottery_prize_event_lottery_prize_item_path(current_event, @event_lottery_prize), class: "btn btn-white btn-sm"%>
+          <div class="text-right">
+            <%= link_to "添加奖项", new_event_event_lottery_prize_event_lottery_prize_item_path(current_event, @event_lottery_prize), class: "btn btn-white btn-sm"%>
+            <%= link_to "抽奖规则设置", event_event_lottery_prize_lottery_prize_rule_path(current_event, @event_lottery_prize), class: "btn btn-white btn-sm"%>
+          </div>
           <table class="table table-striped table-hover">
             <thead>
               <tr>

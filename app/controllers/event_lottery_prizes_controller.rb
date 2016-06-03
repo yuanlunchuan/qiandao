@@ -4,6 +4,10 @@ class EventLotteryPrizesController < ApplicationController
 
   layout 'event'
 
+  def lottery_prize_rule
+    
+  end
+
   def show
     @event_lottery_prize = current_event.event_lottery_prizes.find(params[:id])
     @event_lottery_prize_items = @event_lottery_prize.event_lottery_prize_items

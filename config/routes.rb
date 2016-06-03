@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       resources :system_infos
       resources :session_seats
       resources :event_lottery_prizes do
+        get 'lottery_prize_rule' => 'event_lottery_prizes#lottery_prize_rule'
         resources :event_lottery_prize_items
       end
 
@@ -83,7 +84,6 @@ Rails.application.routes.draw do
 
       get 'live_lottery_prize' => 'lottery_prizes#live_lottery_prize'
       get 'lottery_prize_setting' => 'lottery_prizes#lottery_prize_setting'
-      get 'lottery_prize_rule' => 'lottery_prizes#lottery_prize_rule'
 
       get 'search_attendees' => 'seats#search_attendee'
       post 'dele_attendee_seat' => 'seats#dele_attendee_seat'
