@@ -7,37 +7,46 @@
         <h5>抽奖规则设置</h5>
       </div>
       <div class="ibox-content">
-
-        <div class="row" style="margin-top: 10px">
-          <div class="col-xs-10" style="margin-top: 10px">
-            <b>1, 允许用户重复中奖</b><input type="checkbox" checked name="m-checkbox"></input>
-          </div>  
-        </div>
-
-        <div class="row" style="margin-top: 10px">
-          <div class="col-xs-12">
-            <b>2, 允许同一公司的人同时中奖</b><input type="checkbox" checked name="m-checkbox"></input>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="form-lable col-md-2">1, 允许用户重复中奖</label>
+            <div class="col-md-2">
+              <input type="checkbox" class="form-control"></input>
+            </div>
           </div>
-        </div>
 
-        <div class="row" style="margin-top: 10px">
-          <div class="col-xs-10" style="margin-top:10px">
-            <b>3, 参与抽奖的名单</b>
+          <div class="form-group">
+            <label class="form-lable col-md-2 ">
+              2, 允许同一公司的人同时中奖
+            </label>
+            <div class="col-md-2">
+              <input type="checkbox" class="form-control"></input>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-10">
-              <input style="margin: 10px" type="checkbox"/>经销商
-              <input style="margin: 10px" type="checkbox"/>嘉宾
-              <input style="margin: 10px" type="checkbox"/>其他标签
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" />经销商参与抽奖的名单
+            </label>
           </div>
-        </div>
+        
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" />嘉宾参与抽奖的名单
+            </label>
+          </div>
 
-        <div class="row" style="margin-top:10px">
-          <input class="col-xs-1" style="margin-right:10px" type="button" value="确定"></input>
-          <input class="col-xs-2" type="button" value="取消修改"></input>
-        </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" />其他标签
+            </label>
+          </div>
 
+          <div class="row" style="margin-top: 50px">
+            <input class="col-md-1 btn btn-primary" type="button" value="确定" />
+            <input class="col-md-2 col-md-offset-2 btn btn-default" type="button" value="取消修改" />
+          </div>
+        </form>
 
       </div>
     </div>
