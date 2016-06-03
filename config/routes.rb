@@ -68,6 +68,10 @@ Rails.application.routes.draw do
       resources :attendee_seats
       resources :system_infos
       resources :session_seats
+      resources :event_lottery_prizes do
+        resources :event_lottery_prize_items
+      end
+
       post 'update_event_function_order' => 'events#update_event_function_order'
       get 'event_base_setting' => 'events#event_base_setting'
       patch 'update_event_base_setting' => 'events#update_event_base_setting'

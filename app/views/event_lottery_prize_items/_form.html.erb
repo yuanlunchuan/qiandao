@@ -1,0 +1,19 @@
+<%= form_for @event_lottery_prize_item, url: (@event_lottery_prize_item.new_record? ? event_event_lottery_prize_event_lottery_prize_items_path(current_event, @event_lottery_prize) : event_event_lottery_prize_event_lottery_prize_item_path(current_event, @event_lottery_prize, @event_lottery_prize_item)), html:{ class: 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <label class="form-label col-md-2">奖项名称</label>
+    <div class="col-md-8">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="lable col-md-2">数量</label>
+    <div class="col-md-8">
+      <%= f.text_field :count, class: 'form-control'%>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-2 col-md-offset-1">
+      <%= button_tag '保存', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

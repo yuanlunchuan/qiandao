@@ -217,9 +217,9 @@
         <a href="#"><i class="fa fa-gift"></i>现场互动管理</a>
           <ul class="submenu">
             <li>
-              <%= link_to event_lottery_prizes_path, style: is_active_item('lottery_prizes') do %>
+              <%= link_to event_event_lottery_prizes_path(current_event), style: is_active_item('lottery_prizes') do %>
                 <i class="fa fa-gift"></i>
-                <span class="nav-label">现场抽奖</span>
+                <span class="nav-label">现场抽奖管理</span>
               <% end %>
             </li>
             <li>
