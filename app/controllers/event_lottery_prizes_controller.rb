@@ -5,7 +5,7 @@ class EventLotteryPrizesController < ApplicationController
   layout 'event'
 
   def lottery_prize_rule
-    
+    @categories = current_event.attendee_categories
   end
 
   def show

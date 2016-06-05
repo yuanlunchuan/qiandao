@@ -9,42 +9,31 @@
       <div class="ibox-content">
         <form class="form-horizontal">
           <div class="form-group">
-            <label class="form-lable col-md-2">1, 允许用户重复中奖</label>
-            <div class="col-md-2">
+            <label class="form-lable col-md-2">允许用户重复中奖</label>
+            <div class="col-md-4">
               <input type="checkbox" class="form-control"></input>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-lable col-md-2 ">
-              2, 允许同一公司的人同时中奖
-            </label>
-            <div class="col-md-2">
-              <input type="checkbox" class="form-control"></input>
+            <label class="form-lable col-md-2">允许同一公司的人同时中奖</label>
+            <div class="col-md-4">
+              <input type="checkbox" class="form-control" />
             </div>
           </div>
 
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" />经销商参与抽奖的名单
-            </label>
-          </div>
-        
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" />嘉宾参与抽奖的名单
-            </label>
-          </div>
-
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" />其他标签
-            </label>
-          </div>
+          <% @categories.each do |category|%>
+            <div class="form-group">
+              <label class="form-label col-md-2"><%= "允许#{category.name}参与抽奖" %></label>
+              <div class="col-md-4">
+                <input type="checkbox" class="form-control">
+              </div>
+            </div>
+          <% end %>
 
           <div class="row" style="margin-top: 50px">
-            <input class="col-md-1 btn btn-primary" type="button" value="确定" />
-            <input class="col-md-2 col-md-offset-2 btn btn-default" type="button" value="取消修改" />
+            <input class="col-md-2 btn btn-default" type="button" value="取消修改" />
+            <input class="col-md-1 col-md-offset-2 btn btn-primary" type="button" value="确定" />
           </div>
         </form>
 
