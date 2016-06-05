@@ -11,14 +11,25 @@
           <div class="form-group">
             <label class="form-lable col-md-2">允许用户重复中奖</label>
             <div class="col-md-4">
-              <input type="checkbox" class="form-control"></input>
+              <input type="checkbox" name="allow_attendee_repeat_take_in" class="form-control" <%= "checked='true'" if @event_lottery_prize.allow_attendee_repeat_take_in %> value="true"></input>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-lable col-md-2">允许同一公司的人同时中奖</label>
+            <label class="form-lable col-md-2">
+              设置按人抽奖
+            </label>
             <div class="col-md-4">
-              <input type="checkbox" class="form-control" />
+              <input type="radio" class="form-control" name="lottery_prize_method" <%= "checked='true'" if 'attendee'==@event_lottery_prize.lottery_prize_method %> value="attendee" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-lable col-md-2">
+              设置按公司抽奖
+            </label>
+            <div class="col-md-4">
+              <input type="radio" class="form-control" name="lottery_prize_method" <%= "checked='true'" if 'attendee'!=@event_lottery_prize.lottery_prize_method %> value="company" />
             </div>
           </div>
 
@@ -28,11 +39,8 @@
                 <%= "允许#{category.name}参与抽奖" %>
               </label>
               <div class="col-md-4">
-                <% if @lottery_prize_category_ids.include? category.id %>
-                  <input type="checkbox" name="category_id[]" checked='true' value=<%= category.id %> class="form-control">
-                <% else %>
-                  <input type="checkbox" name="category_id[]" value=<%= category.id %> class="form-control">
-                <% end %>
+                <% checked = @lottery_prize_category_ids.include? category.id %>
+                <input type="checkbox" name="category_id[]" <%= "checked='true'" if checked %> value=<%= category.id %> class="form-control">
               </div>
             </div>
           <% end %>

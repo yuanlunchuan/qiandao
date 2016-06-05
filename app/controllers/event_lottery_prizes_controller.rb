@@ -16,8 +16,16 @@ class EventLotteryPrizesController < ApplicationController
 
   def update_lottery_prize_rule
     @event_lottery_prize = EventLotteryPrize.find params[:event_lottery_prize_id]
+    if params[:allow_attendee_repeat_take_in].present?
+      @event_lottery_prize.update allow_attendee_repeat_take_in: true
+    else
+      @event_lottery_prize.update allow_attendee_repeat_take_in: false
+    end
+    @event_lottery_prize.update lottery_prize_method: params[:lottery_prize_method]
     @lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
+
     @lottery_prize_categories.delete_all
+
     params[:category_id].present? && params[:category_id].each_with_index do |category_id, index|
       attendee_category = AttendeeCategory.find params[:category_id][index]
       LotteryPrizeCategory.create event_lottery_prize: @event_lottery_prize, attendee_category: attendee_category
