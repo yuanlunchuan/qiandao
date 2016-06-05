@@ -6,6 +6,23 @@ class EventLotteryPrizesController < ApplicationController
 
   def lottery_prize_rule
     @categories = current_event.attendee_categories
+    @event_lottery_prize = EventLotteryPrize.find(params[:event_lottery_prize_id])
+    @lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
+    @lottery_prize_category_ids = []
+    @lottery_prize_categories.each do |lottery_prize_category|
+      @lottery_prize_category_ids << lottery_prize_category.attendee_category.id
+    end
+  end
+
+  def update_lottery_prize_rule
+    @event_lottery_prize = EventLotteryPrize.find params[:event_lottery_prize_id]
+    @lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
+    @lottery_prize_categories.delete_all
+    params[:category_id].present? && params[:category_id].each_with_index do |category_id, index|
+      attendee_category = AttendeeCategory.find params[:category_id][index]
+      LotteryPrizeCategory.create event_lottery_prize: @event_lottery_prize, attendee_category: attendee_category
+    end
+    redirect_to event_event_lottery_prize_lottery_prize_rule_path(current_event, @event_lottery_prize), flash: { success: "更新成功" }
   end
 
   def show

@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       resources :session_seats
       resources :event_lottery_prizes do
         get 'lottery_prize_rule' => 'event_lottery_prizes#lottery_prize_rule'
+        patch 'update_lottery_prize_rule' => 'event_lottery_prizes#update_lottery_prize_rule'
         resources :event_lottery_prize_items
       end
 
@@ -78,7 +79,7 @@ Rails.application.routes.draw do
       patch 'update_event_base_setting' => 'events#update_event_base_setting'
       get 'welcome_page_setting' => 'events#welcome_page_setting'
       patch 'update_welcome_page_setting' => "events#update_welcome_page_setting"
-      get 'function_setting' => 'events#function_setting'
+      get 'function_setting' => 'events#function_settineg'
       patch 'update_function_setting' => 'events#update_function_setting'
       get 'content_setting' => 'events#content_setting'
 

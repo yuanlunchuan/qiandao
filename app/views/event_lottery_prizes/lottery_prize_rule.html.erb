@@ -7,7 +7,7 @@
         <h5>抽奖规则设置</h5>
       </div>
       <div class="ibox-content">
-        <form class="form-horizontal">
+        <%= form_tag event_event_lottery_prize_update_lottery_prize_rule_path(current_event, @event_lottery_prize), method: 'patch', class: "form-horizontal" %>
           <div class="form-group">
             <label class="form-lable col-md-2">允许用户重复中奖</label>
             <div class="col-md-4">
@@ -24,16 +24,21 @@
 
           <% @categories.each do |category|%>
             <div class="form-group">
-              <label class="form-label col-md-2"><%= "允许#{category.name}参与抽奖" %></label>
+              <label class="form-label col-md-2">
+                <%= "允许#{category.name}参与抽奖" %>
+              </label>
               <div class="col-md-4">
-                <input type="checkbox" class="form-control">
+                <% if @lottery_prize_category_ids.include? category.id %>
+                  <input type="checkbox" name="category_id[]" checked='true' value=<%= category.id %> class="form-control">
+                <% else %>
+                  <input type="checkbox" name="category_id[]" value=<%= category.id %> class="form-control">
+                <% end %>
               </div>
             </div>
           <% end %>
 
           <div class="row" style="margin-top: 50px">
-            <input class="col-md-2 btn btn-default" type="button" value="取消修改" />
-            <input class="col-md-1 col-md-offset-2 btn btn-primary" type="button" value="确定" />
+            <input class="col-md-1 col-md-offset-2 btn btn-primary" type="submit" value="确定" />
           </div>
         </form>
 

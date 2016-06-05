@@ -3,6 +3,7 @@ class AttendeeCategory < ActiveRecord::Base
   belongs_to :event
 
   validates :name, presence: true
+  has_many :lottery_prize_categories
 
   before_validation :populate_category_number, on: :create
   scope :category_name_is, ->(event, name) { where "event_id=? AND name=? ", event.id, name }
