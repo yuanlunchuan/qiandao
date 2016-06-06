@@ -1,12 +1,32 @@
 class EventLotteryPrizesController < ApplicationController
   before_action :authorize_admin!
   before_action :set_current_module
+  include WebApiRenderer
+  attr_accessor :meta
 
   layout 'event'
 
-  
   def start_lottery_prize
     render layout: 'empty'
+  end
+
+  def get_attendee_list
+    self.meta = params
+
+    collection = []
+    current_event.attendees.each do |attendee|
+      item = {}
+      item = attendee.to_hash
+      img = if attendee.avatar.exists?
+           attendee.avatar.url
+         else
+           attendee.photo.url(:square)
+         end
+      item['img_url'] = img
+      collection << item
+    end
+
+    render_ok collection
   end
 
   def lottery_prize_rule
