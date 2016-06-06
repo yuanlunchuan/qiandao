@@ -4,6 +4,11 @@ class EventLotteryPrizesController < ApplicationController
 
   layout 'event'
 
+  
+  def start_lottery_prize
+    render layout: 'empty'
+  end
+
   def lottery_prize_rule
     @categories = current_event.attendee_categories
     @event_lottery_prize = EventLotteryPrize.find(params[:event_lottery_prize_id])

@@ -1,1 +1,9 @@
-这个界面写开始抽奖功能
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <%=select_tag :event_lottery_prize_id, options_for_select(current_event.event_lottery_prizes.map {|s| [s.name, event_event_lottery_prize_start_lottery_prize_path(current_event, s)]}, url_for), prompt: '选择抽奖活动', include_blank: false, class: 'input-sm form-control input-s-sm inline', id: 'select-session-checkin'%>
+      </div>
+    </div>
+  </div>
+</div>
