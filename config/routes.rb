@@ -81,7 +81,7 @@ Rails.application.routes.draw do
       patch 'update_event_base_setting' => 'events#update_event_base_setting'
       get 'welcome_page_setting' => 'events#welcome_page_setting'
       patch 'update_welcome_page_setting' => "events#update_welcome_page_setting"
-      get 'function_setting' => 'events#function_settineg'
+      get 'function_setting' => 'events#function_setting'
       patch 'update_function_setting' => 'events#update_function_setting'
       get 'content_setting' => 'events#content_setting'
 

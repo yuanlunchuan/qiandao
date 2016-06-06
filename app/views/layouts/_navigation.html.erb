@@ -25,13 +25,7 @@
             <i class="fa fa-th-large"></i> <span class="nav-label">基本信息设置</span></span>
           <% end %>
         </li>
-<!-- 
-        <li class="<%= 'active' if @current_module==6 %>" class="<%= 'hidden' if !current_admin.restaurant_permission %>">
-          <%= link_to edit_event_restaurant_path(current_event, '~') do%>
-            <i class="fa fa-home" aria-hidden="true"></i><span class="nav-label">活动微网站</span></span>
-          <% end %>
-        </li>
- -->
+
         <% if @current_module==6 %>
           <li id="active-item" class="active">
         <% else %>
