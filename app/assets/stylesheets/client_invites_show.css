@@ -1,4 +1,4 @@
-.container{
+﻿.container{
   font-family:'黑体', '微软雅黑';
   position: absolute;
   width: 100%;
@@ -58,8 +58,29 @@ p.letter-pre{
 p.letter-next{
   text-indent: 2em;
 }
+.name-title{
+  margin-bottom: 0px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #3e3a39;
+  font-weight: bold;
+}
+.title-main{
+  margin-bottom: 0px;
+  font-size: 15px;
+  color: #3e3a39;
+  letter-spacing: 2px;
+  margin-top: -3px;
+}
+.title-spare{
+  margin-bottom: 0px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #3e3a39;
+  margin-top: -3px;
+}
 p.invitation{
-  margin-top: 10px;
+  margin-top: 80px;
   font-size: 2.8em;
 }
 .double-down{
