@@ -99,6 +99,10 @@ class Attendee < ActiveRecord::Base
     end
   end
 
+  def self.has_lottery_prize(event_lottery_prize)
+    self.joins('INNER JOIN lottery_prizes on lottery_prizes.attendee_id = attendees.id').where( 'lottery_prizes.event_lottery_prize_id=?', event_lottery_prize.id)
+  end
+
   def self.has_arranged(session)
     self.joins('LEFT OUTER JOIN seats ON seats.attendee_id = attendees.id').select('distinct(attendees.id), attendees.*').where( 'seats.session_id=?', session.id)
   end

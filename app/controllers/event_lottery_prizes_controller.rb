@@ -62,6 +62,8 @@ class EventLotteryPrizesController < ApplicationController
     @event_lottery_prize = current_event.event_lottery_prizes.find(params[:id])
     @event_lottery_prize_items = @event_lottery_prize.event_lottery_prize_items
     @attendees = current_event.attendees
+    @attendees = Attendee.has_lottery_prize(@event_lottery_prize) if "has_lottery"==params[:state]
+    @attendees = @attendees.contains(params[:keyword]) if params[:keyword].present?
     @attendees = @attendees.page(params[:page]).includes(:category)
   end
 
