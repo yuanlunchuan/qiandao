@@ -1,4 +1,50 @@
 <div class="hidden" id="event-lottery-prize" data-event-lottery-prize-id=<%= params[:event_lottery_prize_id]%>>
 </div>
 <div class="hidden" id="event-id" data-event-id=<%= params[:event_id] %> ></div>
-start_lottery_prize.html.erb
+<img id="attendee-img" src="/system/events/avatar/13551031966.jpg" width="400" height="400" />
+<button id="show-pic">dianji</button>
+<script type="text/javascript">
+  var Obj = {
+    imageIndex: 0,
+    timer: null,
+    images: [],
+
+    showPicture: function(imgUrl){
+      var self = Obj;
+      if(self.imageIndex == self.images.length)
+      {
+        self.imageIndex = (self.imageIndex%7)-1;
+        clearInterval(self.timer);
+      }
+      $('#attendee-img').attr('src', self.images[self.imageIndex]);
+      self.imageIndex += 1;
+    },
+
+    loadAttendee: function(){
+      var self = Obj;
+      $.getJSON('/app/events/1/event_lottery_prizes/4/get_attendee_list.json',
+        {
+
+        },
+        function(event){
+        $.each(event.collection, function(index, item){
+          self.images.push(item.img_url);
+        });
+        self.timer = setInterval(self.showPicture,300);
+      });
+    },
+
+    onShowPicClicked: function(){
+      var self = Obj;
+      self.loadAttendee();
+    },
+
+    initialize: function(){
+      var self = Obj;
+      $('#show-pic').on('click', self.onShowPicClicked);
+    }
+  }
+  $(function(){
+    Obj.initialize();
+  })
+</script>

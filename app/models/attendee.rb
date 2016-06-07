@@ -31,6 +31,7 @@ class Attendee < ActiveRecord::Base
 
   has_many :checkins
   has_many :sessions, through: :checkins
+  has_many :lottery_prizes
 
   scope :rfid_is, -> (rfid) { where rfid_num: rfid }
   scope :mobile_is, -> (mobile) { where mobile: mobile }

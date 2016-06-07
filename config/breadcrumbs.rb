@@ -103,12 +103,12 @@ crumb :add_event_lottery_prizes do |event|
 end
 
 crumb :lottery_prizes_list_item do |event|
-  link '奖项列表', event_event_lottery_prizes_path("1")
+  link '奖项列表', event_questions_path#event_event_lottery_prizes_path("1")
   parent :lottery_prizes
 end
 
 crumb :lottery_prizes do
-  link '中奖列表', event_lottery_prizes_path
+  link '中奖列表', event_questions_path#event_lottery_prizes_path
 end
 
 crumb :questions do

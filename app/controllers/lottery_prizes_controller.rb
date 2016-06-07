@@ -16,12 +16,17 @@ class LotteryPrizesController < ApplicationController
   end
 
   def create
-    params[:lottery][:lottery_name].each_with_index do |lottery_item, i|
-      EventLotteryPrize.create event_id: current_event.id,
-        lottery_prize_name: params[:lottery][:lottery_name][i],
-        lottery_prize_acount: params[:lottery][:lottery_acount][i]
-    end
-    redirect_to event_lottery_prize_setting_path(current_event)
+    attendee = Attendee.find params[:attendee_id]
+    event_lottery_prize_item = EventLotteryPrizeItem.find params[:event_lottery_prize_item_id]
+    event_lottery_prize = EventLotteryPrize.find params[:event_lottery_prize_id]
+    lottery_prize = LotteryPrize.create event: current_event,
+      attendee: attendee,
+      event_lottery_prize_item: event_lottery_prize_item,
+      event_lottery_prize: event_lottery_prize
+
+    event_lottery_prize_item.update count: (event_lottery_prize_item.count-1)
+
+    render status: 'success', json: lottery_prize
   end
 
   def lottery_prize_setting

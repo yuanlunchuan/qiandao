@@ -58,7 +58,6 @@ Rails.application.routes.draw do
       resources :seats
       resources :activity_categories
       resources :activities
-      resources :lottery_prizes
       resources :sellers
       resources :recommends
       resources :event_session_locations
@@ -74,6 +73,8 @@ Rails.application.routes.draw do
         get 'start_lottery_prize' => 'event_lottery_prizes#start_lottery_prize'
         get 'get_attendee_list' => 'event_lottery_prizes#get_attendee_list'
         resources :event_lottery_prize_items
+        get 'lottery_prize_setting' => 'lottery_prizes#lottery_prize_setting'
+        resources :lottery_prizes
       end
 
       post 'update_event_function_order' => 'events#update_event_function_order'
@@ -86,7 +87,6 @@ Rails.application.routes.draw do
       get 'content_setting' => 'events#content_setting'
 
       get 'live_lottery_prize' => 'lottery_prizes#live_lottery_prize'
-      get 'lottery_prize_setting' => 'lottery_prizes#lottery_prize_setting'
 
       get 'search_attendees' => 'seats#search_attendee'
       post 'dele_attendee_seat' => 'seats#dele_attendee_seat'

@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
 
   has_many :question
   has_many :event_lottery_prizes
+  has_many :lottery_prizes
 
   before_validation :generate_datetime
   after_find :build_time_attributes

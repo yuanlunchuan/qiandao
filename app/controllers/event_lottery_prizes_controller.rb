@@ -61,6 +61,8 @@ class EventLotteryPrizesController < ApplicationController
   def show
     @event_lottery_prize = current_event.event_lottery_prizes.find(params[:id])
     @event_lottery_prize_items = @event_lottery_prize.event_lottery_prize_items
+    @attendees = current_event.attendees
+    @attendees = @attendees.page(params[:page]).includes(:category)
   end
 
   def destroy
