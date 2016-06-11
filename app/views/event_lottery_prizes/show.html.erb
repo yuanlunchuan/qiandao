@@ -23,7 +23,7 @@
             </div>
             <form action=<%= "/app/events/#{current_event.id}/event_lottery_prizes/#{@event_lottery_prize.id}" %> method="get">
               <div class="col-md-3 col-md-offset-6">
-                <input type="text" name="keyword" value=<%= params[:keyword]||"" %> class="form-control" />
+                <%= text_field_tag :keyword, params[:keyword], class: "form-control" %>
               </div>
               <button class="btn btn-white" type="submit">搜索</button>
             </form>
