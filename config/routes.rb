@@ -72,7 +72,10 @@ Rails.application.routes.draw do
         patch 'update_lottery_prize_rule' => 'event_lottery_prizes#update_lottery_prize_rule'
         get 'start_lottery_prize' => 'event_lottery_prizes#start_lottery_prize'
         get 'get_attendee_list' => 'event_lottery_prizes#get_attendee_list'
-        resources :event_lottery_prize_items
+        resources :event_lottery_prize_items do
+          get 'specify_attendee_lottery' => 'event_lottery_prize_items#specify_attendee_lottery'
+          post 'add_specify_attendee_lottery' => 'event_lottery_prize_items#add_specify_attendee_lottery'
+        end
         get 'lottery_prize_setting' => 'lottery_prizes#lottery_prize_setting'
         resources :lottery_prizes
       end

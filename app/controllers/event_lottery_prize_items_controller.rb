@@ -5,6 +5,24 @@ class EventLotteryPrizeItemsController < ApplicationController
 
   layout 'event'
 
+  def specify_attendee_lottery
+    @event_lottery_prize = EventLotteryPrize.find(params[:event_lottery_prize_id])
+    @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:event_lottery_prize_item_id])
+  end
+
+  def add_specify_attendee_lottery
+    @attendees = current_event.attendees.contains params[:attendee_name]
+    @event_lottery_prize = EventLotteryPrize.find(params[:event_lottery_prize_id])
+    @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:event_lottery_prize_item_id])
+
+    if @attendees.present?
+      
+      redirect_to event_event_lottery_prize_event_lottery_prize_item_specify_attendee_lottery_path(current_event, @event_lottery_prize, @event_lottery_prize_item), flash: { success: '添加成功' }
+    else
+      redirect_to event_event_lottery_prize_event_lottery_prize_item_specify_attendee_lottery_path(current_event, @event_lottery_prize, @event_lottery_prize_item), flash: { error: '没有找到对应的信息' }
+    end
+  end
+
   def load_event_lottery_prize
     @event_lottery_prize = EventLotteryPrize.find(params[:event_lottery_prize_id])
   end

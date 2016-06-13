@@ -1,8 +1,379 @@
-<div class="hidden" id="event-lottery-prize" data-event-lottery-prize-id=<%= params[:event_lottery_prize_id]%>>
+<style type="text/css">
+.content-area{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-family: "微软雅黑";
+  color: #fff;
+  letter-spacing: 1px;
+}
+.bg-img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -999;
+}
+.prize-area{
+  z-index: 1;
+  position: absolute;
+}
+.title-area{
+  margin-top: 15px;
+  position: relative;
+}
+.line-area{
+  position: absolute;
+  left: 28%;
+  top: 8px;
+}
+.top-gradient{
+  height: 25px;
+  width: 1px;
+  background: -webkit-linear-gradient(bottom, rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom, rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom, rgba(255,255,0,0), rgba(255,255,255,0.8)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8)); /* 标准的语法（必须放在最后） */
+}
+.bottom-gradient{
+  height: 25px;
+  width: 1px;
+  background: -webkit-linear-gradient(bottom, rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom, rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom, rgba(255,255,0,0.8), rgba(255,255,255,0)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0)); /* 标准的语法（必须放在最后） */
+}
+.title-area h1{
+  font-size: 23px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.logo-area img{
+  height: 55px;
+  margin-top: 6px;
+  position: absolute;
+  right: 0px;
+}
+.lottery-area{
+  margin-top: 50px;
+  position: relative;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: 300px;
+}
+.lottery-bg{
+  background-color: #ccc;
+  opacity: 0.4;
+  position: absolute;
+  height: 450px;
+  left: 0px;
+  top: 0px;
+  width: 300px;
+  z-index: -999;
+}
+.lottery-title-area{
+  height: 50px;
+  line-height: 50px;
+  margin-top: 10px;
+  width: 300px;
+}
+.head-bg{
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 312px;
+  height: 50px;
+  z-index: -88;
+}
+.lottery-title{
+  float: left;
+  font-size: 18px;
+}
+.lottery-num{
+  float: right;
+  font-size: 15px;
+  font-style: italic;
+}
+.table-area{
+  background-color: #fff;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  height: 370px;
+  width: 100%;
+  overflow: auto;
+  margin-top: 20px;
+}
+.lottery-person{
+  width: 100%;
+  color: #555;
+  background-color: #fff;
+  text-align: center;
+}
+.lottery-person tr.table-title{
+  border-bottom: #d9d9d9 1px solid;
+}
+.lottery-person th{
+  text-align: center;
+}
+.lottery-person tr{
+  border-bottom: #d9d9d9 1px dashed;
+  line-height: 36px;
+}
+.lottery-person td{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.lottery-person tr.last-person{
+  border: 0px;
+}
+.number-area{
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: #929292;
+  color: #fff;
+}
+.name-icon{
+  width: 26px;
+  height: 26px;
+  border: #8f8f8d 1px solid;
+}
+.lottory-prize-area{
+  margin-top: 45px;
+  background:rgba(255,255,255,0.1);
+  height: 450px;
+  position: relative;
+  border-top: #666 1px solid;
+  border-right: #ddd 1px solid;
+  border-bottom: #ddd 1px solid;
+  border-left: #999 1px solid;
+}
+.prize-content{
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.select-content{
+  margin-top: 20px;
+  height: 50px;
+  line-height: 50px;
+}
+.lottory-prize-area{
+  position: relative;
+}
+.lottery-item-bg{
+  position: absolute;
+  left: 0px;
+  top: 20px;
+  width: 100%;
+  height: 50px;
+}
+.select-area{
+  float: left;
+  font-size: 16px;
+}
+.select-area select{
+  background: rgba(255,255,255,0);
+  border:0px;
+}
+.select-area option{
+  background: rgba(255,255,255,0.5);
+  border:0px;
+}
+.person-no-area{
+  float: right;
+  font-style: italic;
+  font-size: 15px;
+}
+.person-msg{
+  text-align: center;
+  position: relative;
+}
+.name-area p{
+  margin-bottom: 5px;
+}
+.name-area{
+  margin-top: 160px;
+  text-align: center;
+}
+.person-portrait{
+  text-align: center;
+  margin-top: 10px;
+  width: 146px;
+  height: 146px;
+  padding: 1px;
+  background-color: #fff;
+  position: absolute;
+  left:50%;
+  margin-left: -73px;
+  top: 0px; 
+}
+.person-portrait img{
+  width: 144px;
+  height: 144px;
+}
+.start-button button{
+  margin-top: 15px;
+  background-color: #4709b2;
+  width: 120px;
+  height: 40px;
+  border: 0px;
+  font-weight: bold;
+}
+.split-line{
+  position: relative;
+  margin-top: 8px;
+}
+.left-gradient{
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  width:50px;
+  height: 1px;
+  background: -webkit-linear-gradient(right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* 标准的语法（必须放在最后） */
+}
+.right-gradient{
+  position: absolute;
+  left: 50%;
+  width:50px;
+  height: 1px;
+  background: -webkit-linear-gradient(right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* 标准的语法（必须放在最后） */
+}
+.person-area{
+  margin-top: 30px;
+}
+
+</style>
+
+<div class="content-area">
+  <img class="bg-img" src="/images/lottery_prize/background.png">
+  <div class="prize-area col-md-8 col-md-offset-2">
+    <div class="title-area col-xs-12">
+      <div class="line-area">
+        <div class="top-gradient"></div>
+        <div class="bottom-gradient"></div>
+      </div>
+      <div class="col-xs-3 logo-area">
+        <img src="/images/lottery_prize/logo.png" class="img-responsive">
+      </div>
+      <div class="col-xs-9">
+        <h1>“2016 YONEX尤尼克斯合作伙伴暨新品发布会议”</h1>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="lottery-area">
+        <div class="lottery-bg"></div>
+        <div class="lottery-title-area">
+          <img class="head-bg" src="/images/lottery_prize/head-bg.png">
+          <p class="lottery-title">获奖名单</p>
+          <p class="lottery-num">获奖人数 <span>13</span></p>
+        </div>        
+        <div class="table-area">
+          <table class="lottery-person">
+            <tr class="table-title">
+              <th>序号</th>
+              <th>获奖人</th>
+              <th>奖项</th>
+            </tr>
+            <tr>
+              <td>
+                <div class="number-area">12</div>
+              </td>
+              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
+              <td>一等奖 x</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="number-area">12</div>
+              </td>
+              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
+              <td>一等奖 x</td>
+            </tr>
+            <tr class="last-person">
+              <td>
+                <div class="number-area">12</div>
+              </td>
+              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
+              <td>一等奖 x</td>
+            </tr>
+            <tr class="last-person">
+              <td>
+                <div class="number-area">12</div>
+              </td>
+              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
+              <td>一等奖 x</td>
+            </tr>
+            <tr class="last-person">
+              <td>
+                <div class="number-area">12</div>
+              </td>
+              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
+              <td>一等奖 x</td>
+            </tr>
+            <tr class="last-person">
+              <td>
+                <div class="number-area">12</div>
+              </td>
+              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
+              <td>一等奖 x</td>
+            </tr>
+            <tr class="last-person">
+              <td>
+                <div class="number-area">12</div>
+              </td>
+              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
+              <td>一等奖 x</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-8 prize-content">
+      <div class="col-xs-12 lottory-prize-area">
+        <img class="lottery-item-bg" src="/images/lottery_prize/lottery-item-bg.png">
+        <div class="col-xs-12 select-content">
+          <div class="select-area">
+            <select>
+              <option>一等奖</option>
+              <option>二等奖</option>
+              <option>三等奖</option>
+              <option>参与奖</option>
+            </select>
+          </div>
+          <div class="person-no-area">
+            <p>参与人数 <span>301</span></p>
+          </div>
+        </div>
+        <div class="col-xs-12 person-area">
+          <div class="person-msg">
+            <div class="person-portrait">
+              <img src="/images/lottery_prize/person.png">
+            </div>
+          </div>
+          <div class="name-area">
+            <p>爱淘气的人</p>
+            <p>王佳</p>
+            <p>某某科技有限公司</p>
+          </div>
+          <div class="split-line">
+            <div class="left-gradient"></div>
+            <div class="right-gradient"></div>
+          </div>
+          <div class="start-button text-center">
+            <button type="button">开始抽奖</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="hidden" id="event-id" data-event-id=<%= params[:event_id] %> ></div>
-<img id="attendee-img" src="/system/events/avatar/13551031966.jpg" width="400" height="400" />
-<button id="show-pic">dianji</button>
 <script type="text/javascript">
   var Obj = {
     imageIndex: 0,
@@ -45,6 +416,6 @@
     }
   }
   $(function(){
-    Obj.initialize();
+    //Obj.initialize();
   })
 </script>

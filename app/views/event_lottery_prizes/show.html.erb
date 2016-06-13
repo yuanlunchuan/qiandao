@@ -94,7 +94,8 @@
                 <td><%= event_lottery_prize_item.name %></td>
                 <td><%= event_lottery_prize_item.count %></td>
                 <td>
-                  <%= link_to '编辑', edit_event_event_lottery_prize_event_lottery_prize_item_path(current_event, @event_lottery_prize, event_lottery_prize_item) %>
+                  <%= link_to '编辑', edit_event_event_lottery_prize_event_lottery_prize_item_path(current_event, @event_lottery_prize, event_lottery_prize_item), class: 'btn btn-primary btn-xs' %>
+                  <%= link_to '指定中奖人管理',event_event_lottery_prize_event_lottery_prize_item_specify_attendee_lottery_path(current_event, @event_lottery_prize, event_lottery_prize_item), class: 'btn btn-primary btn-xs' %>
                   <%= link_to '删除', event_event_lottery_prize_event_lottery_prize_item_path(current_event, @event_lottery_prize, event_lottery_prize_item), method: :delete, data: {confirm: '确定删除?'}, class: 'btn btn-danger btn-xs' %>
                 </td>
               </tr>

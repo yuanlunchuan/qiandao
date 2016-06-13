@@ -1,0 +1,25 @@
+<% breadcrumb :lottery_prizes_list_item %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>指定中奖人管理-<%= @event_lottery_prize.name%>-<%= @event_lottery_prize_item.name %></h5>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <div class=" col-md-offset-6 col-md-6">
+            <%= form_tag(event_event_lottery_prize_event_lottery_prize_item_add_specify_attendee_lottery_path(current_event, @event_lottery_prize, @event_lottery_prize_item), method: "post") do %>
+              <div class="input-group">
+                <input type="text" name="attendee_name" class="form-control" placeholder="请输入用户名...">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">添加</button>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
