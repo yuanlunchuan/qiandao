@@ -19,6 +19,18 @@
             <% end %>
           </div>
         </div>
+        <div class="row">
+          <table class="table table-striped table-hover">
+            <% @lottery_prizes.each do |lottery| %>
+              <tr>
+                <td><%= lottery.attendee.name %></td>
+                <td><%= lottery.attendee.mobile %></td>
+                <td><%= link_to '移除', event_event_lottery_prize_event_lottery_prize_item_remove_specify_attendee_lottery_path(current_event, @event_lottery_prize, @event_lottery_prize_item, attendee_id: lottery.attendee.id), method: :delete, data: { confirm: 'are you sure?' }%>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
       </div>
     </div>
   </div>

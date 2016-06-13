@@ -274,63 +274,26 @@
           <img class="head-bg" src="/images/lottery_prize/head-bg.png">
           <p class="lottery-title">获奖名单</p>
           <p class="lottery-num">获奖人数 <span>13</span></p>
-        </div>        
+        </div>
         <div class="table-area">
           <table class="lottery-person">
             <tr class="table-title">
               <th>序号</th>
+              <td>&nbsp;</td>
               <th>获奖人</th>
               <th>奖项</th>
             </tr>
-            <tr>
-              <td>
-                <div class="number-area">12</div>
-              </td>
-              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
-              <td>一等奖 x</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="number-area">12</div>
-              </td>
-              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
-              <td>一等奖 x</td>
-            </tr>
-            <tr class="last-person">
-              <td>
-                <div class="number-area">12</div>
-              </td>
-              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
-              <td>一等奖 x</td>
-            </tr>
-            <tr class="last-person">
-              <td>
-                <div class="number-area">12</div>
-              </td>
-              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
-              <td>一等奖 x</td>
-            </tr>
-            <tr class="last-person">
-              <td>
-                <div class="number-area">12</div>
-              </td>
-              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
-              <td>一等奖 x</td>
-            </tr>
-            <tr class="last-person">
-              <td>
-                <div class="number-area">12</div>
-              </td>
-              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
-              <td>一等奖 x</td>
-            </tr>
-            <tr class="last-person">
-              <td>
-                <div class="number-area">12</div>
-              </td>
-              <td><img class="name-icon" src="/images/lottery_prize/person.png">可爱的大白</td>
-              <td>一等奖 x</td>
-            </tr>
+            <% @attendees.each do |attendee| %>
+              <% lottery_prize = LotteryPrize.search_by_attendee_and_event_lottery_prize(attendee, @event_lottery_prize)%>
+              <tr class="last-person">
+                <td>
+                  <div class="number-area"><%= attendee.id %></div>
+                </td>
+                <td><%= image_tag(attendee.avatar.url, class: 'name-icon attendee-avatar') %></td>
+                <td><%= attendee.name %></td>
+                <td><%= lottery_prize.first.event_lottery_prize_item.name %> <i class="fa fa-times" aria-hidden="true"></i></td>
+              </tr>
+            <% end %>
           </table>
         </div>
       </div>
@@ -341,14 +304,13 @@
         <div class="col-xs-12 select-content">
           <div class="select-area">
             <select>
-              <option>一等奖</option>
-              <option>二等奖</option>
-              <option>三等奖</option>
-              <option>参与奖</option>
+              <% @event_lottery_prize_items.each do |lottery_prize_item| %>
+                <option><%= lottery_prize_item.name %></option>
+              <% end %>
             </select>
           </div>
           <div class="person-no-area">
-            <p>参与人数 <span>301</span></p>
+            <p>参与人数 <span><%= @total_attendee_count %></span></p>
           </div>
         </div>
         <div class="col-xs-12 person-area">
@@ -358,7 +320,6 @@
             </div>
           </div>
           <div class="name-area">
-            <p>爱淘气的人</p>
             <p>王佳</p>
             <p>某某科技有限公司</p>
           </div>

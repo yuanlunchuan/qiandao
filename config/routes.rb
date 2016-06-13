@@ -75,6 +75,7 @@ Rails.application.routes.draw do
         resources :event_lottery_prize_items do
           get 'specify_attendee_lottery' => 'event_lottery_prize_items#specify_attendee_lottery'
           post 'add_specify_attendee_lottery' => 'event_lottery_prize_items#add_specify_attendee_lottery'
+          delete 'remove_specify_attendee_lottery' => 'event_lottery_prize_items#remove_specify_attendee_lottery'
         end
         get 'lottery_prize_setting' => 'lottery_prizes#lottery_prize_setting'
         resources :lottery_prizes

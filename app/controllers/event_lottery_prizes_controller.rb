@@ -7,6 +7,10 @@ class EventLotteryPrizesController < ApplicationController
   layout 'event'
 
   def start_lottery_prize
+    @event_lottery_prize = current_event.event_lottery_prizes.find(params[:event_lottery_prize_id])
+    @event_lottery_prize_items = @event_lottery_prize.event_lottery_prize_items
+    @total_attendee_count = current_event.attendees.size
+    @attendees = Attendee.has_lottery_prize(@event_lottery_prize)
     render layout: 'empty'
   end
 

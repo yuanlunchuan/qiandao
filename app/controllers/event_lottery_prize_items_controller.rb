@@ -8,6 +8,7 @@ class EventLotteryPrizeItemsController < ApplicationController
   def specify_attendee_lottery
     @event_lottery_prize = EventLotteryPrize.find(params[:event_lottery_prize_id])
     @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:event_lottery_prize_item_id])
+    @lottery_prizes = @event_lottery_prize_item.lottery_prizes.is_specify
   end
 
   def add_specify_attendee_lottery
@@ -16,11 +17,28 @@ class EventLotteryPrizeItemsController < ApplicationController
     @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:event_lottery_prize_item_id])
 
     if @attendees.present?
-      
+      lottery_prize = LotteryPrize.create event: current_event,
+        attendee: @attendees.first,
+        event_lottery_prize_item: @event_lottery_prize_item,
+        event_lottery_prize: @event_lottery_prize,
+        is_specify: true
       redirect_to event_event_lottery_prize_event_lottery_prize_item_specify_attendee_lottery_path(current_event, @event_lottery_prize, @event_lottery_prize_item), flash: { success: '添加成功' }
     else
       redirect_to event_event_lottery_prize_event_lottery_prize_item_specify_attendee_lottery_path(current_event, @event_lottery_prize, @event_lottery_prize_item), flash: { error: '没有找到对应的信息' }
     end
+  end
+
+  def remove_specify_attendee_lottery
+    @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:event_lottery_prize_item_id])
+    @attendee = Attendee.find params[:attendee_id]
+    @event_lottery_prize = EventLotteryPrize.find(params[:event_lottery_prize_id])
+    @lottery_prize = @event_lottery_prize_item.lottery_prizes.attendee_is(@attendee)
+    if @lottery_prize.first.state=='C'
+      @lottery_prize.first.destroy
+    else
+      @lottery_prize.first.update is_specify: false
+    end
+    redirect_to event_event_lottery_prize_event_lottery_prize_item_specify_attendee_lottery_path(current_event, @event_lottery_prize, @event_lottery_prize_item), flash: { success: '移除成功' }
   end
 
   def load_event_lottery_prize

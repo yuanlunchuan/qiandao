@@ -22,7 +22,8 @@ class LotteryPrizesController < ApplicationController
     lottery_prize = LotteryPrize.create event: current_event,
       attendee: attendee,
       event_lottery_prize_item: event_lottery_prize_item,
-      event_lottery_prize: event_lottery_prize
+      event_lottery_prize: event_lottery_prize,
+      state: 'F'
 
     event_lottery_prize_item.update count: (event_lottery_prize_item.count-1)
 
@@ -30,7 +31,7 @@ class LotteryPrizesController < ApplicationController
   end
 
   def lottery_prize_setting
-    
+
   end
 
   def set_current_module
