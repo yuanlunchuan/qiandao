@@ -17,8 +17,24 @@ class EventLotteryPrizesController < ApplicationController
   def get_attendee_list
     self.meta = params
 
+    #"event_id"=>"1", "event_lottery_prize_id"=>"4"
     collection = []
     current_event.attendees.each do |attendee|
+      item = {}
+      item = attendee.to_hash
+      img = if attendee.avatar.exists?
+           attendee.avatar.url
+         else
+           attendee.photo.url(:square)
+         end
+      item['img_url'] = img
+      collection << item
+    end
+
+    @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:lottery_prize_item])
+    lottery_prizes =  LotteryPrize.event_lottery_prize_item_unfinished(@event_lottery_prize_item)
+    if lottery_prizes.present?
+      attendee = lottery_prizes.first.attendee
       item = {}
       item = attendee.to_hash
       img = if attendee.avatar.exists?

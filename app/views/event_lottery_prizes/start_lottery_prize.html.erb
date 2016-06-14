@@ -252,6 +252,9 @@
 
 </style>
 
+<div id="event" data-event-id=<%= current_event.id %> class="hidden"></div>
+<div id="event-lottery-prize" data-event-lottery-prize-id=<%= params[:event_lottery_prize_id] %> class="hidden"></div>
+
 <div class="content-area">
   <img class="bg-img" src="/images/lottery_prize/background.png">
   <div class="prize-area col-md-8 col-md-offset-2">
@@ -303,9 +306,9 @@
         <img class="lottery-item-bg" src="/images/lottery_prize/lottery-item-bg.png">
         <div class="col-xs-12 select-content">
           <div class="select-area">
-            <select>
+            <select id="lottery-prize-item">
               <% @event_lottery_prize_items.each do |lottery_prize_item| %>
-                <option><%= lottery_prize_item.name %></option>
+                <option value=<%= lottery_prize_item.id %>><%= lottery_prize_item.name %></option>
               <% end %>
             </select>
           </div>
@@ -316,19 +319,19 @@
         <div class="col-xs-12 person-area">
           <div class="person-msg">
             <div class="person-portrait">
-              <img src="/images/lottery_prize/person.png">
+              <img id="attendee-img" src="/images/lottery_prize/person.png">
             </div>
           </div>
           <div class="name-area">
-            <p>王佳</p>
-            <p>某某科技有限公司</p>
+            <p id="attendee-name">王佳</p>
+            <p id="attendee-company">某某科技有限公司</p>
           </div>
           <div class="split-line">
             <div class="left-gradient"></div>
             <div class="right-gradient"></div>
           </div>
           <div class="start-button text-center">
-            <button type="button">开始抽奖</button>
+            <button id="start-lottery-prize" type="button">开始抽奖</button>
           </div>
         </div>
       </div>
@@ -340,43 +343,52 @@
     imageIndex: 0,
     timer: null,
     images: [],
+    attendee_names: [],
+    attendee_companies: [],
 
     showPicture: function(imgUrl){
       var self = Obj;
       if(self.imageIndex == self.images.length)
       {
-        self.imageIndex = (self.imageIndex%7)-1;
         clearInterval(self.timer);
       }
       $('#attendee-img').attr('src', self.images[self.imageIndex]);
+      $('#attendee-name').text(self.attendee_names[self.imageIndex]);
+      $('#attendee-company').text(self.attendee_companies[self.imageIndex]||'');
+
       self.imageIndex += 1;
     },
 
     loadAttendee: function(){
       var self = Obj;
-      $.getJSON('/app/events/1/event_lottery_prizes/4/get_attendee_list.json',
-        {
 
+      var event_id = $('#event').data('event-id');
+      var event_lottery_prize_id = $('#event-lottery-prize').data('event-lottery-prize-id');
+      $.getJSON('/app/events/'+event_id+'/event_lottery_prizes/'+event_lottery_prize_id+'/get_attendee_list.json',
+        {
+          lottery_prize_item: $('#lottery-prize-item').val()
         },
         function(event){
-        $.each(event.collection, function(index, item){
-          self.images.push(item.img_url);
-        });
-        self.timer = setInterval(self.showPicture,300);
+          $.each(event.collection, function(index, item){
+            self.images.push(item.img_url);
+            self.attendee_names.push(item.name);
+            self.attendee_companies.push(item.company);
+          });
+          self.timer = setInterval(self.showPicture,300);
       });
     },
 
-    onShowPicClicked: function(){
+    onStartLotteryPrizeClicked: function(){
       var self = Obj;
       self.loadAttendee();
     },
 
     initialize: function(){
       var self = Obj;
-      $('#show-pic').on('click', self.onShowPicClicked);
+      $('#start-lottery-prize').on('click', self.onStartLotteryPrizeClicked);
     }
   }
   $(function(){
-    //Obj.initialize();
+    Obj.initialize();
   })
 </script>
