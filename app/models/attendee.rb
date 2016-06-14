@@ -100,7 +100,7 @@ class Attendee < ActiveRecord::Base
   end
 
   def self.has_lottery_prize(event_lottery_prize)
-    self.joins('INNER JOIN lottery_prizes on lottery_prizes.attendee_id = attendees.id').where( 'lottery_prizes.event_lottery_prize_id=?', event_lottery_prize.id)
+    self.joins('INNER JOIN lottery_prizes on lottery_prizes.attendee_id = attendees.id').where( "lottery_prizes.state = 'F' AND lottery_prizes.event_lottery_prize_id=?", event_lottery_prize.id)
   end
 
   def self.has_arranged(session)

@@ -17,7 +17,6 @@ class EventLotteryPrizesController < ApplicationController
   def get_attendee_list
     self.meta = params
 
-    #"event_id"=>"1", "event_lottery_prize_id"=>"4"
     collection = []
     current_event.attendees.each do |attendee|
       item = {}

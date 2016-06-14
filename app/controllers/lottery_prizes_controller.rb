@@ -24,10 +24,24 @@ class LotteryPrizesController < ApplicationController
       event_lottery_prize_item: event_lottery_prize_item,
       event_lottery_prize: event_lottery_prize,
       state: 'F'
+      event_lottery_prize_item.update count: (event_lottery_prize_item.count-1)
 
-    event_lottery_prize_item.update count: (event_lottery_prize_item.count-1)
+    item = {}
+    item = attendee.to_hash
+    img = if attendee.avatar.exists?
+         attendee.avatar.url
+       else
+         attendee.photo.url(:square)
+       end
+    item['img_url'] = img
 
-    render status: 'success', json: lottery_prize
+    response = {
+      attendee: item,
+      lottery_prize: lottery_prize,
+      event_lottery_prize_item: event_lottery_prize_item
+    }
+
+    render status: 'success', json: response
   end
 
   def lottery_prize_setting
