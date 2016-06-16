@@ -16,7 +16,9 @@ class EventLotteryPrizesController < ApplicationController
 
   def get_attendee_list
     self.meta = params
+    @event_lottery_prize = EventLotteryPrize.find params[:event_lottery_prize_id]
 
+    #--------------base attendee--------------------
     collection = []
     current_event.attendees.each do |attendee|
       item = {}
@@ -29,11 +31,13 @@ class EventLotteryPrizesController < ApplicationController
       item['img_url'] = img
       collection << item
     end
+    #------------------base attendee--------------------
 
+    #------------------special attendee-----------------
     @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:lottery_prize_item])
-    lottery_prizes =  LotteryPrize.event_lottery_prize_item_unfinished(@event_lottery_prize_item)
-    if lottery_prizes.present?
-      attendee = lottery_prizes.first.attendee
+    @lottery_prizes =  LotteryPrize.event_lottery_prize_item_unfinished(@event_lottery_prize_item)
+    if @lottery_prizes.present?
+      attendee = @lottery_prizes.first.attendee
       item = {}
       item = attendee.to_hash
       img = if attendee.avatar.exists?
@@ -43,9 +47,19 @@ class EventLotteryPrizesController < ApplicationController
          end
       item['img_url'] = img
       collection << item
+    else
+      if "attendee"==@event_lottery_prize.lottery_prize_method
+        @event_lottery_prize.lottery_prize_categories
+      end
     end
+    logger.info "--------------params: #{params}"
+    #--------------------specail attendee-----------------
 
     render_ok collection
+  end
+
+  def get_special_attendee
+    
   end
 
   def lottery_prize_rule

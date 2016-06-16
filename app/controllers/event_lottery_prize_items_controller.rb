@@ -46,6 +46,7 @@ class EventLotteryPrizeItemsController < ApplicationController
   end
 
   def new
+    @event_lottery_prize = EventLotteryPrize.find params[:event_lottery_prize_id]
     @event_lottery_prize_item = @event_lottery_prize.event_lottery_prize_items.build
   end
 

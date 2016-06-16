@@ -97,18 +97,37 @@ crumb :edit_seller do |cat|
   parent :sellers
 end
 
-crumb :add_event_lottery_prizes do |event|
-  link '新增奖项', new_event_event_lottery_prize_path("1")
-  parent :lottery_prizes_list_item
+crumb :specify_lottery_prize_attendee do |event_lottery_prize, event_lottery_prize_item|
+  link '指定中奖人管理', event_questions_path
+  parent :event_lottery_prize, event_lottery_prize
 end
 
-crumb :lottery_prizes_list_item do |event|
-  link '奖项列表', event_questions_path#event_event_lottery_prizes_path("1")
-  parent :lottery_prizes
+crumb :lottery_prize_rule do |event_lottery_prize|
+  link '抽奖规则设置', event_event_lottery_prize_lottery_prize_rule_path(current_event, event_lottery_prize.id)
+  parent :event_lottery_prize, event_lottery_prize
+end
+
+crumb :edit_event_lottery_prize do |event_lottery_prize|
+  link '编辑奖项', new_event_event_lottery_prize_path(current_event)
+  parent :event_lottery_prize, event_lottery_prize
+end
+
+crumb :add_event_lottery_prizes do |event_lottery_prize|
+  link '新增奖项', new_event_event_lottery_prize_path(current_event)
+  parent :event_lottery_prize, event_lottery_prize
+end
+
+crumb :event_lottery_prize do |event_lottery_prize|
+  link event_lottery_prize.name, event_event_lottery_prize_path(current_event, event_lottery_prize.id)
+  parent :event_lottery_prizes
+end
+
+crumb :event_lottery_prizes do
+  link '抽奖活动列表', event_event_lottery_prizes_path(current_event)
 end
 
 crumb :lottery_prizes do
-  link '中奖列表', event_questions_path#event_lottery_prizes_path
+  link '中奖列表', event_questions_path
 end
 
 crumb :questions do
@@ -179,7 +198,7 @@ crumb :attendee_category do |cat|
   link cat.name, event_attendee_category_path
   parent :attendee_categories
 end
-
+ 
 crumb :edit_attendee_category do |cat|
   link '编辑用户标签', event_attendee_category_path
   parent :attendee_categories
