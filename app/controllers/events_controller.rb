@@ -13,8 +13,7 @@ class EventsController < ApplicationController
   def content_setting
     @current_module = 6
     @event = current_event
-    
-    #restaurant setting initialize
+
     @restaurant = Restaurant.find_or_create_by(event: current_event)
     @latitude = @restaurant.latitude
     @longitude = @restaurant.longitude
