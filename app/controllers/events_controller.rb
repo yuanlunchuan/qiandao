@@ -41,7 +41,15 @@ class EventsController < ApplicationController
 
   def update_function_setting
     @event = Event.find(params[:event_id])
-    if @event.update(update_function_setting_params)
+    reset_event_function
+    function_order = 1
+    update_function_setting_params.each do |k , v|
+      if '1'==v
+        current_event.update! "#{k}_order": function_order
+        function_order += 1
+      end
+    end
+    if @event.update!(update_function_setting_params)
       redirect_to event_function_setting_path(current_event), flash: { success: '活动编辑成功' }
     else
       flash.now[:error] = @event.errors.full_messages
