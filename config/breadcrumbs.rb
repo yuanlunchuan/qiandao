@@ -117,6 +117,11 @@ crumb :add_event_lottery_prizes do |event_lottery_prize|
   parent :event_lottery_prize, event_lottery_prize
 end
 
+crumb :new_event_lottery_prize do
+  link '新增抽奖活动', new_event_event_lottery_prize_path(current_event)
+  parent :event_lottery_prizes
+end
+
 crumb :event_lottery_prize do |event_lottery_prize|
   link event_lottery_prize.name, event_event_lottery_prize_path(current_event, event_lottery_prize.id)
   parent :event_lottery_prizes
