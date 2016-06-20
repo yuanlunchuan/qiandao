@@ -55,22 +55,28 @@ class EventLotteryPrizesController < ApplicationController
       if specify_attendees.present?&&@event_lottery_prize.allow_attendee_repeat_take_in
         attendee_index = rand(0...specify_attendees.size)
         attendee = specify_attendees[attendee_index].attendee
-      end
-      if "attendee"==@event_lottery_prize.lottery_prize_method
-        @event_lottery_prize.lottery_prize_categories
+      elsif "attendee"==@event_lottery_prize.lottery_prize_method
+        lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
+        lottery_prize_category_index = rand(0...lottery_prize_categories.size)
+        attendee_category = lottery_prize_categories[lottery_prize_category_index].attendee_category
+
+        attendees = Attendee.where("category_id=?", attendee_category.id)
+        attendee_index = rand(0...attendees.size)
+        attendee = attendees[attendee_index]
       end
     end
 
-    item = {}
-    item = attendee.to_hash
-    img = if attendee.avatar.exists?
-         attendee.avatar.url
-       else
-         attendee.photo.url(:square)
-       end
-    item['img_url'] = img
-    collection << item
-
+    if attendee.present?
+      item = {}
+      item = attendee.to_hash
+      img = if attendee.avatar.exists?
+           attendee.avatar.url
+         else
+           attendee.photo.url(:square)
+         end
+      item['img_url'] = img
+      collection << item
+    end
     render_ok collection
   end
 

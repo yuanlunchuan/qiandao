@@ -1,5 +1,5 @@
 class AttendeeCategory < ActiveRecord::Base
-  belongs_to :attendee
+  has_many :attendees
   belongs_to :event
 
   validates :name, presence: true
