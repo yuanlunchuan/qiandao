@@ -19,12 +19,18 @@ class LotteryPrizesController < ApplicationController
     attendee = Attendee.find params[:attendee_id]
     event_lottery_prize_item = EventLotteryPrizeItem.find params[:event_lottery_prize_item_id]
     event_lottery_prize = EventLotteryPrize.find params[:event_lottery_prize_id]
-    lottery_prize = LotteryPrize.create event: current_event,
-      attendee: attendee,
-      event_lottery_prize_item: event_lottery_prize_item,
-      event_lottery_prize: event_lottery_prize,
-      state: 'F'
-      event_lottery_prize_item.update count: (event_lottery_prize_item.count-1)
+
+    special_lottery_prize_attendees = LotteryPrize.search_by_attendee_and_event_lottery_prize(attendee, event_lottery_prize).where("state='C'")
+    if special_lottery_prize_attendees.present?
+      special_lottery_prize_attendees.first.update state: 'F'
+    else
+      lottery_prize = LotteryPrize.create event: current_event,
+        attendee: attendee,
+        event_lottery_prize_item: event_lottery_prize_item,
+        event_lottery_prize: event_lottery_prize,
+        state: 'F'
+    end
+    event_lottery_prize_item.update count: (event_lottery_prize_item.count-1)
 
     item = {}
     item = attendee.to_hash

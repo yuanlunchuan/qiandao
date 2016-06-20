@@ -18,9 +18,22 @@ class EventLotteryPrizesController < ApplicationController
     self.meta = params
     @event_lottery_prize = EventLotteryPrize.find params[:event_lottery_prize_id]
 
-    #--------------base attendee--------------------
     collection = []
-    current_event.attendees.each do |attendee|
+    minimum_id = current_event.attendees.first.id
+    maximum_id = current_event.attendees.last.id
+    last_attendee_id = -1
+    for i in 0..20
+      attendee_id = rand(minimum_id..maximum_id)
+      find = true
+      while find
+        if last_attendee_id != attendee_id
+          find = false
+          last_attendee_id = attendee_id
+        else
+          attendee_id = rand(minimum_id..maximum_id)
+        end
+      end
+      attendee = Attendee.find attendee_id
       item = {}
       item = attendee.to_hash
       img = if attendee.avatar.exists?
@@ -31,29 +44,32 @@ class EventLotteryPrizesController < ApplicationController
       item['img_url'] = img
       collection << item
     end
-    #------------------base attendee--------------------
 
-    #------------------special attendee-----------------
     @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:lottery_prize_item])
     @lottery_prizes =  LotteryPrize.event_lottery_prize_item_unfinished(@event_lottery_prize_item)
+
     if @lottery_prizes.present?
       attendee = @lottery_prizes.first.attendee
-      item = {}
-      item = attendee.to_hash
-      img = if attendee.avatar.exists?
-           attendee.avatar.url
-         else
-           attendee.photo.url(:square)
-         end
-      item['img_url'] = img
-      collection << item
     else
+      specify_attendees = @event_lottery_prize_item.lottery_prizes.is_specify
+      if specify_attendees.present?&&@event_lottery_prize.allow_attendee_repeat_take_in
+        attendee_index = rand(0...specify_attendees.size)
+        attendee = specify_attendees[attendee_index].attendee
+      end
       if "attendee"==@event_lottery_prize.lottery_prize_method
         @event_lottery_prize.lottery_prize_categories
       end
     end
-    logger.info "--------------params: #{params}"
-    #--------------------specail attendee-----------------
+
+    item = {}
+    item = attendee.to_hash
+    img = if attendee.avatar.exists?
+         attendee.avatar.url
+       else
+         attendee.photo.url(:square)
+       end
+    item['img_url'] = img
+    collection << item
 
     render_ok collection
   end
