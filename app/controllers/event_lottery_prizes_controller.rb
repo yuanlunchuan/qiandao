@@ -63,6 +63,23 @@ class EventLotteryPrizesController < ApplicationController
         attendees = Attendee.where("category_id=?", attendee_category.id)
         attendee_index = rand(0...attendees.size)
         attendee = attendees[attendee_index]
+      elsif "company"==@event_lottery_prize.lottery_prize_method
+        # find special company
+        companies = current_event.attendees.select('company').group('company').reorder('company')
+        logger.info "---------companies: #{companies.inspect}"
+        company_index = rand(0...companies.size)
+        company = companies[company_index][:company]
+        attendees = current_event.attendees.company_is company
+        
+        # find special attendee category
+        lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
+        lottery_prize_category_index = rand(0...lottery_prize_categories.size)
+        attendee_category = lottery_prize_categories[lottery_prize_category_index].attendee_category
+
+        # find special attendee
+        attendees = attendees.category attendee_category.id
+        attendee_index = rand(0...attendees.size)
+        attendee = attendees[attendee_index]
       end
     end
 

@@ -39,6 +39,7 @@ class Attendee < ActiveRecord::Base
   scope :token_is, ->(token) { where token: token}
 
   scope :seller_is, -> (seller) { where seller_id: seller.id }
+  scope :company_is, -> (company) { where company: company }
   scope :printed, -> {where('printed_at IS NOT NULL')}
   scope :not_printed, -> {where('printed_at IS NULL')}
   scope :has_photo, -> { where('photo_file_name IS NOT NULL') }
@@ -204,7 +205,7 @@ class Attendee < ActiveRecord::Base
   rescue => e
     error = "#{e.class} - #{e.message[0..200]}"
     Rails.logger.error("[DWZ] #{error}")
-    raise error
+    raise error||""
   end
 
   def prepare_sms_template(template)
