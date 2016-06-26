@@ -276,7 +276,7 @@
         <div class="lottery-title-area">
           <img class="head-bg" src="/images/lottery_prize/head-bg.png">
           <p class="lottery-title">获奖名单</p>
-          <p class="lottery-num">获奖人数 <span><%= @attendees.size %></span></p>
+          <p class="lottery-num">获奖人数 <span id="lottery-prize-attendee-size"><%= @attendees.size %></span></p>
         </div>
         <div class="table-area">
           <table id="lottery-prize-attendees" class="lottery-person">
@@ -374,6 +374,7 @@
 
     onPostLotteryPrizeSuccess: function(event){
       var self = Obj;
+      $('#lottery-prize-attendee-size').text(parseInt($('#lottery-prize-attendee-size').text())+1);
 
       var $tr=$("#lottery-prize-attendees tr").eq(0);
       var trHtml = "<tr class='last-person'><td><div class='number-area'>"+event.attendee.id+"</div>"

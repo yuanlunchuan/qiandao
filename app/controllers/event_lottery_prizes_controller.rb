@@ -47,39 +47,49 @@ class EventLotteryPrizesController < ApplicationController
 
     @event_lottery_prize_item = EventLotteryPrizeItem.find(params[:lottery_prize_item])
     @lottery_prizes =  LotteryPrize.event_lottery_prize_item_unfinished(@event_lottery_prize_item)
-
+    #完成第一轮特殊人抽奖
     if @lottery_prizes.present?
+      logger.info "-----------------第一轮特殊人抽奖----------------"
       attendee = @lottery_prizes.first.attendee
     else
       specify_attendees = @event_lottery_prize_item.lottery_prizes.is_specify
+      #如果特殊人可以重复 则在特殊人中继续进行抽奖
       if specify_attendees.present?&&@event_lottery_prize.allow_attendee_repeat_take_in
+        logger.info "-------------特殊人可以重复 则在特殊人中继续进行抽奖---------"
         attendee_index = rand(0...specify_attendees.size)
         attendee = specify_attendees[attendee_index].attendee
+        #按照参会人进行抽奖
       elsif "attendee"==@event_lottery_prize.lottery_prize_method
+        logger.info "-----------按照参会人进行抽奖-----------"
         lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
-        lottery_prize_category_index = rand(0...lottery_prize_categories.size)
-        attendee_category = lottery_prize_categories[lottery_prize_category_index].attendee_category
+        if lottery_prize_categories.present?
+          lottery_prize_category_index = rand(0...lottery_prize_categories.size)
+          attendee_category = lottery_prize_categories[lottery_prize_category_index].attendee_category
 
-        attendees = Attendee.where("category_id=?", attendee_category.id)
-        attendee_index = rand(0...attendees.size)
-        attendee = attendees[attendee_index]
+          attendees = Attendee.where("category_id=?", attendee_category.id)
+          attendee_index = rand(0...attendees.size)
+          attendee = attendees[attendee_index]
+        end
+        #按照公司进行抽奖
       elsif "company"==@event_lottery_prize.lottery_prize_method
         # find special company
+        logger.info "------------按照公司进行抽奖----------------"
         companies = current_event.attendees.select('company').group('company').reorder('company')
-        logger.info "---------companies: #{companies.inspect}"
         company_index = rand(0...companies.size)
         company = companies[company_index][:company]
         attendees = current_event.attendees.company_is company
 
         # find special attendee category
         lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
-        lottery_prize_category_index = rand(0...lottery_prize_categories.size)
-        attendee_category = lottery_prize_categories[lottery_prize_category_index].attendee_category
+        if lottery_prize_categories.present?
+          lottery_prize_category_index = rand(0...lottery_prize_categories.size)
+          attendee_category = lottery_prize_categories[lottery_prize_category_index].attendee_category
 
-        # find special attendee
-        attendees = attendees.category attendee_category.id
-        attendee_index = rand(0...attendees.size)
-        attendee = attendees[attendee_index]
+          # find special attendee
+          attendees = attendees.category attendee_category.id
+          attendee_index = rand(0...attendees.size)
+          attendee = attendees[attendee_index]
+        end
       end
     end
 
