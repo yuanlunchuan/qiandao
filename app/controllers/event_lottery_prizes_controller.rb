@@ -70,7 +70,7 @@ class EventLotteryPrizesController < ApplicationController
         company_index = rand(0...companies.size)
         company = companies[company_index][:company]
         attendees = current_event.attendees.company_is company
-        
+
         # find special attendee category
         lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
         lottery_prize_category_index = rand(0...lottery_prize_categories.size)
