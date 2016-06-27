@@ -33,6 +33,7 @@ class EventLotteryPrizesController < ApplicationController
           attendee_id = rand(minimum_id..maximum_id)
         end
       end
+      logger.info "------------attendee_id: #{attendee_id}"
       attendee = Attendee.find attendee_id
       item = {}
       item = attendee.to_hash
@@ -61,6 +62,7 @@ class EventLotteryPrizesController < ApplicationController
         #按照参会人进行抽奖
       elsif "attendee"==@event_lottery_prize.lottery_prize_method
         logger.info "-----------按照参会人进行抽奖-----------"
+        #如果允许分类存在 则在存在的里面进行选择
         lottery_prize_categories = @event_lottery_prize.lottery_prize_categories
         if lottery_prize_categories.present?
           lottery_prize_category_index = rand(0...lottery_prize_categories.size)
@@ -69,6 +71,9 @@ class EventLotteryPrizesController < ApplicationController
           attendees = Attendee.where("category_id=?", attendee_category.id)
           attendee_index = rand(0...attendees.size)
           attendee = attendees[attendee_index]
+        #所有人情况都试了 且不允许重复
+        elsif !(@event_lottery_prize.allow_attendee_repeat_take_in)
+          logger.info "--------------所有人情况都试了 且不允许重复---------"
         end
         #按照公司进行抽奖
       elsif "company"==@event_lottery_prize.lottery_prize_method
@@ -91,6 +96,10 @@ class EventLotteryPrizesController < ApplicationController
           attendee = attendees[attendee_index]
         end
       end
+    end
+
+    def not_repeat_attendee
+      
     end
 
     if attendee.present?
