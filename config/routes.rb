@@ -67,6 +67,7 @@ Rails.application.routes.draw do
       resources :attendee_seats
       resources :system_infos
       resources :session_seats
+      resources :event_questions
       resources :event_lottery_prizes do
         get 'lottery_prize_rule' => 'event_lottery_prizes#lottery_prize_rule'
         patch 'update_lottery_prize_rule' => 'event_lottery_prizes#update_lottery_prize_rule'

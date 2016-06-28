@@ -3,9 +3,9 @@ class CreateQuestions < ActiveRecord::Migration
     create_table :questions do |t|
       t.string :question_content
 
-      t.references :session
       t.references :attendee
       t.references :event
+      t.references :event_question
 
       t.timestamps null: false
     end

@@ -5,7 +5,6 @@ class Session < ActiveRecord::Base
   # This is wrong in postgresql
   # has_many :attendees, -> { select('attendees.*, checkins.checked_in_at as session_checked_in_at').order('`checkins`.checked_in_at DESC') }, through: :checkins
   has_many :attendees, -> { select('attendees.*, checkins.checked_in_at as session_checked_in_at').order('checkins.checked_in_at DESC') }, through: :checkins
-  has_many :question
   has_many :seats
   has_one  :session_seat
   belongs_to :session_location

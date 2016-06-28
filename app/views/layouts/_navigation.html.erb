@@ -217,7 +217,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to event_questions_path, style: is_active_item('questions') do %>
+              <%= link_to event_event_questions_path(current_event), style: is_active_item('event_questions') do %>
                 <i class="fa fa-check-circle-o"></i>
                 <span class="nav-label">现场提问</span><span class="jquery-accordion-menu-label hidden">10 </span>
               <% end %>
@@ -348,7 +348,6 @@
 
 })(jQuery, window, document);
 
-
 jQuery(document).ready(function () {
   jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
 });
@@ -361,4 +360,3 @@ $(function(){
   })
 })
 </script>
-

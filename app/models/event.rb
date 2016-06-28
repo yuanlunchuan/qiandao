@@ -19,7 +19,8 @@ class Event < ActiveRecord::Base
   has_many  :system_infos
   has_many :session_locations
 
-  has_many :question
+  has_many :questions
+  has_many :event_questions
   has_many :event_lottery_prizes
   has_many :lottery_prizes
 
