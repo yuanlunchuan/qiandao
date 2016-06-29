@@ -2,6 +2,20 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :event_question do |event_question|
+  link event_question.name, event_event_question_path(current_event, event_question)
+  parent :event_questions
+end
+
+crumb :edit_event_question do |event_question|
+  link '编辑环节列表', edit_event_event_question_path(current_event, event_question)
+  parent :event_questions
+end
+
+crumb :event_questions do
+  link '问题环节列表', event_event_questions_path(current_event)
+end
+
 crumb :edit_session_seat do
   link '设置微网站座位查询', new_event_seat_path
 end

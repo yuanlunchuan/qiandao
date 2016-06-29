@@ -2,6 +2,10 @@ class EventQuestionsController < ApplicationController
   layout 'event'
   before_action :set_current_module
 
+  def show
+    @event_question = EventQuestion.find params[:id]
+  end
+
   def create
     @event_question = current_event.event_questions.new event_question_params
     if @event_question.save
