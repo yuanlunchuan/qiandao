@@ -12,6 +12,11 @@
     <div class="col-md-12">
       <label for='event_event_logo'>2.上传logo(上传尺寸 120px 宽*100px高, jpg/png格式, 尺寸200kb)</label>
     </div>
+    <% if @event.event_logo.present? %>
+      <div class="col-md-3 col-md-offset-2">
+        <img src=<%=@event.event_logo.url%> width="100px">
+      </div>
+    <% end %>
     <div class="col-md-8">
       <%= f.file_field :event_logo, class: 'form-control' %>
     </div>
@@ -21,6 +26,11 @@
     <div class="col-md-12">
       <label>3.上传头图图片(上传尺寸 640px宽*240px高，jpg/png格式，尺寸200kb)</label>
     </div>
+    <% if @event.head_photo.present? %>
+      <div class="col-md-3 col-md-offset-2">
+        <img src=<%=@event.head_photo.url%> width="100px">
+      </div>
+    <% end %>
     <div class="col-md-8">
       <%= f.file_field :head_photo, class: 'form-control' %>
     </div>
