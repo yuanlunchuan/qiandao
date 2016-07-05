@@ -1,5 +1,8 @@
 //= require shared/jquery.touchSwipe.min.js
 $(document).ready(function(){
+  setTimeout(function(){
+    $(".load-area").addClass("hidden");
+  },500);
   var event_id = $('#event-id').data('event-id');
   $.getJSON(
     '/client/events/'+event_id+'/event_info.json',
@@ -11,15 +14,31 @@ $(document).ready(function(){
         };
         if (result.collection[0].welcome_page_logo) {
           $('.logo-area img').attr("src",result.collection[0].welcome_page_logo);
+          if (result.collection[0].welcome_page_logo != "/images/default_logo.png") {
+            $(".logo-area div").removeClass("text-right");
+            $(".logo-area div").addClass("text-center");
+          };
         };
         if (result.collection[0].welcome_bg) {
           $('.home-bg img').attr("src",result.collection[0].welcome_bg);
         };
-        if (result.collection[0].opposite_color == false) {
+        if (result.collection[0].text_inverse_color == true) {
           $('.container').addClass("font-white");
         }
         else{
           $('.container').removeClass("font-white");
+        }
+        if (result.collection[0].title != "") {
+          $(".set-title").empty();
+          $(".set-title").removeClass("hidden");
+          $(".set-title").append("<p class='title1'>"+result.collection[0].title+"</p>");
+          $(".invitation").addClass("invitation-margin");    
+        }
+        else{
+          $(".set-title").removeClass("hidden");
+        }
+        if (result.collection[0].content != "") {
+          $(".letter-pre").html(result.collection[0].content);
         }
       }
       else {

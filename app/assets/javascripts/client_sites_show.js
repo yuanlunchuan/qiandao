@@ -53,6 +53,62 @@ $(document).ready(function(){
       }
     )
   },1000)
+  //界面上显示哪些功能
+  $(function(){
+    var event_id = $('#event-id').data('event-id');
+    $.getJSON(
+      '/client/events/'+event_id+'/event_info.json',
+      {},
+      function(result) {//返回数据根据结果进行相应的处理
+        if ( result.success ) {
+          var functions = new Array();
+          var collection = result.collection[0];
+          //将数据保存下来
+          //入场凭证
+          if (collection.admission_certificate_order!=0) {
+            functions[collection.admission_certificate_order-1] = "admission_certificate_order";
+          };
+          //会议日程
+          if (collection.session_schedule_order!=0) {
+            functions[collection.session_schedule_order-1] = "session_schedule_order";
+          };
+          //酒店信息
+          if (collection.hotel_info_order!=0) {
+            functions[collection.hotel_info_order-1] = "hotel_info_order";
+          };
+          //周边推荐
+          if (collection.nearby_recommend_order!=0) {
+            functions[collection.nearby_recommend_order-1] = "nearby_recommend_order";
+          };
+          //座位查询
+          if (collection.seat_info_order!=0) {
+            functions[collection.seat_info_order-1] = "seat_info_order";
+          };
+          //官方网站
+          if (collection.outside_link_order!=0) {
+            functions[collection.outside_link_order-1] = "outside_link_order";
+          };
+          //现场抽奖
+          if (collection.interactive_answer_order!=0) {
+            functions[collection.interactive_answer_order-1] = "interactive_answer_order";
+          };
+          //互动问答
+          if (collection.lottery_order!=0) {
+            functions[collection.lottery_order-1] = "lottery_order";
+          };
+
+          //先根据需要显示的数量布局
+          var count = functions.length;
+          alert(collection.hotel_info_order!=0);
+          console.info(functions);
+        }
+        else {
+          alert("请求失败了")
+        }
+      }
+    )
+  })
+  
 
   //生成二维码
   // $(function(){
