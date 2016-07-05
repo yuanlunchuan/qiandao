@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627135413) do
+ActiveRecord::Schema.define(version: 20160705134251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(version: 20160627135413) do
     t.integer  "outside_link_order",             default: 6
     t.integer  "interactive_answer_order",       default: 7
     t.integer  "lottery_order",                  default: 8
+    t.boolean  "text_inverse_color",             default: false
   end
 
   create_table "invitation_settings", force: :cascade do |t|

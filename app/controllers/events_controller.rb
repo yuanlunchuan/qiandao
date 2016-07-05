@@ -197,7 +197,7 @@ class EventsController < ApplicationController
   end
 
   def welcome_page_setting_params
-    params.require(:event).permit(:display_welcome_page, :welcome_page_logo, :welcome_bg)
+    params.require(:event).permit(:display_welcome_page, :welcome_page_logo, :welcome_bg, :text_inverse_color)
   end
 
   def event_base_params
