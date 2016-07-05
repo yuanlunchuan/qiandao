@@ -242,9 +242,17 @@
         <li><%= link_to event_site_path do %>
           <i class="fa fa-qrcode"></i> <span class="nav-label">现场签到管理</span>
         <% end %></li>
+
         <li><%= link_to event_live_lottery_prize_path(current_event) do %>
           <i class="fa fa-qrcode"></i> <span class="nav-label">开始抽奖</span>
         <% end %></li>
+
+        <li>
+          <%= link_to event_choose_event_question_path(current_event) do %>
+          <i class="fa fa-qrcode"></i>
+          <span class="nav-label">问题列表</span>
+        <% end %>
+        </li>
       </ul>
     </div>
   </div>

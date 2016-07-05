@@ -1,0 +1,32 @@
+#question-page{
+  .question-section{
+    background-color: #fff;
+  }
+  .question-logo{
+    margin-left: 100px;
+    width: 150px;
+    margin-top: 5px;
+  }
+  .black-ground{
+    background-color: black;
+    height: 50px;
+  }
+  .header h1{
+    color: #fff;
+  }
+  .border{
+    border: 1px solid #f00;
+  }
+  .question-title{
+    background-color: green;
+    height: 50px;
+    color: #fff;
+    h1{
+      margin: 0;
+      padding-top: 5px;
+    }
+  }
+  .col-md-4{
+    border: 1px solid #f00;
+  } 
+}

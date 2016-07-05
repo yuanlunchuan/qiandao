@@ -2,8 +2,15 @@ class QuestionsController < ApplicationController
   layout 'event'
   before_action :set_current_module
 
+  def choose_event_question
+    @event_questions = current_event.event_questions
+    render layout: 'empty'
+  end
+
   def index
-    @questions = current_event.question
+    @event_question = EventQuestion.find params[:event_question_id]
+    @questions = @event_question.questions
+    render layout: 'empty'
   end
 
   def show
