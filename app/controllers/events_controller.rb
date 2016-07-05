@@ -152,7 +152,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all.where(defunct: false).order('start')
+    @events = Event.all.where(defunct: false).order(start: :DESC)
   end
 
   def new
