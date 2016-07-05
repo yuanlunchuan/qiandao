@@ -1,10 +1,7 @@
 class BadgePdf < Prawn::Document
     def initialize(attendee, options={})
       pdf_options = {page_size: [154, 246], page_layout: :portrait, top_margin: 10, left_margin: 5, right_margin: 5, bottom_margin:0}
-      background = "#{Rails.root}/app/pdfs/guanzhou_red_background.png"
-      # if '经销商'==attendee.category.try(:name)
-      #   background = "#{Rails.root}/app/pdfs/guanzhou_blue_background.png"
-      # end
+      background = "#{Rails.root}/app/pdfs/pdfbackground.png"
 
       pdf_options.merge!({background: background, background_scale: 0.25})
 
@@ -24,7 +21,7 @@ class BadgePdf < Prawn::Document
       end
       fill_color category_color
       stroke_color category_color
-      fill_and_stroke_rounded_rectangle [-10,38], 200, 27, 0
+      fill_and_stroke_rounded_rectangle [-10,36], 200, 24, 0
       fill_color '000000'
 
       font('msyh') do
@@ -33,7 +30,7 @@ class BadgePdf < Prawn::Document
         company = ' '
         company = attendee.company if attendee.company.present?
         text company, align: :center, size: 8
-        move_down 20
+        move_down 16
         text attendee.category.try(:name), align: :center, size: 9, color: "FFFFFF"
       end
 
