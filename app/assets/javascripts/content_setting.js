@@ -1,5 +1,6 @@
 var Obj = {
   functinList: [],
+  hasInitialed: false,
 
   onSaveFunctionOrderClicked: function(event){
     var self = Obj;
@@ -28,7 +29,6 @@ var Obj = {
         function_length: data.length
       },
       function(event){
-        event.collection.length==0&&$('#saveFunctionOrder').addClass('hidden');
         alert('success');
       });
   },
@@ -37,9 +37,6 @@ var Obj = {
     var self = Obj;
     var currentEvent = event.collection[0];
     (currentEvent.admission_certificate||currentEvent.session_schedule||currentEvent.hotel_info||currentEvent.nearby_recommend||currentEvent.seat_info||currentEvent.outside_link||currentEvent.interactive_answer||currentEvent.lottery)&&$('#saveFunctionOrder').removeClass('hidden');
-    if(self.functinList.length>0){
-      return;
-    }
     if (currentEvent.admission_certificate){
       var item = {
         functionName: 'admission_certificate',
@@ -96,7 +93,6 @@ var Obj = {
       };
       self.functinList.push(item)
     }
-    console.info("------------functinList: "+JSON.stringify(self.functinList));
     self.reOrderFunction();
     self.showFunction();
   },
@@ -222,20 +218,23 @@ var Obj = {
     var eventId = $("#event-id").data('event-id');
     $.getJSON('/app/events/'+eventId+'.json', 
       {
-        name: 'zhangsan'
       },
       self.onGetEventFunctionSuccess).error(self.onGetEventFunctionFailure);
   },
 
   initialize: function(){
   	var self = Obj;
+    if (self.hasInitialed) {
+      return;
+    }
+    self.hasInitialed = true;
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
     self.getEventFunction();
     $('#saveFunctionOrder').on('click', self.onSaveFunctionOrderClicked);
   }
 };
 
 $(function() {
-  $( "#sortable" ).sortable();
-  $( "#sortable" ).disableSelection();
   Obj.initialize();
 });

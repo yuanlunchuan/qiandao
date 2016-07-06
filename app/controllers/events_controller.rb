@@ -41,20 +41,17 @@ class EventsController < ApplicationController
 
   def update_function_setting
     @event = Event.find(params[:event_id])
+
     reset_event_function
     function_order = 1
+
     update_function_setting_params.each do |k , v|
       if '1'==v
-        current_event.update! "#{k}_order": function_order
+        current_event.update! "#{k}_order": function_order, "#{k}": true
         function_order += 1
       end
     end
-    if @event.update!(update_function_setting_params)
-      redirect_to event_function_setting_path(current_event), flash: { success: '活动编辑成功' }
-    else
-      flash.now[:error] = @event.errors.full_messages
-      redirect_to event_function_setting_path(current_event)
-    end
+    redirect_to event_function_setting_path(current_event), flash: { success: '活动编辑成功' }
   end
 
   def update_welcome_page_setting
@@ -89,8 +86,9 @@ class EventsController < ApplicationController
       function_name = params['function_list']['5']['function_name'] if 5==i
       function_name = params['function_list']['6']['function_name'] if 6==i
       function_name = params['function_list']['7']['function_name'] if 7==i
-
       case function_name
+      when 'hotel_info'
+        current_event.update hotel_info: true, hotel_info_order: (i+1)
       when 'admission_certificate'
         current_event.update admission_certificate: true, admission_certificate_order: (i+1)
       when 'session_schedule'
