@@ -3,6 +3,7 @@
 <div id="rfid-num" class="hidden" data-rfid-num=<%= Attendee.find(session[:attendee_id]).rfid_num %>></div>
 <div id="show-qrcode" class="hidden" data-show-qrcode=<%=@attendee.login_count>1? false : true %>></div>
 <div id="attendee-token" class="hidden" data-attendee-token=<%=@attendee.token%>></div>
+<div id="event-link" class="hidden" data-event-link=<%= @event.event_link %>></div>
 
 <title>2016YONEX订货会</title>
 <div class="container">
@@ -51,7 +52,7 @@
       <div class="col-xs-12 function-area">
         <table>
           <tbody>
-            <tr>
+            <!-- <tr>
               <td>
                 <%= link_to client_event_event_sessions_path(current_event) do %>
                   <%= image_tag 'client/sites/schedule.png' %>
@@ -90,7 +91,7 @@
                   <span>官方网站</span>
                 </a>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>

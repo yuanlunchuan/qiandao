@@ -28,9 +28,11 @@ Rails.application.config.assets.precompile += %w(
   client/sessions/sessions.png
   client/shared/close.png
   client/shared/metting_logo.png
+  client/sites/answer.png
   client/sites/arrow.png
   client/sites/hotel.png
   client/sites/loading.gif
+  client/sites/lottery.png
   client/sites/no_portrait.png
   client/sites/notice.png
   client/sites/official_website.png
