@@ -4,10 +4,28 @@ $(document).ready(function(){
     $('#down-load-info').text('长按保存二维码');
   }
   var height;
+  var result;
+  var event_id = $('#event-id').data('event-id');
+  $.getJSON(
+    '/client/events/'+event_id+'/event_info.json',
+    {},
+    function(res) {//返回数据根据结果进行相应的处理
+      if ( res.success ) {
+        result = res;
+        var collection = result.collection[0];
+        //更换图片
+        if (collection.head_photo!="/images/default-bg.png") {
+          var img_height = $('.illus-area img').height();
+          $(".illus-area img").attr("src",collection.head_photo);
+          $(".illus-area img").height(img_height);
+        }
+      }
+      else {
+        alert("请求失败了")
+      }
+    }
+  )
   setTimeout(function(){
-    $('.load-page').fadeOut();
-    $('.home-page').fadeIn();
-
     if($('.illus-area').height()== 1)//网路差图片还没加载出来
     {
       var img_height = parseInt(($(window).width()/496)*228);//计算图片的高度
@@ -53,63 +71,49 @@ $(document).ready(function(){
       }
     )
     //界面上显示哪些功能
-    var event_id = $('#event-id').data('event-id');
-    $.getJSON(
-      '/client/events/'+event_id+'/event_info.json',
-      {},
-      function(result) {//返回数据根据结果进行相应的处理
-        if ( result.success ) {
-          var functions = new Array();
-          var collection = result.collection[0];
-          //更换图片
-          if (collection.head_photo!="/images/default-bg.png") {
-            var img_height = $('.illus-area img').height();
-            $(".illus-area img").attr("src",collection.head_photo);
-            $(".illus-area img").height(img_height);
-          }
-          //将数据保存下来
-          //入场凭证
-          if (collection.admission_certificate_order!=0) {
-            functions[collection.admission_certificate_order-1] = "voucher";
-          };
-          //会议日程
-          if (collection.session_schedule_order!=0) {
-            functions[collection.session_schedule_order-1] = "schedule";
-          };
-          //酒店信息
-          if (collection.hotel_info_order!=0) {
-            functions[collection.hotel_info_order-1] = "hotel";
-          };
-          //周边推荐
-          if (collection.nearby_recommend_order!=0) {
-            functions[collection.nearby_recommend_order-1] = "periphery";
-          };
-          //座位查询
-          if (collection.seat_info_order!=0) {
-            functions[collection.seat_info_order-1] = "seat";
-          };
-          //官方网站
-          if (collection.outside_link_order!=0) {
-            functions[collection.outside_link_order-1] = "official_website";
-          };
-          //互动问答
-          if (collection.interactive_answer_order!=0) {
-            functions[collection.interactive_answer_order-1] = "answer";
-          };
-          //现场抽奖
-          if (collection.lottery_order!=0) {
-            functions[collection.lottery_order-1] = "lottery";
-          };
+    if ( result.success ) {
+      var functions = new Array();
+      var collection = result.collection[0];
+      //将数据保存下来
+      //入场凭证
+      if (collection.admission_certificate_order!=0) {
+        functions[collection.admission_certificate_order-1] = "voucher";
+      };
+      //会议日程
+      if (collection.session_schedule_order!=0) {
+        functions[collection.session_schedule_order-1] = "schedule";
+      };
+      //酒店信息
+      if (collection.hotel_info_order!=0) {
+        functions[collection.hotel_info_order-1] = "hotel";
+      };
+      //周边推荐
+      if (collection.nearby_recommend_order!=0) {
+        functions[collection.nearby_recommend_order-1] = "periphery";
+      };
+      //座位查询
+      if (collection.seat_info_order!=0) {
+        functions[collection.seat_info_order-1] = "seat";
+      };
+      //官方网站
+      if (collection.outside_link_order!=0) {
+        functions[collection.outside_link_order-1] = "official_website";
+      };
+      //互动问答
+      if (collection.interactive_answer_order!=0) {
+        functions[collection.interactive_answer_order-1] = "answer";
+      };
+      //现场抽奖
+      if (collection.lottery_order!=0) {
+        functions[collection.lottery_order-1] = "lottery";
+      };
 
-          //先根据需要显示的数量布局以及高度
-          var count = functions.length;
-          setlayout(height,count,functions);
-        }
-        else {
-          alert("请求失败了")
-        }
-      }
-    )
+      //先根据需要显示的数量布局以及高度
+      var count = functions.length;
+      setlayout(height,count,functions);
+    }
+    else {}
+    $(".load-page").addClass("hidden");
   },1000)
   function setlayout(lay_height,count,functions){
     var x = 0; //横着有多少个元素
@@ -155,6 +159,9 @@ $(document).ready(function(){
   }
   //设置每一个功能的值
   function setContent(content){
+    if (content == "") {
+      return " "
+    };
     var event_id = $('#event-id').data('event-id');
     var event_link = $('#event-link').data('event-link');
     //会议日程
