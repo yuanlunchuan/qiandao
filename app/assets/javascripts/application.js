@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require kindeditor
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require metisMenu/jquery.metisMenu.js

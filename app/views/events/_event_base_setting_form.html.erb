@@ -50,10 +50,11 @@
       <label>5.内容(字数在99字以内)</label>
     </div>
   </div>
+  <%= f.kindeditor :content %>
 
-  <% options = { model: @event, form: f } %>
+<!--   <% options = { model: @event, form: f } %>
   <%= render partial: 'shared/rich_editor', locals: { options: options.merge(name: :content) } %>
-
+ -->
   <div class="row" style="margin-top:10px">
     <%= button_tag '保存', class: 'btn btn-primary col-xs-1', style: "margin-right:10px" %>
   </div>

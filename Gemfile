@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'importex'
 #https://github.com/mattyr/rqrencoder-magick
 gem 'rqrcode_png'
+gem 'rails_kindeditor'
 
 gem 'jquery-rails'
 gem 'turbolinks'
