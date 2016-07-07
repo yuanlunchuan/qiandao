@@ -11,8 +11,6 @@
 
 <div class='form-group'>
 
-  <%#= form.label name, class: label_class %>
-
   <div class='<%= field_class %> input-group'>
 
     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#rich-editor">
@@ -57,7 +55,9 @@
 
     </div>
 
-    <div id='rich-editor' contenteditable='true' class='form-control'><%= model.send(name).to_s.html_safe %></div>
+    <div id='rich-editor' contenteditable='true' class='form-control' style="height: 100px;">
+      <%= model.send(name).to_s.html_safe %>
+    </div>
 
     <%= form.text_area name, class: 'hidden' %>
 
