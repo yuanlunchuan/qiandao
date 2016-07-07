@@ -49,12 +49,16 @@
     <div class="col-md-12">
       <label>5.内容(字数在99字以内)</label>
     </div>
-    <div class="col-md-8">
-      <%= f.text_area :content, rows: 10, class: 'form-control' %>
-    </div>
   </div>
+
+  <% options = { model: @event, form: f } %>
+  <%= render partial: 'shared/rich_editor', locals: { options: options.merge(name: :content) } %>
 
   <div class="row" style="margin-top:10px">
     <%= button_tag '保存', class: 'btn btn-primary col-xs-1', style: "margin-right:10px" %>
   </div>
+<% end %>
+
+<% content_for :script do %>
+  <%= javascript_include_tag 'event_base_setting' %>
 <% end %>

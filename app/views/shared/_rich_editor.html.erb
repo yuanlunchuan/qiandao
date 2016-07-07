@@ -1,0 +1,70 @@
+<%
+  model = options[:model]
+  form  = options[:form]
+  name  = options[:name]
+  type  = options[:type]||:text_field
+
+  label_class = [ 'control-label', options[:label_class]||'col-xs-2' ].flatten.join ' '
+  field_class = [ options[:label_class]||'col-xs-8' ].flatten.join ' '
+  error_class = [ options[:error_class]||'col-xs-12' ].flatten.join ' '
+%>
+
+<div class='form-group'>
+
+  <%#= form.label name, class: label_class %>
+
+  <div class='<%= field_class %> input-group'>
+
+    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#rich-editor">
+
+      <div class="btn-group">
+        <a data-toggle="dropdown" class="btn dropdown-toggle" data-original-title="字号">
+          <i class="fa fa-text-height"></i>&nbsp;
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a data-edit="fontSize 5"><font size="5">大号</font></a></li>
+          <li><a data-edit="fontSize 3"><font size="3">正常</font></a></li>
+          <li><a data-edit="fontSize 1"><font size="1">小号</font></a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'bold',          font: 'bold',          original_title: '加粗 (Ctrl/Cmd+B)' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'italic',        font: 'italic',        original_title: '斜体 (Ctrl/Cmd+I)' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'strikethrough', font: 'strikethrough', original_title: '删除线' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'underline',     font: 'underline',     original_title: '下划线 (Ctrl/Cmd+U)' } %>
+      </div>
+
+      <div class="btn-group">
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'insertunorderedlist', font: 'list-ul', original_title: '无序列表' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'insertorderedlist',   font: 'list-ol', original_title: '有序列表' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'outdent',             font: 'dedent',  original_title: '减少缩进 (Shift+Tab)' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'indent',              font: 'indent',  original_title: '增加缩进 (Tab)' } %>
+      </div>
+
+      <div class="btn-group">
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'justifyleft',   font: 'align-left',    original_title: '居左 (Ctrl/Cmd+L)' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'justifycenter', font: 'align-center',  original_title: '居中 (Ctrl/Cmd+E)' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'justifyright',  font: 'align-right',   original_title: '居右 (Ctrl/Cmd+R)' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'justifyfull',   font: 'align-justify', original_title: '两端 (Ctrl/Cmd+J)' } %>
+      </div>
+
+      <div class="btn-group">
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'undo', font: 'undo',   original_title: '撤销 (Ctrl/Cmd+Z)' } %>
+        <%= render partial: 'shared/rich_editor_toolbar_button', locals: { edit: 'redo', font: 'repeat', original_title: '恢复 (Ctrl/Cmd+Y)' } %>
+      </div>
+
+    </div>
+
+    <div id='rich-editor' contenteditable='true' class='form-control'><%= model.send(name).to_s.html_safe %></div>
+
+    <%= form.text_area name, class: 'hidden' %>
+
+  </div>
+
+  <% if model.errors[name].present? %>
+    <p class='<%= error_class %>'><%= model.errors[name].first %></p>
+  <% end %>
+
+</div>
