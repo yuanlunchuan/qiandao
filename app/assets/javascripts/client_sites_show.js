@@ -19,12 +19,6 @@ $(document).ready(function(){
           $(".illus-area img").attr("src",collection.head_photo);
           $(".illus-area img").height(img_height);
         }
-        //
-        if (collection.title != "") {
-          $(document).attr("title",collection.title);
-        }else{
-          $(document).attr("title","2016YONEX订货会");  
-        }
       }
       else {
         alert("请求失败了")
