@@ -17,6 +17,7 @@ $(document).ready(function(){
           if (result.collection[0].welcome_page_logo != "/images/default_logo.png") {
             $(".logo-area div").removeClass("text-right");
             $(".logo-area div").addClass("text-center");
+            $(".logo-area div img").addClass("logo-img");
           };
         }
         if (result.collection[0].welcome_bg) {

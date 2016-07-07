@@ -35,6 +35,12 @@
   width: 100px;
   height: 26px;
 }
+.logo-img{
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  margin-left: -50px;
+}
 .title-area{
   margin-top: 60px;
   text-align: center;
