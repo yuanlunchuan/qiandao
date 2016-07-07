@@ -31,6 +31,19 @@
 		      <%=f.text_field :phone_number, class: 'form-control'%>
 		    </div>
 		  </div>
+		  <div class="form-group">
+		  	<div class="col-md-3 control-label">
+		  		<label>请上传一个750*300像素的酒店图片</label>
+		  	</div>
+		    <% if @restaurant.head_photo.present? %>
+		      <div class="col-md-3 col-md-offset-2">
+		        <img src=<%=@restaurant.head_photo.url%> width="100px">
+		      </div>
+		    <% end %>
+		  	<div class="col-md-8">
+		  		<%= f.file_field :head_photo, class: 'form-control' %>
+		  	</div>
+		  </div>
 
 		  <div class="form-group">
 		    <label class="col-md-3 control-label">地址</label>
