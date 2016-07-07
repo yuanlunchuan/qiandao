@@ -5,7 +5,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 restaurants-img">
-     <img src=<%= @restaurant.head_photo.url%> class="img-responsive">
+    <% if @restaurant.head_photo.present? %>
+      <img src=<%= @restaurant.head_photo.url%> class="img-responsive">
+    <% else %>
+      <%= image_tag 'client/restaurants/restaurants.png', class:"img-responsive"%>
+    <% end %>
     </div>
     <div class="col-xs-12 restaurants-area">
       <div class="col-xs-12 title-area">
