@@ -11,17 +11,17 @@ $(document).ready(function(){
       if ( result.success ) {
         if (result.collection[0].display_welcome_page == false) {
           location.href="/client/sessions/new"
-        };
+        }
         if (result.collection[0].welcome_page_logo) {
           $('.logo-area img').attr("src",result.collection[0].welcome_page_logo);
           if (result.collection[0].welcome_page_logo != "/images/default_logo.png") {
             $(".logo-area div").removeClass("text-right");
             $(".logo-area div").addClass("text-center");
           };
-        };
+        }
         if (result.collection[0].welcome_bg) {
           $('.home-bg img').attr("src",result.collection[0].welcome_bg);
-        };
+        }
         if (result.collection[0].text_inverse_color == true) {
           $('.container').addClass("font-white");
         }
@@ -38,6 +38,7 @@ $(document).ready(function(){
           $(".set-title").removeClass("hidden");
         }
         if (result.collection[0].content != "") {
+          $(".call-name").addClass("hidden");
           $(".letter-pre").html(result.collection[0].content);
         }
       }

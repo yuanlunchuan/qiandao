@@ -19,6 +19,12 @@ $(document).ready(function(){
           $(".illus-area img").attr("src",collection.head_photo);
           $(".illus-area img").height(img_height);
         }
+        //
+        if (collection.title != "") {
+          $(document).attr("title",collection.title);
+        }else{
+          $(document).attr("title","2016YONEX订货会");  
+        }
       }
       else {
         alert("请求失败了")
@@ -172,14 +178,14 @@ $(document).ready(function(){
     };
     //入场凭证
     if (content == "voucher") {
-      return  "<a href='javascript:void(0);' class='voucher-button'>"+
+      return  "<a href='javascript:void(0);' onclick='showQrcode()' class='voucher-button'>"+
               "<img src='/client/voucher.png' alt=''>"+
               "<span>入场凭证</span>"+
               "</a>"
     };
     //座位查询
     if (content == "seat") {
-      return  "<a href='javascript:void(0);' class='seat-button'>"+
+      return  "<a href='javascript:void(0);' onclick='showSeat()' class='seat-button'>"+
               "<img src='/client/seat.png' alt=''>"+
               "<span>座位查询</span>"+
               "</a>"
@@ -231,17 +237,6 @@ $(document).ready(function(){
   //   qrcode.makeCode(qrcode_value);
   // });
 
-  //显示二维码
-  $('.voucher-button').click(function(){
-    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-    if (userAgent.indexOf("Safari") > -1)
-    {
-      $(".down-msg").html("长按图片下载二维码");
-    }
-    $('.page0').addClass("blur");
-    $('.voucher-page').removeClass("hidden");
-  })
-
   //隐藏二维码
   $('.voucher-page').click(function(){
 
@@ -251,46 +246,6 @@ $(document).ready(function(){
 
     $('.page0').removeClass("blur");
     $('.voucher-page').addClass("hidden");
-  });
-
-  //显示座位
-  $('.seat-button').click(function(){
-    $('.page0').addClass("blur");
-    $('.seat-page').removeClass("hidden");
-    //请求座位
-    var event_number = $('#event-id').data('event-id');
-    var attendee_number = $('#attendee-id').data('attendee-id');
-    $.getJSON(
-      '/client/events/'+event_number+'/seats',
-      {
-        attendee_id:attendee_number,
-      },
-      function(result) {//返回数据根据结果进行相应的处理
-        if ( result.success ) {
-          var unit = '桌';
-          var table_row = result.collection[0].table_row;
-          var table_col = result.collection[0].table_col;
-
-          if ('row'==result.collection[0].properties.unit) {
-            unit = '排';
-          }
-          var seat_message = "第"+table_row+unit+", 第"+table_col+"号";
-
-          if (result.collection[0].properties) {
-            if ('false'==result.collection[0].properties.set_table_num) {
-              seat_message = "第"+table_row+unit;
-            }
-          }
-          $('.seat-number').html(seat_message);
-        }
-      }
-    ).error(function(event){
-      if ('404'==event.status) {
-        $('.seat-number').html('正在安排中');
-      }else{
-        alert('网络请求失败， 请重试。');
-      }
-    });
   });
 
   //隐藏座位
@@ -318,3 +273,52 @@ $(document).ready(function(){
     }
   });
 });
+//显示二维码
+function showQrcode(){
+  var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    if (userAgent.indexOf("Safari") > -1)
+    {
+      $(".down-msg").html("长按图片下载二维码");
+    }
+    $('.page0').addClass("blur");
+    $('.voucher-page').removeClass("hidden");
+}
+//显示座位
+function showSeat(){
+  $('.page0').addClass("blur");
+  $('.seat-page').removeClass("hidden");
+  //请求座位
+  var event_number = $('#event-id').data('event-id');
+  var attendee_number = $('#attendee-id').data('attendee-id');
+  $.getJSON(
+    '/client/events/'+event_number+'/seats',
+    {
+      attendee_id:attendee_number,
+    },
+    function(result) {//返回数据根据结果进行相应的处理
+      if ( result.success ) {
+        var unit = '桌';
+        var table_row = result.collection[0].table_row;
+        var table_col = result.collection[0].table_col;
+
+        if ('row'==result.collection[0].properties.unit) {
+          unit = '排';
+        }
+        var seat_message = "第"+table_row+unit+", 第"+table_col+"号";
+
+        if (result.collection[0].properties) {
+          if ('false'==result.collection[0].properties.set_table_num) {
+            seat_message = "第"+table_row+unit;
+          }
+        }
+        $('.seat-number').html(seat_message);
+      }
+    }
+  ).error(function(event){
+    if ('404'==event.status) {
+      $('.seat-number').html('正在安排中');
+    }else{
+      alert('网络请求失败， 请重试。');
+    }
+  });
+}

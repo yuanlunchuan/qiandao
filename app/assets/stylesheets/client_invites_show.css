@@ -62,7 +62,7 @@
   font-size: 12px;
 }
 p.letter-pre{
-  text-indent: 2em;
+  /*text-indent: 2em;*/
   min-height: 64px;
 }
 #page1{
