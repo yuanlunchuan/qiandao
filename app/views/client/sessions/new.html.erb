@@ -13,7 +13,7 @@
       <p class="call-name">您好!</p>
       <p class="phone-msg">请输入您的手机号码验证身份</p>
       
-      <form action="/client/sessions" method="post">
+      <form action="/client/events/<%= current_event.id %>/sessions" method="post">
         <div class="col-xs-12 phone-area">
           <span class="phone-box-area">
             <span>+ 86 &nbsp;|</span>
