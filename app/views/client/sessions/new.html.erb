@@ -2,7 +2,11 @@
 <div class="container">
   <div class="row">
     <div class="home-bg">
-      <%= image_tag 'client/sessions/sessions.png', class:"bg-img" %>
+      <% if current_event.sessions_new_bg.present? %>
+        <img src=<%= current_event.sessions_new_bg.url %> class="bg-img" />
+      <% else %>
+        <%= image_tag 'client/sessions/sessions.png', class:"bg-img" %>
+      <% end %>
     </div>
     <div class="col-xs-12 text-center">
       <%= image_tag 'client/shared/metting_logo.png', class:"logo-img"%>

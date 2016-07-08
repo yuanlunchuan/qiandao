@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   end
 
   namespace :client do
-    resources :sessions
     resources :events do
       get 'event_info' => 'invites#event_info'
       get 'invites'     => 'invites#show'
@@ -29,6 +28,7 @@ Rails.application.routes.draw do
       resources :recommends
       get 'restaurants'     => 'restaurants#show'
       resources :event_sessions
+      resources :sessions
     end
   end
 
