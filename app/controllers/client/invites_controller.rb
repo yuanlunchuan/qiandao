@@ -16,6 +16,7 @@ class Client::InvitesController < ApplicationController
     item['event_logo'] = event.event_logo.url
     item['welcome_page_logo'] = event.welcome_page_logo.url
     item['welcome_bg'] = event.welcome_bg.url
+    item['welcome_second_bg'] = event.welcome_second_bg.url
     collection << item
 
     render_ok collection

@@ -46,6 +46,16 @@ class Event < ActiveRecord::Base
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
                     url: '/system/events/welcome_bg/:style/:event.jpg',
                     default_url: '/images/default-welcome-bg.png'
+  
+  has_attached_file :welcome_second_bg,
+                    styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
+                    url: '/system/events/welcome_second_bg/:style/:event.jpg',
+                    default_url: '/images/default-welcome-bg.png'
+  
+  has_attached_file :sessions_new_bg,
+                    styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
+                    url: '/system/events/sessions_new_bg/:style/:event.jpg',
+                    default_url: '/images/default-welcome-bg.png'
 
   validates_attachment_content_type :head_photo, :content_type => /\Aimage\/.*\Z/
   def start_time

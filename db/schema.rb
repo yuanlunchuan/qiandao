@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707141947) do
+ActiveRecord::Schema.define(version: 20160708130340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,14 @@ ActiveRecord::Schema.define(version: 20160707141947) do
     t.integer  "interactive_answer_order",       default: 7
     t.integer  "lottery_order",                  default: 8
     t.boolean  "text_inverse_color",             default: false
+    t.string   "welcome_second_bg_file_name"
+    t.string   "welcome_second_bg_content_type"
+    t.integer  "welcome_second_bg_file_size"
+    t.datetime "welcome_second_bg_updated_at"
+    t.string   "sessions_new_bg_file_name"
+    t.string   "sessions_new_bg_content_type"
+    t.integer  "sessions_new_bg_file_size"
+    t.datetime "sessions_new_bg_updated_at"
   end
 
   create_table "invitation_settings", force: :cascade do |t|

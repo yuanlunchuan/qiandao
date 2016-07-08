@@ -16,7 +16,7 @@
 
   <div class="form-group">
   	<div class="col-md-12">
-  		<label>2, 上传背景图片(上传尺寸 748px 宽*1226px高, jpg/png格式, 尺寸500kb)</label>
+  		<label>2, 上传欢迎界面第一页背景图(上传尺寸 748px 宽*1226px高, jpg/png格式, 尺寸500kb)</label>
   	</div>
     <% if @event.welcome_bg.present? %>
       <div class="col-md-3 col-md-offset-2">
@@ -26,6 +26,34 @@
   	<div class="col-md-8">
   		<%= f.file_field :welcome_bg, class: 'form-control' %>
   	</div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label>3, 上传欢迎界面第二页背景图(上传尺寸 748px 宽*1226px高, jpg/png格式, 尺寸500kb)</label>
+    </div>
+    <% if @event.welcome_second_bg.present? %>
+      <div class="col-md-3 col-md-offset-2">
+        <img src=<%=@event.welcome_second_bg.url%> width="100px">
+      </div>
+    <% end %>
+    <div class="col-md-8">
+      <%= f.file_field :welcome_second_bg, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label>4, 上传登录界面背景图(上传尺寸 748px 宽*1226px高, jpg/png格式, 尺寸500kb)</label>
+    </div>
+    <% if @event.sessions_new_bg.present? %>
+      <div class="col-md-3 col-md-offset-2">
+        <img src=<%=@event.sessions_new_bg.url%> width="100px">
+      </div>
+    <% end %>
+    <div class="col-md-8">
+      <%= f.file_field :sessions_new_bg, class: 'form-control' %>
+    </div>
   </div>
 
   <div class="checkbox">
