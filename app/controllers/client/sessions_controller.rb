@@ -3,12 +3,12 @@ class Client::SessionsController < ApplicationController
 
   layout 'client'
   def create
-    attendees = Attendee.mobile_is(params[:phone_number])
+    attendees = current_event.attendees.mobile_is(params[:phone_number])
     if attendees.present?
       cookies.permanent[:attendee_id] = attendees.first.id
       attendee = attendees.first
 
-      redirect_to client_event_sites_path(attendees.first.event.id)
+      redirect_to client_event_sites_path(current_event)
     else
       flash.now[:error] = '该用户不存在请重新输入'
       render :new
