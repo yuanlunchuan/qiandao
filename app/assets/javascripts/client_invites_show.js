@@ -21,8 +21,11 @@ $(document).ready(function(){
           };
         }
         if (result.collection[0].welcome_bg) {
-          $('.home-bg img').attr("src",result.collection[0].welcome_bg);
+          $('.first-bg img').attr("src",result.collection[0].welcome_bg);
         }
+        if (result.collection[0].welcome_second_bg) {
+          $('.second-bg img').attr("src",result.collection[0].welcome_second_bg);
+        };
         if (result.collection[0].text_inverse_color == true) {
           $('.container').addClass("font-white");
         }
