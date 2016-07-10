@@ -18,7 +18,9 @@
 
   <%= render partial: 'shared/style' %>
   <%= yield :style %>
-
+  <div id='wx_pic' style='margin:0 auto;display:none;'>
+    <img src="<%= current_event.event_logo.url(:square) %>" />
+  </div>
 </head>
 
 <body class='<%= params[:controller].split('/').join ' ' %> <%= params[:action] %>'>
