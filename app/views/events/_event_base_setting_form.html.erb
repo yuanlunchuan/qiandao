@@ -38,7 +38,21 @@
 
   <div class="form-group">
     <div class="col-md-12">
-      <label>4, 标题(字数在15字以内)</label>
+      <label>4.上传微信图标(上传尺寸 300px宽*300px高，jpg/png格式，尺寸200kb)</label>
+    </div>
+    <% if @event.wx_pic_logo.present? %>
+      <div class="col-md-3 col-md-offset-2">
+        <img src=<%=@event.wx_pic_logo.url%> width="100px">
+      </div>
+    <% end %>
+    <div class="col-md-8">
+      <%= f.file_field :wx_pic_logo, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label>5, 标题(字数在15字以内)</label>
     </div>
     <div class="col-md-8">
       <%= f.text_field :title, class: 'form-control' %>
@@ -47,7 +61,7 @@
   
   <div class="form-group">
     <div class="col-md-12">
-      <label>5.内容(字数在99字以内)</label>
+      <label>6.内容(字数在99字以内)</label>
     </div>
   </div>
   <%= f.kindeditor :content, :simple_mode => true %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708130340) do
+ActiveRecord::Schema.define(version: 20160710094036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,6 +212,10 @@ ActiveRecord::Schema.define(version: 20160708130340) do
     t.string   "sessions_new_bg_content_type"
     t.integer  "sessions_new_bg_file_size"
     t.datetime "sessions_new_bg_updated_at"
+    t.string   "wx_pic_logo_file_name"
+    t.string   "wx_pic_logo_content_type"
+    t.integer  "wx_pic_logo_file_size"
+    t.datetime "wx_pic_logo_updated_at"
   end
 
   create_table "invitation_settings", force: :cascade do |t|

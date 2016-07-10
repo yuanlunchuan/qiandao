@@ -37,6 +37,11 @@ class Event < ActiveRecord::Base
                     url: '/system/events/event_logo/:style/:event.jpg',
                     default_url: '/images/default_logo.png'
 
+  has_attached_file :wx_pic_logo,
+                    styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
+                    url: '/system/events/wx_pic_logo/:style/:event.jpg',
+                    default_url: '/images/default_logo.png'
+
   has_attached_file :welcome_page_logo,
                     styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
                     url: '/system/events/welcome_page_logo/:style/:event.jpg',
