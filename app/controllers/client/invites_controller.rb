@@ -25,7 +25,7 @@ class Client::InvitesController < ApplicationController
   def show
     if cookies[:attendee_id].present?
       attendee = Attendee.find_by(id: cookies[:attendee_id])
-      if attendee.present?&&attendee.event_id.present?
+      if attendee.present?&&attendee.event_id.present?&&attendee.event_id==current_event.id
         session[:attendee_id] = attendee.id
         cookies.permanent[:attendee_id] = attendee.id
         redirect_to client_event_sites_path(attendee.event.id)

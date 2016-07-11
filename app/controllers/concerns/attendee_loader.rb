@@ -10,7 +10,7 @@ module AttendeeLoader
         redirect_to new_client_event_session_path(current_event)
       else
         attendee = Attendee.find_by(id: cookies[:attendee_id])
-        if attendee.present?&&attendee.event_id.present?
+        if attendee.present?&&attendee.event_id.present?&&attendee.event_id==current_event.id
           if current_event.id==attendee.event.id
             session[:attendee_id] = attendee.id
           else
