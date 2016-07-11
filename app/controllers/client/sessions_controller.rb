@@ -18,7 +18,7 @@ class Client::SessionsController < ApplicationController
   def new
     if cookies[:attendee_id].present?
       attendee = Attendee.find_by(id: cookies[:attendee_id])
-      if attendee.present?
+      if attendee.present?&&attendee.event_id.present?
         redirect_to client_event_sites_path(attendee.event.id)
       end
     end
