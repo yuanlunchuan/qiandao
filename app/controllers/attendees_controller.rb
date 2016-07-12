@@ -176,6 +176,8 @@ class AttendeesController < ApplicationController
   def update
     @attendee = current_event.attendees.find(params[:id])
 
+    original_mobile = @attendee.mobile
+
     if @attendee.update(attendee_params)
       if params[:seller_name].present?
         seller = Seller.seller_name_is(params[:seller_name]).first
@@ -212,6 +214,27 @@ class AttendeesController < ApplicationController
         @attendee.photo.clear
         @attendee.save
       end
+      if original_mobile!=@attendee.mobile
+        if File::exists?("#{Rails.root}/public/system/events/medium/#{original_mobile}.jpg")
+          File.rename("#{Rails.root}/public/system/events/medium/#{original_mobile}.jpg", "#{Rails.root}/public/system/events/medium/#{@attendee.mobile}.jpg")
+        end
+        if File::exists?("#{Rails.root}/public/system/events/square/#{original_mobile}.jpg")
+          File.rename("#{Rails.root}/public/system/events/square/#{original_mobile}.jpg", "#{Rails.root}/public/system/events/square/#{@attendee.mobile}.jpg")
+        end
+        if File::exists?("#{Rails.root}/public/system/events/thumb/#{original_mobile}.jpg")
+          File.rename("#{Rails.root}/public/system/events/thumb/#{original_mobile}.jpg", "#{Rails.root}/public/system/events/thumb/#{@attendee.mobile}.jpg")
+        end
+        if File::exists?("#{Rails.root}/public/system/events/large/#{original_mobile}.jpg")
+          File.rename("#{Rails.root}/public/system/events/large/#{original_mobile}.jpg", "#{Rails.root}/public/system/events/large/#{@attendee.mobile}.jpg")
+        end
+        if File::exists?("#{Rails.root}/public/system/events/original/#{original_mobile}.jpg")
+          File.rename("#{Rails.root}/public/system/events/original/#{original_mobile}.jpg", "#{Rails.root}/public/system/events/original/#{@attendee.mobile}.jpg")
+        end
+        if File::exists?("#{Rails.root}/public/system/events/avatar/#{original_mobile}.jpg")
+          File.rename("#{Rails.root}/public/system/events/avatar/#{original_mobile}.jpg", "#{Rails.root}/public/system/events/avatar/#{@attendee.mobile}.jpg")
+        end
+      end
+
       redirect_to event_attendee_path(current_event, @attendee), flash: {success: '编辑成功'}
     else
       flash.now[:error] = @attendee.errors.full_messages
