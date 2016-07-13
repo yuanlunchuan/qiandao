@@ -19,7 +19,9 @@
   <%= render partial: 'shared/style' %>
   <%= yield :style %>
   <div id='wx_pic' style='margin:0 auto;display:none;'>
-    <img src="<%= current_event.wx_pic_logo.present? && current_event.wx_pic_logo.url() %>" />
+    <% if current_event.wx_pic_logo.present? %>
+      <img src="<%= current_event.wx_pic_logo.present? && current_event.wx_pic_logo.url() %>" />
+    <%end%>
   </div>
 </head>
 
