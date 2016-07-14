@@ -81,7 +81,11 @@
 
           <div class="col-sm-4">
             <div class="text-center">
-              <%= image_tag(@attendee.avatar.url, class: 'attendee-avatar') %>
+              <% if @attendee.avatar.exists? %>
+                <%= image_tag(@attendee.avatar.url, class: 'attendee-avatar') %>
+              <% else %>
+                <%= image_tag("avatar.png", class: 'attendee-avatar') %>
+              <% end %>
               <div class="m-t-xs font-bold m-b-lg">
                 <% if @attendee.photo.exists? %>
                   <%=link_to '编辑',  avatar_event_attendee_path(current_event, @attendee)%> &nbsp;&nbsp;&nbsp;
