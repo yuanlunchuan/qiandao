@@ -25,7 +25,11 @@
 
           <div class="col-sm-4">
             <div class="text-center">
-              <%= image_tag(@attendee.photo.url(:medium))%>
+              <% if @attendee.photo.exists? %>
+                <%= image_tag(@attendee.photo.url(:medium))%>
+              <% else %>
+                <%= image_tag("avatar.png") %>
+              <% end %>
               <div class="m-t-xs font-bold">
                 <div class="dropzone-photo-preview"></div>
                 <%=link_to '上传', 'javascript:;', class: 'upload-photo-btn', data: {url: upload_photo_event_attendee_path(current_event, @attendee, format: :json)}%>
