@@ -2,6 +2,7 @@ var Obj = {
   choosed_attendee: [],
   total_attendee: 0,
   table_col: 1,
+  isInitialized: false,
 
   onAttendeeIdBoxClicked: function(event){
     var self = Obj;
@@ -129,6 +130,11 @@ var Obj = {
 
   initialize: function(){
     var self = Obj;
+
+    if (!self.isInitialized) {
+      self.isInitialized = true;
+      return;
+    }
 
     $('#search-button').on('click', self.onSearchButtonClicked);
     self.total_attendee = $('#per-table-num').data('per-table-num')-$('#seat-table').data('attendee-count');

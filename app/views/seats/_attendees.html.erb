@@ -12,7 +12,7 @@
         <input type="text" class="hidden" name="current_action" value="show_attendees" />
         <input type="text" class="hidden" name="session_id" value="<%= params[:session_id] %>" />
         <input type="text" id="keyword" placeholder="请输入关键字" class="input-sm form-control" name="keyword" value="<%=params[:keyword]%>">
-        <span class="input-group-btn"><button id="search-button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+        <span class="input-group-btn"><button id="search-button" class="btn btn-sm btn-primary">搜索</button> </span>
       </div>
     </div>
   </div>
@@ -60,11 +60,16 @@
 
 <div class="col-md-3">
   <button id="save-and-continue" type="button">保存</button>
-  <div id="current-row" class="hidden" data-current-row=<%= @current_row %>></div>
-  <div id="current-event" class="hidden" data-current-event=<%= current_event.id %>></div>
-  <div id="total-table-count" class="hidden" data-total-table-count=<%=@current_session_seat.total_table_count%>></div>
-  <div id="per-table-num" class="hidden" data-per-table-num=<%= @current_session_seat.per_table_num%>></div>
-  <div id="current-session-id" class="hidden" data-current-session-id=<%= params[:session_id] %>></div>
+  <div id="current-row" class="hidden" data-current-row=<%= @current_row %>>
+  </div>
+  <div id="current-event" class="hidden" data-current-event=<%= current_event.id %>>
+  </div>
+  <div id="total-table-count" class="hidden" data-total-table-count=<%=@current_session_seat.total_table_count%>>
+  </div>
+  <div id="per-table-num" class="hidden" data-per-table-num=<%= @current_session_seat.per_table_num%>>
+  </div>
+  <div id="current-session-id" class="hidden" data-current-session-id=<%= params[:session_id] %>>
+  </div>
 
   <% if @current_row.to_i > @current_session_seat.total_table_count.to_i%>
     <div id="data" style="background-color: #999; color: #fff; align='center';"><%=@current_session_seat.total_table_count%>/<%=@current_session_seat.total_table_count%>桌</div>
@@ -79,7 +84,17 @@
       <% i = 0 %>
       <% @current_table.each do |seat| %>
         <% i += 1 %>
-        <tr><td class='arranged-attendee'><span style='border:1px solid #000; width: 100%'><%= i %><%= seat.attendee.name %><i class='fa fa-times'></i></span></td><td class="hidden"><%= seat.attendee.id %></td></tr>
+        <tr>
+          <td class='arranged-attendee'>
+            <span style='border:1px solid #000; width: 100%'>
+              <%= i %><%= seat.attendee.name %>
+              <i class='fa fa-times'></i>
+            </span>
+          </td>
+          <td class="hidden">
+            <%= seat.attendee.id %>
+          </td>
+        </tr>
       <% end %>
     <% end %>
   </table>

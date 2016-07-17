@@ -69,7 +69,7 @@ $(document).on('ready page:load', function(){
         window.setTimeout(closewin,2000);   
     }
 
-    function closewin() {  
+    function closewin() {
         document.body.removeChild(document.getElementById("alertbgDiv"));  
         document.getElementById("alertmsgDiv").removeChild(document.getElementById("alertmsgTitle"));  
         document.body.removeChild(document.getElementById("alertmsgDiv"));  
@@ -96,7 +96,8 @@ $(document).on('ready page:load', function(){
   }
 
   function binding_rfid(attendee_id, rfid_num){
-    $.post('/app/events/1/site/binding_rfid.json',
+    var eventId = $('#event-id').data('event-id');
+    $.post('/app/events/'+eventId+'/site/binding_rfid.json',
       {
         attendee_id: attendee_id,
         rfid_num:rfid_num
@@ -221,7 +222,6 @@ $(document).on('ready page:load', function(){
     });
 
     $('#key_word_input_box').on('change', function(){
-      //console.info('----------107');
       //findAndCheckin();
     });
 
@@ -284,7 +284,6 @@ $(document).on('ready page:load', function(){
         setTimeout(function(){
             $('.scanner-input').val('');
             $('.scanner-input').focus();
-
         }, 500);
     });
 
