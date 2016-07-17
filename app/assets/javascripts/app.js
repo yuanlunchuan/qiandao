@@ -79,7 +79,10 @@ $(document).on('ready page:load', function(){
         if (!keyword) {
             return;
         }
-        $.getJSON('/app/events/1/site/search_attendee.json',
+
+        var eventId = $('#event-id').data('event-id');
+
+        $.getJSON('/app/events/'+eventId+'/site/search_attendee.json',
           {
             keyword: keyword
           },

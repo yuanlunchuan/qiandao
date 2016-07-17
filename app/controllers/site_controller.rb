@@ -11,10 +11,10 @@ class SiteController < ApplicationController
   def search_attendee
     self.meta = params
 
-    attendee = Attendee.find_by(rfid_num: params[:keyword])
-    attendee = Attendee.find_by(token: params[:keyword]) if attendee.blank?
-    attendee = Attendee.find_by(name: params[:keyword]) if attendee.blank?
-    attendee = Attendee.find_by(mobile: params[:keyword]) if attendee.blank?
+    attendee = current_event.attendees.find_by(rfid_num: params[:keyword])
+    attendee = current_event.attendees.find_by(token: params[:keyword]) if attendee.blank?
+    attendee = current_event.attendees.find_by(name: params[:keyword]) if attendee.blank?
+    attendee = current_event.attendees.find_by(mobile: params[:keyword]) if attendee.blank?
 
     if attendee.present?
       render_ok [ attendee ]
