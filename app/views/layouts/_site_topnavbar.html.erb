@@ -13,10 +13,9 @@
       <% if @session %>
       <span class="navbar-eventname">
         <%= "#{@session.full_name}" %>
-
         <i class="fa fa-circle m-l-lg" id="scanner-indicator"></i>
       </span>
-      <span id="refresh" class="navbar-eventname">
+      <span id="refresh" class="navbar-eventname" style="cursor:pointer">
         <i class="fa fa-refresh m-l-lg"></i>
       </span>
       <% end %>
