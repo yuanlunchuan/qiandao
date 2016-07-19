@@ -83,7 +83,6 @@ var Obj = {
 
   onSearchButtonClicked: function(event){
     var self = Obj;
-
     if (!$('#keyword').val()) {
       return;
     }
@@ -101,7 +100,6 @@ var Obj = {
 
   onSaveAdnContinueButtonClicked: function(event){
     var self = Obj;
-
     if ($('#total-table-count').data('total-table-count')<$('#current-row').data('current-row')) {
       alert('当前已设置完所有桌');
       return;
@@ -130,12 +128,6 @@ var Obj = {
 
   initialize: function(){
     var self = Obj;
-
-    if (!self.isInitialized) {
-      self.isInitialized = true;
-      return;
-    }
-
     $('#search-button').on('click', self.onSearchButtonClicked);
     self.total_attendee = $('#per-table-num').data('per-table-num')-$('#seat-table').data('attendee-count');
 
@@ -167,9 +159,10 @@ var Obj = {
   }
 };
 
-$(window.document).ready(
-  function(event)
-  {
-    Obj.initialize();
-  }
-);
+// $(window.document).ready(
+//   function(event)
+//   {
+//     //console.info("-----------line 168---");
+//     //Obj.initialize();
+//   }
+// );
