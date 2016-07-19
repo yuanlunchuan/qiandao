@@ -68,7 +68,8 @@ var Obj = {
 
   onSearchAttendeeSuccess: function(event){
     var self = Obj;
-
+    $('#search-button').text('搜索');
+    $('#search-button').removeClass('disabled');
     $("#page-box").addClass('hidden');
     if (!event.collection.length) {
       alert('搜索结果为空');
@@ -86,7 +87,8 @@ var Obj = {
     if (!$('#keyword').val()) {
       return;
     }
-
+    $('#search-button').text('请稍候');
+    $('#search-button').addClass('disabled');
     $.getJSON('/app/events/'+$('#current-event').data('current-event')+'/search_attendees.json',
       {
         session_id: $('#current-session-id').data('current-session-id'),
@@ -94,6 +96,8 @@ var Obj = {
       },
       self.onSearchAttendeeSuccess
       ).error(function(event){
+        $('#search-button').text('搜索');
+        $('#search-button').removeClass('disabled');
         alert('搜索失败，请重试');
       });
   },
