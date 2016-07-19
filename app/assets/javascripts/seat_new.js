@@ -46,6 +46,7 @@ var Obj = {
 
   onAddAttendeeClicked: function(event){
     var self = Obj;
+    console.info("----------line 49");
 
     if(self.total_attendee<=self.choosed_attendee.length){
       alert('已经坐满');
@@ -77,8 +78,8 @@ var Obj = {
     $("#attendee-table tbody").html("");
     $.each(event.collection, function(index, attendee){
       $("#attendee-table tbody").append(self.showAttendee(attendee));
-      $('#attendee-table tr').on('click', self.onAddAttendeeClicked);
     });
+    $('#attendee-table tr').on('click', self.onAddAttendeeClicked);
   },
 
   onSearchButtonClicked: function(event){
@@ -159,10 +160,10 @@ var Obj = {
   }
 };
 
-// $(window.document).ready(
-//   function(event)
-//   {
-//     //console.info("-----------line 168---");
-//     //Obj.initialize();
-//   }
-// );
+$(window.document).ready(
+  function(event)
+  {
+    console.info("-----------line 168---");
+    //Obj.initialize();
+  }
+);
