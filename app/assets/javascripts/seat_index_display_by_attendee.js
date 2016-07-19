@@ -1,5 +1,6 @@
 var Obj = {
   attendee_id: '',
+  isInitialized: false,
 
   onUpdateSeatFailure: function(event){
     alert('安排失败');
@@ -80,7 +81,10 @@ var Obj = {
 
   initialize: function(){
     var self = Obj;
-
+    if (!self.isInitialized) {
+      self.isInitialized = true;
+      return;
+    }
     $('#cancel-button').on('click', self.onCancelButtonClicked);
     $("#seat-attendee-table tr #update-seat").each(function(){
       $(this).on("click", function(event){

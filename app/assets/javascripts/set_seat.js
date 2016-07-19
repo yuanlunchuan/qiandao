@@ -1,4 +1,6 @@
 var Obj = {
+  isInitialized: false,
+
   onLoadSeatSuccess: function(event){
     var self = Obj;
     var seat = event.collection[0];
@@ -55,6 +57,11 @@ var Obj = {
 
   initialize: function(){
     var self = Obj;
+
+    if (!self.isInitialized) {
+      self.isInitialized = true;
+      return;
+    }
     self.loadSeat();
     $('#session_id').on('change', self.onSessionIdChanged);
   }
