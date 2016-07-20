@@ -1,4 +1,4 @@
-var Obj = {
+var QuestionIndex = {
 
   initialize: function(){
     $('.question-section').css("height", (document.body.clientHeight-100)+"px")
@@ -8,5 +8,5 @@ var Obj = {
 };
 
 $(function(){
-  Obj.initialize();
+  QuestionIndex.initialize();
 });

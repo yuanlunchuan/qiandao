@@ -29,5 +29,7 @@
 </div>
 
 <% content_for :script do %>
-  <%= javascript_include_tag 'seat_index_display_by_attendee' %>
+  <% if 'seat'!=params[:display_type]%>
+    <%= javascript_include_tag 'seat_index_display_by_attendee' %>
+  <% end %>
 <% end %>

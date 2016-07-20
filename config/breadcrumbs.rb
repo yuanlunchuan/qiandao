@@ -46,7 +46,7 @@ crumb :set_attendee_seat do |cat|
 end
 
 crumb :set_seat do
-  link '座位设置', new_event_seat_path
+  link '座位设置', event_set_seat_path(current_event)
 end
 
 crumb :new_seytem_info do |cat|

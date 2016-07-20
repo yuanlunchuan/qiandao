@@ -1,6 +1,5 @@
-var Obj = {
+var SeatIndexDisplayByAttendee = {
   attendee_id: '',
-  isInitialized: false,
 
   onUpdateSeatFailure: function(event){
     alert('安排失败');
@@ -11,7 +10,7 @@ var Obj = {
   },
 
   updateSeat: function(){
-    var self= Obj;
+    var self= SeatIndexDisplayByAttendee;
 
     var url = '/app/events/'+$('#current-event').data('current-event')+"/update_attendee_seat.json"
     $.post(url, 
@@ -25,7 +24,7 @@ var Obj = {
   },
 
   onLoadTableColSuccess: function(event){
-    var self = Obj;
+    var self = SeatIndexDisplayByAttendee;
     $('#table-col').empty();
     var per_table_num = event.collection[0].per_table_num;
     for(var i=1; i<= per_table_num; i++){
@@ -48,12 +47,12 @@ var Obj = {
   },
 
   onLoadTableColFailure: function(event){
-    var self = Obj;
+    var self = SeatIndexDisplayByAttendee;
     
   },
 
   showTableColList: function(table_row){
-    var self = Obj;
+    var self = SeatIndexDisplayByAttendee;
     if (!$('#set-table-num').data('set-table-num')){
       return;
     }
@@ -66,7 +65,7 @@ var Obj = {
   },
 
   onTableRowChanged: function(event){
-    var self = Obj;
+    var self = SeatIndexDisplayByAttendee;
 
     if (isNaN($(this).val())) {
       return;
@@ -75,16 +74,13 @@ var Obj = {
   },
 
   onCancelButtonClicked: function(event){
-    var self = Obj;
+    var self = SeatIndexDisplayByAttendee;
     window.location.href=window.location.href;
   },
 
   initialize: function(){
-    var self = Obj;
-    if (!self.isInitialized) {
-      self.isInitialized = true;
-      return;
-    }
+    var self = SeatIndexDisplayByAttendee;
+
     $('#cancel-button').on('click', self.onCancelButtonClicked);
     $("#seat-attendee-table tr #update-seat").each(function(){
       $(this).on("click", function(event){
@@ -143,6 +139,6 @@ var Obj = {
 $(window.document).ready(
   function(event)
   {
-    Obj.initialize();
+    SeatIndexDisplayByAttendee.initialize();
   }
 );

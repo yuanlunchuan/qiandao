@@ -163,89 +163,91 @@
     <input class="hidden" name="session_id" value=<%= params[:session_id] %>>
   <% end %>
 </div>
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript">
-  var Obj = {
-    countDownTime: 2,
-    timer: null,
 
-    countDown: function(){
-      var self = Obj;
+<% content_for :script do %>
+  <script type="text/javascript">
+    var AttendeeSeatShow = {
+      countDownTime: 2,
+      timer: null,
 
-      self.timer = setInterval(function(){
-        $('.seconds').html(self.countDownTime);
-        self.countDownTime--;
-        if(self.countDownTime == -1)
+      countDown: function(){
+        var self = AttendeeSeatShow;
+
+        self.timer = setInterval(function(){
+          $('.seconds').html(self.countDownTime);
+          self.countDownTime--;
+          if(self.countDownTime == -1)
+          {
+            clearInterval(self.timer);
+            history.back(-1);
+          }
+        },1000);
+      },
+
+      onLoadSeatSuccess: function(event){
+        var self = AttendeeSeatShow;
+        self.countDownTime = 2;
+        self.countDown();
+
+        var collection_item = event.collection[0];
+        var seat = collection_item.seat;
+        var attendee = collection_item.attendee;
+        var session_seat = collection_item.session_seat;
+        var seat_info = "";
+        var unit = '桌';
+        if('row'==session_seat.properties.unit){
+          unit = '排';
+        }
+        $('.seat-area').empty();
+
+        var user_name = "<p><span id='attendee-name'>"+attendee.name+"</span> 先生/女士，您的座位在</p>";
+        if('true'==session_seat.properties.set_table_num){
+          seat_info = "<p class='number-paragraph'>第 <span class='table-num'>"+seat.table_row+"</span>"+unit+"<span id='table-col'>"+seat.table_col+"</span>号</p>";
+        }else{
+          seat_info = "<p class='number-paragraph'>第 <span class='table-num'>"+seat.table_row+"</span>"+unit+"</p>";
+        }
+
+        $('.seat-area').html(user_name+seat_info);
+      },
+
+      onLoadSeatFailure: function(event){
+        var self = AttendeeSeatShow;
+        self.countDownTime = 2;
+        self.countDown();
+        $('.seat-area').empty();
+        var error_message = "<p>很抱歉，没有找到您的座位信息。</p><p>请联系您的担当销售。</p>";
+        $('.seat-area').html(error_message);
+      },
+
+      onEnterkeyPressed: function(event){
+        var self = AttendeeSeatShow;
+        var keyCode = event.which||event.keyCode;
+        if(keyCode == 13)
         {
           clearInterval(self.timer);
-          history.back(-1);
+          var url = "/app/events/"+$('#event-id').data('event-id')+"/attendee_seats/~.json";
+          $.get(url,{
+            session_id: $('#session-id').data('session-id'),
+            keyword: $('.mssage-box').val()
+          },
+          self.onLoadSeatSuccess).error(self.onLoadSeatFailure);
+          $('.mssage-box').val("");
         }
-      },1000);
-    },
+      },
 
-    onLoadSeatSuccess: function(event){
-      var self = Obj;
-      self.countDownTime = 2;
-      self.countDown();
-
-      var collection_item = event.collection[0];
-      var seat = collection_item.seat;
-      var attendee = collection_item.attendee;
-      var session_seat = collection_item.session_seat;
-      var seat_info = "";
-      var unit = '桌';
-      if('row'==session_seat.properties.unit){
-        unit = '排';
-      }
-      $('.seat-area').empty();
-
-      var user_name = "<p><span id='attendee-name'>"+attendee.name+"</span> 先生/女士，您的座位在</p>";
-      if('true'==session_seat.properties.set_table_num){
-        seat_info = "<p class='number-paragraph'>第 <span class='table-num'>"+seat.table_row+"</span>"+unit+"<span id='table-col'>"+seat.table_col+"</span>号</p>";
-      }else{
-        seat_info = "<p class='number-paragraph'>第 <span class='table-num'>"+seat.table_row+"</span>"+unit+"</p>";
-      }
-
-      $('.seat-area').html(user_name+seat_info);
-    },
-
-    onLoadSeatFailure: function(event){
-      var self = Obj;
-      self.countDownTime = 2;
-      self.countDown();
-      $('.seat-area').empty();
-      var error_message = "<p>很抱歉，没有找到您的座位信息。</p><p>请联系您的担当销售。</p>";
-      $('.seat-area').html(error_message);
-    },
-
-    onEnterkeyPressed: function(event){
-      var self = Obj;
-      var keyCode = event.which||event.keyCode;
-      if(keyCode == 13)
-      {
-        clearInterval(self.timer);
-        var url = "/app/events/"+$('#event-id').data('event-id')+"/attendee_seats/~.json";
-        $.get(url,{
-          session_id: $('#session-id').data('session-id'),
-          keyword: $('.mssage-box').val()
-        },
-        self.onLoadSeatSuccess).error(self.onLoadSeatFailure);
-        $('.mssage-box').val("");
-      }
-    },
-
-    initialize: function(){
-      var self = Obj;
-      $('.mssage-box').focus();
-      $(document).click(function(){
+      initialize: function(){
+        var self = AttendeeSeatShow;
         $('.mssage-box').focus();
-      });
-      $('.mssage-box').keypress(self.onEnterkeyPressed);
-      self.countDown();
-    }
-  };
+        $(document).click(function(){
+          $('.mssage-box').focus();
+        });
+        $('.mssage-box').keypress(self.onEnterkeyPressed);
+        self.countDown();
+      }
+    };
 
-  $(document).ready(function(){
-    Obj.initialize();
-  });
-</script>
+    $(document).ready(function(){
+      AttendeeSeatShow.initialize();
+    });
+  </script>
+<% end %>

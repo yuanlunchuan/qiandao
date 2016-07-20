@@ -1,17 +1,17 @@
-var Obj = {
+var SeatNew = {
   choosed_attendee: [],
   total_attendee: 0,
   table_col: 1,
   isInitialized: false,
 
   onAttendeeIdBoxClicked: function(event){
-    var self = Obj;
+    var self = SeatNew;
     self.remove($(this).data('attendee-id'));
     $(this).remove();
   },
 
   remove: function(val){
-    var self = Obj;
+    var self = SeatNew;
     var index = self.indexOf(val);
     if (index > -1) {
       self.choosed_attendee.splice(index, 1);
@@ -19,7 +19,7 @@ var Obj = {
   },
 
   indexOf: function(val){
-    var self = Obj;
+    var self = SeatNew;
      for (var i = 0; i < self.choosed_attendee.length; i++) {
         if (self.choosed_attendee[i] == val) return i;
       }
@@ -27,7 +27,7 @@ var Obj = {
   },
 
   showAttendee: function(attendee){
-    var self = Obj;
+    var self = SeatNew;
 
     var html = "";
     html += "<tr><td>"+attendee.attendee_number+"</td>";
@@ -45,7 +45,7 @@ var Obj = {
   },
 
   onAddAttendeeClicked: function(event){
-    var self = Obj;
+    var self = SeatNew;
 
     if(self.total_attendee<=self.choosed_attendee.length){
       alert('已经坐满');
@@ -67,7 +67,7 @@ var Obj = {
   },
 
   onSearchAttendeeSuccess: function(event){
-    var self = Obj;
+    var self = SeatNew;
     $('#search-button').text('搜索');
     $('#search-button').removeClass('disabled');
     $("#page-box").addClass('hidden');
@@ -83,7 +83,7 @@ var Obj = {
   },
 
   onSearchButtonClicked: function(event){
-    var self = Obj;
+    var self = SeatNew;
     if (!$('#keyword').val()) {
       return;
     }
@@ -103,7 +103,7 @@ var Obj = {
   },
 
   onSaveAdnContinueButtonClicked: function(event){
-    var self = Obj;
+    var self = SeatNew;
     if ($('#total-table-count').data('total-table-count')<$('#current-row').data('current-row')) {
       alert('当前已设置完所有桌');
       return;
@@ -131,7 +131,8 @@ var Obj = {
   },
 
   initialize: function(){
-    var self = Obj;
+    var self = SeatNew;
+
     $('#search-button').on('click', self.onSearchButtonClicked);
     self.total_attendee = $('#per-table-num').data('per-table-num')-$('#seat-table').data('attendee-count');
 
@@ -163,6 +164,6 @@ var Obj = {
 $(window.document).ready(
   function(event)
   {
-    //Obj.initialize();
+    SeatNew.initialize();
   }
 );

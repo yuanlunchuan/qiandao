@@ -1,19 +1,38 @@
 <%= form_for [current_event, @session_seat], html: {class: 'form-horizontal'} do |f|%>
 
   <div class="ibox-content">
-    <div class="form-group">
-      <% if @session_seat.display %>
-        <label class="col-sm-4 control-label">当前显示为：<%= @session_seat.session.full_name %></label>
-      <% else %>
-        <label class="col-sm-4 control-label">前端未设置座位显示</label>
-      <% end %>
-    </div>
+    <% if @session_seat.display %>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          当前显示为
+        </label>
+        <div class="col-md-5">
+          <input type="text" disabled="true" class="form-control" value=<%= @session_seat.session.full_name %> >
+        </div>
+      </div>
+    <% else %>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          当前显示为
+        </label>
+        <div class="col-md-5">
+          <input type="text" disabled="true" class="form-control" value="无" >
+        </div>
+      </div>
+    <% end %>
 
-    <%=select_tag :session_id, options_for_select(current_event.sessions.map {|s| [s.full_name, s.id]}, url_for), prompt: '请选择日程', include_blank: false, class: 'input-sm form-control input-s-sm inline', id: 'session-id' %>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        请选择会议日程
+      </label>
+      <div class="col-md-5">
+        <%=select_tag :session_id, options_for_select(current_event.sessions.map {|s| [s.full_name, s.id]}, url_for), prompt: '请选择日程', include_blank: false, class: 'input-sm form-control input-s-sm inline', id: 'session-id' %>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
-    <div class="col-sm-4">
+    <div class="col-md-4 col-md-offset-2">
       <%= button_tag '设置', class: 'btn btn-primary'%>
     </div>
   </div>

@@ -1,11 +1,7 @@
 <div id="seats_num" data-table-num=<%= @session.try(:session_seat).try(:total_table_count) %> data-table-pernum=<%= @session.try(:session_seat).try(:per_table_num) %> class='hidden'></div>
 <div id="current-event" class="hidden" data-current-event=<%=current_event.id%>></div>
 
-<% if 'show_attendees'==params[:current_action] %>
-  <% breadcrumb :set_attendee_seat %>
-<% else %>
-  <% breadcrumb :set_seat %>
-<% end %>
+<% breadcrumb :set_attendee_seat %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -16,11 +12,7 @@
       <div class="ibox-content">
         <div class="container-fluid">
           <div class="row">
-            <% if 'show_attendees'==params[:current_action] %>
-              <%= render 'attendees' %>
-            <% else %>
-              <%= render 'set_seat' %>
-            <% end %>
+            <%= render 'attendees' %>
           </div>
         </div>
       </div>
@@ -29,9 +21,5 @@
 </div>
 
 <% content_for :script do %>
-  <% if 'show_attendees'==params[:current_action] %>
-    <%= javascript_include_tag 'seat_new' %>
-  <% else %>
-    <%= javascript_include_tag 'set_seat' %>
-  <% end %>
+  <%= javascript_include_tag 'seat_new' %>
 <% end %>

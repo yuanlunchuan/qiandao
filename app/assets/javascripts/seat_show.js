@@ -1,10 +1,10 @@
-var Obj = {
+var seatShow = {
   clickCount: 0,
   old_seat_id: 0,
   oldObj: null,
 
   onSeatClicked: function(event){
-    var self = Obj;
+    var self = seatShow;
     
     self.old_seat_id++;
     if (self.old_seat_id%2) {
@@ -16,7 +16,7 @@ var Obj = {
   },
 
   initialize: function(){
-    var self = Obj;
+    var self = seatShow;
 
     $('.seat').click(function(){
       self.clickCount++;
@@ -48,6 +48,6 @@ var Obj = {
 $(window.document).ready(
   function(event)
   {
-    Obj.initialize();
+    seatShow.initialize();
   }
 );

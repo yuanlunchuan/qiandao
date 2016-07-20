@@ -1,9 +1,9 @@
-var Obj = {
+var ContentSetting = {
   functinList: [],
   hasInitialed: false,
 
   onSaveFunctionOrderClicked: function(event){
-    var self = Obj;
+    var self = ContentSetting;
     var functionOrder = 0;
     var sendData = [];
     $('li').each(function(){
@@ -21,7 +21,7 @@ var Obj = {
   },
 
   updateEventFunctionOrder: function(data){
-    var self = Obj;
+    var self = ContentSetting;
     var eventId = $("#event-id").data('event-id');
     $.post('/app/events/'+eventId+'/update_event_function_order.json',
       {
@@ -34,7 +34,7 @@ var Obj = {
   },
 
   onGetEventFunctionSuccess: function(event){
-    var self = Obj;
+    var self = ContentSetting;
     var currentEvent = event.collection[0];
     (currentEvent.admission_certificate||currentEvent.session_schedule||currentEvent.hotel_info||currentEvent.nearby_recommend||currentEvent.seat_info||currentEvent.outside_link||currentEvent.interactive_answer||currentEvent.lottery)&&$('#saveFunctionOrder').removeClass('hidden');
     if (currentEvent.admission_certificate){
@@ -98,7 +98,7 @@ var Obj = {
   },
 
   reOrderFunction: function(){
-    var self = Obj;
+    var self = ContentSetting;
 
     var temp = {};
     for (var i = 0; i < self.functinList.length; i++)
@@ -116,7 +116,7 @@ var Obj = {
   },
 
   showFunction: function(){
-    var self = Obj;
+    var self = ContentSetting;
     $.each(self.functinList,function (index,item){
       switch(item.functionName)
       {
@@ -209,12 +209,12 @@ var Obj = {
   },
 
   onGetEventFunctionFailure: function(event){
-    var self = Obj;
+    var self = ContentSetting;
     alert("network error please try again!");
   },
 
   getEventFunction: function(){
-    var self = Obj;
+    var self = ContentSetting;
     var eventId = $("#event-id").data('event-id');
     $.getJSON('/app/events/'+eventId+'.json', 
       {
@@ -223,7 +223,7 @@ var Obj = {
   },
 
   initialize: function(){
-  	var self = Obj;
+  	var self = ContentSetting;
     if (self.hasInitialed) {
       return;
     }
@@ -236,5 +236,5 @@ var Obj = {
 };
 
 $(function() {
-  Obj.initialize();
+  ContentSetting.initialize();
 });

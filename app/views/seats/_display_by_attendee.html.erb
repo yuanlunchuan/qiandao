@@ -4,15 +4,10 @@
 
 <div class="ibox-content">
   <div class="container-fluid">
-    <div class="col-sm-3 m-b-xs">
-      <%= link_to '按座位查看', event_seats_path(current_event, display_type: 'seat', session_id: params[:session_id]), class: "btn btn-primary" %>
-      <%= link_to '按名单查看', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id]), class: 'btn btn-primary' %>
-    </div>
-
     <div class="col-sm-5 m-b-xs">
-      <%= link_to '全部', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id]), class: "btn btn-default" %>
-      <%= link_to '已安排', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id], has_arranged: true), class: "btn btn-default" %>
-      <%= link_to '未安排', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id], has_arranged: false), class: 'btn btn-default' %>
+      <%= link_to '全部', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id]), class: "btn btn-white" %>
+      <%= link_to '已安排', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id], has_arranged: true), class: "btn btn-white" %>
+      <%= link_to '未安排', event_seats_path(current_event, display_type: 'attendee', session_id: params[:session_id], has_arranged: false), class: 'btn btn-white' %>
     </div>
 
     <%= form_tag "/app/events/#{current_event.id}/seats", method: :get do%>
