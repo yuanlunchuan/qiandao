@@ -5,6 +5,10 @@ class SeatsController < ApplicationController
   skip_before_action :verify_authenticity_token
   attr_accessor :meta
 
+  def set_seat
+    
+  end
+
   def destroy
     seat = Seat.find(params[:id])
     seat.destroy

@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       end
 
       resources :seats
+      get 'set_seat'  => 'seats#set_seat'
       resources :activity_categories
       resources :activities
       resources :sellers

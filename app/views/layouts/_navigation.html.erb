@@ -162,7 +162,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to new_event_seat_path, style: is_active_item('seats') do %>
+              <%= link_to event_set_seat_path(current_event), style: is_active_item('seats') do %>
                 <i class="fa fa-asterisk"></i>
                 <span class="nav-label">座位安排</span>
               <% end %>
