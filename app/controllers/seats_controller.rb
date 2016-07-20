@@ -91,11 +91,13 @@ class SeatsController < ApplicationController
     params[:attendees_id].each do |attendee_id|
       table_col += 1
       attendee = Attendee.find(attendee_id)
-      seat = Seat.new session: session,
-        attendee:  attendee,
-        table_row: params[:table_row],
-        table_col: table_col
-      seat.save
+      if Seat.attendee_seat_is(attendee, session).blank?
+        seat = Seat.new session: session,
+          attendee:  attendee,
+          table_row: params[:table_row],
+          table_col: table_col
+        seat.save
+      end
     end
     render_ok []
   end
