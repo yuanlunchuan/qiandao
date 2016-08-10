@@ -9,7 +9,7 @@ class AccessMonitorsController < ApplicationController
     @access_records = AccessRecord.all
     @access_records = AccessRecord.white_list if 'white_list' == params[:filter]
     @access_records = AccessRecord.black_list if 'black_list' == params[:filter]
-    
+
     @total = AccessRecord.all.size
     @white_list_total = AccessRecord.white_list.size
     @black_list_total = AccessRecord.black_list.size
