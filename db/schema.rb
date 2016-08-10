@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160710094036) do
+ActiveRecord::Schema.define(version: 20160810154835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_records", force: :cascade do |t|
+    t.string   "ip_address"
+    t.integer  "access_count",    default: 0
+    t.boolean  "is_trust",        default: true
+    t.boolean  "is_notification", default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
   create_table "activities", force: :cascade do |t|
     t.string   "name"

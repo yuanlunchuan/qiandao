@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get '20160223'  => 'redirects#show'
 
+  resources :access_monitors
+
   namespace :seller do
     resources :sessions
     resources :events do
