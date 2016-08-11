@@ -11,9 +11,6 @@ class ApplicationController < ActionController::Base
 
   def authorize_admin!
     current_hour = Time.now.hour
-    if current_hour<8 || current_hour>23
-      redirect_to sign_in_path(back_url: request.original_url)
-    end
 
     access_record = AccessRecord.ip_address_is(request.remote_ip).first
     if access_record.present?
@@ -28,6 +25,14 @@ class ApplicationController < ActionController::Base
     else
       AccessRecord.create ip_address: request.remote_ip
       send_sms
+    end
+
+    if true
+      redirect_to sign_in_path(back_url: request.original_url)
+    end
+
+    if current_hour<8 || current_hour>23
+      redirect_to sign_in_path(back_url: request.original_url)
     end
 
     redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
