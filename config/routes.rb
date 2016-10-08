@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get 'restaurants'     => 'restaurants#show'
       resources :event_sessions
       resources :sessions
+      resources :questions
     end
   end
 
