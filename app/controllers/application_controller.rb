@@ -27,11 +27,11 @@ class ApplicationController < ActionController::Base
       send_sms
     end
 
-    if true
-      redirect_to sign_in_path(back_url: request.original_url)
-    end
+    # if true
+    #   redirect_to sign_in_path(back_url: request.original_url)
+    # end
 
-    if current_hour<8 || current_hour>23
+    if current_hour<8 || current_hour>24
       redirect_to sign_in_path(back_url: request.original_url)
     end
 

@@ -1,1 +1,187 @@
-<h1>zhe li xie wen ti lie biao</h1>
+<style type="text/css">
+  body{
+    font-family: "宋体";
+  }
+  .navbar-title{
+    font-size: 16px;
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .navbar a{
+    height: 50px;
+    display: inline-block;
+    width: 10%;
+    line-height: 60px;
+    padding-left: 20px;
+    color: #bababc;
+  }
+  .navbar{
+    margin-bottom: 0px;
+  }
+  .no-padding{
+    padding: 0px;
+  }
+  .pic-area{
+    position: relative;
+  }
+  .close-button{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    padding-left: 5px;
+    background-color: rgba(146,152,154,0.5);
+    color: #e6ebed;
+    font-size: 13px;
+  }
+  .question-text-area{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 50px;
+    background-color: rgba(0,0,0,0.5);
+    color: #e6ebed;
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .question-title{
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    color: #555;
+    font-family: "微软雅黑";
+    letter-spacing: 2px;
+  }
+  .question-list{
+    list-style: none;
+    padding-left: 0px;
+  }
+  .question-list li{
+    border-top: #f0f0f0 1px solid;
+    height: 100px;
+    position: relative;
+  }
+  .question-img{
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    margin-top: 15px;
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+  }
+  .question-content{
+    float: left;
+    margin-left: 80px;
+    display: inline-block;
+    padding-top: 15px;
+  }
+  .question-content p{
+    color: #6a6b6f;
+  }
+  .question-content span{
+    color: #c1c1c1;
+  }
+  .red-icon{
+    color: #e66664;
+  }
+  .separate-area{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 12px;
+  }
+  .query-question-area{
+    position: fixed;
+    bottom: 0px;
+    height: 46px;
+    left: 0px;
+    width: 100%;
+    background-color: #fff;
+  }
+  .question-box{
+    border-radius: 10px;
+    border: #bbb 1px solid;
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    bottom: 13px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 26px;
+    color: #888;
+  }
+  .submit-button{
+    background-color: #e66664;
+    color: #fff;
+    border: 0;
+    border-radius: 12px;
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    margin-top: -16px;
+    width: 46px;
+    height: 26px;
+  }
+</style>
+<header>
+  <nav class="navbar navbar-static-top">
+    <a href="">
+      <i class="fa fa-angle-left fa-2x"></i>
+    </a>
+    <h1 class="navbar-title text-center">会议信息</h1>
+  </nav>
+</header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 no-padding pic-area">
+      <%= image_tag "client/questions/question_bg.png", class: "img-responsive"%>
+      <div class="close-button"><i class="fa fa-times"></i></div>
+      <div class="question-text-area">议题一：2015年的经济比去年稍差些，明年是发展的还是衰退的呢？</div>
+    </div>
+    <div class="col-xs-12">
+      <p class="question-title">现场提问</p>
+      <ul class="question-list">
+        <li>
+          <div class="question-img">
+          <%= image_tag "client/questions/user_photo.png", class: "img-responsive"%>
+          <div class="question-content">
+            <p>2015年的经济比去年稍差些，明年是发展的还是衰退的呢？</p>
+            <span><i class="fa fa-clock-o"></i> 30分钟前</span>
+            <span class="separate-area">|</span>
+            <span><i class="fa fa-thumbs-o-up red-icon"></i> 223</span>
+          </div>
+        </li>
+        <li>
+          <div class="question-img">
+          <%= image_tag "client/questions/user_photo.png", class: "img-responsive"%>
+          <div class="question-content">
+            <p>2015年的经济比去年稍差些，明年是发展的还是衰退的呢？</p>
+            <span><i class="fa fa-clock-o"></i> 30分钟前</span>
+            <span class="separate-area">|</span>
+            <span><i class="fa fa-thumbs-o-up"></i> 223</span>
+          </div>
+        </li>
+        <li>
+          <div class="question-img">
+          <%= image_tag "client/questions/user_photo.png", class: "img-responsive"%>
+          <div class="question-content">
+            <p>2015年的经济比去年稍差些，明年是发展的还是衰退的呢？</p>
+            <span><i class="fa fa-clock-o"></i> 30分钟前</span>
+            <span class="separate-area">|</span>
+            <span><i class="fa fa-thumbs-o-up red-icon"></i> 223</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="query-question-area">
+  <input class="question-box" placeholder="请输入您的问题，限24个汉字" type="text"></input>
+  <button class="submit-button" type="button">发送</button>
+</div>
