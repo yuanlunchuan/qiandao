@@ -4,6 +4,7 @@
 <div id="show-qrcode" class="hidden" data-show-qrcode=<%=@attendee.login_count>1? false : true %>></div>
 <div id="attendee-token" class="hidden" data-attendee-token=<%=@attendee.token%>></div>
 <div id="event-link" class="hidden" data-event-link=<%= @event.event_link %>></div>
+<div id="current_event_question" class="hidden" data-current-event-question=<%= @current_event_question.try(:id) %>></div>
 
 <title><%= @event.name %></title>
 <div class="container">
@@ -131,6 +132,6 @@
 
 <% content_for :script do %>
 <%= javascript_include_tag 'https://rawgit.com/enyo/dropzone/master/dist/dropzone.js' %>
-  <%= javascript_include_tag 'http://www.luqidong.com/demo/qrcode/js/qrcode.js' %>
-  <%= javascript_include_tag 'client_sites_show' %>
+<%= javascript_include_tag 'http://www.luqidong.com/demo/qrcode/js/qrcode.js' %>
+<%= javascript_include_tag 'client_sites_show' %>
 <% end %>

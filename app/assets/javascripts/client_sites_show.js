@@ -207,7 +207,8 @@ $(document).ready(function(){
     };
     //互动问答
     if (content == "answer") {
-      return  "<a href='javascript:void(0);'>"+
+      var current_event_question = $('#current_event_question').data('current-event-question');
+      return  "<a href='/client/events/"+event_id+"/event_questions/"+current_event_question+"/questions'>"+
               "<img src='/client/answer.png' alt=''>"+
               "<span>互动问答</span>"+
               "</a>"
