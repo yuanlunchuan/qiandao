@@ -31,7 +31,9 @@ Rails.application.routes.draw do
       get 'restaurants'     => 'restaurants#show'
       resources :event_sessions
       resources :sessions
-      resources :questions
+      resources :event_questions do
+        resources :questions
+      end
     end
   end
 
@@ -73,6 +75,8 @@ Rails.application.routes.draw do
       resources :event_questions do
         resources :questions
       end
+      get 'set_current_event_questions' => 'event_questions#set_current_event_questions'
+      post 'update_current_event_questions' => 'event_questions#update_current_event_questions'
       resources :event_lottery_prizes do
         get 'lottery_prize_rule' => 'event_lottery_prizes#lottery_prize_rule'
         patch 'update_lottery_prize_rule' => 'event_lottery_prizes#update_lottery_prize_rule'

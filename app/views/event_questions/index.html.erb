@@ -10,7 +10,8 @@
 
         <div class="row">
           <div class="col-sm-12">
-            <%= link_to '创建提问环节', new_event_event_question_path(current_event), class: 'btn btn-white btn-sm pull-right' %>
+            <%= link_to '设置当前提问环节', event_set_current_event_questions_path(current_event), class: "btn btn-white btn-sm pull-right" %>
+            <%= link_to '创建提问环节', new_event_event_question_path(current_event), class: "btn btn-white btn-sm pull-right" %>
           </div>
         </div>
         <div class="row">

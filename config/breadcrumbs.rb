@@ -2,6 +2,11 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :set_current_event_question do
+  link '设置当前提问环节', event_set_current_event_questions_path(current_event)
+  parent :event_questions
+end
+
 crumb :event_question do |event_question|
   link event_question.name, event_event_question_path(current_event, event_question)
   parent :event_questions
