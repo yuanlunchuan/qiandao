@@ -129,6 +129,7 @@
     height: 26px;
   }
 </style>
+
 <header>
   <nav class="navbar navbar-static-top">
     <a href="">
@@ -185,6 +186,8 @@
   </div>
 </div>
 <div class="query-question-area">
-  <input class="question-box" placeholder="请输入您的问题，限24个汉字" type="text"></input>
-  <button class="submit-button" type="button">发送</button>
+  <%= form_tag(client_event_event_question_questions_path(current_event, params[:event_question_id]), method: "POST") do %>
+    <input class="question-box" placeholder="请输入您的问题，限24个汉字" type="text" name="question"></input>
+    <button class="submit-button" type="submit">发送</button>
+  <% end %>
 </div>
