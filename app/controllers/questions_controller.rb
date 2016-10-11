@@ -26,6 +26,13 @@ class QuestionsController < ApplicationController
 
   end
 
+  def destroy
+    question = Question.find(params[:id])
+    event_question = EventQuestion.find(params[:event_question_id])
+    question.delete
+    redirect_to event_event_question_path(current_event, event_question), flash: {success: '删除成功'}
+  end
+
   def update
     question = Question.find(params[:question_id])
     event_question = EventQuestion.find(params[:event_question_id])

@@ -29,7 +29,7 @@
                       <button type="submit">保存</button>
                     <% end %>
                   </td>
-                  <td>删除</td>
+                  <td><%= link_to "删除", event_event_question_question_path(current_event, @event_question, question), method: :DELETE, data: {confirm: '是否确认删除？'} %></td>
                 </tr>
               <% end %>
             </table>
