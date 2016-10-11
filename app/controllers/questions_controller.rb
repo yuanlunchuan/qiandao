@@ -23,21 +23,25 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def update
-    admin = Admin.auth_token_is(cookies[:auth_token]).first
-    question = Question.find(params[:id])
+    question = Question.find(params[:question_id])
+    event_question = EventQuestion.find(params[:event_question_id])
+    praise_count = params[:praise_count]
+    question.update praise_count: praise_count
+    # admin = Admin.auth_token_is(cookies[:auth_token]).first
+    # question = Question.find(params[:id])
 
-    if params[:answer_id].present?
-      answer = Answer.find(params[:answer_id])
-      answer.update admin: admin, question: question, answer: params[:answer]
-    else
-      Answer.create admin: admin, question: question, answer: params[:answer]
-    end
+    # if params[:answer_id].present?
+    #   answer = Answer.find(params[:answer_id])
+    #   answer.update admin: admin, question: question, answer: params[:answer]
+    # else
+    #   Answer.create admin: admin, question: question, answer: params[:answer]
+    # end
 
-    redirect_to event_questions_path(current_event)
+    redirect_to event_event_question_path(current_event, event_question), flash: {success: '点赞成功'}
   end
 
   def set_current_module

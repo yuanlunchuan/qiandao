@@ -8,7 +8,32 @@
       </div>
       <div class="ibox-content">
         <div class="row">
-
+          <div class="col-md-12">
+            <table class="table table-striped table-hover">
+              <tr class="info">
+                <td>#</td>
+                <td>问题内容</td>
+                <td>提问时间</td>
+                <td>点赞数</td>
+                <td>操作</td>
+              </tr>
+              <% @questions.each do |question|%>
+                <tr>
+                  <td><%= question.id %></td>
+                  <td><%= question.question_content %></td>
+                  <td><%= question.created_at %></td>
+                  <td>
+                    <%= form_tag event_event_question_question_path(current_event, @event_question, question), method: 'PATCH' do %>
+                      <input type="number" name="praise_count" value="<%= question.praise_count %>">
+                      <input type="hidden" name="question_id" value="<%= question.id %>">
+                      <button type="submit">保存</button>
+                    <% end %>
+                  </td>
+                  <td>删除</td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
         </div>
       </div>
     </div>
