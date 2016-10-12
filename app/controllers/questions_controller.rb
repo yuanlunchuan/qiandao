@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
 
   def index
     @event_question = EventQuestion.find params[:event_question_id]
-    @questions = @event_question.questions
+    @questions = @event_question.questions.limit(9).reorder('praise_count desc')
     render layout: 'empty'
   end
 

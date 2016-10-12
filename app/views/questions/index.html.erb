@@ -8,69 +8,23 @@
     </div>
   </div>
   <div class="row question-section">
-    <div class="col-md-4 question-item">
-      <div class="row">
-        <div class="col-md-2 text-center">
-          <div style="background-color: rgba(0,0,0,0.3); width: 50px; color: red">
-            205
-          </div>
-          <div style="background-color: rgba(0,0,0,0.5); width: 50px; color: black;">
+    <% @questions.each do |question|%>
+      <div class="col-md-4 question-item">
+        <div class="row">
+          <div class="col-md-2 text-center">
+            <div style="background-color: rgba(0,0,0,0.3); width: 50px; color: red">
+            <%= question.praise_count %>
+            </div>
+            <div style="background-color: rgba(0,0,0,0.5); width: 50px; color: black;">
             支持数
+            </div>
           </div>
-        </div>
-        <div class="col-md-8">
-          为什么BBC的Top Gear成功而湖南卫视《最高档》失败？
+          <div class="col-md-8">
+            <%= question.question_content %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 question-item">
-      234
-    </div>
-    <div class="col-md-4 question-item">
-      345
-    </div>
-    <div class="col-md-4 question-item">
-      <div class="row">
-        <div class="col-md-2 text-center">
-          <div style="background-color: rgba(0,0,0,0.3); width: 50px; color: red">
-            205
-          </div>
-          <div style="background-color: rgba(0,0,0,0.5); width: 50px; color: black;">
-            支持数
-          </div>
-        </div>
-        <div class="col-md-8">
-          为什么BBC的Top Gear成功而湖南卫视《最高档》失败？
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 question-item">
-      234
-    </div>
-    <div class="col-md-4 question-item">
-      345
-    </div>
-    <div class="col-md-4 question-item">
-      <div class="row">
-        <div class="col-md-2 text-center">
-          <div style="background-color: rgba(0,0,0,0.3); width: 50px; color: red">
-            205
-          </div>
-          <div style="background-color: rgba(0,0,0,0.5); width: 50px; color: black;">
-            支持数
-          </div>
-        </div>
-        <div class="col-md-8">
-          为什么BBC的Top Gear成功而湖南卫视《最高档》失败？
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 question-item">
-      234
-    </div>
-    <div class="col-md-4 question-item">
-      345
-    </div>
+    <% end %>
   </div>
 
 </div>

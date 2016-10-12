@@ -2,8 +2,8 @@ class Client::QuestionsController < ApplicationController
   layout 'client'
 
   def index
-    current_event_question = current_event.event_questions.active.first
-    @questions = current_event_question.try(:questions)
+    @current_event_question = current_event.event_questions.active.first
+    @questions = @current_event_question.try(:questions)
   end
   
   def create

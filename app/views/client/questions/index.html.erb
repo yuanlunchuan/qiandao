@@ -143,7 +143,9 @@
     <div class="col-xs-12 no-padding pic-area">
       <%= image_tag "client/questions/question_bg.png", class: "img-responsive"%>
       <div class="close-button"><i class="fa fa-times"></i></div>
-      <div class="question-text-area">议题一：2015年的经济比去年稍差些，明年是发展的还是衰退的呢？</div>
+      <div class="question-text-area">
+        <%= @current_event_question.name %>
+      </div>
     </div>
     <div class="col-xs-12">
       <p class="question-title">现场提问</p>
