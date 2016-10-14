@@ -61,6 +61,7 @@ Rails.application.config.assets.precompile += %w(
   set_seat.js
   jquery.sortable.js
   content_setting.js
+  client_questions.js
 
   client_event_sessions_show.css
   client_invites_show.css
@@ -72,4 +73,5 @@ Rails.application.config.assets.precompile += %w(
   invitations.css
   jquery-accordion-menu.css
   seller_checkins_show.css
+  client_questions.css
 )
