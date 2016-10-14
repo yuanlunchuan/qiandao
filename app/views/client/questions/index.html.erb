@@ -1,3 +1,6 @@
+<div class="hidden" id="event" data-event-id=<%= params[:event_id]%>></div>
+<div class="hidden" id="event-question" data-event-question-id=<%= params[:event_question_id]%>></div>
+
 <header>
   <nav class="navbar navbar-static-top">
     <a href="">
@@ -28,13 +31,19 @@
                      question.attendee.photo.url(:square)
                    end
               %>
-              <%= image_tag img, class: "img-responsive"%>
+              <%= image_tag img||"client/questions/user_photo.png", class: "img-responsive"%>
             </div>
             <div class="question-content">
               <p><%= question.question_content %></p>
               <span><i class="fa fa-clock-o"></i> 30分钟前</span>
               <span class="separate-area">|</span>
-              <span><i class="fa fa-thumbs-o-up red-icon"></i> <%= question.praise_count %></span>
+              <span class="cursor-pointer praise-button" data-question-id=<%= question.id %>>
+              <% if AttendeePraisesQuestion.get_praise(@current_attendee, question).present? %>
+                <i class="fa fa-thumbs-o-up gray-icon"></i>
+              <% else %>
+                <i class="fa fa-thumbs-o-up red-icon"></i>
+              <% end %>
+              <span class="praise-count"><%= question.praise_count %></span></span>
             </div>
           </li>
         <% end %>

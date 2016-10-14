@@ -90,6 +90,9 @@ body{
 .red-icon{
   color: #e66664;
 }
+.gray-icon{
+  color: gray;
+}
 .separate-area{
   margin-left: 10px;
   margin-right: 10px;
@@ -126,4 +129,7 @@ body{
   margin-top: -16px;
   width: 46px;
   height: 26px;
+}
+.cursor-pointer{
+  cursor: pointer;
 }

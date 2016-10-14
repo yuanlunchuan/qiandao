@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :sessions
       resources :event_questions do
         resources :questions
+        post 'praises'     => 'questions#praises'
       end
     end
   end
