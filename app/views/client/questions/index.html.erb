@@ -35,7 +35,20 @@
             </div>
             <div class="question-content">
               <p><%= question.question_content %></p>
-              <span><i class="fa fa-clock-o"></i> 30分钟前</span>
+              <span>
+                <i class="fa fa-clock-o"></i>
+                <%
+                  time_ago = (Time.new - question.created_at).to_i
+                  if time_ago<60
+                    time = "#{time_ago}秒前"
+                  elsif time_ago<3600
+                    time = "#{time_ago/60}分钟前"
+                  else
+                    time = "#{time_ago/3600}小时前"
+                  end
+                %>
+                <%= time %>
+              </span>
               <span class="separate-area">|</span>
               <span class="cursor-pointer praise-button" data-question-id=<%= question.id %>>
               <% if AttendeePraisesQuestion.get_praise(@current_attendee, question).present? %>
