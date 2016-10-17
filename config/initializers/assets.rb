@@ -62,6 +62,7 @@ Rails.application.config.assets.precompile += %w(
   jquery.sortable.js
   content_setting.js
   client_questions.js
+  questions_index.js
 
   client_event_sessions_show.css
   client_invites_show.css

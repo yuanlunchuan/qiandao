@@ -4,7 +4,7 @@
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
       <div class="ibox-title">
-        <h5>问题列表</h5>
+        <h5>问题列表1</h5>
       </div>
       <div class="ibox-content">
         <div class="row">
@@ -19,20 +19,25 @@
               </tr>
               <% @questions.each do |question|%>
                 <tr>
-                  <td><%= question.id %></td>
-                  <td><%= question.question_content %></td>
-                  <td><%= question.created_at %></td>
-                  <td>
-                    <%= form_tag event_event_question_question_path(current_event, @event_question, question), method: 'PATCH' do %>
-                      <input type="number" name="praise_count" value="<%= question.praise_count %>">
+                  <%= form_tag event_event_question_question_path(current_event, @event_question, question), method: 'PATCH' do %>
+                    <td><%= question.id %></td>
+                    <td><%= question.question_content %></td>
+                    <td><%= question.created_at %></td>
+                    <td>
+                      <input type="text" name="praise_count" value="<%= question.praise_count %>" class="form-control">
                       <input type="hidden" name="question_id" value="<%= question.id %>">
-                      <button type="submit">保存</button>
-                    <% end %>
-                  </td>
-                  <td><%= link_to "删除", event_event_question_question_path(current_event, @event_question, question), method: :DELETE, data: {confirm: '是否确认删除？'} %></td>
+                    </td>
+                    <td>
+                      <button type="submit" class="btn btn-sm btn-white">保存</button>
+                      <%= link_to "删除", event_event_question_question_path(current_event, @event_question, question), method: :DELETE, data: {confirm: '是否确认删除？'}, class: 'btn btn-danger btn-sm' %>
+                    </td>
+                  <% end %>
                 </tr>
               <% end %>
             </table>
+          </div>
+          <div class="col-md-12">
+            <%= paginate @questions %>
           </div>
         </div>
       </div>

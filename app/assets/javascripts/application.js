@@ -31,4 +31,3 @@
 //= require jquery-template/jquery.loadTemplate.min.js
 //= require sweetalert/sweetalert.min.js
 //= require app.js
-//= require questions_index.js

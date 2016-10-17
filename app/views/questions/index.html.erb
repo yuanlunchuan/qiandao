@@ -11,16 +11,16 @@
     <% @questions.each do |question|%>
       <div class="col-md-4 question-item">
         <div class="row">
-          <div class="col-md-2 text-center">
-            <div style="background-color: rgba(0,0,0,0.3); width: 50px; color: red">
-            <%= question.praise_count %>
+          <div class="col-md-2 text-center" style="margin-top: 10%;">
+            <div style="background-color: rgba(0,0,0,0.2); width: 50px; color: red; margin:0; padding: 0;" class="h2">
+              <%= question.praise_count %>
             </div>
-            <div style="background-color: rgba(0,0,0,0.5); width: 50px; color: black;">
+            <div style="background-color: rgba(0,0,0,0.3); width: 50px; color: black;">
             支持数
             </div>
           </div>
           <div class="col-md-8">
-            <%= question.question_content %>
+            <h2><em><%= question.question_content %></em></h2>
           </div>
         </div>
       </div>
@@ -28,3 +28,7 @@
   </div>
 
 </div>
+
+<% content_for :script do %>
+  <%= javascript_include_tag 'questions_index' %>
+<% end %>

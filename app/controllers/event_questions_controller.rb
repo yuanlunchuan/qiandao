@@ -16,6 +16,7 @@ class EventQuestionsController < ApplicationController
   def show
     @event_question = EventQuestion.find params[:id]
     @questions = @event_question.questions.reorder(:created_at)
+    @questions = @questions.page(params[:page])
   end
 
   def create

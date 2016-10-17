@@ -1,3 +1,4 @@
+<title>会议信息</title>
 <div class="hidden" id="event" data-event-id=<%= params[:event_id]%>></div>
 <div class="hidden" id="event-question" data-event-question-id=<%= params[:event_question_id]%>></div>
 
@@ -13,7 +14,12 @@
   <div class="row">
     <div class="col-xs-12 no-padding pic-area">
       <%= image_tag "client/questions/question_bg.png", class: "img-responsive"%>
-      <div class="close-button"><i class="fa fa-times"></i></div>
+      <div class="close-button">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" style="color: #fff;">
+          <i class="fa fa-times"></i>
+        </a>
+      </div>
+
       <div class="question-text-area">
         <%= @current_event_question.name %>
       </div>
