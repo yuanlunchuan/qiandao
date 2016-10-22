@@ -16,6 +16,7 @@
           <td>ip</td>
           <td>访问次数</td>
           <td>白/黑名单</td>
+          <td>时间</td>
           <td>操作</td>
         </tr>
         <% index = 1 %>
@@ -24,6 +25,7 @@
           <td><%= index %></td>
           <td><%= access_record.ip_address %></td>
           <td><%= access_record.access_count %></td>
+          <td><%= access_record.updated_at %></td>
           <td><%= access_record.is_trust ? '白名单' : '黑名单' %></td>
           <td><a href="/access_monitors/<%= access_record.id %>?filter=<%= params[:filter]%>" class="btn btn-white">加入<%= access_record.is_trust ? '黑名单' : '白名单' %></a></td>
         </tr>

@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
 
   def create
     admin = Admin.find_by_name(params[:name])
-
     if admin && admin.password_digest==params[:password]
       if params[:remember_me]
         cookies.permanent[:auth_token] = admin.auth_token

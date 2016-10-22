@@ -6,9 +6,9 @@ class AccessMonitorsController < ApplicationController
       redirect_to sign_in_path(back_url: request.original_url)
     end
 
-    @access_records = AccessRecord.all
-    @access_records = AccessRecord.white_list if 'white_list' == params[:filter]
-    @access_records = AccessRecord.black_list if 'black_list' == params[:filter]
+    @access_records = AccessRecord.all.reorder('updated_at DESC')
+    @access_records = AccessRecord.white_list.reorder('updated_at DESC') if 'white_list' == params[:filter]
+    @access_records = AccessRecord.black_list.reorder('updated_at DESC') if 'black_list' == params[:filter]
 
     @total = AccessRecord.all.size
     @white_list_total = AccessRecord.white_list.size
