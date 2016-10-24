@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     access_record = AccessRecord.ip_address_is(request.remote_ip).first
     if access_record.present?
       access_record.update access_count: (access_record.access_count+1)
-      if (!access_record.is_notification)&&(0==access_record.access_count%10)&&
+      if (!access_record.is_notification)&&(0==access_record.access_count%10)
         send_sms
       end
 
@@ -25,15 +25,12 @@ class ApplicationController < ActionController::Base
     else
       AccessRecord.create ip_address: request.remote_ip
       send_sms
-    end
-
-    # if true
-    #   redirect_to sign_in_path(back_url: request.original_url)
-    # end
-
-    if current_hour<8 || current_hour>24
       redirect_to sign_in_path(back_url: request.original_url)
     end
+
+    # if current_hour<8 || current_hour>24
+    #   redirect_to sign_in_path(back_url: request.original_url)
+    # end
 
     redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
   end
