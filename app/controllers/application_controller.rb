@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin!
+    access_record = AccessRecord.ip_address_is(request.remote_ip).first
+    if access_record.present?
+      access_record.update access_count: (access_record.access_count+1)
+    else
+      AccessRecord.create ip_address: request.remote_ip
+    end
+    redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
+
+    return
     current_hour = Time.now.hour
 
     access_record = AccessRecord.ip_address_is(request.remote_ip).first
