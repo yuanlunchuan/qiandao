@@ -16,30 +16,10 @@ class ApplicationController < ActionController::Base
     else
       AccessRecord.create ip_address: request.remote_ip
     end
-    redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
 
-    return
-    current_hour = Time.now.hour
-
-    access_record = AccessRecord.ip_address_is(request.remote_ip).first
-    if access_record.present?
-      access_record.update access_count: (access_record.access_count+1)
-      if (!access_record.is_notification)&&(0==access_record.access_count%10)
-        send_sms
-      end
-
-      if !access_record.is_trust
-        redirect_to sign_in_path(back_url: request.original_url)
-      end
-    else
-      AccessRecord.create ip_address: request.remote_ip
-      send_sms
-      redirect_to sign_in_path(back_url: request.original_url)
+    File.open("log/access_file","a+") do |file|
+      file.puts "id: #{request.remote_ip} time: #{access_record.access_count} url: #{request.original_url}"
     end
-
-    # if current_hour<8 || current_hour>24
-    #   redirect_to sign_in_path(back_url: request.original_url)
-    # end
 
     redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
   end
