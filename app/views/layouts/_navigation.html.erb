@@ -37,25 +37,25 @@
         <ul class="submenu">
           <li>
             <%= link_to event_event_base_setting_path(current_event), style: is_active_item('events', 'event_base_setting') do %>
-              <i class="fa fa-gift"></i>
+              <i class="fa fa-cog" aria-hidden="true"></i>
               <span class="nav-label">基本设置</span>
             <% end %>
           </li>
           <li>
             <%= link_to event_welcome_page_setting_path(current_event), style: is_active_item('events', 'welcome_page_setting') do %>
-              <i class="fa fa-gift"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
               <span class="nav-label">欢迎页设置</span>
             <% end %>
           </li>
           <li>
             <%= link_to event_function_setting_path(current_event), style: is_active_item('events', 'function_setting') do %>
-              <i class="fa fa-gift"></i>
+              <i class="fa fa-wrench" aria-hidden="true"></i>
               <span class="nav-label">功能设置</span>
             <% end %>
           </li>
           <li>
             <%= link_to event_content_setting_path(current_event), style: is_active_item('events', 'content_setting') do %>
-              <i class="fa fa-gift"></i>
+              <i class="fa fa-newspaper-o" aria-hidden="true"></i>
               <span class="nav-label">内容设置</span>
             <% end %>
           </li>
@@ -67,7 +67,7 @@
         <% else %>
           <li class="<%= 'hidden' if !current_admin.session_manage_permission%>">
         <% end %>
-          <a id="conference" href="#"><i class="fa fa-users"></i>会议管理</a>
+          <a id="conference" href="#"><i class="fa fa-tachometer" aria-hidden="true"></i>会议管理</a>
           <ul class="submenu">
             <li>
               <%= link_to event_activities_path, style: is_active_item('activities') do %>
@@ -76,7 +76,8 @@
             </li>
             <li>
               <%= link_to event_event_session_locations_path, style: is_active_item('event_session_locations') do %>
-                <i class="fa fa-gamepad"></i><span class="nav-label">会议场地管理</span></a>
+                <i class="fa fa-building" aria-hidden="true"></i>
+                <span class="nav-label">会议场地管理</span></a>
               <% end %>
             </li>
             <li>
@@ -103,7 +104,7 @@
         <% else %>
           <li class="<%= 'hidden' if !current_admin.session_notifacation_permission%>">
         <% end %>
-          <a href="#"><i class="fa fa-users"></i>会议通知</a>
+          <a href="#"><i class="fa fa-volume-up" aria-hidden="true"></i>会议通知</a>
           <ul class="submenu">
             <li>
               <%= link_to event_invitation_settings_path, style: is_active_item('invitation_settings') do %>
@@ -130,7 +131,7 @@
         <% else %>
           <li class="<%= 'hidden' if !current_admin.attendee_manage_permission%>">
         <% end %>
-        <a href="#"><i class="fa fa-heart"></i>嘉宾管理</a>
+        <a href="#"><i class="fa fa-users" aria-hidden="true"></i>嘉宾管理</a>
           <ul class="submenu">
             <li>
               <%= link_to event_attendee_categories_path, style: is_active_item('attendee_categories') do %>
@@ -218,7 +219,7 @@
             </li>
             <li>
               <%= link_to event_event_questions_path(current_event), style: is_active_item('event_questions') do %>
-                <i class="fa fa-check-circle-o"></i>
+                <i class="fa fa-question" aria-hidden="true"></i>
                 <span class="nav-label">现场提问</span><span class="jquery-accordion-menu-label hidden">10 </span>
               <% end %>
             </li>
@@ -249,7 +250,7 @@
 
         <li>
           <%= link_to event_choose_event_question_path(current_event) do %>
-          <i class="fa fa-qrcode"></i>
+          <i class="fa fa-list" aria-hidden="true"></i>
           <span class="nav-label">问题列表</span>
         <% end %>
         </li>
