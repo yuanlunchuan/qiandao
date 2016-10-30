@@ -33,7 +33,6 @@ class EventLotteryPrizesController < ApplicationController
           attendee_id = rand(minimum_id..maximum_id)
         end
       end
-      logger.info "------------attendee_id: #{attendee_id}"
       attendee = Attendee.find attendee_id
       item = {}
       item = attendee.to_hash

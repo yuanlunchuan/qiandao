@@ -3,16 +3,9 @@ class LotteryPrizesController < ApplicationController
   before_action :set_current_module
 
   layout 'event'
-  def index
-    
-  end
 
   def live_lottery_prize
     render layout: 'empty'
-  end
-
-  def new
-
   end
 
   def create
@@ -48,10 +41,6 @@ class LotteryPrizesController < ApplicationController
     }
 
     render status: 'success', json: response
-  end
-
-  def lottery_prize_setting
-
   end
 
   def set_current_module

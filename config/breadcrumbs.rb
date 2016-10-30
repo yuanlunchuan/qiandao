@@ -2,6 +2,11 @@ crumb :root do
   link "首页", event_dashboard_path
 end
 
+crumb :new_event_question do
+  link '新增问题环节', event_set_current_event_questions_path(current_event)
+  parent :event_questions
+end
+
 crumb :set_current_event_question do
   link '设置当前提问环节', event_set_current_event_questions_path(current_event)
   parent :event_questions
@@ -117,7 +122,7 @@ crumb :edit_seller do |cat|
 end
 
 crumb :specify_lottery_prize_attendee do |event_lottery_prize, event_lottery_prize_item|
-  link '指定中奖人管理', event_questions_path
+  link '指定中奖人管理', event_event_lottery_prize_event_lottery_prize_item_specify_attendee_lottery_path(current_event, event_lottery_prize, event_lottery_prize_item)
   parent :event_lottery_prize, event_lottery_prize
 end
 
@@ -126,7 +131,7 @@ crumb :lottery_prize_rule do |event_lottery_prize|
   parent :event_lottery_prize, event_lottery_prize
 end
 
-crumb :edit_event_lottery_prize do |event_lottery_prize|
+crumb :edit_event_lottery_prize_item do |event_lottery_prize|
   link '编辑奖项', new_event_event_lottery_prize_path(current_event)
   parent :event_lottery_prize, event_lottery_prize
 end
@@ -134,6 +139,11 @@ end
 crumb :add_event_lottery_prizes do |event_lottery_prize|
   link '新增奖项', new_event_event_lottery_prize_path(current_event)
   parent :event_lottery_prize, event_lottery_prize
+end
+
+crumb :edit_event_lottery_prize do |event_lottery_prize|
+  link '编辑抽奖活动', edit_event_event_lottery_prize_path(current_event, event_lottery_prize.id)
+  parent :event_lottery_prizes
 end
 
 crumb :new_event_lottery_prize do
@@ -285,29 +295,3 @@ end
 crumb :photos do
   link '用户照片管理', event_photos_path
 end
-
-
-# crumb :projects do
-#   link "Projects", projects_path
-# end
-
-# crumb :project do |project|
-#   link project.name, project_path(project)
-#   parent :projects
-# end
-
-# crumb :project_issues do |project|
-#   link "Issues", project_issues_path(project)
-#   parent :project, project
-# end
-
-# crumb :issue do |issue|
-#   link issue.title, issue_path(issue)
-#   parent :project_issues, issue.project
-# end
-
-# If you want to split your breadcrumbs configuration over multiple files, you
-# can create a folder named `config/breadcrumbs` and put your configuration
-# files there. All *.rb files (e.g. `frontend.rb` or `products.rb`) in that
-# folder are loaded and reloaded automatically when you change them, just like
-# this file (`config/breadcrumbs.rb`).

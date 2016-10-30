@@ -63,6 +63,7 @@ Rails.application.config.assets.precompile += %w(
   content_setting.js
   client_questions.js
   questions_index.js
+  start_lottery_prize.js
 
   client_event_sessions_show.css
   client_invites_show.css
@@ -75,4 +76,5 @@ Rails.application.config.assets.precompile += %w(
   jquery-accordion-menu.css
   seller_checkins_show.css
   client_questions.css
+  start_lottery_prize.css
 )

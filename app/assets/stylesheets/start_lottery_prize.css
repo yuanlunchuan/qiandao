@@ -1,0 +1,250 @@
+.content-area{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-family: "微软雅黑";
+  color: #fff;
+  letter-spacing: 1px;
+}
+.bg-img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -999;
+}
+.prize-area{
+  z-index: 1;
+  position: absolute;
+}
+.title-area{
+  margin-top: 15px;
+  position: relative;
+}
+.line-area{
+  position: absolute;
+  left: 28%;
+  top: 8px;
+}
+.top-gradient{
+  height: 25px;
+  width: 1px;
+  background: -webkit-linear-gradient(bottom, rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom, rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom, rgba(255,255,0,0), rgba(255,255,255,0.8)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8)); /* 标准的语法（必须放在最后） */
+}
+.bottom-gradient{
+  height: 25px;
+  width: 1px;
+  background: -webkit-linear-gradient(bottom, rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom, rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom, rgba(255,255,0,0.8), rgba(255,255,255,0)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0)); /* 标准的语法（必须放在最后） */
+}
+.title-area h1{
+  font-size: 23px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.logo-area img{
+  height: 55px;
+  margin-top: 6px;
+  position: absolute;
+  right: 0px;
+}
+.lottery-area{
+  margin-top: 50px;
+  position: relative;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: 300px;
+}
+.lottery-bg{
+  background-color: #ccc;
+  opacity: 0.4;
+  position: absolute;
+  height: 450px;
+  left: 0px;
+  top: 0px;
+  width: 300px;
+  z-index: -999;
+}
+.lottery-title-area{
+  height: 50px;
+  line-height: 50px;
+  margin-top: 10px;
+  width: 300px;
+}
+.head-bg{
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 312px;
+  height: 50px;
+  z-index: -88;
+}
+.lottery-title{
+  float: left;
+  font-size: 18px;
+}
+.lottery-num{
+  float: right;
+  font-size: 15px;
+  font-style: italic;
+}
+.table-area{
+  background-color: #fff;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  height: 370px;
+  width: 100%;
+  overflow: auto;
+  margin-top: 20px;
+}
+.lottery-person{
+  width: 100%;
+  color: #555;
+  background-color: #fff;
+  text-align: center;
+}
+.lottery-person tr.table-title{
+  border-bottom: #d9d9d9 1px solid;
+}
+.lottery-person th{
+  text-align: center;
+}
+.lottery-person tr{
+  border-bottom: #d9d9d9 1px dashed;
+  line-height: 36px;
+}
+.lottery-person td{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.lottery-person tr.last-person{
+  border: 0px;
+}
+.number-area{
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: #929292;
+  color: #fff;
+}
+.name-icon{
+  width: 26px;
+  height: 26px;
+  border: #8f8f8d 1px solid;
+}
+.lottory-prize-area{
+  margin-top: 45px;
+  background:rgba(255,255,255,0.1);
+  height: 450px;
+  position: relative;
+  border-top: #666 1px solid;
+  border-right: #ddd 1px solid;
+  border-bottom: #ddd 1px solid;
+  border-left: #999 1px solid;
+}
+.prize-content{
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.select-content{
+  margin-top: 20px;
+  height: 50px;
+  line-height: 50px;
+}
+.lottory-prize-area{
+  position: relative;
+}
+.lottery-item-bg{
+  position: absolute;
+  left: 0px;
+  top: 20px;
+  width: 100%;
+  height: 50px;
+}
+.select-area{
+  float: left;
+  font-size: 16px;
+}
+.select-area select{
+  background: rgba(255,255,255,0);
+  border:0px;
+}
+.select-area option{
+  background: rgba(255,255,255,0.5);
+  border:0px;
+}
+.person-no-area{
+  float: right;
+  font-style: italic;
+  font-size: 15px;
+}
+.person-msg{
+  text-align: center;
+  position: relative;
+}
+.name-area p{
+  margin-bottom: 5px;
+}
+.name-area{
+  margin-top: 160px;
+  text-align: center;
+}
+.person-portrait{
+  text-align: center;
+  margin-top: 10px;
+  width: 146px;
+  height: 146px;
+  padding: 1px;
+  background-color: #fff;
+  position: absolute;
+  left:50%;
+  margin-left: -73px;
+  top: 0px; 
+}
+.person-portrait img{
+  width: 144px;
+  height: 144px;
+}
+.start-button button{
+  margin-top: 15px;
+  background-color: #4709b2;
+  width: 120px;
+  height: 40px;
+  border: 0px;
+  font-weight: bold;
+}
+.split-line{
+  position: relative;
+  margin-top: 8px;
+}
+.left-gradient{
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  width:50px;
+  height: 1px;
+  background: -webkit-linear-gradient(right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right,rgba(255,255,255,0), rgba(255,255,255,0.8)); /* 标准的语法（必须放在最后） */
+}
+.right-gradient{
+  position: absolute;
+  left: 50%;
+  width:50px;
+  height: 1px;
+  background: -webkit-linear-gradient(right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right,rgba(255,255,255,0.8), rgba(255,255,255,0)); /* 标准的语法（必须放在最后） */
+}
+.person-area{
+  margin-top: 30px;
+}

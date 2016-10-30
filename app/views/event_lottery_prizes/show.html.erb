@@ -19,7 +19,7 @@
             <div class="col-md-2">
               <%= link_to "  已中奖", event_event_lottery_prize_path(current_event, @event_lottery_prize, state: 'has_lottery' ) %>
               &nbsp;&nbsp;|&nbsp;&nbsp;
-              <%= link_to "  未中奖", event_event_lottery_prize_path(current_event, @event_lottery_prize, state: 'not_lottery' ), class: 'hidden' %>
+              <%= link_to "全部", event_event_lottery_prize_path(current_event, @event_lottery_prize) %>
             </div>
             <form action=<%= "/app/events/#{current_event.id}/event_lottery_prizes/#{@event_lottery_prize.id}" %> method="get">
               <div class="col-md-3 col-md-offset-6">
@@ -104,7 +104,7 @@
           </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-white" data-dismiss="modal">close</button>
       </div>
     </div>
   </div>
