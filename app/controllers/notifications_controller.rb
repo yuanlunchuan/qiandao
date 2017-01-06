@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+  http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   before_action :authorize_admin!
   before_action :check_sms_template, only: [:send_sms, :send_test_sms, :create]
   before_action :set_current_module
@@ -43,8 +44,8 @@ class NotificationsController < ApplicationController
   end
 
   def send_sms
-    redirect_to :back, flash: {success: "暂时关闭发送通道， 请联系技术人员"}
-    return
+    #redirect_to :back, flash: {success: "暂时关闭发送通道， 请联系技术人员"}
+    #return
     @attendee = current_event.attendees.find(params[:attendee_id])
     begin
       @attendee.send_sms(@template.content)

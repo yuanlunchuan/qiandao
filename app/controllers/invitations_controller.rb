@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   layout 'invitation'
 
   before_action :find_attendee, only: [:index, :show, :confirmation, :sessions, :done, :upload]

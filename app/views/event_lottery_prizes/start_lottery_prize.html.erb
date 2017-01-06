@@ -57,7 +57,7 @@
       <div class="col-xs-12 lottory-prize-area">
         <img class="lottery-item-bg" src="/images/lottery_prize/lottery-item-bg.png">
         <div class="col-xs-12 select-content">
-          <div class="select-area">
+          <div class="select-area" style="">
             <select id="lottery-prize-item">
               <% @event_lottery_prize_items.each do |lottery_prize_item| %>
                 <option value=<%= lottery_prize_item.id %>><%= lottery_prize_item.name %></option>

@@ -1,4 +1,5 @@
 class AttendeeSeatsController < ApplicationController
+  http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   before_action :set_module
   skip_before_action :verify_authenticity_token
   include WebApiRenderer

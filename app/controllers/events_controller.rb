@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   before_action :authorize_admin!
   include WebApiRenderer
   attr_accessor :meta

@@ -1,4 +1,5 @@
 class SiteController < ApplicationController
+  http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   before_action :authorize_admin!
   before_action :find_categories, except: [:search_attendee]
   before_action :find_session, except: [:index, :binding_rfid, :search_attendee]
