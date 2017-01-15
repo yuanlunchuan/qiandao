@@ -164,7 +164,6 @@ class Attendee < ActiveRecord::Base
 
   def send_sms(template)
     template = prepare_sms_template template
-
     raise '该用户没有手机号码' if self.mobile.blank?
 
     Rails.logger.info("[SMS] Send SMS to #{self.mobile} (#{self.attendee_number}: #{self.name})")
@@ -175,7 +174,6 @@ class Attendee < ActiveRecord::Base
     end
 
     json = JSON.parse(ret)
-
     # 发送成功
     if json['code'] == 0
       self.sms_sent_at        = Time.now

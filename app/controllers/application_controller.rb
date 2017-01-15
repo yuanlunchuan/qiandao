@@ -18,7 +18,9 @@ class ApplicationController < ActionController::Base
     end
 
     File.open("log/access_file","a+") do |file|
-      file.puts "id: #{request.remote_ip} time: #{access_record.access_count} url: #{request.original_url}"
+      if access_record.present?
+        file.puts "id: #{request.remote_ip} time: #{access_record.access_count} url: #{request.original_url}"
+      end
     end
 
     redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
