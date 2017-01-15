@@ -154,6 +154,23 @@ class EventsController < ApplicationController
     @events = Event.all.where(defunct: false).order(start: :DESC)
   end
 
+  def set_current_event
+    @events = Event.all.where(defunct: false).order(start: :DESC)
+    @current_active_event = Event.find_by(is_current_event: true)
+  end
+
+  def update_current_event
+    Event.update_all(is_current_event: false)
+    event = Event.find(params[:event_id])
+    event.update(is_current_event: true)
+    redirect_to set_current_event_path, flash: { success: '设置成功' }
+  end
+
+  def get_current_event
+    event = Event.find_by(is_current_event: true)
+    redirect_to client_event_invites_path(event)
+  end
+
   def new
     @event = Event.new
   end
