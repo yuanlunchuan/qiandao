@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   post 'sign_in'      => 'sessions#create'
   delete 'logout'     => 'sessions#destroy',  as: :sign_out
 
+  get 'set_current_event' => 'events#set_current_event'
+  post 'set_current_event' => 'events#update_current_event'
+  get 'get_current_event' => 'events#get_current_event'
+
   root 'home#index'
 
   get '20160223'  => 'redirects#show'
