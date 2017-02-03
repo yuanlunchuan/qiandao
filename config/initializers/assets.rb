@@ -44,7 +44,14 @@ Rails.application.config.assets.precompile += %w(
   client/sites/voucher.png
   client/questions/question_bg.png
   client/questions/user_photo.png
-  function_item_bg.jpg
+  function_setting/answer_function.png
+  function_setting/checkin_function.png
+  function_setting/hotal_function.png
+  function_setting/lottery_function.png
+  function_setting/recommand_function.png
+  function_setting/seat_function.png
+  function_setting/sessions_function.png
+  function_setting/web_site_function.png
   
   client_event_sessions_show.js
   client_invites_show.js

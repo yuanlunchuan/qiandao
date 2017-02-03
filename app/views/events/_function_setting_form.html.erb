@@ -1,6 +1,7 @@
 <style type="text/css">
 	.tu{
 		text-align:center;
+		border: 1px solid #ebebeb;
 	}
 	.ch{
 		position:absolute;
@@ -10,46 +11,46 @@
 <%= form_for @event, url: event_update_function_setting_path(@event), html: {class: 'form-horizontal'} do |f|%>
 	<div class="row">
 		<div class="col-xs-3 tu">
-		  <%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+		  <%= image_tag 'function_setting/checkin_function.png', style: "width:100%;high:80%"%>
 		  <%= f.check_box :admission_certificate, class: 'ch' %>
 			<span>入场凭证</span>
 		</div>
 
 		<div class="col-xs-3 tu">
-		<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+		<%= image_tag 'function_setting/sessions_function.png', style: "width:100%;high:80%"%>
 			<%= f.check_box :session_schedule, class: 'ch' %>
 			<span>会议日程</span>
 		</div>
 
 		<div class="col-xs-3 tu">
-			<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+			<%= image_tag 'function_setting/hotal_function.png', style: "width:100%;high:80%"%>
 			<%= f.check_box :hotel_info, class: 'ch' %>
 			<span>酒店信息</span>
 		</div>
 
 		<div class="col-xs-3 tu">
-			<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+			<%= image_tag 'function_setting/recommand_function.png', style: "width:100%;high:80%"%>
 			<%= f.check_box :nearby_recommend, class: 'ch' %>
 			<span>周边推荐</span>
 		</div>
 
 		<div class="col-xs-3 tu">
-			<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+			<%= image_tag 'function_setting/seat_function.png', style: "width:100%;high:80%"%>
 			<%= f.check_box :seat_info, class: 'ch' %>
 			<span>座位信息</span>
 		</div>
 		<div class="col-xs-3 tu">
-			<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+			<%= image_tag 'function_setting/web_site_function.png', style: "width:100%;high:80%"%>
 			<%= f.check_box :outside_link, class: 'ch' %>
 			<span>站外链接</span>
 		</div>
 		<div class="col-xs-3 tu">
-			<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+			<%= image_tag 'function_setting/answer_function.png', style: "width:100%;high:80%"%>
 			<%= f.check_box :interactive_answer, class: 'ch' %>
 			<span>互动问答</span>
 		</div>
 		<div class="col-xs-3 tu">
-			<%= image_tag 'function_item_bg.jpg', style: "width:100%;high:80%"%>
+			<%= image_tag 'function_setting/lottery_function.png', style: "width:100%;high:80%"%>
 			<%= f.check_box :lottery, class: 'ch' %>
 			<span>现场抽奖</span>
 		</div>
