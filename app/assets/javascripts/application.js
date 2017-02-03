@@ -30,4 +30,5 @@
 //= require inspinia.js
 //= require jquery-template/jquery.loadTemplate.min.js
 //= require sweetalert/sweetalert.min.js
+//= require colorpicker.min.js
 //= require app.js

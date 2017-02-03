@@ -5,7 +5,9 @@
   </div>
 
   <div class="form-group"><label class="col-sm-2 control-label">标签颜色</label>
-    <div class="col-sm-3"> <%=f.color_field :category_color, class: 'form-control'%> </div>
+    <div class="col-sm-3">
+      <input id="attendee_category_category_color" value="<%= @category.category_color %>" type="text" name="attendee_category[category_color]" class='form-control' style='background: <%= @category.category_color %>; cursor:pointer;'>
+    </div>
   </div>
 
   <div class="form-group">
@@ -17,3 +19,20 @@
 
 <% end %>
 
+<script type="text/javascript">
+  $(function(){
+    $('#attendee_category_category_color').ColorPicker({  
+      color: '#ff0000',
+      onSubmit: function(hsb, hex, rgb, el, parent) {
+        $(el).css('background', '#'+hex);
+        $(el).val('#'+hex);  
+        $(el).ColorPickerHide();  
+      },  
+      onBeforeShow: function () {
+        $(this).ColorPickerSetColor(this.value);  
+      }  
+    }).bind('keyup', function(){
+        $(this).ColorPickerSetColor(this.value);  
+    });  
+  });
+</script>
