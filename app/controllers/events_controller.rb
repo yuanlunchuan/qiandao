@@ -217,7 +217,7 @@ class EventsController < ApplicationController
   end
 
   def event_base_params
-    params.require(:event).permit(:domain_name, :title, :content, :head_photo, :event_logo, :wx_pic_logo)
+    params.require(:event).permit(:domain_name, :title, :content, :head_photo, :event_logo, :wx_pic_logo, :seat_search_bg)
   end
 
 private

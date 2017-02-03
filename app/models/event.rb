@@ -62,6 +62,11 @@ class Event < ActiveRecord::Base
                     url: '/system/events/sessions_new_bg/:style/:event.jpg',
                     default_url: '/images/default-welcome-bg.png'
 
+  has_attached_file :seat_search_bg,
+                    styles: { medium: "300x300>", square:'300x300#', thumb: "100x100>", large: '1000x1000>'},
+                    url: '/system/events/seat_search_bg/:style/:event.jpg',
+                    default_url: '/images/default_seat_search_bg.png'
+
   validates_attachment_content_type :head_photo, :content_type => /\Aimage\/.*\Z/
   def start_time
     @start_time ||= '00:00'
