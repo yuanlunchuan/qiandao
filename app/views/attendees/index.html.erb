@@ -16,14 +16,12 @@
             <%= link_to '添加报名用户', new_event_attendee_path, class: 'btn btn-white btn-sm pull-right' %>
             <%= link_to '报名数据导出', event_export_path, class: 'btn btn-white btn-sm m-r-md pull-right' %>
           </div>
-          <div class="col-sm-3">
-            <form action="/app/events/<%= current_event.id %>/attendees" class='form-horizontal' method="post" name="fileForm" multipart='true' enctype="multipart/form-data" onsubmit="return validate_form(this);">
-              <table>
-                <tr>
-                  <td><%= file_field_tag :attendee_file %></td>
-                  <td><input id="import-attendee" type="submit" value="导入"></td>
-                </tr>
-              </table>
+          <div class="col-sm-12">
+            <form action="/app/events/<%= current_event.id %>/attendees" class='form-inline' method="post" name="fileForm" multipart='true' enctype="multipart/form-data" onsubmit="return validate_form(this);">
+              <div class="form-group">
+                <%= file_field_tag :attendee_file, class: 'form-control' %>
+              </div>
+              <button id="import-attendee" class="btn btn-white" type="submit">导入</button>
             </form>
           </div>
 
@@ -109,8 +107,21 @@
 function validate_form(thisform)
 {
   var fileName = document.forms["fileForm"]["attendee_file"].value;
+  if(fileName&&fileName.split(".")[1]!="xls"){
+    alert('请上传xls格式的文件');
+    return false;
+  }
+  var current_time = 0;
   if (fileName){
-    $('#import-attendee').val('数据导入中， 请稍后...');
+    setInterval(function(){
+      current_time++;
+      var textString = "";
+      for(var i=0; i<(current_time%3); i++){
+        textString += ".";
+      }
+      $('#import-attendee').text('数据导入中， 请稍后'+textString);
+    },
+      500);
     return true;
   }
   else{

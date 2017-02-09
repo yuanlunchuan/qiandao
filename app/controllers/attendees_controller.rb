@@ -1,4 +1,5 @@
 class AttendeesController < ApplicationController
+  require 'spreadsheet'
   http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   before_action :authorize_admin!
   before_action :set_current_module
@@ -37,7 +38,6 @@ class AttendeesController < ApplicationController
   end
 
   def create
-
     if params[:attendee_file].present?
       import_attendee
       return
@@ -89,38 +89,70 @@ class AttendeesController < ApplicationController
     success_count = 0
     error_count = 0
     error_message = ''
-    File.open(file_path) do |file|
-      file.each_line{|line|
-        gender_id = 0 if line.split(',')[2]=='男'
-        gender_id = 1 if line.split(',')[2]=='女'
-        if line.split(',')[11].present?
-          city = line.split(',')[11].split("\n")[0]
-        end
+    
+    invitation_short_url = generate_short_url("#{ENV['HOSTNAME']}/client/events/#{current_event.id}/invites")
 
-        if line.split(',')[5].present?
-          category = AttendeeCategory.category_name_is(current_event, line.split(',')[5]).first
-        end
+    Spreadsheet.client_encoding = 'UTF-8'
+    book = Spreadsheet.open file_path
+    sheet1 = book.worksheet 0
+    sheet1.each 1 do |row|
+      gender_id = 0 if row[2]=='男'
+      gender_id = 1 if row[2]=='女'
+      if row[5].present?
+        category = AttendeeCategory.category_name_is(current_event, row[5]).first
+      end
 
-        attendee   = current_event.attendees.new name: line.split(',')[1],
+      attendee   = current_event.attendees.new name: row[1],
         gender_id: gender_id,
         category: category,
-        company: line.split(',')[7],
-        mobile: line.split(',')[8],
-        province: line.split(',')[10],
-        city: city
+        company: row[7],
+        mobile: row[8],
+        province: row[10],
+        city: row[11],
+        invitation_short_url: invitation_short_url
 
-        if attendee.save
-          success_count += 1
-        else
-          if '名字'!=line.split(',')[1]
-            error_message = "#{error_message}, #{line.split(',')[1]}"
-            error_count += 1
-          end
+      if attendee.save
+        success_count += 1
+      else
+        if '名字'!=row[1]
+          error_message = "#{error_message}, #{row[1]}"
+          error_count += 1
         end
-      }
-      file.close();
+      end
     end
+
     redirect_to event_attendees_path, flash: {success: "成功导入#{success_count}条, 有#{error_count}条导入失败, #{error_message}"}
+    #File.open(file_path) do |file|
+     # file.each_line{|line|
+      #  gender_id = 0 if line.split(',')[2]=='男'
+      # gender_id = 1 if line.split(',')[2]=='女'
+      #  if line.split(',')[11].present?
+      #    city = line.split(',')[11].split("\n")[0]
+      #  end
+
+      #  if line.split(',')[5].present?
+      #    category = AttendeeCategory.category_name_is(current_event, line.split(',')[5]).first
+      #  end
+
+      #  attendee   = current_event.attendees.new name: line.split(',')[1],
+      #  gender_id: gender_id,
+      #  category: category,
+      #  company: line.split(',')[7],
+      #  mobile: line.split(',')[8],
+      #  province: line.split(',')[10],
+      #  city: city
+
+      #  if attendee.save
+      #    success_count += 1
+      #  else
+      #    if '名字'!=line.split(',')[1]
+      #      error_message = "#{error_message}, #{line.split(',')[1]}"
+      #      error_count += 1
+      #    end
+      #  end
+      #}
+      #file.close();
+    #end
 
     return
     AttendeeList.import(file_path)
@@ -323,6 +355,23 @@ class AttendeesController < ApplicationController
     @attendee = current_event.attendees.find(params[:id])
     return redirect_to :back unless @attendee.photo.exists?
     send_file @attendee.photo.path, filename: "#{@attendee.attendee_number}-#{@attendee.name}.jpg", type: 'image/jpeg', disposition: 'attachment'
+  end
+
+  def generate_short_url(long_url)
+    Rails.logger.info("[DWZ] Generate Short URL: #{long_url}")
+    ret = Timeout::timeout(5) do
+      # http = Net::HTTP.post_form(URI.parse('http://dwz.cn/create.php'),{url: long_url})
+      Net::HTTP.get(URI.parse("http://api.weibo.com/2/short_url/shorten.json?source=1681459862&url_long=#{long_url}"))
+    end
+    json = JSON.parse(ret)
+    if json['urls']
+      json['urls'][0]['url_short']
+    elsif json['error']
+      'app/model/attendee/150'
+      #raise json['error']
+    else
+      raise json['err_msg']
+    end
   end
 
   def generate_invitation_short_url

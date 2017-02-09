@@ -197,8 +197,10 @@ class Attendee < ActiveRecord::Base
   end
 
   def generate_invitation_short_url
-    url = generate_short_url(self.invitation_long_url)
-    self.update_attribute(:invitation_short_url, url)
+    if self.invitation_short_url.blank?
+      url = generate_short_url(self.invitation_long_url)
+      self.update_attribute(:invitation_short_url, url)
+    end
   rescue => e
     error = "#{e.class} - #{e.message[0..200]}"
     Rails.logger.error("[DWZ] #{error}")
