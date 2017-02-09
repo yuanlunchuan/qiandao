@@ -168,3 +168,9 @@ p.invitation{
   }
 }
 
+@media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) and (orientation : portrait){
+/*iPhone 6 and iPhone 6+ portrait*/
+ .letter-pre{
+    padding-top: 15px;
+ }
+}
