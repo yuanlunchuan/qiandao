@@ -42,6 +42,7 @@ class Client::SitesController < ApplicationController
   def upload_photo
     @attendee = current_event.attendees.find(params[:id])
     @attendee.photo = params[:file]
+    @attendee.avatar.clear
     @attendee.save
 
     redirect_to client_event_sites_path(@attendee.event_id)
