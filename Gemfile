@@ -31,7 +31,7 @@ gem 'kaminari'
 
 gem 'curb'
 gem 'prawn'
-
+gem 'spreadsheet'
 group :development do
   gem 'quiet_assets'
   gem 'mina'
