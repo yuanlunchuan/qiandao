@@ -16,8 +16,8 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    redirect_to :back, flash: {success: "暂时关闭发送通道， 请联系技术人员"}
-    return
+    #redirect_to :back, flash: {success: "暂时关闭发送通道， 请联系技术人员"}
+    #return
     params[:sent_sms] ||= '0'
     @attendees  = current_event.attendees
     @attendees = @attendees.category(params[:category_id]) if params[:category_id].present?
