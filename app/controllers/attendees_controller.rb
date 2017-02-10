@@ -106,7 +106,7 @@ class AttendeesController < ApplicationController
         gender_id: gender_id,
         category: category,
         company: row[7],
-        mobile: row[8],
+        mobile: row[8].to_i,
         province: row[10],
         city: row[11],
         invitation_short_url: invitation_short_url
