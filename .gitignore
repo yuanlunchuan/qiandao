@@ -8,6 +8,7 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /public/system
+/public/errors
 /public/uploads
 /public/upload
 /public/attendee_qrcode
