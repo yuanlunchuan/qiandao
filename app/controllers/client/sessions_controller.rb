@@ -3,6 +3,11 @@ class Client::SessionsController < ApplicationController
 
   layout 'client'
   def create
+    if params[:phone_number].blank?
+      flash.now[:error] = '请输入手机号码'
+      render :new  
+      return
+    end
     attendees = current_event.attendees.mobile_is(params[:phone_number])
     if attendees.present?
       cookies.permanent[:attendee_id] = attendees.first.id
