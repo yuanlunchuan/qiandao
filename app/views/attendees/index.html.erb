@@ -22,8 +22,8 @@
                 <%= file_field_tag :attendee_file, class: 'form-control' %>
               </div>
               <button id="import-attendee" class="btn btn-white" type="submit">导入</button>
-              <% if flash[:path] %>
-                <a class="btn btn-white" href="<%= flash[:path] %>" target="_blank">下载错误日志</a>
+              <% if params[:path] %>
+                <a class="btn btn-danger" href="<%= params[:path] %>" target="_blank">查看错误日志</a>
               <% end %>
             </form>
           </div>

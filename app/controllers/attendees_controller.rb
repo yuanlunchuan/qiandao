@@ -115,7 +115,7 @@ class AttendeesController < ApplicationController
         success_count += 1
       else
         if '名字'!=row[1]
-          error_message = "#{error_message}\n#{error_count} #{row[1]} #{attendee.errors.messages}"
+          error_message = "#{error_message}<br >#{error_count} #{row[1]} #{attendee.errors.messages}"
           error_count += 1
         end
       end
@@ -125,11 +125,13 @@ class AttendeesController < ApplicationController
       path = "public/errors"
       FileUtils.mkdir_p(path) unless File.exists?(path)
       current_time = Time.now.to_i
-      File.open(path+"/#{current_time}.txt","a+") do |file|
+      File.open(path+"/#{current_time}.html","a+") do |file|
         file.set_encoding('utf-8')
+        file.puts "<!DOCTYPE HTML><html><head><meta charset='UTF-8'><title>错误日志</title></head><body>"
         file.puts "#{error_message}"
+        file.puts "</body></html>"
       end
-      redirect_to event_attendees_path, flash: {success: "成功导入#{success_count}条, 有#{error_count}条导入失败.", path: "/errors/#{current_time}.txt"}
+      redirect_to event_attendees_path(path: "/errors/#{current_time}.html"), flash: {success: "成功导入#{success_count}条, 有#{error_count}条导入失败."}
     else
       redirect_to event_attendees_path, flash: {success: "成功导入#{success_count}条"}
     end
