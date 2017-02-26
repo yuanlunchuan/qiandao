@@ -44,7 +44,7 @@ class Attendee < ActiveRecord::Base
   scope :does_not_have_photo, -> { where('photo_file_name IS NULL') }
   scope :has_avatar, -> { where('avatar_file_name IS NOT NULL') }
   scope :does_not_have_avatar, -> { where('avatar_file_name IS NULL') }
-  scope :does_not_processed_avatar, -> { where('photo_file_name IS NOT NULL AND avatar_file_name IS NULL') }
+  scope :does_not_processed_avatar, -> { where('photo_updated_at IS NOT NULL AND avatar_updated_at IS NULL') }
 
   scope :category,  -> (category_id) { where(category_id: category_id) }
   scope :checked_in, -> { where('checked_in_at IS NOT NULL') }
