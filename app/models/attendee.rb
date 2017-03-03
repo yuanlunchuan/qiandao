@@ -40,10 +40,10 @@ class Attendee < ActiveRecord::Base
   scope :printed, -> {where('printed_at IS NOT NULL')}
   scope :not_printed, -> {where('printed_at IS NULL')}
 
-  scope :has_photo, -> { where('photo_file_name IS NOT NULL') }
-  scope :does_not_have_photo, -> { where('photo_file_name IS NULL') }
+  scope :has_photo, -> { where('photo_updated_at IS NOT NULL') }
+  scope :does_not_have_photo, -> { where('photo_updated_at IS NULL') }
   scope :has_avatar, -> { where('avatar_file_name IS NOT NULL') }
-  scope :does_not_have_avatar, -> { where('avatar_file_name IS NULL') }
+  scope :does_not_have_avatar, -> { where('avatar_updated_at IS NULL') }
   scope :does_not_processed_avatar, -> { where('photo_updated_at IS NOT NULL AND avatar_updated_at IS NULL') }
 
   scope :category,  -> (category_id) { where(category_id: category_id) }
