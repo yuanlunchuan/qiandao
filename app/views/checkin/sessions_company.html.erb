@@ -99,10 +99,10 @@
             </tr>
             </thead>
             <tbody>
-            <% @attendees.each do |attendee| %>
+            <% @attendees.each_with_index do |attendee, index| %>
                 <tr>
+                  <td> <%= index %></td>
                   <td> <%=attendee.company%> </td>
-                  <td> </td>
                 </tr>
             <% end %>
             </tbody>

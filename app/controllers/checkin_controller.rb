@@ -1,3 +1,4 @@
+require "set"
 class CheckinController < ApplicationController
   http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   before_action :authorize_admin!
@@ -71,7 +72,13 @@ private
     params[:checked_in] ||= '1'
 
     @total = current_event.attendees.select(:company).distinct.count
-    @checked_in_numbers = @session.checkins.count
+    @has_check_in_attendees = @session.attendees.unscope(:order).order(checked_in_at: :desc)
+    
+    has_check_in_company = Set.new
+    @has_check_in_attendees.each do |attendee|
+      has_check_in_company << attendee.company
+    end
+    @checked_in_numbers = has_check_in_company.size
 
     if params[:checked_in] == '0'
       @attendees = current_event.attendees.group(:company)
@@ -80,8 +87,8 @@ private
       @attendees = @session.attendees
       @attendees = @attendees.page(params[:page]).per(200).includes(:category)
     else
-      #@attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).group(:company)
       @attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).select('attendees.company').group(:company).reorder('attendees.company')
+
       @attendees = @attendees.page(params[:page]).per(200)#.includes(:category)
     end
 
