@@ -12,7 +12,13 @@
 
         <div class="row">
           <div class="col-xs-6">
-            <h3>共找到 <strong class="text-success"><%= @attendees.total_count %></strong> 条记录</h3>
+            <h3>共找到 <strong class="text-success">
+              <% if params[:checked_in].to_i==1||params[:checked_in].to_i==-1%>
+                <%= params[:checked_in].to_i==1? @total - @has_not_checkin_attendees.length : @has_not_checkin_attendees.length%></strong> 条记录
+              <% else %>
+                <%= @attendees.total_count %></strong> 条记录
+              <% end %>
+            </h3>
           </div>
           <div class="col-xs-6">
             <%= link_to '签到数据导出', event_session_company_checkin_export_path(current_event, @session), class: 'btn btn-white btn-sm pull-right' %>
@@ -101,7 +107,6 @@
             <tbody>
             <% @attendees.each_with_index do |attendee, index| %>
                 <tr>
-                  <td> <%= index %></td>
                   <td> <%=attendee.company%> </td>
                 </tr>
             <% end %>
