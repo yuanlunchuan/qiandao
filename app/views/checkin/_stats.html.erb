@@ -16,7 +16,7 @@
         <h5><%= @session.company_checkin? ? '已签到公司' : '已签到人数' %></h5>
       </div>
       <div class="ibox-content">
-        <h1 class="no-margins"><%=@checked_in_numbers%></h1>
+        <h1 class="no-margins"><%=@total - @has_not_checkin_attendees.length%></h1>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
         <h5><%= @session.company_checkin? ? '未签到公司' : '未签到人数' %></h5>
       </div>
       <div class="ibox-content">
-        <h1 class="no-margins"><%=@total - @checked_in_numbers%></h1>
+        <h1 class="no-margins"><%=@has_not_checkin_attendees.length%></h1>
       </div>
     </div>
   </div>

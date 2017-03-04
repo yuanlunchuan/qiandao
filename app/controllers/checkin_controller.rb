@@ -31,7 +31,7 @@ class CheckinController < ApplicationController
     params[:checked_in] ||= '0'
 
     @total = current_event.attendees.count
-    @checked_in_numbers = @session.checkins.count
+    @has_not_checkin_attendees = current_event.attendees.where.not(id: @session.attendees.pluck(:id))
 
     if params[:checked_in] == '0'
       @attendees = current_event.attendees
@@ -72,13 +72,8 @@ private
     params[:checked_in] ||= '1'
 
     @total = current_event.attendees.select(:company).distinct.count
-    @has_check_in_attendees = @session.attendees.unscope(:order).order(checked_in_at: :desc)
-    
-    has_check_in_company = Set.new
-    @has_check_in_attendees.each do |attendee|
-      has_check_in_company << attendee.company
-    end
-    @checked_in_numbers = has_check_in_company.size
+
+    @has_not_checkin_attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).select('attendees.company').group(:company).reorder('attendees.company')
 
     if params[:checked_in] == '0'
       @attendees = current_event.attendees.group(:company)
