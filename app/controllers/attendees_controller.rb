@@ -74,6 +74,9 @@ class AttendeesController < ApplicationController
     @attendee.owner_attendee = owner_attendee
     @attendee.seller   = seller
 
+    self.generate_photo
+    self.generate_avatar
+
     if @attendee.save
       redirect_to event_attendees_path, flash: {success: '添加成功'}
     else
@@ -102,7 +105,7 @@ class AttendeesController < ApplicationController
         category = AttendeeCategory.category_name_is(current_event, row[5]).first
       end
 
-      attendee   = current_event.attendees.new name: row[1],
+      @attendee   = current_event.attendees.new name: row[1],
         gender_id: gender_id,
         category: category,
         company: row[7],
@@ -110,12 +113,14 @@ class AttendeesController < ApplicationController
         province: row[10],
         city: row[11],
         invitation_short_url: invitation_short_url
+      self.generate_photo
+      self.generate_avatar
 
-      if attendee.valid?&&attendee.save
+      if @attendee.valid?&&@attendee.save
         success_count += 1
       else
         if '名字'!=row[1]
-          error_message = "#{error_message}<br >#{error_count} #{row[1]} #{attendee.errors.messages}"
+          error_message = "#{error_message}<br >#{error_count} #{row[1]} #{@attendee.errors.messages}"
           error_count += 1
         end
       end
@@ -135,84 +140,7 @@ class AttendeesController < ApplicationController
     else
       redirect_to event_attendees_path, flash: {success: "成功导入#{success_count}条"}
     end
-    
-    #File.open(file_path) do |file|
-     # file.each_line{|line|
-      #  gender_id = 0 if line.split(',')[2]=='男'
-      # gender_id = 1 if line.split(',')[2]=='女'
-      #  if line.split(',')[11].present?
-      #    city = line.split(',')[11].split("\n")[0]
-      #  end
 
-      #  if line.split(',')[5].present?
-      #    category = AttendeeCategory.category_name_is(current_event, line.split(',')[5]).first
-      #  end
-
-      #  attendee   = current_event.attendees.new name: line.split(',')[1],
-      #  gender_id: gender_id,
-      #  category: category,
-      #  company: line.split(',')[7],
-      #  mobile: line.split(',')[8],
-      #  province: line.split(',')[10],
-      #  city: city
-
-      #  if attendee.save
-      #    success_count += 1
-      #  else
-      #    if '名字'!=line.split(',')[1]
-      #      error_message = "#{error_message}, #{line.split(',')[1]}"
-      #      error_count += 1
-      #    end
-      #  end
-      #}
-      #file.close();
-    #end
-
-    return
-    AttendeeList.import(file_path)
-    count = 0
-    error_count = 0
-    AttendeeList.all.each do |attendee|
-      gender_id = 0 if attendee.attributes['性别']=='男'
-      gender_id = 1 if attendee.attributes['性别']=='女'
-
-      category_name = attendee.attributes['分类'].try(:strip)
-      category = AttendeeCategory.category_name_is(category_name).first if category_name.present?
-
-      if attendee.attributes['手机号码'].length>11
-        mobile =attendee.attributes['手机号码'].split('.')[0]
-      else
-        mobile =attendee.attributes['手机号码']
-      end
-      owner = attendee.attributes['主嘉宾']
-      owner_attendee = Attendee.attendee_name_is(attendee.attributes['主嘉宾'].try(:strip)).first
-      seller = Seller.seller_name_is(attendee.attributes['对应销售'].try(:strip)).first
-
-      attendee_item = Attendee.new rfid_num: attendee.attributes['卡号'].split('.')[0],
-        name: attendee.attributes['名字'],
-        gender_id: gender_id,
-        mobile: mobile,
-        category: category,
-        level: attendee.attributes['级别'],
-        company: attendee.attributes['公司'],
-        email: attendee.attributes['email'],
-        province: attendee.attributes['所在省'],
-        city: attendee.attributes['所在市'],
-        event: current_event,
-        owner_attendee: owner_attendee,
-        seller: seller
-
-      if attendee_item.save
-        count += 1
-      else
-        logger.info "----------attendee.errors.full_messages: #{attendee.errors.full_messages}"
-        error_count += 1
-      end
-    end
-    AttendeeList.all.clear
-    redirect_to event_attendees_path, flash: {success: "成功导入#{count}"} if error_count==0
-    redirect_to event_attendees_path, flash: {error: "成功导入#{count}条, 有#{error_count}条导入失败"} if error_count>0
-  return
   end
 
   def edit
@@ -385,6 +313,28 @@ class AttendeesController < ApplicationController
       #raise json['error']
     else
       raise json['err_msg']
+    end
+  end
+
+  def generate_photo
+    if @attendee.photo.blank?&&@attendee.mobile.present?
+      attendee = Attendee.has_photo.mobile_is(@attendee.mobile).first
+      if attendee.present?
+        @attendee.photo_file_name = attendee.photo_file_name
+        @attendee.photo_content_type = attendee.photo_content_type
+        @attendee.photo_file_size = attendee.photo_file_size
+      end
+    end
+  end
+
+  def generate_avatar
+    if @attendee.avatar.blank?&&@attendee.mobile.present?
+      attendee = Attendee.has_avatar.mobile_is(@attendee.mobile).first
+      if attendee.present?
+        @attendee.avatar_file_name = attendee.avatar_file_name
+        @attendee.avatar_content_type = attendee.avatar_content_type
+        @attendee.avatar_file_size = attendee.avatar_file_size
+      end
     end
   end
 

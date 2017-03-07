@@ -40,11 +40,11 @@ class Attendee < ActiveRecord::Base
   scope :printed, -> {where('printed_at IS NOT NULL')}
   scope :not_printed, -> {where('printed_at IS NULL')}
 
-  scope :has_photo, -> { where('photo_updated_at IS NOT NULL') }
-  scope :does_not_have_photo, -> { where('photo_updated_at IS NULL') }
+  scope :has_photo, -> { where('photo_file_name IS NOT NULL') }
+  scope :does_not_have_photo, -> { where('photo_file_name IS NULL') }
   scope :has_avatar, -> { where('avatar_file_name IS NOT NULL') }
-  scope :does_not_have_avatar, -> { where('avatar_updated_at IS NULL') }
-  scope :does_not_processed_avatar, -> { where('photo_updated_at IS NOT NULL AND avatar_updated_at IS NULL') }
+  scope :does_not_have_avatar, -> { where('avatar_file_name IS NULL') }
+  scope :does_not_processed_avatar, -> { where('photo_file_name IS NOT NULL AND avatar_file_name IS NULL') }
 
   scope :category,  -> (category_id) { where(category_id: category_id) }
   scope :checked_in, -> { where('checked_in_at IS NOT NULL') }
@@ -62,14 +62,16 @@ class Attendee < ActiveRecord::Base
   after_create  { generate_invitation_short_url }
   after_create  { generate_qrcode }
 
-  before_save { generate_photo }
+=begin  before_save { generate_photo }
   before_save { generate_avatar }
 
   before_update { generate_photo }
   before_update { generate_avatar }
+=end
 
   validate :valid_mobile?
 
+=begin
   def generate_photo
     if self.photo.blank?&&self.mobile.present?
       attendee = Attendee.has_photo.mobile_is(self.mobile).first
@@ -90,7 +92,7 @@ class Attendee < ActiveRecord::Base
         self.avatar_file_size = attendee.avatar_file_size
       end
     end
-  end
+  end=end
 
   def valid_mobile?
     if self.mobile.present?
