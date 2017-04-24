@@ -92,7 +92,8 @@ class Attendee < ActiveRecord::Base
         self.avatar_file_size = attendee.avatar_file_size
       end
     end
-  end=end
+  end
+=end
 
   def valid_mobile?
     if self.mobile.present?
