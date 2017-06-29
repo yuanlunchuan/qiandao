@@ -13,11 +13,7 @@
         <div class="row">
           <div class="col-xs-6">
             <h3>共找到 <strong class="text-success">
-              <% if params[:checked_in].to_i==1||params[:checked_in].to_i==-1%>
-                <%= params[:checked_in].to_i==1? @total - @has_not_checkin_attendees.length : @has_not_checkin_attendees.length%></strong> 条记录
-              <% else %>
-                <%= @attendees.total_count %></strong> 条记录
-              <% end %>
+              <%= @attendees.total_count %></strong> 条记录
             </h3>
           </div>
           <div class="col-xs-6">
@@ -39,40 +35,12 @@
         </div>
 
         <div class="table-responsive">
-
-
-          <% if params[:checked_in] == '0' %>
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th>公司</th>
-              <th>签到人</th>
-              <th>手机号码</th>
-              <th>签到时间</th>
-              <th>管理</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @attendees.each do |attendee| %>
-                <tr>
-                  <td>
-                    <span class="text-success"> <%=attendee.company%> </span>
-                  </td>
-                  <td title="编号：<%=attendee.attendee_number%>"><%=attendee.name%></td>
-                  <td><%=attendee.mobile%></td>
-                  <td><%=attendee.session_checked_in(@session.id) ? attendee.session_checked_in(@session.id).checked_in_at.to_s(:short) : ''%></td>
-                  <td>
-                    <%= link_to '取消签到', event_session_uncheck_in_path(current_event, @session, attendee), method: :delete, data: {confirm: '是否确认取消签到?'}, class: 'btn btn-xs btn-white' %>
-                  </td>
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
-          <% elsif params[:checked_in] == '1' %>
+          <% if params[:checked_in] == '1' %>
           <!--已签到-->
           <table class="table table-striped">
             <thead>
             <tr>
+              <th>序号</th>
               <th>公司</th>
               <th>签到人</th>
               <th>手机号码</th>
@@ -81,8 +49,11 @@
             </tr>
             </thead>
             <tbody>
-            <% @attendees.each do |attendee| %>
+            <% @attendees.each_with_index do |attendee, index| %>
                 <tr>
+                  <td>
+                    <%= index+1 %>
+                  </td>
                   <td>
                     <span class="text-success"> <%=attendee.company%> </span>
                   </td>
@@ -100,13 +71,16 @@
           <table class="table table-striped">
             <thead>
             <tr>
+              <th>序号</th>
               <th>公司</th>
-              <th>管理</th>
             </tr>
             </thead>
             <tbody>
             <% @attendees.each_with_index do |attendee, index| %>
                 <tr>
+                  <td>
+                    <%= index+1 %>
+                  </td>
                   <td> <%=attendee.company%> </td>
                 </tr>
             <% end %>
