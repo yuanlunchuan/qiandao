@@ -1,6 +1,6 @@
 <div class="row">
   <% @categories.each do |category| %>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
           <h3 class="no-margins"> <%=category.name%> 签到进度 </h3>
@@ -22,7 +22,7 @@
   <% end %>
 
   <% if !@session.company_checkin? %>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
           <h3 class="no-margins">公司签到进度</h3>
@@ -35,7 +35,7 @@
     </div>
   <% end %>
 
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <div class="ibox float-e-margins">
       <div class="ibox-content text-center">
         <h3 class="no-margins timer-date"></h3>
