@@ -7,11 +7,29 @@
           <h3>&nbsp;</h3>
 
           <% if @session.company_checkin? %>
-          <h1> <%= category.checked_in_attendee_numbers(@session.id) %> / <%= category.company_numbers %></h1>
+            <h1>
+              <%= category.checked_in_attendee_numbers(@session.id) %> / <%= category.company_numbers %>
+              </h1>
           <% else %>
-          <h1><%= category.checked_in_attendee_numbers(@session.id) %> / <%= category.attendee_numbers %></h1>
+            <h1>
+              <%= category.checked_in_attendee_numbers(@session.id) %> / <%= category.attendee_numbers %>
+            </h1>
           <% end %>
 
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if !@session.company_checkin? %>
+    <div class="col-lg-4">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <h3 class="no-margins">公司签到进度</h3>
+          <h3>&nbsp;</h3>
+          <h1>
+          <%= @has_checkin_attendees_count %> / <%= @total_company %>
+          </h1>
         </div>
       </div>
     </div>
