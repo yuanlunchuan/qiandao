@@ -145,11 +145,12 @@ badge_url: badge_event_attendee_path(id: @attendee.id, format: :pdf, print: true
 
   def find_categories
     @categories = current_event.attendee_categories
-
-    @total_company = current_event.attendees.select(:company).distinct.count
-    @session = current_event.sessions.find(params[:session_id])
-    @has_not_checkin_attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).select('attendees.company').group(:company).reorder('attendees.company')
-    @has_checkin_attendees_count = @total_company - @has_not_checkin_attendees.length
+    if params[:session_id].present?
+      @total_company = current_event.attendees.select(:company).distinct.count
+      @session = current_event.sessions.find(params[:session_id])
+      @has_not_checkin_attendees = current_event.attendees.where.not(company: @session.attendees.pluck(:company)).select('attendees.company').group(:company).reorder('attendees.company')
+      @has_checkin_attendees_count = @total_company - @has_not_checkin_attendees.length
+    end
   end
 
   def find_session
