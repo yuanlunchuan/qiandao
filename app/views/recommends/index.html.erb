@@ -31,7 +31,7 @@
             <tr>
               <td><%= recommend.category_name %></td>
               <td><%= recommend.recommend_name %></td>
-              <td><%= recommend.address %></td>
+              <td><%= truncate(recommend.address, :length=>20)%></td>
               <td><%= recommend.phone_number %></td>
               <td><%= recommend.distance %>km</td>
               <td>
