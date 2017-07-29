@@ -1,6 +1,7 @@
 body{
   background-color: #ececec;
-  font-family:'黑体', '微软雅黑';
+  font-family: '宋体', 'Simsun';
+  white-space: pre;
 }
 .schedule-img{
   padding: 0px;
