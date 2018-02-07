@@ -97,6 +97,7 @@ class Attendee < ActiveRecord::Base
 
   def valid_mobile?
     if self.mobile.present?
+      errors.add(:mobile, "手机号不正确，请检查手机号码。") if self.mobile.length<11
       attendee = self.event.attendees.mobile_is(self.mobile).first
       errors.add(:mobile, "同一个活动中电话号码不能重复") if attendee.present?&&(attendee.id!=self.id)
     end
