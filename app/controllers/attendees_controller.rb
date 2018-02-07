@@ -113,7 +113,7 @@ class AttendeesController < ApplicationController
       @attendee   = current_event.attendees.new name: row[1],
         gender_id: gender_id,
         category: category,
-        seller: seller
+        seller: seller,
         company: row[7],
         mobile: row[8].to_i,
         province: row[10],
