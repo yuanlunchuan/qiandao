@@ -17,8 +17,9 @@ class SellersController < ApplicationController
       count = 0
       error_collection = []
       SellerList.all.each do |seller|
-        manage_name = seller.attributes['销售负责人']
-        name =  seller.attributes['姓名']
+        manage_name = nil#seller.attributes['销售负责人']
+        name =  seller.attributes['销售主管']
+
         if seller.attributes['电话号码'].length>11
           phone_number =seller.attributes['电话号码'].split('.')[0]
         else
