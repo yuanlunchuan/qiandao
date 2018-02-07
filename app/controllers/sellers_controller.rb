@@ -49,17 +49,17 @@ class SellersController < ApplicationController
 
     @seller = current_event.sellers.new(seller_params)
 
-    if Attendee.mobile_is(params[:seller][:phone_number]).present?
-      flash.now[:error] = '该手机号已作为嘉宾手机号'
-      render :new
-      return
-    end
+#    if Attendee.mobile_is(params[:seller][:phone_number]).present?
+#      flash.now[:error] = '该手机号已作为嘉宾手机号'
+#      render :new
+#      return
+#    end
 
     if params[:seller_manager_name].present?
       @seller_manager = Seller.seller_name_is(params[:seller_manager_name]).first
       if @seller_manager.blank?
         @seller_manager_name = params[:seller_manager_name]
-        flash.now[:error] = '没有找到对应的对接人, 请重新输入'
+        flash.now[:error] = '没有找到对应的对接人请重新输入'
         render :new
         return
       else

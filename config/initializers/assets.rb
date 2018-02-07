@@ -84,4 +84,5 @@ Rails.application.config.assets.precompile += %w(
   seller_checkins_show.css
   client_questions.css
   start_lottery_prize.css
+  client_activities.css
 )

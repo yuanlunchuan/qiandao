@@ -23,7 +23,7 @@ function validate_form(thisform)
         <div class="project-list">
 
           <div class="row">
-            <div class="col-sm-3">
+            <!-- <div class="col-sm-3">
               <form action="/app/events/<%= current_event.id %>/sellers" class='form-horizontal' method="post" name="fileForm" multipart='true' enctype="multipart/form-data" onsubmit="return validate_form(this);">
                 <table>
                   <tr>
@@ -32,12 +32,11 @@ function validate_form(thisform)
                   </tr>
                 </table>
               </form>
-            </div>
+            </div> -->
 
-            <div class="col-sm-3">
+            <!-- <div class="col-sm-3">
               <%= link_to '下载模板', templates_path(filename: 'seller.xls'), class: 'btn btn-white btn-sm pull-right' %>
-            </div>
-
+            </div> -->
             <div class="col-sm-3">
               <%= link_to '新增销售', new_event_seller_path, class: 'btn btn-white btn-sm pull-right' %>
             </div>
@@ -49,10 +48,10 @@ function validate_form(thisform)
             <thead>
             <tr>
               <th>姓名</th>
-              <th>负责区域</th>
+<!--               <th>负责区域</th>
+              <th>销售主管</th> -->
               <th>电话号码</th>
-              <th>销售主管</th>
-              <th></th>
+              <th>操作</th>
             </tr>
             </thead>
 
@@ -63,16 +62,8 @@ function validate_form(thisform)
                 <%= seller.name %>
               </td>
               <td>
-                <%= seller.responsible_area %>
-              </td>
-              <td>
                 <%= seller.phone_number %>
               </td>
-              <% if seller.manager.present? %>
-                <td><%= seller.manager.name %></td>
-              <% else %>
-                <td>无</td>
-              <% end %>
               <td class="text-center">
                 <%= link_to edit_event_seller_path(current_event, seller), class: 'btn btn-white btn-sm' do%>
                 <i class="fa fa-pencil"></i> 修改

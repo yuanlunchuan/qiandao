@@ -1,0 +1,23 @@
+<title>尤尼克斯新品发布合作伙伴会议</title>
+<div class="container">
+  <div class="col-xs-12">
+    <h3><%= @seller.name %>，你好</h3>
+  </div>
+
+  <div class="col-xs-12">
+    <p>请选择你需要查询的签到场次</p>
+
+    <% @sessions.each do |session| %>
+      <div class="item-container">
+        <a href="/seller/events/<%= params[:event_id]%>/sessions/<%= session.id %>/checkins">
+          <h4 class="text-center"><%= session.name %></h4>
+        </a>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<% content_for :style do %>
+  <%= stylesheet_link_tag 'client_activities', media: 'all' %>
+<% end %>

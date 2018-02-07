@@ -34,28 +34,17 @@ body{
   border: 0px;
   width: 100%;
 }
-.sign-content{
-  padding-left: 30px;
-  padding-right: 30px;
+.sign-active{
+  background-color: rgb(3,169,243);
+  color: #fff;
+}
+.unsign-active{
+  background-color: rgb(91,91,91);
+  color: #fff; 
 }
 .sign-area{
-  margin-top: 30px;
-  border: #005BAC 1px solid;
-  background-color: #fff;
-  border-radius: 15px;
-  padding: 0px;
-  overflow: hidden;
-}
-.sign-area div{
-  color: #005BAC;
-  font-size: 1.2em;
-  height: 30px;
-  line-height: 30px;
-  cursor: pointer;
-}
-.sign-area div.sign-active{
-  background-color: #005BAC;
-  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .table-area{
   padding-left: 30px;
@@ -65,7 +54,6 @@ table{
   width:100%;
   text-align: center;
   vertical-align: middle;
-  color: #005BAC;
 }
 tr{
   height: 40px;
@@ -84,13 +72,15 @@ td{
   cursor: pointer;
 }
 .phone-button a{
-  color: #005BAC;
+  background-color: rgb(3,169,243);
+  color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .phone-button a:hover{
   text-decoration: none;
-}
-.phone-button span{
-  background: url(<%= image_path 'client/recommends/map_bg.png' %>) center no-repeat;
 }
 .bg-cell{
   background-color: #e5e5e5;

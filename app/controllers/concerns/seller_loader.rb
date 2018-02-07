@@ -7,7 +7,7 @@ module SellerLoader
     def load_seller
       if cookies[:seller_id].blank?
         cookies[:seller_id] = nil
-        redirect_to new_seller_session_path
+        redirect_to new_seller_event_session_path current_event.id
       else
         seller = Seller.find_by(id: cookies[:seller_id])
         if seller.present?
@@ -15,11 +15,11 @@ module SellerLoader
             session[:seller_id] = seller.id
           else
             cookies[:seller_id] = nil
-            redirect_to new_seller_session_path
+            redirect_to new_seller_event_session_path current_event.id
           end
         else
           cookies[:seller_id] = nil
-          redirect_to new_seller_session_path
+          redirect_to new_seller_event_session_path current_event.id
         end
       end
     end

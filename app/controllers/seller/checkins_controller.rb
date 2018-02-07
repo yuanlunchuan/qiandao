@@ -8,12 +8,12 @@ class Seller::CheckinsController < ApplicationController
   attr_accessor :meta
 
   def show
-  
+
   end
 
   def index
     self.meta = params
-
+    @seller = Seller.find(session[:seller_id])
     if params[:format]=='json'
       seller = Seller.find(session[:seller_id])
       collection = []
@@ -34,6 +34,7 @@ class Seller::CheckinsController < ApplicationController
         item = attendee.to_hash
         item[:has_checked] = false
         item[:has_checked] = true if checkin.present?
+        item[:checked_in_at] = checkin.first.checked_in_at.to_s if checkin.present?
         collection << item
       end
 

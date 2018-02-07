@@ -1,19 +1,25 @@
 <div id="event-id" data-event-id=<%= current_event.id %> class="hidden"></div>
+<div id="session-id" data-session-id=<%= params[:session_id]%> class="hidden"></div>
 
 <title>签到进度查询</title>
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 title-name">签到进度查询</div>
     <div class="col-xs-12">
-      <%=select_tag :session_id, options_for_select(current_event.sessions.map {|s| [s.full_name, s.id ]}, url_for), class: 'input-sm form-control input-s-sm inline', id: 'select-session-checkin'%>
+      <h3><%= @seller.name %>，你好</h3>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="col-xs-3 control-label">当前场次</label>
+      <div class="col-xs-9">
+        <%=select_tag :session_id, options_for_select(current_event.sessions.map {|s| [s.full_name, s.id ]}, url_for), class: 'input-sm form-control input-s-sm inline', id: 'select-session-checkin'%>
+      </div>
     </div>
 
     <div class="col-xs-12 sign-number-area">
-      <div class="col-xs-6">已签到：<span id="checked_in_numbers"></span>人</div>
-      <div class="col-xs-6">未签到：<span id="unchecked_in_numbers"></span>人</div>
+      <p class="text-center">您对接的经销商共有<span id="checked_in_numbers"></span>人，该环节尚有<span id="unchecked_in_numbers"></span>人未签到。</p>
     </div>
-    <div class="col-xs-12 select-area">
+    <div class="col-xs-12 select-area hidden">
       <div class="col-xs-9 select-box-area">
         <input type="text" id="key_word" placeholder="请输入经销商姓名或手机号码"/>
       </div>
@@ -21,20 +27,25 @@
         <button type="button" id="search-button">搜 索</button>
       </div>
     </div>
-    <div class="col-xs-12 text-center sign-content">
+
+    <div class="col-xs-12 text-center">
       <div class="col-xs-12 sign-area">
-        <div id="all_attendee" class="col-xs-4 sign-active">全部</div>
-        <div id="checked_attendee" class="col-xs-4">已签到</div>
-        <div id="not_checked_attendee" class="col-xs-4">未签到</div>
+        <div id="checked_attendee" class="col-xs-4 col-xs-offset-2">
+          <button class="btn unsign-active">已签到</button>
+        </div>
+        <div id="not_checked_attendee" class="col-xs-4">
+          <button class="btn sign-active">未签到</button>
+        </div>
       </div>
     </div>
+
     <div class="col-xs-12 table-area">
       <table id="attendee-table">
         <tr id="table_head" class="bg-cell">
           <th>姓名</th>
           <th>公司</th>
-          <th>状态</th>
-          <th>一键拨号</th>
+          <th>签到时间</th>
+          <th>电话一键拨号</th>
         </tr>
       </table>
     </div>

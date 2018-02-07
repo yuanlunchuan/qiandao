@@ -15,9 +15,14 @@ Rails.application.routes.draw do
   resources :access_monitors
 
   namespace :seller do
-    resources :sessions
     resources :events do
-      resources :checkins
+      resources :sessions do
+        resources :checkins
+      end
+    end
+
+    resources :events do
+      resources :activities
     end
   end
 

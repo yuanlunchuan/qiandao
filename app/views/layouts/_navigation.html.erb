@@ -244,11 +244,15 @@
           <i class="fa fa-qrcode"></i> <span class="nav-label">现场签到管理</span>
         <% end %></li>
 
-        <li><%= link_to event_live_lottery_prize_path(current_event) do %>
+        <li><%= link_to new_seller_event_session_path do %>
+          <i class="fa fa-qrcode"></i> <span class="nav-label">销售登录</span>
+        <% end %></li>
+
+        <li class="hidden"><%= link_to event_live_lottery_prize_path(current_event) do %>
           <i class="fa fa-qrcode"></i> <span class="nav-label">开始抽奖</span>
         <% end %></li>
 
-        <li>
+        <li class="hidden">
           <%= link_to event_choose_event_question_path(current_event) do %>
           <i class="fa fa-list" aria-hidden="true"></i>
           <span class="nav-label">问题列表</span>

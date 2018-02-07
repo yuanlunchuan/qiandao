@@ -1,21 +1,11 @@
 $(document).ready(function(){
-  $('.sign-area div').click(function(){
+/*  $('.sign-area div').click(function(){
     $('.sign-area div').removeClass('sign-active');
     $(this).addClass('sign-active');
-  });
+  });*/
 
-  $('#all_attendee').click(function(event){
-    var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json';
-    var session_id = $("#select-session-checkin").val();
-
-    if(!isNaN(parseInt(session_id))){
-      url = url+'?session_id='+session_id;
-    }
-    loadAttendee(url);
-  });
-
-  var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json';
-  var session_id = $("#select-session-checkin").val();
+  var session_id = $('#session-id').data('session-id');
+  var url = '/seller/events/'+$('#event-id').data('event-id')+'/sessions/'+session_id+'/checkins.json';
 
   if(!isNaN(parseInt(session_id))){
     url = url+'?session_id='+session_id
@@ -45,7 +35,7 @@ $(document).ready(function(){
 
   function loadAttendeeSuccess(event){
     $('#attendee-table').empty();
-    var headItem = "<th>姓名</th><th>公司</th><th>状态</th><th>一键拨号</th>";
+    var headItem = "<th>姓名</th><th>公司</th><th>签到时间</th><th>电话</th>";
     $('#attendee-table').append(headItem);
 
     $.each(event.collection, function(i, value) {
@@ -55,8 +45,8 @@ $(document).ready(function(){
         return;
       }
       var company = value.company ? value.company : '公司未知';
-      var state = value.has_checked ? '已签到' : '未签到';
-      var tableItem = "<tr><td>"+value.name+"</td><td>"+company+"</td><td>"+state+"</td><td>"+"<td class='phone-button'><a href='tel:"+value.mobile+"'><span>一键拨号</span></a></td>";
+      var checkin_time = value.has_checked ? value.checked_in_at : '未签到';
+      var tableItem = "<tr><td>"+value.name+"</td><td>"+company+"</td><td>"+checkin_time+"<td class='phone-button'><a href='tel:"+value.mobile+"'><span>一键拨号</span></a></td>";
       $('#attendee-table').append(tableItem);
     });
   }
@@ -66,7 +56,14 @@ $(document).ready(function(){
   }
 
   $('#checked_attendee').click(function(event){
-    var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json?state=checked';
+    $('#checked_attendee button').removeClass('sign-active');
+    $('#checked_attendee button').addClass('unsign-active');
+    $('#not_checked_attendee button').removeClass('unsign-active');
+    $('#not_checked_attendee button').addClass('sign-active');
+
+    var session_id = $("#select-session-checkin").val();
+    !session_id&&(session_id=$('#session-id').data('session-id'));
+    var url = '/seller/events/'+$('#event-id').data('event-id')+'/sessions/'+session_id+'/checkins.json?state=checked';
 
     var session_id = $("#select-session-checkin").val();
     if(!isNaN(parseInt(session_id))){
@@ -76,9 +73,15 @@ $(document).ready(function(){
   });
 
   $('#not_checked_attendee').click(function(event){
-    var url = '/seller/events/'+$('#event-id').data('event-id')+'/checkins.json?state=not_checked';
+    $('#checked_attendee button').removeClass('unsign-active');
+    $('#checked_attendee button').addClass('sign-active');
+    $('#not_checked_attendee button').removeClass('sign-active');
+    $('#not_checked_attendee button').addClass('unsign-active');
 
     var session_id = $("#select-session-checkin").val();
+    !session_id&&(session_id=$('#session-id').data('session-id'));
+    var url = '/seller/events/'+$('#event-id').data('event-id')+'/sessions/'+session_id+'/checkins.json?state=not_checked';
+
     if(!isNaN(parseInt(session_id))){
       url = url+'&session_id='+session_id;
     }
