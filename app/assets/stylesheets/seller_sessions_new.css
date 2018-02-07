@@ -1,0 +1,13 @@
+.container{
+  font-family:'黑体', '微软雅黑';
+}
+.submit-button{
+  background: rgb(8, 150,216);
+  color: #fff;
+  padding-left: 150px;
+  padding-right: 150px;
+  margin-top: 30px;
+}
+.desc-area{
+  border: 1px solid black;
+}
