@@ -101,6 +101,11 @@ class AttendeesController < ApplicationController
     sheet1.each 1 do |row|
       gender_id = 0 if row[2]=='男'
       gender_id = 1 if row[2]=='女'
+
+      if row[4].present?
+        seller = Seller.phone_and_event_is(row[5], current_event).try(:first)
+      end
+
       if row[5].present?
         category = AttendeeCategory.category_name_is(current_event, row[5]).first
       end
@@ -108,6 +113,7 @@ class AttendeesController < ApplicationController
       @attendee   = current_event.attendees.new name: row[1],
         gender_id: gender_id,
         category: category,
+        seller: seller
         company: row[7],
         mobile: row[8].to_i,
         province: row[10],

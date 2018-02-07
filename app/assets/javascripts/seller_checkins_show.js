@@ -1,14 +1,9 @@
 $(document).ready(function(){
-/*  $('.sign-area div').click(function(){
-    $('.sign-area div').removeClass('sign-active');
-    $(this).addClass('sign-active');
-  });*/
-
   var session_id = $('#session-id').data('session-id');
   var url = '/seller/events/'+$('#event-id').data('event-id')+'/sessions/'+session_id+'/checkins.json?state=checked';
 
   if(!isNaN(parseInt(session_id))){
-    url = url+'?session_id='+session_id
+    url = url+'&session_id='+session_id
     loadAttendee(url);
   }
 
