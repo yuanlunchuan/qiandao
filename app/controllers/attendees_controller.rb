@@ -103,7 +103,7 @@ class AttendeesController < ApplicationController
       gender_id = 1 if row[2]=='女'
 
       if row[4].present?
-        seller = Seller.phone_and_event_is(row[4], current_event).first
+        seller = Seller.phone_and_event_is(row[4].to_i.to_s, current_event).first
       end
 
       if row[5].present?

@@ -10,6 +10,7 @@ class Seller < ActiveRecord::Base
   has_many   :attendees
 
   scope :phone_and_event_is, ->(phone_number, event) { where "phone_number=? AND event_id=?", phone_number, event.id }
+
   scope :seller_name_is, ->(name) { where name: name }
   scope :phone_number_is, -> (phone_number) { where phone_number: phone_number }
 end
