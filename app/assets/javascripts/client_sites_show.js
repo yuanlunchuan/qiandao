@@ -299,14 +299,25 @@ function showSeat(){
         if ('row'==result.collection[0].properties.unit) {
           unit = '排';
         }
-        var seat_message = "第"+table_row+unit+", 第"+table_col+"号";
+        var seat_message = "第"+table_row+unit+", 第"+table_col+"号<br>";
+        var area_height=0;
 
         if (result.collection[0].properties) {
           if ('false'==result.collection[0].properties.set_table_num) {
-            seat_message = "第"+table_row+unit;
+            seat_message = "第"+table_row+unit+'<br>';
           }
+          for(var i=0;i<result.collection[0].attendees.length;i++){
+            if(i%3==0){
+              seat_message += result.collection[0].attendees[i] +"  ";
+              area_height +=20;
+            }else{
+              seat_message += result.collection[0].attendees[i] +"<br>";
+            }
+          }
+          seat_message +="<p style='font-size: 13px;margin-top:10px;'>同桌人员名单排名不分先后</p>";
         }
         $('.seat-number').html(seat_message);
+        $('.seat-show-area').height(100+area_height);
       }
     }
   ).error(function(event){

@@ -12,7 +12,6 @@ class AttendeeSeatsController < ApplicationController
 
   def show
     self.meta = params
-
     session = Session.find(params[:session_id])
     attendees = Attendee.rfid_is(params[:keyword])
     attendees = Attendee.token_is(params[:keyword]) if attendees.blank?

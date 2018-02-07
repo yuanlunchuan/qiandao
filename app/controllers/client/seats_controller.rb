@@ -14,13 +14,21 @@ class Client::SeatsController < ApplicationController
     end
 
     render_not_found '座位在安排中' and return if show_seat_session.blank?
-    seats = Seat.attendee_seat_is(attendee, show_seat_session)
+    seats = Seat.attendee_seat_is attendee, show_seat_session
     render_not_found '没查询到您的座位' and return if seats.blank?
+
+    current_table_seats = Seat.search_by_session_row show_seat_session, seats.first.table_row
+    attendees = []
+    current_table_seats.each do |seat|
+      attendees << Attendee.find_by(id: seat.attendee_id).name
+    end
+    
     collection = []
     item = {}
     item = seats.first.to_hash
 
     item[:properties] = show_seat_session.session_seat.properties
+    item[:attendees] = attendees
     collection << item
 
     render_ok collection

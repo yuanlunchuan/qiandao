@@ -13,48 +13,30 @@ class SellersController < ApplicationController
     if params[:seller_file].present?
       filename = uploadfile(params[:seller_file])
       file_path = "#{Rails.root}/public/upload/#{@filename}"
-      SellerList.import(file_path)
+
+      Spreadsheet.client_encoding = 'UTF-8'
+      book = Spreadsheet.open file_path
+      sheet1 = book.worksheet 0
       count = 0
       error_collection = []
-      SellerList.all.each do |seller|
-        manage_name = nil#seller.attributes['销售负责人']
-        name =  seller.attributes['销售主管']
-
-        if seller.attributes['电话号码'].length>11
-          phone_number =seller.attributes['电话号码'].split('.')[0]
-        else
-          phone_number =seller.attributes['电话号码']
-        end
-        responsible_area = seller.attributes['负责地区']
-
-        manager = nil
-        managers = Seller.seller_name_is(manage_name) if manage_name.present?
-        manager = managers.first if managers.present?
-        seller_item = Seller.new name: name,
-          phone_number: phone_number,
-          responsible_area: responsible_area,
-          manager: manager,
+      sheet1.each 1 do |row|
+        seller_item = Seller.new name: row[0],
+          phone_number: row[2].to_i.to_s,
+          responsible_area: row[1],
           event: current_event
-        if seller_item.save
+        if Seller.phone_and_event_is(row[2].to_i.to_s, current_event).blank?&&seller_item.save
           count+=1
         else
-          error_collection << name
+          error_collection << row[0]
         end
       end
-      SellerList.all.clear
 
       redirect_to event_sellers_path, flash: {success: "成功导入#{count}"} if error_collection.size==0
       redirect_to event_sellers_path, flash: {error: "成功导入#{count}条, #{error_collection}导入失败"} if error_collection.size>0
-    return
+      return
     end
 
     @seller = current_event.sellers.new(seller_params)
-
-#    if Attendee.mobile_is(params[:seller][:phone_number]).present?
-#      flash.now[:error] = '该手机号已作为嘉宾手机号'
-#      render :new
-#      return
-#    end
 
     if params[:seller_manager_name].present?
       @seller_manager = Seller.seller_name_is(params[:seller_manager_name]).first
