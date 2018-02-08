@@ -38,7 +38,7 @@ class Seller::CheckinsController < ApplicationController
         collection << item
       end
 
-      collection << { unchecked_in_numbers: unchecked_in_numbers, checked_in_numbers: checked_in_numbers }
+      collection << { total: total, unchecked_in_numbers: unchecked_in_numbers, checked_in_numbers: checked_in_numbers }
 
       render_ok collection and return if collection.present?
       render_not_found '嘉宾为空'

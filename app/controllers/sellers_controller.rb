@@ -6,7 +6,7 @@ class SellersController < ApplicationController
   layout 'event'
 
   def index
-    @sellers = current_event.sellers
+    @sellers = Seller.all
   end
 
   def create
@@ -24,7 +24,8 @@ class SellersController < ApplicationController
           phone_number: row[2].to_i.to_s,
           responsible_area: row[1],
           event: current_event
-        if Seller.phone_and_event_is(row[2].to_i.to_s, current_event).blank?&&seller_item.save
+
+        if Seller.phone_number_is(row[2].to_i.to_s).blank?&&seller_item.save
           count+=1
         else
           error_collection << row[0]
@@ -36,7 +37,7 @@ class SellersController < ApplicationController
       return
     end
 
-    @seller = current_event.sellers.new(seller_params)
+    @seller = current_event.sellers.new seller_params 
 
     if params[:seller_manager_name].present?
       @seller_manager = Seller.seller_name_is(params[:seller_manager_name]).first
@@ -50,31 +51,25 @@ class SellersController < ApplicationController
       end
     end
 
-    if @seller.save
+    if Seller.phone_number_is(@seller.phone_number).blank?&&@seller.save
       redirect_to event_sellers_path, flash: {success: '保存成功'}
     else
-      flash.now[:error] = @seller.errors.full_messages
+      flash.now[:error] = '手机号已经存在'
       render :new
     end
   end
 
   def destroy
-    @seller = current_event.sellers.find(params[:id])
+    @seller = Seller.find_by(id: params[:id])
     @seller.destroy
 
     redirect_to event_sellers_path
   end
 
   def update
-    @seller = current_event.sellers.find(params[:id])
+    @seller = Seller.find_by(id: params[:id])
 
-    if Attendee.mobile_is(params[:seller][:phone_number]).present?
-      flash.now[:error] = '该手机号已作为嘉宾手机号'
-      render :edit
-      return
-    end
-
-    if @seller.update(seller_params)
+    if Seller.phone_number_is(@seller.phone_number).blank?&&@seller.update(seller_params)
       @seller_manager = nil
 
       if params[:seller_manager_name].present?
@@ -90,13 +85,13 @@ class SellersController < ApplicationController
       @seller.save
       redirect_to event_sellers_path, flash: {success: '保存成功'}
     else
-      flash.now[:error] = @seller.errors.full_messages
+      flash.now[:error] = '手机号已经存在'
       render :edit
     end
   end
 
   def edit
-    @seller = current_event.sellers.find(params[:id])
+    @seller = Seller.find_by(id: params[:id])
     @seller_manager_name = @seller.manager.try(:name)
   end
 

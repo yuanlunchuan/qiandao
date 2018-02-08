@@ -55,18 +55,12 @@ class AttendeesController < ApplicationController
     end
 
     if params[:seller_name].present?
-      seller             = Seller.seller_name_is(params[:seller_name]).first
+      seller             = Seller.phone_number_is(params[:seller_name]).first
       if seller.blank?
         flash.now[:error] = '没有找到对应的销售'
         render :new
         return
       end
-    end
-
-    if Seller.phone_number_is(params[:attendee][:mobile]).present?
-      flash.now[:error] = '该手机号已作为销售手机号码'
-      render :new
-      return
     end
 
     @attendee.province       = params[:province]
@@ -103,7 +97,7 @@ class AttendeesController < ApplicationController
       gender_id = 1 if row[2]=='女'
 
       if row[4].present?
-        seller = Seller.phone_and_event_is(row[4].to_i.to_s, current_event).first
+        seller = Seller.phone_number_is(row[4].to_i.to_s).first
       end
 
       if row[5].present?
@@ -161,7 +155,7 @@ class AttendeesController < ApplicationController
 
     if @attendee.update(attendee_params)
       if params[:seller_name].present?
-        seller = Seller.seller_name_is(params[:seller_name]).first
+        seller             = Seller.phone_number_is(params[:seller_name]).first
         if seller.blank?
           flash.now[:error] = '没有找到对应的销售'
           render :edit
@@ -176,12 +170,6 @@ class AttendeesController < ApplicationController
           render :edit
           return
         end
-      end
-
-      if Seller.phone_number_is(params[:attendee][:mobile]).present?
-        flash.now[:error] = '该手机号已作为销售手机号码'
-        render :edit
-        return
       end
 
       @attendee.province = params[:province]

@@ -1,6 +1,7 @@
 $(document).ready(function(){
   var session_id = $('#session-id').data('session-id');
   var url = '/seller/events/'+$('#event-id').data('event-id')+'/sessions/'+session_id+'/checkins.json?state=checked';
+  $("#select-session-checkin").val(session_id);
 
   if(!isNaN(parseInt(session_id))){
     url = url+'&session_id='+session_id
@@ -35,7 +36,7 @@ $(document).ready(function(){
 
     $.each(event.collection, function(i, value) {
       if (event.size==(i+1)) {
-        $('#checked_in_numbers').text(value.checked_in_numbers);
+        $('#checked_in_numbers').text(value.total);
         $('#unchecked_in_numbers').text(value.unchecked_in_numbers);
         return;
       }
@@ -49,6 +50,22 @@ $(document).ready(function(){
   function loadAttendeeError(event){
     console.info("---------error event: "+JSON.stringify(event));
   }
+
+  $("#select-session-checkin").change(function(event){
+    $('#checked_attendee button').removeClass('sign-active');
+    $('#checked_attendee button').addClass('unsign-active');
+    $('#not_checked_attendee button').removeClass('unsign-active');
+    $('#not_checked_attendee button').addClass('sign-active');
+
+    var session_id = $("#select-session-checkin").val();
+    !session_id&&(session_id=$('#session-id').data('session-id'));
+    var url = '/seller/events/'+$('#event-id').data('event-id')+'/sessions/'+session_id+'/checkins.json?state=checked';
+
+    if(!isNaN(parseInt(session_id))){
+      url = url+'&session_id='+session_id;
+    }
+    loadAttendee(url);
+  });
 
   $('#checked_attendee').click(function(event){
     $('#checked_attendee button').removeClass('sign-active');

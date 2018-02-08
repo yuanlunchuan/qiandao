@@ -307,14 +307,14 @@ function showSeat(){
             seat_message = "第"+table_row+unit+'<br>';
           }
           for(var i=0;i<result.collection[0].attendees.length;i++){
-            if(i%3==0){
+            if(i%2==0){
               seat_message += result.collection[0].attendees[i] +"  ";
-              area_height +=20;
+              area_height +=40;
             }else{
               seat_message += result.collection[0].attendees[i] +"<br>";
             }
           }
-          seat_message +="<p style='font-size: 13px;margin-top:10px;'>同桌人员名单排名不分先后</p>";
+          seat_message +="<p style='font-size: 10px;margin-top:10px;'>同桌人员名单排名不分先后</p>";
         }
         $('.seat-number').html(seat_message);
         $('.seat-show-area').height(100+area_height);
