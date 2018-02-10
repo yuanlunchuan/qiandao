@@ -59,7 +59,6 @@ body{
 .address-area{
   color: #646464;
   padding: 0px;
-  height: 40px;
   line-height: 40px;
 }
 .address-area img{
@@ -67,7 +66,6 @@ body{
   height: 16px;
 }
 .phone-icon-area{
-  height: 40px;
   line-height: 40px;
 }
 .phone-icon-area img{
