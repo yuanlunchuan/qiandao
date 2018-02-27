@@ -34,8 +34,8 @@
     </div>
     <div class="col-xs-12 text-center message">
       <div class="col-xs-12 message-area">
-        <div class="col-xs-9 address-area">
-          <%= image_tag 'client/restaurants/adress.png'%><%= @restaurant.address %>
+        <div class="col-xs-9 address-area text-left" style="padding-left: 10px;">
+          <%= @restaurant.address %>
         </div>
         <div class="col-xs-3 phone-icon-area">
           <a href="tel:<%= @restaurant.phone_number %>">
