@@ -69,7 +69,7 @@ class SellersController < ApplicationController
   def update
     @seller = Seller.find_by(id: params[:id])
 
-    if Seller.phone_number_is(@seller.phone_number).blank?&&@seller.update(seller_params)
+    if Seller.phone_number_is(params[:seller][:phone_number]).blank?&&@seller.update(seller_params)
       @seller_manager = nil
 
       if params[:seller_manager_name].present?
