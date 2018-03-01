@@ -11,8 +11,9 @@ class Seller::SessionsController < ApplicationController
         else
           cookies[:seller_id] = seller.id
         end
-
-        redirect_to seller_event_activities_path(seller.event.id)
+          
+        cookies[:event_id]=params[:event_id]
+        redirect_to seller_event_activities_path(params[:event_id])
         return
       end
     end
@@ -27,10 +28,10 @@ class Seller::SessionsController < ApplicationController
   end
 
   def new
-    if cookies[:seller_id].present?
+    if cookies[:seller_id].present?&&cookies[:event_id]==params[:event_id]
       seller = Seller.find_by(id: cookies[:seller_id])
       if seller.present?
-        redirect_to seller_event_activities_path(seller.event.id)
+        redirect_to seller_event_activities_path(params[:event_id])
       end
     end
   end
