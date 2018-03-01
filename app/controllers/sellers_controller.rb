@@ -7,6 +7,8 @@ class SellersController < ApplicationController
 
   def index
     @sellers = Seller.all
+    @sellers = @sellers.page(params[:page])
+
   end
 
   def create

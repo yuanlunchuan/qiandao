@@ -246,7 +246,13 @@ class AttendeesController < ApplicationController
 
   def destroy
     @attendee = current_event.attendees.find(params[:id])
-    @attendee.update event_id: nil
+    @attendee.update event_id: nil, seller_id: nil
+
+    check_ins = Checkin.attendee_is @attendee
+    check_ins.each do |check_in|
+      check_in.delete
+    end
+
     redirect_to event_attendees_path, flash: {success: '删除成功'}
   end
 

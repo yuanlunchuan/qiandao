@@ -4,6 +4,7 @@ class Checkin < ActiveRecord::Base
 
   before_create :populate_time
   scope :checkin_is, ->(session, attendee) { where "attendee_id=? AND session_id=?", attendee.id, session.id }
+  scope :attendee_is, ->(attendee) { where "attendee_id=?", attendee.id}
 
 private
   def populate_time
