@@ -56,7 +56,7 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-8">
-                  <button type="submit" class="btn btn-primary" id="set-seat">开始设置</button>
+                  <button type="submit" class="btn btn-primary"onclick="return check(this.from)" id="set-seat">开始设置</button>
                 </div>
               </div>
             </form>
@@ -71,3 +71,11 @@
 <% content_for :script do %>
   <%= javascript_include_tag 'set_seat' %>
 <% end %>
+<script type="text/javascript">
+  function check(){
+    if (!$("#total-table-count").val()||!$("#per-table-num").val()) {
+      alert('请输入桌数');
+      return false;
+    }
+  }
+</script>
