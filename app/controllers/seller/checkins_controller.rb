@@ -13,6 +13,7 @@ class Seller::CheckinsController < ApplicationController
 
   def index
     self.meta = params
+    session[:seller_id]=cookies[:seller_id]
     @seller = Seller.find(session[:seller_id])
     if params[:format]=='json'
       seller = Seller.find(session[:seller_id])

@@ -11,8 +11,9 @@ class Seller::SessionsController < ApplicationController
         else
           cookies[:seller_id] = seller.id
         end
-          
+logger.info "------------------deng lo chengg"          
         cookies[:event_id]=params[:event_id]
+logger.info "--------------dengl"
         redirect_to seller_event_activities_path(params[:event_id])
         return
       end
