@@ -1,5 +1,9 @@
 //= require shared/jquery.touchSwipe.min.js
 $(document).ready(function(){
+//$('.first-bg').load(function(){
+//    alert('loadfinish');
+//});
+
   setTimeout(function(){
     $(".load-area").addClass("hidden");
   },500);
@@ -21,7 +25,7 @@ $(document).ready(function(){
           };
         }
         if (result.collection[0].welcome_bg) {
-          $('.first-bg img').attr("src",result.collection[0].welcome_bg);
+          //$('.first-bg img').attr("src",result.collection[0].welcome_bg);
         }
         if (result.collection[0].welcome_second_bg) {
           $('.second-bg img').attr("src",result.collection[0].welcome_second_bg);

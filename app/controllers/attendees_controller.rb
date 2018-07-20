@@ -319,7 +319,8 @@ class AttendeesController < ApplicationController
   def generate_photo
     if @attendee.photo.blank?&&@attendee.mobile.present?
       attendee = Attendee.has_photo.mobile_is(@attendee.mobile).first
-      if attendee.present?
+      #if attendee.present?
+      if attendee.present?&&attendee.photo.exists?
         @attendee.photo_file_name = attendee.photo_file_name
         @attendee.photo_content_type = attendee.photo_content_type
         @attendee.photo_file_size = attendee.photo_file_size
@@ -330,7 +331,7 @@ class AttendeesController < ApplicationController
   def generate_avatar
     if @attendee.avatar.blank?&&@attendee.mobile.present?
       attendee = Attendee.has_avatar.mobile_is(@attendee.mobile).first
-      if attendee.present?
+      if attendee.present?&&attendee.avatar.exists?
         @attendee.avatar_file_name = attendee.avatar_file_name
         @attendee.avatar_content_type = attendee.avatar_content_type
         @attendee.avatar_file_size = attendee.avatar_file_size

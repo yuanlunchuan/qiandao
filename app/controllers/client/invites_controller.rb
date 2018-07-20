@@ -23,6 +23,9 @@ class Client::InvitesController < ApplicationController
   end
 
   def show
+    event = Event.find(params[:event_id])
+    @welcome_bg = event.welcome_bg.url if event.welcome_bg.present?
+
     if cookies[:attendee_id].present?
       attendee = Attendee.find_by(id: cookies[:attendee_id])
       if attendee.present?&&attendee.event_id.present?&&attendee.event_id==current_event.id
