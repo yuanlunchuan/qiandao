@@ -5,7 +5,7 @@ module AttendeeLoader
   self.included do |includer|
 
     def load_attendee
-      if params[:attendee_id].present?&&params[:attendee_id]==30
+      if params[:attendee_id].present?&&params[:event_id].to_i==30
         session[:attendee_id]=params[:attendee_id]
         cookies[:attendee_id]=params[:attendee_id]
         return

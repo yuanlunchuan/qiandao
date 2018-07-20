@@ -13,6 +13,7 @@
         <h4><%= @attendee.name %></h4>
         <ul class="list-unstyled" style="font-size:14px">
         <li>报名身份：<%= @attendee.category.try(:name)%> </li>
+        <li>报名等级：<%= @attendee.level%> </li>
         <li>手机号码：<%= @attendee.mobile%> </li>
         <li>公司名称：<%= @attendee.company%></li>
         <% 

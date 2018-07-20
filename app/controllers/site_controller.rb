@@ -65,7 +65,7 @@ class SiteController < ApplicationController
     # 已签到
     if @session.checkins.where(attendee: @attendee).count > 0
       seats = Seat.attendee_seat_is(@attendee, @session)
-      message = "#{@attendee.name} / #{@attendee.mobile} / #{@attendee.company}"
+      message = "#{@attendee.name} / #{@attendee.mobile} / #{@attendee.company}/#{@attendee.level}"
       #message += " / 座位号: #{seats.first.table_row}桌" if !seats.nil?
 
       return render json: {type: 'warning', error: '该用户已签到', message: message, code: -2, attendee: attendee_info}
