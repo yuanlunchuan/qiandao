@@ -163,7 +163,11 @@ class Attendee < ActiveRecord::Base
   end
 
   def invitation_long_url
-    "#{ENV['HOSTNAME']}/client/events/#{self.event.id}/invites"
+    if self.event.id==30
+      "#{ENV['HOSTNAME']}/client/events/#{self.event.id}/sites?attendee_id=#{self.id}"
+    else
+      "#{ENV['HOSTNAME']}/client/events/#{self.event.id}/invites"
+    end
   end
 
   def send_sms(template)
