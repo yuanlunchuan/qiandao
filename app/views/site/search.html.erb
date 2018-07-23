@@ -30,11 +30,13 @@
       <tr>
         <th class="text-center">头像</th>
         <th class="text-center">姓名</th>
+        <th class="text-center">等级</th>
         <th class="text-center">公司</th>
         <th class="text-center">手机</th>
         <th class="text-center">打印</th>
         <th class="text-center">状态</th>
         <th class="text-center">操作</th>
+        <th class="text-center">绑定rfid</th>
       </tr>
     </thead>
   <tbody>
@@ -57,6 +59,7 @@
           <% end %>
 
           <td> <%= attendee.name %> </td>
+          <td> <%= attendee.level %> </td>
           <td> <%= attendee.company %> </td>
           <td> <%= attendee.mobile %> </td>
 
