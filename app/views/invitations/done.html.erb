@@ -4,7 +4,7 @@
 <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
   <div class="row">
     <div class="col-md-12 text-center" style="margin-top: 1em;">
-      <%= image_tag image_path('yonex-done-title.png'), width: '80%', style:'margin: 0 auto; margin-bottom: 1em', class: 'animated fadeIn' %>
+      <%= image_tag image_path('cloudsignin-done-title.png'), width: '80%', style:'margin: 0 auto; margin-bottom: 1em', class: 'animated fadeIn' %>
 
       <div class="animated fadeIn">
       <div class="row done-row">
@@ -49,11 +49,11 @@
       </div> <!--WRAPPER-->
       
       <%= image_tag(@qr.as_png(border_modules: 1).to_data_url,  width: '40%', style:'margin:0 auto; margin-top: 1.3em;', class:'animated fadeInUp') %>
-      <%= image_tag image_path('yonex-done-qrcode-arrow.png'), width: '80%', style:'margin: 0 auto; '%>
+      <%= image_tag image_path('cloudsignin-done-qrcode-arrow.png'), width: '80%', style:'margin: 0 auto; '%>
 
       <div class="qr-tip" style="font-weight: bold;">长按上图或截屏将二维码保存至手机相册</div>
 
-      <%= image_tag image_path('yonex-done-qrcode-tip.png'), width: '80%', style:'margin: 0 auto; margin-bottom: 1em'%>
+      <%= image_tag image_path('cloudsignin-done-qrcode-tip.png'), width: '80%', style:'margin: 0 auto; margin-bottom: 1em'%>
 
 
     </div>

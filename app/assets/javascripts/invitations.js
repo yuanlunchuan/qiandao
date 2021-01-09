@@ -11,10 +11,10 @@ $(document).on('ready page:load', function() {
         }
     }
 
-    $('#yonex-logo').addClass('animated flipInX');
-    $('#yonex-enter-btn').addClass('animated fadeInRight');
-    $('#yonex-invitation').addClass('animated fadeInRight');
-    $('#yonex-event-title').addClass('animated fadeInLeft');
+    $('#cloudsignin-logo').addClass('animated flipInX');
+    $('#cloudsignin-enter-btn').addClass('animated fadeInRight');
+    $('#cloudsignin-invitation').addClass('animated fadeInRight');
+    $('#cloudsignin-event-title').addClass('animated fadeInLeft');
     $('#background-container').addClass('animated fadeInLeft');
 
     $('#upload_photo').dropzone({
@@ -25,9 +25,9 @@ $(document).on('ready page:load', function() {
             $('.loading-animation').removeClass('hidden');
         },
         success: function(a, b){
-            $('.yonex-done-btn').removeClass('hidden');
+            $('.cloudsignin-done-btn').removeClass('hidden');
             $('#upload_photo').attr('src', b.url);
-            $('.yonex-done-btn').addClass('animated fadeIn');
+            $('.cloudsignin-done-btn').addClass('animated fadeIn');
         },
         error: function(a, error){
             alert(error);

@@ -4,10 +4,10 @@
 <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
   <div class="row">
     <div class="col-md-12 text-center" style="margin-top: 1em;">
-      <%= image_tag image_path('yonex-confirmation-title.png'), width: '80%', style:'margin: 0 auto' %>
+      <%= image_tag image_path('cloudsignin-confirmation-title.png'), width: '80%', style:'margin: 0 auto' %>
 
 
-      <% img_url = (@img.present? ? @img : image_path('yonex-confirmation-camera.png')) %>
+      <% img_url = (@img.present? ? @img : image_path('cloudsignin-confirmation-camera.png')) %>
       <%= image_tag  img_url, width: '35%', style:'margin: 1em auto;', id: 'upload_photo', class: 'img-circle animated zoomIn'%>
 
       <div class="hidden loading-animation">
@@ -35,8 +35,8 @@
       </div>
 
       <% klass = @attendee.photo.exists? ? '' : 'hidden' %>
-      <%= link_to invitations_done_path, class:"yonex-done-btn #{klass}" do %>
-        <%= image_tag image_path('yonex-done-btn.png'), width: '80%', style:'margin: 1em auto' %>
+      <%= link_to invitations_done_path, class:"cloudsignin-done-btn #{klass}" do %>
+        <%= image_tag image_path('cloudsignin-done-btn.png'), width: '80%', style:'margin: 1em auto' %>
       <% end %>
 
     </div>
