@@ -1,7 +1,6 @@
 require "fileutils"
 
 class SessionsController < ApplicationController
-  http_basic_authenticate_with name: Rails.configuration.authen_name, password: Rails.configuration.password
   layout 'empty'
 
   def new
