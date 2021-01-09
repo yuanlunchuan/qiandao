@@ -23,7 +23,7 @@
         <div class="col-xs-12 profiles-area">
           <div class="col-xs-4 text-center">
             <button type="button" class="portrait-img-area">
-              <% img_url = (@img.present? ? @img : image_path('yonex-confirmation-camera.png')) %>
+              <% img_url = (@img.present? ? @img : image_path('cloudsignin-confirmation-camera.png')) %>
               <%= image_tag  img_url, class:"portrait-img", id: "attendee_photo"%>
             </button>
             <form action="/client/events/<%= current_event.id %>/upload_photo.json?id=<%= @attendee.id %>" method="post" id="formId" multipart='true' enctype="multipart/form-data">

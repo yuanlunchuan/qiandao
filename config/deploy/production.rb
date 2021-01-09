@@ -1,6 +1,6 @@
 set :domain, 'M01'
-set :deploy_to, '/data/www/yonex'
-set :repository, 'git@github.com:duxins/yonex.git'
+set :deploy_to, '/data/www/cloudsignin'
+set :repository, 'git@github.com:duxins/cloudsignin.git'
 set :branch, 'develop'
 set :user, 'deploy'
 set :rvm_ruby_version, '2.2.2'
