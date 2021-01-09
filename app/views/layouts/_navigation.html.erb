@@ -16,7 +16,7 @@
             </span>
           </div>
           <div class="logo-element">
-            YONEX
+            CLOUDSIGNIN
           </div>
         </li>
 
@@ -225,7 +225,7 @@
             </li>
           </ul>
         </li>
-
+<!--
         <% if @current_module==5 %>
           <li id="active-item" class="active">
         <% else %>
@@ -235,6 +235,7 @@
             <i class="fa fa-user"></i>销售员管理
           <% end %>
         </li>
+-->
         
         <li><%= link_to event_attendee_seats_path do %>
           <i class="fa fa-asterisk"></i><span class="nav-label">座位查询</span>
@@ -244,9 +245,9 @@
           <i class="fa fa-qrcode"></i> <span class="nav-label">现场签到管理</span>
         <% end %></li>
 
-        <li><%= link_to new_seller_event_session_path do %>
+<!--         <li><%= link_to new_seller_event_session_path do %>
           <i class="fa fa-qrcode"></i> <span class="nav-label">销售登录</span>
-        <% end %></li>
+        <% end %></li> -->
 
         <li class="hidden"><%= link_to event_live_lottery_prize_path(current_event) do %>
           <i class="fa fa-qrcode"></i> <span class="nav-label">开始抽奖</span>

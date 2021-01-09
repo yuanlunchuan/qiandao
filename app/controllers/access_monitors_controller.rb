@@ -1,5 +1,4 @@
 class AccessMonitorsController < ApplicationController
-  http_basic_authenticate_with name: "admin", password: "gudu27012"
   layout 'empty'
 
   def index
