@@ -293,11 +293,9 @@ ActiveRecord::Schema.define(version: 20170203070341) do
     t.string   "question_content"
     t.integer  "attendee_id"
     t.integer  "event_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
     t.integer  "event_question_id"
-    t.integer  "praise_count",      default: 0
-    t.boolean  "enable_display",    default: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "recommends", force: :cascade do |t|
