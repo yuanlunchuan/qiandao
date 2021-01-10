@@ -1,12 +1,9 @@
 //= require shared/jquery.touchSwipe.min.js
 $(document).ready(function(){
-//$('.first-bg').load(function(){
-//    alert('loadfinish');
-//});
-
   setTimeout(function(){
     $(".load-area").addClass("hidden");
   },500);
+
   var event_id = $('#event-id').data('event-id');
   $.getJSON(
     '/client/events/'+event_id+'/event_info.json',
@@ -54,7 +51,8 @@ $(document).ready(function(){
         alert("请求失败了")
       }
     }
-  )
+  );
+
   $("#page0").swipe({ 
     swipe:function(event,direction, distance, duration, fingerCount)
     {
