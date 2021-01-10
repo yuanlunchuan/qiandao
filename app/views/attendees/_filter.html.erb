@@ -1,10 +1,10 @@
 <div class="row m-b-md m-t-md">
 
-  <div class="col-sm-3 m-b-xs">
+  <div class="col-sm-1 m-b-xs">
     <%=select_tag :category_id, options_from_collection_for_select(current_event.attendee_categories, 'id', 'name', params[:category_id]), prompt: '选择用户标签', include_blank: false, class: 'input-sm form-control input-s-sm inline'%>
   </div>
 
-  <div class="col-sm-9 m-b-xs">
+  <div class="col-sm-8 m-b-xs">
     <div data-toggle="buttons" class="btn-group">
       <% {'全部' => '0', '有图' => '1', '无图' => '-1'}.each do |k, v| %>
           <label class="btn btn-sm btn-white <%=params[:has_photo] == v ? 'active' : ''%>">
@@ -21,7 +21,7 @@
   </div>
 
   <%= form_tag '', method: :get do%>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="input-group">
           <input type="text" placeholder="请输入关键字" class="input-sm form-control" name="keyword" value="<%=params[:keyword]%>">
           <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>

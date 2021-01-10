@@ -8,23 +8,20 @@
       </div>
       <div class="ibox-content">
         <div class="row">
-          <div class="col-xs-6">
-            <%= link_to '下载模板', templates_path(filename: 'attendee.xls'), class: 'btn btn-white btn-sm pull-right' %>
-            <%= link_to '添加报名用户', new_event_attendee_path, class: 'btn btn-white btn-sm pull-right' %>
-            <%= link_to '报名数据导出', event_export_path, class: 'btn btn-white btn-sm m-r-md pull-right' %>
-          </div>
-          <div class="col-sm-6">
-            <form action="/app/events/<%= current_event.id %>/attendees" class='form-inline' method="post" name="fileForm" multipart='true' enctype="multipart/form-data" onsubmit="return validate_form(this);">
+          <div class="col-xs-12 text-right">
+            <%= link_to '下载模板', templates_path(filename: 'attendee.xls'), class: 'btn btn-white btn-sm' %>
+            <%= link_to '添加报名用户', new_event_attendee_path, class: 'btn btn-white btn-sm' %>
+            <%= link_to '报名数据导出', event_export_path, class: 'btn btn-white btn-sm m-r-md' %>
+            <form action="/app/events/<%= current_event.id %>/attendees" class='form-inline pull-right' method="post" name="fileForm" multipart='true' enctype="multipart/form-data" onsubmit="return validate_form(this);">
               <div class="form-group">
                 <%= file_field_tag :attendee_file, class: 'form-control' %>
               </div>
-              <button id="import-attendee" class="btn btn-white" type="submit">导入</button>
+              <button id="import-attendee" class="btn btn-sm btn-white" type="submit">导入</button>
               <% if params[:path] %>
                 <a class="btn btn-danger" href="<%= params[:path] %>" target="_blank">查看错误日志</a>
               <% end %>
             </form>
           </div>
-
         </div>
 
         <%= render 'filter' %>
