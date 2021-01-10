@@ -4,7 +4,7 @@
     <%=select_tag :category_id, options_from_collection_for_select(current_event.attendee_categories, 'id', 'name', params[:category_id]), prompt: '选择用户标签', include_blank: false, class: 'input-sm form-control input-s-sm inline'%>
   </div>
 
-  <div class="col-sm-5 m-b-xs">
+  <div class="col-sm-9 m-b-xs">
     <div data-toggle="buttons" class="btn-group">
       <% {'全部' => '0', '有图' => '1', '无图' => '-1'}.each do |k, v| %>
           <label class="btn btn-sm btn-white <%=params[:has_photo] == v ? 'active' : ''%>">
