@@ -21,11 +21,11 @@ class ApplicationController < ActionController::Base
       AccessRecord.create ip_address: request.remote_ip
     end
 
-    File.open("log/access_file","a+") do |file|
-      if access_record.present?
-        file.puts "id: #{request.remote_ip} time: #{access_record.access_count} url: #{request.original_url}"
-      end
-    end
+    # File.open("log/access_file","a+") do |file|
+    #   if access_record.present?
+    #     file.puts "id: #{request.remote_ip} time: #{access_record.access_count} url: #{request.original_url}"
+    #   end
+    # end
 
     redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
   end
