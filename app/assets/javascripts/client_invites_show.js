@@ -10,9 +10,6 @@ $(document).ready(function(){
     {},
     function(result) {//返回数据根据结果进行相应的处理
       if ( result.success ) {
-        if (result.collection[0].display_welcome_page == false) {
-          location.href="/client/sessions/new"
-        }
         if (result.collection[0].welcome_page_logo) {
           $('.logo-area img').attr("src",result.collection[0].welcome_page_logo);
           if (result.collection[0].welcome_page_logo != "/images/default_logo.png") {
@@ -22,7 +19,7 @@ $(document).ready(function(){
           };
         }
         if (result.collection[0].welcome_bg) {
-          //$('.first-bg img').attr("src",result.collection[0].welcome_bg);
+          $('.first-bg img').attr("src",result.collection[0].welcome_bg);
         }
         if (result.collection[0].welcome_second_bg) {
           $('.second-bg img').attr("src",result.collection[0].welcome_second_bg);

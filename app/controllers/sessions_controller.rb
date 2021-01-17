@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = admin.auth_token
       end
+      cookies[:company_id] = admin.company.id
 
       back_url = params[:back_url].present? ? params[:back_url] : dashboard_path
       redirect_to back_url

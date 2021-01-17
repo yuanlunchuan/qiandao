@@ -2,6 +2,7 @@ class Admin < ActiveRecord::Base
   has_secure_password
 
   has_many :answers
+  belongs_to :company
 
   before_create { generate_token(:auth_token) }
 

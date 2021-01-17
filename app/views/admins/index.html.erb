@@ -28,6 +28,9 @@
             <td><%=admin.created_at.to_s(:default)%></td>
             <td>
               <%= link_to '编辑', edit_admin_path(admin), class: 'btn btn-outline btn-info btn-xs'%>
+              <%= link_to admin_path(admin), method: :delete, data: {confirm: '是否确认删除？'}, class: 'btn btn-white btn-sm' do %>
+                  <i class="fa fa-trash"></i> 删除
+              <% end %>
             </td>
           </tr>
           <%end%>

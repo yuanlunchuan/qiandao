@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203070341) do
+ActiveRecord::Schema.define(version: 20210116134826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,10 @@ ActiveRecord::Schema.define(version: 20170203070341) do
     t.boolean  "interaction_manage_permission"
     t.boolean  "seller_manage_permission"
     t.boolean  "event_manage_permission"
+    t.integer  "company_id"
   end
+
+  add_index "admins", ["company_id"], name: "index_admins_on_company_id", using: :btree
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -141,6 +144,13 @@ ActiveRecord::Schema.define(version: 20170203070341) do
 
   add_index "checkins", ["attendee_id"], name: "index_checkins_on_attendee_id", using: :btree
   add_index "checkins", ["session_id"], name: "index_checkins_on_session_id", using: :btree
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "event_lottery_prize_items", force: :cascade do |t|
     t.integer  "event_lottery_prize_id"
@@ -239,7 +249,10 @@ ActiveRecord::Schema.define(version: 20170203070341) do
     t.string   "seat_search_bg_content_type"
     t.integer  "seat_search_bg_file_size"
     t.datetime "seat_search_bg_updated_at"
+    t.integer  "company_id"
   end
+
+  add_index "events", ["company_id"], name: "index_events_on_company_id", using: :btree
 
   create_table "invitation_settings", force: :cascade do |t|
     t.integer  "event_id"
@@ -293,9 +306,11 @@ ActiveRecord::Schema.define(version: 20170203070341) do
     t.string   "question_content"
     t.integer  "attendee_id"
     t.integer  "event_id"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "event_question_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "praise_count",      default: 0
+    t.boolean  "enable_display",    default: false
   end
 
   create_table "recommends", force: :cascade do |t|
@@ -402,4 +417,5 @@ ActiveRecord::Schema.define(version: 20170203070341) do
 
   add_foreign_key "checkins", "attendees"
   add_foreign_key "checkins", "sessions"
+  add_foreign_key "events", "companies"
 end

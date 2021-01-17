@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   scope 'app' do
     get '/'           => redirect('/app/dashboard')
     get 'dashboard'   =>  'dashboard#index'
+    get 'edit_company' => 'companies#edit'
+    resources :companies
 
     resources :events do
       resources :attendees do

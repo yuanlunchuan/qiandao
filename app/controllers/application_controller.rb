@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  def current_company
+    @current_company ||= Company.find(cookies[:company_id]) if cookies[:company_id]
+  end
+
   def current_admin
     @current_admin ||= Admin.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
   end
@@ -26,14 +30,14 @@ class ApplicationController < ActionController::Base
     redirect_to sign_in_path(back_url: request.original_url) if current_admin.nil?
   end
 
-  def send_sms
-    template = Event.find(10).sms_template
-    attendee = Attendee.find(2361)
-    begin
-      attendee.send_sms(template.content)
-    rescue => e
-    end
-  end
+  # def send_sms
+  #   template = Event.find(10).sms_template
+  #   attendee = Attendee.find(2361)
+  #   begin
+  #     attendee.send_sms(template.content)
+  #   rescue => e
+  #   end
+  # end
 
   helper_method :current_admin, :current_event
 end

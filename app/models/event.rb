@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
   has_many :event_questions
   has_many :event_lottery_prizes
   has_many :lottery_prizes
+  belongs_to :company
 
   before_validation :generate_datetime
   after_find :build_time_attributes
