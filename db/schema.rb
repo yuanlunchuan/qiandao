@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210116134826) do
+ActiveRecord::Schema.define(version: 20210117023125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,10 @@ ActiveRecord::Schema.define(version: 20210116134826) do
     t.boolean  "seller_manage_permission"
     t.boolean  "event_manage_permission"
     t.integer  "company_id"
+    t.string   "phone_number"
+    t.string   "regist_sms_code"
+    t.datetime "regist_sms_code_create"
+    t.boolean  "active"
   end
 
   add_index "admins", ["company_id"], name: "index_admins_on_company_id", using: :btree
