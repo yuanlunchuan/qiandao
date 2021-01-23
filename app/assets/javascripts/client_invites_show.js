@@ -1,4 +1,7 @@
+//= require jquery
 //= require shared/jquery.touchSwipe.min.js
+//= require bootstrap
+
 $(document).ready(function(){
   setTimeout(function(){
     $(".load-area").addClass("hidden");
