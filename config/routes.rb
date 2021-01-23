@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  get '20160223'  => 'redirects#show'
-
   resources :access_monitors
 
   namespace :seller do
