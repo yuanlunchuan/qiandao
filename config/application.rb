@@ -23,6 +23,8 @@ module Cloudsignin
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.time_zone = 'Beijing'
     config.active_record.raise_in_transactional_callbacks = true
+    #让bootstrap-sass和asset pipeline兼容
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
