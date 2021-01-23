@@ -71,6 +71,7 @@ Rails.application.config.assets.precompile += %w(
   client_questions.js
   questions_index.js
   start_lottery_prize.js
+  client_application.js
 
   client_event_sessions_show.css
   client_invites_show.css
