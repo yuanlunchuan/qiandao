@@ -33,6 +33,13 @@ class EventsController < ApplicationController
     render layout: 'event'
   end
 
+  def welcome_page_drage_setting
+    @current_module = 6
+    @event = current_event
+    @host = Figaro.env.HOSTNAME
+    render layout: 'event'
+  end
+
   def function_setting
     @current_module = 6
     @event = current_event

@@ -48,6 +48,12 @@
             <% end %>
           </li>
           <li>
+            <%= link_to event_welcome_page_drage_setting_path(current_event), style: is_active_item('events', 'welcome_page_drage_setting') do %>
+              <i class="fa fa-hand-o-up" aria-hidden="true"></i>
+              <span class="nav-label">拖拽设置</span>
+            <% end %>
+          </li>
+          <li>
             <%= link_to event_function_setting_path(current_event), style: is_active_item('events', 'function_setting') do %>
               <i class="fa fa-wrench" aria-hidden="true"></i>
               <span class="nav-label">功能设置</span>
