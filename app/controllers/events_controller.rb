@@ -33,6 +33,13 @@ class EventsController < ApplicationController
     render layout: 'event'
   end
 
+  def welcome_page_drage_setting
+    @current_module = 6
+    @event = current_event
+    @host = Figaro.env.HOSTNAME
+    render layout: 'event'
+  end
+
   def function_setting
     @current_module = 6
     @event = current_event
@@ -150,11 +157,11 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all.where(defunct: false).order(start: :DESC)
+    @events = current_company.events.where(defunct: false).order(start: :DESC)
   end
 
   def set_current_event
-    @events = Event.all.where(defunct: false).order(start: :DESC)
+    @events = current_company.events.where(defunct: false).order(start: :DESC)
     @current_active_event = Event.find_by(is_current_event: true)
   end
 
@@ -176,6 +183,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_param)
+    @event.company = current_company
     if @event.save
       redirect_to dashboard_path, flash: { success: '活动创建成功' }
     else
@@ -190,6 +198,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+    @event.company = current_company
     if @event.update(event_param)
       redirect_to dashboard_path , flash: { success: '活动编辑成功' }
     else

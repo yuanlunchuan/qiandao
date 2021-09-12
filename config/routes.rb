@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  get '20160223'  => 'redirects#show'
-
   resources :access_monitors
 
   namespace :seller do
@@ -52,6 +50,8 @@ Rails.application.routes.draw do
   scope 'app' do
     get '/'           => redirect('/app/dashboard')
     get 'dashboard'   =>  'dashboard#index'
+    get 'edit_company' => 'companies#edit'
+    resources :companies
 
     resources :events do
       resources :attendees do
@@ -106,6 +106,7 @@ Rails.application.routes.draw do
       get 'event_base_setting' => 'events#event_base_setting'
       patch 'update_event_base_setting' => 'events#update_event_base_setting'
       get 'welcome_page_setting' => 'events#welcome_page_setting'
+      get 'welcome_page_drage_setting' => 'events#welcome_page_drage_setting'
       patch 'update_welcome_page_setting' => "events#update_welcome_page_setting"
       get 'function_setting' => 'events#function_setting'
       patch 'update_function_setting' => 'events#update_function_setting'

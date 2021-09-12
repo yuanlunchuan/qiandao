@@ -1,21 +1,16 @@
 //= require shared/jquery.touchSwipe.min.js
-$(document).ready(function(){
-//$('.first-bg').load(function(){
-//    alert('loadfinish');
-//});
 
+$(document).ready(function(){
   setTimeout(function(){
     $(".load-area").addClass("hidden");
   },500);
+
   var event_id = $('#event-id').data('event-id');
   $.getJSON(
     '/client/events/'+event_id+'/event_info.json',
     {},
     function(result) {//返回数据根据结果进行相应的处理
       if ( result.success ) {
-        if (result.collection[0].display_welcome_page == false) {
-          location.href="/client/sessions/new"
-        }
         if (result.collection[0].welcome_page_logo) {
           $('.logo-area img').attr("src",result.collection[0].welcome_page_logo);
           if (result.collection[0].welcome_page_logo != "/images/default_logo.png") {
@@ -25,7 +20,7 @@ $(document).ready(function(){
           };
         }
         if (result.collection[0].welcome_bg) {
-          //$('.first-bg img').attr("src",result.collection[0].welcome_bg);
+          $('.first-bg img').attr("src",result.collection[0].welcome_bg);
         }
         if (result.collection[0].welcome_second_bg) {
           $('.second-bg img').attr("src",result.collection[0].welcome_second_bg);
@@ -54,7 +49,8 @@ $(document).ready(function(){
         alert("请求失败了")
       }
     }
-  )
+  );
+
   $("#page0").swipe({ 
     swipe:function(event,direction, distance, duration, fingerCount)
     {

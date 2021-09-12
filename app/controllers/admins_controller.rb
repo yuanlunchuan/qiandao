@@ -2,12 +2,12 @@ class AdminsController < ApplicationController
   before_action :authorize_admin!
 
   def index
-    @admins = Admin.all
+    @admins = current_company.admins
   end
 
   def update
     @admin = Admin.find(params[:id])
-    #return redirect_to admins_path if @admin.root?
+    @admin.company = current_company
 
     params[:admin].delete(:password_digest) if params[:admin][:password_digest].blank?
 
@@ -25,6 +25,7 @@ class AdminsController < ApplicationController
 
   def create
     @admin = Admin.new admin_param
+    @admin.company = current_company
 
     if @admin.save
       redirect_to admins_path, flash:{success: '添加成功'}
@@ -36,12 +37,11 @@ class AdminsController < ApplicationController
 
   def edit
     @admin = Admin.find(params[:id])
-    #return redirect_to admins_path if @admin.root?
   end
 
   def destroy
     @admin = Admin.find(params[:id])
-    return redirect_to admins_path if @admin.root?
+    return redirect_to admins_path unless @admin.root?
     @admin.destroy
     redirect_to admins_path, flash:{success: '删除成功'}
   end

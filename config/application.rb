@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Yonex
+module Cloudsignin
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -23,6 +23,8 @@ module Yonex
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.time_zone = 'Beijing'
     config.active_record.raise_in_transactional_callbacks = true
+    #让bootstrap-sass和asset pipeline兼容
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]

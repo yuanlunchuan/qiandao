@@ -23,8 +23,8 @@
       <tr>
         <th>序号</th>
         <th>姓名</th>
-        <th>主嘉宾</th>
-        <th>对应销售</th>
+        <!-- <th>主嘉宾</th>
+        <th>对应销售</th> -->
         <th>省</th>
         <th>市</th>
         <th>公司</th>
@@ -38,8 +38,8 @@
         <tr>
           <td><%=attendee.attendee_number%></td>
           <td id="attendee-name"><%=attendee.name%></td>
-          <td><%=attendee.owner_attendee.try(:name)%></td>
-          <td><%=attendee.seller.try(:name)%></td>
+          <!-- <td><%=attendee.owner_attendee.try(:name)%></td>
+          <td><%=attendee.seller.try(:name)%></td> -->
           <td><%=attendee.province%></td>
           <td><%=attendee.city%></td>
           <td><%=attendee.company%></td>

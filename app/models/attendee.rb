@@ -206,7 +206,7 @@ class Attendee < ActiveRecord::Base
 
   def generate_invitation_short_url
     if self.invitation_short_url.blank?
-      url = generate_short_url(self.invitation_long_url)
+      url = self.invitation_long_url # //generate_short_url(self.invitation_long_url)
       self.update_attribute(:invitation_short_url, url)
     end
   rescue => e
@@ -234,7 +234,7 @@ private
     Rails.logger.info("[DWZ] Generate Short URL: #{long_url}")
     ret = Timeout::timeout(5) do
       # http = Net::HTTP.post_form(URI.parse('http://dwz.cn/create.php'),{url: long_url})
-      Net::HTTP.get(URI.parse("http://api.weibo.com/2/short_url/shorten.json?source=1681459862&url_long=#{long_url}"))
+      Net::HTTP.get(URI.parse("https://api.weibo.com/2/short_url/shorten.json?source=1681459862&url_long=#{long_url}"))
     end
     json = JSON.parse(ret)
     if json['urls']
